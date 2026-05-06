@@ -446,3 +446,77 @@ function validateStep(step){
   return true;
 }
 
+function toggleBinary(el,inputId){
+
+const input = document.getElementById(inputId);
+
+/* DEFAULT -> YES */
+
+if(el.classList.contains('default')){
+
+el.classList.remove('default');
+el.classList.add('active-yes');
+
+if(inputId === 'ablution'){
+input.value='Var';
+}else{
+input.value='Evet';
+}
+
+return updateAblutionArea();
+}
+
+/* YES -> NO */
+
+if(el.classList.contains('active-yes')){
+
+el.classList.remove('active-yes');
+el.classList.add('active-no');
+
+if(inputId === 'ablution'){
+input.value='Yok';
+}else{
+input.value='Hayır';
+}
+
+return updateAblutionArea();
+}
+
+/* NO -> YES */
+
+el.classList.remove('active-no');
+el.classList.add('active-yes');
+
+if(inputId === 'ablution'){
+input.value='Var';
+}else{
+input.value='Evet';
+}
+
+updateAblutionArea();
+
+}
+
+/* ABDESTHANE ALANI */
+
+function updateAblutionArea(){
+
+const ablution =
+document.getElementById('ablution');
+
+const area =
+document.getElementById('ablutionArea');
+
+if(!ablution || !area) return;
+
+if(ablution.value === 'Var'){
+
+area.style.display='block';
+
+}else{
+
+area.style.display='none';
+
+}
+
+}
