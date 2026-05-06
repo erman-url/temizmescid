@@ -235,7 +235,6 @@ align-items:flex-start;
   </div>
 
 </nav>
-
 <!-- MODAL -->
 <div id="formModal" class="modal hidden" onclick="closeForm()">
 
@@ -299,33 +298,13 @@ align-items:flex-start;
       Seçiniz
     </option>
 
-    <option>
-      AVM
-    </option>
-
-    <option>
-      Benzinci
-    </option>
-
-    <option>
-      Stadyum
-    </option>
-
-    <option>
-      Metro
-    </option>
-
-    <option>
-      Otel
-    </option>
-
-    <option>
-      Hastane
-    </option>
-
-    <option>
-      Diğer
-    </option>
+    <option>AVM</option>
+    <option>Benzinci</option>
+    <option>Stadyum</option>
+    <option>Metro</option>
+    <option>Otel</option>
+    <option>Hastane</option>
+    <option>Diğer</option>
 
   </select>
 
@@ -452,71 +431,150 @@ Değerlendirme
 
   <div class="star" data-key="carpet"></div>
 
-</div>
+</div><!-- KÜTÜPHANE -->
 
 <label>
 Kütüphane Var mı?
 </label>
 
-<select id="library" required>
+<div
+class="binary-toggle default"
+onclick="toggleBinary(this,'library')"
+>
 
-  <option value="">
-    Seçiniz
-  </option>
-
-  <option>
-    Evet
-  </option>
-
-  <option>
+  <div class="binary-option no-text">
     Hayır
-  </option>
+  </div>
 
-</select>
+  <div class="binary-option yes-text">
+    Evet
+  </div>
+
+  <div class="toggle-slider"></div>
+
+</div>
+
+<input
+type="hidden"
+id="library"
+required
+>
+
+<!-- GÖREVLİ -->
 
 <label>
 Görevli Var mı?
 </label>
 
-<select id="staff" required>
+<div
+class="binary-toggle default"
+onclick="toggleBinary(this,'staff')"
+>
 
-  <option value="">
-    Seçiniz
-  </option>
-
-  <option>
-    Evet
-  </option>
-
-  <option>
+  <div class="binary-option no-text">
     Hayır
-  </option>
+  </div>
 
-</select>
+  <div class="binary-option yes-text">
+    Evet
+  </div>
+
+  <div class="toggle-slider"></div>
+
+</div>
+
+<input
+type="hidden"
+id="staff"
+required
+>
+
+<!-- KLİMA -->
+
+<label>
+Klima Var mı?
+</label>
+
+<div
+class="binary-toggle default"
+onclick="toggleBinary(this,'airCondition')"
+>
+
+  <div class="binary-option no-text">
+    Hayır
+  </div>
+
+  <div class="binary-option yes-text">
+    Evet
+  </div>
+
+  <div class="toggle-slider"></div>
+
+</div>
+
+<input
+type="hidden"
+id="airCondition"
+required
+>
+
+<!-- KADIN BÖLÜMÜ -->
+
+<label>
+Kadın Bölümü Var mı?
+</label>
+
+<div
+class="binary-toggle default"
+onclick="toggleBinary(this,'womenArea')"
+>
+
+  <div class="binary-option no-text">
+    Hayır
+  </div>
+
+  <div class="binary-option yes-text">
+    Evet
+  </div>
+
+  <div class="toggle-slider"></div>
+
+</div>
+
+<input
+type="hidden"
+id="womenArea"
+required
+>
+
+<!-- ABDESTHANE -->
 
 <label>
 Abdesthane
 </label>
 
-<select
-id="ablution"
-required
-onchange="toggleAblution()"
+<div
+class="binary-toggle default"
+onclick="toggleBinary(this,'ablution')"
 >
 
-  <option value="">
-    Seçiniz
-  </option>
-
-  <option>
-    Var
-  </option>
-
-  <option>
+  <div class="binary-option no-text">
     Yok
-  </option>
+  </div>
 
-</select>
+  <div class="binary-option yes-text">
+    Var
+  </div>
+
+  <div class="toggle-slider"></div>
+
+</div>
+
+<input
+type="hidden"
+id="ablution"
+required
+>
 
 <div id="ablutionArea">
 
@@ -538,25 +596,33 @@ onchange="toggleAblution()"
 
 </div>
 
+<!-- KAĞIT HAVLU -->
+
 <label>
 Kağıt Havlu
 </label>
 
-<select id="paper">
+<div
+class="binary-toggle default"
+onclick="toggleBinary(this,'paper')"
+>
 
-  <option value="">
-    Seçiniz
-  </option>
-
-  <option>
-    Evet
-  </option>
-
-  <option>
+  <div class="binary-option no-text">
     Hayır
-  </option>
+  </div>
 
-</select>
+  <div class="binary-option yes-text">
+    Evet
+  </div>
+
+  <div class="toggle-slider"></div>
+
+</div>
+
+<input
+type="hidden"
+id="paper"
+>
 
 <div class="rating-block">
 
@@ -591,12 +657,16 @@ Kağıt Havlu
   <button
     type="button"
     onclick="submitForm()"
+    class="next-btn"
   >
     Kaydet
   </button>
 
 </div>
 
+</div>
+
+</div>
 </div>
 
 </div>
