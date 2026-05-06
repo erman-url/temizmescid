@@ -1,123 +1,256 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>TemizMescid</title>
+
+<title>TemizMescid | Mescid Değerlendirme Rehberi</title>
+
+<meta name="description" content="Çevrendeki mescidleri keşfet, puanla ve katkı sağla. Temizlik, ulaşım ve imkanlara göre değerlendirme yap.">
+<meta name="keywords" content="mescid, mescit, mescid puanlama, mescit değerlendirme, cami temizlik">
+<meta name="author" content="TemizMescid">
+
+<link rel="canonical" href="https://temizmescid.com.tr/">
+
+<meta property="og:title" content="TemizMescid">
+<meta property="og:description" content="Mescidleri keşfet ve değerlendir">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://temizmescid.com.tr/">
+<meta property="og:image" content="logo.png">
+
+<meta name="theme-color" content="#0f172a">
+
 <link rel="stylesheet" href="style.css">
+
+<style>
+
+.step-actions{
+display:flex;
+gap:10px;
+margin-top:16px;
+}
+
+.back-btn{
+width:44px;
+height:44px;
+border-radius:10px;
+font-size:18px;
+background:#e5e7eb;
+border:none;
+}
+
+.step-actions button:last-child{
+flex:1;
+}
+
+.rating-text{
+display:flex;
+flex-direction:column;
+}
+
+.rating-title{
+font-size:14px;
+font-weight:600;
+}
+
+.rating-desc{
+font-size:11px;
+color:#888;
+}
+
+.rating-block{
+align-items:flex-start;
+}
+
+</style>
+
 </head>
 
 <body>
 
-<!-- ===== HEADER ===== -->
+<header>
+
 <div class="prayer-bar" id="prayerBar">
-  <div class="prayer-item">İmsak <span>04:12</span></div>
-  <div class="prayer-item">Öğle <span>13:05</span></div>
-  <div class="prayer-item">İkindi <span>16:45</span></div>
-  <div class="prayer-item">Akşam <span>19:32</span></div>
-  <div class="prayer-item">Yatsı <span>20:55</span></div>
+
+  <div class="prayer-item">
+    İmsak
+    <span>04:12</span>
+  </div>
+
+  <div class="prayer-item">
+    Öğle
+    <span>13:05</span>
+  </div>
+
+  <div class="prayer-item">
+    İkindi
+    <span>16:45</span>
+  </div>
+
+  <div class="prayer-item">
+    Akşam
+    <span>19:32</span>
+  </div>
+
+  <div class="prayer-item">
+    Yatsı
+    <span>20:55</span>
+  </div>
+
 </div>
 
 <div class="datetime-bar">
-  <div id="date"></div>
-  <div id="time"></div>
+
+  <time id="date"></time>
+
+  <time id="time"></time>
+
   <div id="countdown"></div>
+
 </div>
 
-<div class="app">
+</header>
 
-<!-- AYET -->
-<div class="daily-verse">
-  <div class="verse-icon">📖</div>
-  <div>
-    <div class="verse-title">Günün Ayeti</div>
-    <div class="verse-text">“Şüphesiz Allah temizlenenleri sever.”</div>
-  </div>
-</div>
+<main class="app">
 
 <!-- SLIDER -->
-<div class="slider">
+<section class="slider">
 
   <div class="slide active">
+
     <img src="https://images.unsplash.com/photo-1584551246679-0daf3d275d0f">
+
     <div class="slide-overlay">
       <h3>Metro Mescidi</h3>
       <p>⭐ 4.6</p>
     </div>
+
   </div>
 
   <div class="slide">
+
     <img src="https://images.unsplash.com/photo-1591608971362-f08b2a75731a">
+
     <div class="slide-overlay">
       <h3>AVM Mescidi</h3>
       <p>⭐ 4.8</p>
     </div>
+
   </div>
 
-</div>
+</section>
 
-<!-- HERO -->
-<div class="hero">
-  <img src="logo.png">
-  <h1>TemizMescid</h1>
-  <p>Mescid değerlendirme rehberi</p>
-</div>
+<!-- CTA PREMIUM -->
+<section class="main-action">
 
-<!-- CTA -->
-<div class="main-action">
   <button class="cta-pro" onclick="startForm()">
-    <div class="cta-icon">＋</div>
+
+    <div class="cta-icon">
+      ＋
+    </div>
 
     <div class="cta-content">
-      <div class="cta-title">Mescid Değerlendir</div>
+
+      <div class="cta-title">
+        Mescid Değerlendir
+      </div>
+
       <div class="cta-sub">
         Fotoğraf ekle • Puan ver • Katkı sağla
       </div>
+
     </div>
 
-    <div class="cta-arrow">→</div>
+    <div class="cta-arrow">
+      →
+    </div>
+
   </button>
-</div>
 
-</div>
+</section>
 
-<!-- ===== FOOTER ===== -->
-<div class="footer">
+<!-- AYET -->
+<section class="daily-verse">
+
+  <div class="verse-icon">
+    📖
+  </div>
+
+  <div>
+
+    <div class="verse-title">
+      Günün Ayeti
+    </div>
+
+    <div class="verse-text">
+      “Şüphesiz Allah temizlenenleri sever.”
+    </div>
+
+  </div>
+
+</section>
+
+<!-- HERO -->
+<section class="hero">
+
+  <img src="logo.png" alt="TemizMescid">
+
+  <h1>
+    TemizMescid
+  </h1>
+
+  <p>
+    Mescid değerlendirme uygulaması
+  </p>
+
+</section>
+
+</main>
+
+<nav class="footer">
 
   <div class="nav-item active">
-    <span>🏠</span>
+    <span class="nav-icon">⌂</span>
     <p>Ana</p>
   </div>
 
   <div class="nav-item">
-    <span>⭐</span>
+    <span class="nav-icon">★</span>
     <p>İlk 10</p>
   </div>
 
-  <div class="center-btn" onclick="startForm()">+</div>
+  <button type="button" class="center-btn" onclick="startForm()">
+    +
+  </button>
 
   <div class="nav-item">
-    <span>👥</span>
+    <span class="nav-icon">◎</span>
     <p>Sosyal</p>
   </div>
 
   <div class="nav-item">
-    <span>✉️</span>
+    <span class="nav-icon">✉</span>
     <p>İletişim</p>
   </div>
 
-</div>
+</nav>
 
-<!-- ===== MODAL ===== -->
-<div id="formModal" class="modal hidden">
+<!-- MODAL -->
+<div id="formModal" class="modal hidden" onclick="closeForm()">
 
-<div class="sheet glass">
-
-<div class="sheet-handle"></div>
+<div class="sheet" onclick="event.stopPropagation()">
 
 <div class="sheet-header">
-  <h3>Mescid Değerlendir</h3>
-  <button onclick="closeForm()">✕</button>
+
+  <h3>
+    Mescid Değerlendir
+  </h3>
+
+  <button type="button" onclick="closeForm()">
+    ✕
+  </button>
+
 </div>
 
 <div class="progress">
@@ -126,74 +259,349 @@
 
 <!-- STEP 1 -->
 <div class="step active" id="s1">
-  <h4>Fotoğraf</h4>
-  <input type="file" id="images" multiple accept="image/*">
-  <button onclick="next(2)">Devam</button>
+
+  <h4>
+    Fotoğraf Ekle
+  </h4>
+
+  <input
+    type="file"
+    id="images"
+    multiple
+    accept="image/*"
+    required
+  >
+
+  <div class="step-actions">
+
+    <button
+      type="button"
+      onclick="next(2)"
+      class="next-btn"
+    >
+      Devam
+    </button>
+
+  </div>
+
 </div>
 
 <!-- STEP 2 -->
 <div class="step" id="s2">
-  <h4>Konum</h4>
 
-  <select id="type">
-    <option>AVM</option>
-    <option>Benzinci</option>
-    <option>İş Yeri</option>
-    <option>Stadyum</option>
-    <option>Metro</option>
-    <option>Otel</option>
-    <option>Hastane</option>
-    <option>Diğer</option>
+  <h4>
+    Konum (Mescid Nerede)
+  </h4>
+
+  <select id="type" required>
+
+    <option value="">
+      Seçiniz
+    </option>
+
+    <option>
+      AVM
+    </option>
+
+    <option>
+      Benzinci
+    </option>
+
+    <option>
+      Stadyum
+    </option>
+
+    <option>
+      Metro
+    </option>
+
+    <option>
+      Otel
+    </option>
+
+    <option>
+      Hastane
+    </option>
+
+    <option>
+      Diğer
+    </option>
+
   </select>
 
-  <input id="desc" placeholder="Açıklama">
+  <input
+    id="desc"
+    placeholder="Açıklama"
+    required
+  >
 
-  <button onclick="next(3)">Devam</button>
+  <div class="step-actions">
+
+    <button
+      type="button"
+      onclick="goStep(1)"
+      class="back-btn"
+    >
+      ←
+    </button>
+
+    <button
+      type="button"
+      onclick="next(3)"
+      class="next-btn"
+    >
+      Devam
+    </button>
+
+  </div>
+
 </div>
 
 <!-- STEP 3 -->
 <div class="step" id="s3">
 
-<h4>Değerlendirme</h4>
+<h4>
+Değerlendirme
+</h4>
 
-<div class="rating-block">Konum <div class="star" data-key="location"></div></div>
-<div class="rating-block">Ulaşım <div class="star" data-key="access"></div></div>
-<div class="rating-block">İklim <div class="star" data-key="climate"></div></div>
-<div class="rating-block">Işık <div class="star" data-key="light"></div></div>
-<div class="rating-block">Halı <div class="star" data-key="carpet"></div></div>
-<div class="rating-block">Kütüphane <div class="star" data-key="library"></div></div>
+<div class="rating-block">
 
-<label>Görevli Var mı?</label>
-<select id="staff"><option>Evet</option><option>Hayır</option></select>
+  <div class="rating-text">
 
-<label>Bildirim yaptın mı?</label>
-<select id="reported"><option>Evet</option><option>Hayır</option></select>
+    <div class="rating-title">
+      Konum
+    </div>
 
-<label>Abdesthane</label>
-<select id="ablution" onchange="toggleAblution()">
-<option>Var</option>
-<option>Yok</option>
+    <div class="rating-desc">
+      (Mescid kolay bulunabiliyor mu?)
+    </div>
+
+  </div>
+
+  <div class="star" data-key="location"></div>
+
+</div>
+
+<div class="rating-block">
+
+  <div class="rating-text">
+
+    <div class="rating-title">
+      Temizlik
+    </div>
+
+    <div class="rating-desc">
+      (Genel temizlik durumu)
+    </div>
+
+  </div>
+
+  <div class="star" data-key="cleanliness"></div>
+
+</div>
+
+<div class="rating-block">
+
+  <div class="rating-text">
+
+    <div class="rating-title">
+      Havalandırma
+    </div>
+
+    <div class="rating-desc">
+      (Kötü koku var mı, hava temiz mi?)
+    </div>
+
+  </div>
+
+  <div class="star" data-key="climate"></div>
+
+</div>
+
+<div class="rating-block">
+
+  <div class="rating-text">
+
+    <div class="rating-title">
+      Işıklandırma
+    </div>
+
+    <div class="rating-desc">
+      (Yeterli aydınlatma var mı?)
+    </div>
+
+  </div>
+
+  <div class="star" data-key="light"></div>
+
+</div>
+
+<div class="rating-block">
+
+  <div class="rating-text">
+
+    <div class="rating-title">
+      Halı / Zemin
+    </div>
+
+    <div class="rating-desc">
+      (Temiz ve düzenli mi?)
+    </div>
+
+  </div>
+
+  <div class="star" data-key="carpet"></div>
+
+</div>
+
+<label>
+Kütüphane Var mı?
+</label>
+
+<select id="library" required>
+
+  <option value="">
+    Seçiniz
+  </option>
+
+  <option>
+    Evet
+  </option>
+
+  <option>
+    Hayır
+  </option>
+
+</select>
+
+<label>
+Görevli Var mı?
+</label>
+
+<select id="staff" required>
+
+  <option value="">
+    Seçiniz
+  </option>
+
+  <option>
+    Evet
+  </option>
+
+  <option>
+    Hayır
+  </option>
+
+</select>
+
+<label>
+Abdesthane
+</label>
+
+<select
+id="ablution"
+required
+onchange="toggleAblution()"
+>
+
+  <option value="">
+    Seçiniz
+  </option>
+
+  <option>
+    Var
+  </option>
+
+  <option>
+    Yok
+  </option>
+
 </select>
 
 <div id="ablutionArea">
 
-<div class="rating-block">Abdest Temizlik <div class="star" data-key="ablution_clean"></div></div>
+<div class="rating-block">
 
-<label>Kağıt Havlu</label>
-<select id="paper"><option>Evet</option><option>Hayır</option></select>
+  <div class="rating-text">
 
-<div class="rating-block">Zemin <div class="star" data-key="floor"></div></div>
+    <div class="rating-title">
+      Abdesthane Temizlik
+    </div>
+
+    <div class="rating-desc">
+      (Islak zemin temiz mi?)
+    </div>
+
+  </div>
+
+  <div class="star" data-key="ablution_clean"></div>
 
 </div>
 
-<button onclick="submitForm()">Kaydet</button>
+<label>
+Kağıt Havlu
+</label>
+
+<select id="paper">
+
+  <option value="">
+    Seçiniz
+  </option>
+
+  <option>
+    Evet
+  </option>
+
+  <option>
+    Hayır
+  </option>
+
+</select>
+
+<div class="rating-block">
+
+  <div class="rating-text">
+
+    <div class="rating-title">
+      Zemin
+    </div>
+
+    <div class="rating-desc">
+      (Kayganlık / temizlik)
+    </div>
+
+  </div>
+
+  <div class="star" data-key="floor"></div>
 
 </div>
 
 </div>
+
+<div class="step-actions">
+
+  <button
+    type="button"
+    onclick="goStep(2)"
+    class="back-btn"
+  >
+    ←
+  </button>
+
+  <button
+    type="button"
+    onclick="submitForm()"
+  >
+    Kaydet
+  </button>
+
 </div>
 
-<!-- ✅ TEK JS KAYNAĞI -->
+</div>
+
+</div>
+</div>
+
 <script src="app.js"></script>
 
 </body>
