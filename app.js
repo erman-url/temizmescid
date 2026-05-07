@@ -520,3 +520,27 @@ area.style.display='none';
 }
 
 }
+
+async function loadTopMescids(){
+
+  try{
+
+    const res = await fetch(
+      "https://spring-violet-7aa7.temizmescid.workers.dev/api/mescids/top"
+    );
+
+    const data = await res.json();
+
+    console.log("CANLI MESCIDLER:", data);
+
+  }
+
+  catch(err){
+
+    console.error(err);
+
+  }
+
+}
+
+loadTopMescids();
