@@ -4,12 +4,22 @@
  -webkit-tap-highlight-color:transparent;
 }
 
+html,
 body{
- margin:0;
- font-family:-apple-system,BlinkMacSystemFont,sans-serif;
- background:linear-gradient(180deg,#0f2027,#203a43,#2c5364);
- color:#fff;
- overflow-x:hidden;
+  margin:0;
+  max-width:100%;
+  overflow-x:hidden;
+
+  font-family:-apple-system,BlinkMacSystemFont,sans-serif;
+
+  background:linear-gradient(
+    180deg,
+    #0f2027,
+    #203a43,
+    #2c5364
+  );
+
+  color:#fff;
 }
 
 /* ===== APP ===== */
@@ -254,7 +264,7 @@ linear-gradient(
   z-index:99999;
 }
 .sheet{
-  width:100%;
+   width:calc(100% - 16px);
   max-width:420px;
 
   background:linear-gradient(180deg,#ffffff,#f7f7f7);
@@ -289,43 +299,62 @@ linear-gradient(
 /* HEADER */
 .sheet-header{
   display:flex;
-  justify-content:space-between;
   align-items:center;
+  justify-content:space-between;
 
-  margin-bottom:16px;
+  margin-bottom:14px;
 }
 
+
+
 .sheet-header h3{
- font-size:17px;
- font-weight:800;
- letter-spacing:.2px;
+ font-family:
+   "Inter",
+   "SF Pro Display",
+   "Segoe UI",
+   sans-serif;
+
+ font-size:18px;
+
+ font-weight:700;
+
+ line-height:1.1;
+
+ letter-spacing:-0.4px;
+
  color:#111;
 }
 
 .sheet-header button{
-  width:42px;
-  height:42px;
+  width:30px !important;
+  height:30px;
+
+  min-width:30px;
+
+  flex:none;
+
+  margin-left:12px;
+
+  padding:0 !important;
+  margin-top:0 !important;
 
   border:none;
-  border-radius:14px;
+  border-radius:10px;
 
   display:flex;
   align-items:center;
   justify-content:center;
 
-  background:linear-gradient(180deg,#ffffff,#f1f1f1);
+  background:rgba(0,0,0,.05);
 
-  color:#222;
-  font-size:18px;
+  color:#444;
+  font-size:15px;
   font-weight:700;
 
-  box-shadow:
-    0 8px 20px rgba(0,0,0,.08),
-    inset 0 1px 0 rgba(255,255,255,.9);
+  box-shadow:none;
 
-  transition:.18s ease;
+  transition:.15s ease;
 }
-
 .sheet-header button:active{
   transform:scale(.94);
 }
@@ -851,4 +880,58 @@ linear-gradient(
 
 .binary-toggle:active{
 transform:scale(.98);
+}
+
+body{
+ font-family:
+   "Inter",
+   "SF Pro Text",
+   -apple-system,
+   BlinkMacSystemFont,
+   sans-serif;
+}
+
+
+
+/* ===== BINARY GRID ===== */
+
+.binary-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:16px 14px;
+
+  margin:14px 0 10px;
+}
+
+.binary-item{
+  min-width:0;
+}
+
+.binary-item label{
+  display:block;
+
+  margin-bottom:8px;
+
+  font-size:14px;
+  font-weight:600;
+
+  line-height:1.3;
+
+  color:#111;
+}
+
+/* TOGGLE FULL WIDTH */
+
+.binary-item .binary-toggle{
+  width:100%;
+}
+
+/* MOBILE FIX */
+
+@media(max-width:380px){
+
+  .binary-grid{
+    grid-template-columns:1fr;
+  }
+
 }
