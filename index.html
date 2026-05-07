@@ -424,128 +424,168 @@ Değerlendirme
     </div>
 
     <div class="rating-desc">
-      (Temiz ve düzenli mi?)
+      (Temiz ve Düzenli mi?)
     </div>
 
   </div>
 
   <div class="star" data-key="carpet"></div>
 
-</div><!-- KÜTÜPHANE -->
+</div><!-- ===== BINARY GRID ===== -->
 
-<label>
-Kütüphane Var mı?
-</label>
 
-<div
-class="binary-toggle default"
-onclick="toggleBinary(this,'library')"
->
+<div class="rating-block">
 
-  <div class="binary-option no-text">
-    Hayır
+  <div class="rating-text">
+
+    <div class="rating-title">
+      Ses Yalıtımı / Sakinlik
+    </div>
+
+    <div class="rating-desc">
+      (Ortam sakin ve ibadete uygun mu?)
+    </div>
+
   </div>
 
-  <div class="binary-option yes-text">
-    Evet
-  </div>
-
-  <div class="toggle-slider"></div>
+  <div class="star" data-key="peace"></div>
 
 </div>
 
-<input
-type="hidden"
-id="library"
-required
->
 
-<!-- GÖREVLİ -->
 
-<label>
-Görevli Var mı?
-</label>
+<div class="binary-grid">
 
-<div
-class="binary-toggle default"
-onclick="toggleBinary(this,'staff')"
->
+  <!-- KÜTÜPHANE -->
+  <div class="binary-item">
 
-  <div class="binary-option no-text">
-    Hayır
+    <label>
+      Kütüphane Var mı?
+    </label>
+
+    <div
+    class="binary-toggle default"
+    onclick="toggleBinary(this,'library')"
+    >
+
+      <div class="binary-option no-text">
+        Hayır
+      </div>
+
+      <div class="binary-option yes-text">
+        Evet
+      </div>
+
+      <div class="toggle-slider"></div>
+
+    </div>
+
+    <input
+    type="hidden"
+    id="library"
+    required
+    >
+
   </div>
 
-  <div class="binary-option yes-text">
-    Evet
+  <!-- GÖREVLİ -->
+  <div class="binary-item">
+
+    <label>
+      Görevli Var mı?
+    </label>
+
+    <div
+    class="binary-toggle default"
+    onclick="toggleBinary(this,'staff')"
+    >
+
+      <div class="binary-option no-text">
+        Hayır
+      </div>
+
+      <div class="binary-option yes-text">
+        Evet
+      </div>
+
+      <div class="toggle-slider"></div>
+
+    </div>
+
+    <input
+    type="hidden"
+    id="staff"
+    required
+    >
+
   </div>
 
-  <div class="toggle-slider"></div>
+  <!-- KLİMA -->
+  <div class="binary-item">
+
+    <label>
+      Klima Var mı?
+    </label>
+
+    <div
+    class="binary-toggle default"
+    onclick="toggleBinary(this,'airCondition')"
+    >
+
+      <div class="binary-option no-text">
+        Hayır
+      </div>
+
+      <div class="binary-option yes-text">
+        Evet
+      </div>
+
+      <div class="toggle-slider"></div>
+
+    </div>
+
+    <input
+    type="hidden"
+    id="airCondition"
+    required
+    >
+
+  </div>
+
+  <!-- KADIN BÖLÜMÜ -->
+  <div class="binary-item">
+
+    <label>
+      Kadın Bölümü Var mı?
+    </label>
+
+    <div
+    class="binary-toggle default"
+    onclick="toggleBinary(this,'womenArea')"
+    >
+
+      <div class="binary-option no-text">
+        Hayır
+      </div>
+
+      <div class="binary-option yes-text">
+        Evet
+      </div>
+
+      <div class="toggle-slider"></div>
+
+    </div>
+
+    
+    <input
+    type="hidden"
+    id="womenArea"
+    required
+    >
+
+  </div>
 
 </div>
-
-<input
-type="hidden"
-id="staff"
-required
->
-
-<!-- KLİMA -->
-
-<label>
-Klima Var mı?
-</label>
-
-<div
-class="binary-toggle default"
-onclick="toggleBinary(this,'airCondition')"
->
-
-  <div class="binary-option no-text">
-    Hayır
-  </div>
-
-  <div class="binary-option yes-text">
-    Evet
-  </div>
-
-  <div class="toggle-slider"></div>
-
-</div>
-
-<input
-type="hidden"
-id="airCondition"
-required
->
-
-<!-- KADIN BÖLÜMÜ -->
-
-<label>
-Kadın Bölümü Var mı?
-</label>
-
-<div
-class="binary-toggle default"
-onclick="toggleBinary(this,'womenArea')"
->
-
-  <div class="binary-option no-text">
-    Hayır
-  </div>
-
-  <div class="binary-option yes-text">
-    Evet
-  </div>
-
-  <div class="toggle-slider"></div>
-
-</div>
-
-<input
-type="hidden"
-id="womenArea"
-required
->
 
 <!-- ABDESTHANE -->
 
@@ -587,7 +627,7 @@ required
     </div>
 
     <div class="rating-desc">
-      (Islak zemin temiz mi?)
+      (Islak Zemin temiz mi?)
     </div>
 
   </div>
@@ -633,7 +673,7 @@ id="paper"
     </div>
 
     <div class="rating-desc">
-      (Kayganlık / temizlik)
+      (Kayganlık / Temizlik)
     </div>
 
   </div>
