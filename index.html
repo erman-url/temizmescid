@@ -194,7 +194,7 @@ align-items:flex-start;
 <!-- HERO -->
 <section class="hero">
 
-  <img src="logo.png" alt="TemizMescid">
+  <img src="assets/img/logo.png" alt="TemizMescid">
 
   <h1>
     TemizMescid
@@ -210,29 +210,48 @@ align-items:flex-start;
 
 <nav class="footer">
 
-  <div class="nav-item active">
-    <span class="nav-icon">⌂</span>
-    <p>Ana</p>
-  </div>
+  <div
+  class="nav-item active"
+  onclick="location.href='index.html'"
+>
 
-  <div class="nav-item">
+  <span class="nav-icon">⌂</span>
+
+  <p>
+    Ana
+  </p>
+
+</div>
+
+<a href="eniyiler.html" class="nav-item">
     <span class="nav-icon">★</span>
-    <p>İlk 10</p>
-  </div>
+    <p>En İyiler</p>
+</a>
 
   <button type="button" class="center-btn" onclick="startForm()">
     +
   </button>
 
-  <div class="nav-item">
-    <span class="nav-icon">◎</span>
-    <p>Sosyal</p>
-  </div>
+  <div
+  class="nav-item"
+  onclick="location.href='sosyal.html'"
+>
 
-  <div class="nav-item">
-    <span class="nav-icon">✉</span>
-    <p>İletişim</p>
-  </div>
+  <span class="nav-icon">◎</span>
+
+  <p>
+    Sosyal
+  </p>
+
+</div>
+
+ <div
+  class="nav-item"
+  onclick="location.href='iletisim.html'"
+>
+  <span class="nav-icon">✉</span>
+  <p>İletişim</p>
+</div>
 
 </nav>
 <!-- MODAL -->
@@ -460,7 +479,7 @@ Değerlendirme
   <div class="binary-item">
 
     <label>
-      Kütüphane Var mı?
+      Kitaplık Alanı var mı?
     </label>
 
     <div
@@ -488,37 +507,37 @@ Değerlendirme
 
   </div>
 
-  <!-- GÖREVLİ -->
-  <div class="binary-item">
+<!-- ASKILIK / EŞYA ALANI -->
+<div class="binary-item">
 
-    <label>
-      Görevli Var mı?
-    </label>
+  <label>
+    Eşya Alanı var mı ?
+  </label>
 
-    <div
-    class="binary-toggle default"
-    onclick="toggleBinary(this,'staff')"
-    >
+  <div
+  class="binary-toggle default"
+  onclick="toggleBinary(this,'hanger')"
+  >
 
-      <div class="binary-option no-text">
-        Hayır
-      </div>
-
-      <div class="binary-option yes-text">
-        Evet
-      </div>
-
-      <div class="toggle-slider"></div>
-
+    <div class="binary-option no-text">
+      Hayır
     </div>
 
-    <input
-    type="hidden"
-    id="staff"
-    required
-    >
+    <div class="binary-option yes-text">
+      Evet
+    </div>
+
+    <div class="toggle-slider"></div>
 
   </div>
+
+  <input
+  type="hidden"
+  id="hanger"
+  required
+  >
+
+</div>
 
   <!-- KLİMA -->
   <div class="binary-item">
@@ -551,6 +570,73 @@ Değerlendirme
     >
 
   </div>
+
+
+<!-- TEMİZLİK GÖREVLİSİ -->
+<div class="binary-item">
+
+  <label>
+    Temizlik Görevlisi
+  </label>
+
+  <div
+  class="binary-toggle default"
+  onclick="toggleBinary(this,'staff')"
+  >
+
+    <div class="binary-option no-text">
+      Hayır
+    </div>
+
+    <div class="binary-option yes-text">
+      Evet
+    </div>
+
+    <div class="toggle-slider"></div>
+
+  </div>
+
+  <input
+  type="hidden"
+  id="staff"
+  required
+  >
+
+</div>
+
+
+<!-- ŞARJ / PRİZ İMKANI -->
+<div class="binary-item">
+
+  <label>
+    Şarj / Priz Alanı
+  </label>
+
+  <div
+  class="binary-toggle default"
+  onclick="toggleBinary(this,'socket')"
+  >
+
+    <div class="binary-option no-text">
+      Hayır
+    </div>
+
+    <div class="binary-option yes-text">
+      Evet
+    </div>
+
+    <div class="toggle-slider"></div>
+
+  </div>
+
+  <input
+  type="hidden"
+  id="socket"
+  required
+  >
+
+</div>
+
 
   <!-- KADIN BÖLÜMÜ -->
   <div class="binary-item">
@@ -586,12 +672,13 @@ Değerlendirme
   </div>
 
 </div>
-
+<!-- ========================= -->
 <!-- ABDESTHANE -->
+<!-- ========================= -->
 
-<label>
-Abdesthane
-</label>
+<div class="section-title">
+Abdesthane bulunuyor mu?
+</div>
 
 <div
 class="binary-toggle default"
@@ -616,73 +703,138 @@ id="ablution"
 required
 >
 
+<!-- ABDEST ALANI -->
 <div id="ablutionArea">
 
-<div class="rating-block">
+  <!-- TEMİZLİK -->
+  <div class="rating-block">
 
-  <div class="rating-text">
+    <div class="rating-text">
 
-    <div class="rating-title">
-      Abdesthane Temizlik
+      <div class="rating-title">
+        Abdesthane Temizlik
+      </div>
+
+      <div class="rating-desc">
+        (Genel temizliği & kokusu)
+      </div>
+
     </div>
 
-    <div class="rating-desc">
-      (Islak Zemin temiz mi?)
+    <div class="star" data-key="ablution_clean"></div>
+
+  </div>
+
+  <!-- ZEMİN -->
+  <div class="rating-block">
+
+    <div class="rating-text">
+
+      <div class="rating-title">
+        Islak Zemin
+      </div>
+
+      <div class="rating-desc">
+        (Zemin düzeni ve temiziği)
+      </div>
+
+    </div>
+
+    <div class="star" data-key="floor"></div>
+
+  </div>
+
+  <!-- GRID -->
+  <div class="binary-grid">
+
+    <!-- SABUN -->
+    <div class="binary-item">
+
+      <label>
+        Sabun Var mı?
+      </label>
+
+      <div
+      class="binary-toggle default"
+      onclick="toggleBinary(this,'soap')"
+      >
+
+        <div class="binary-option no-text">
+          Hayır
+        </div>
+
+        <div class="binary-option yes-text">
+          Evet
+        </div>
+
+        <div class="toggle-slider"></div>
+
+      </div>
+
+      <input
+      type="hidden"
+      id="soap"
+      required
+      >
+
+    </div>
+
+    <!-- KAĞIT HAVLU -->
+    <div class="binary-item">
+
+      <label>
+        Kağıt Havlu
+      </label>
+
+      <div
+      class="binary-toggle default"
+      onclick="toggleBinary(this,'paper')"
+      >
+
+        <div class="binary-option no-text">
+          Hayır
+        </div>
+
+        <div class="binary-option yes-text">
+          Evet
+        </div>
+
+        <div class="toggle-slider"></div>
+
+      </div>
+
+      <input
+      type="hidden"
+      id="paper"
+      >
+
     </div>
 
   </div>
 
-  <div class="star" data-key="ablution_clean"></div>
+</div>
+
+<!-- ÖNERİ / ŞİKAYET -->
+
+<div class="feedback-box">
+
+  <label for="extraNote">
+    Eklemek İstediğiniz Öneri / Şikayet
+  </label>
+
+  <textarea
+    id="extraNote"
+    rows="3"
+    maxlength="500"
+    placeholder="İsterseniz ek görüşlerinizi yazabilirsiniz..."
+  ></textarea>
 
 </div>
 
-<!-- KAĞIT HAVLU -->
 
-<label>
-Kağıt Havlu
-</label>
-
-<div
-class="binary-toggle default"
-onclick="toggleBinary(this,'paper')"
->
-
-  <div class="binary-option no-text">
-    Hayır
-  </div>
-
-  <div class="binary-option yes-text">
-    Evet
-  </div>
-
-  <div class="toggle-slider"></div>
-
-</div>
-
-<input
-type="hidden"
-id="paper"
->
-
-<div class="rating-block">
-
-  <div class="rating-text">
-
-    <div class="rating-title">
-      Zemin
-    </div>
-
-    <div class="rating-desc">
-      (Kayganlık / Temizlik)
-    </div>
-
-  </div>
-
-  <div class="star" data-key="floor"></div>
-
-</div>
-
-</div>
+<!-- ========================= -->
+<!-- BUTTONS -->
+<!-- ========================= -->
 
 <div class="step-actions">
 
@@ -705,10 +857,6 @@ id="paper"
 </div>
 
 </div>
-
-</div>
-</div>
-
 </div>
 </div>
 
