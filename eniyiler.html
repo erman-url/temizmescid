@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+name="viewport"
+content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+>
+
+<title>
+TemizMescid | En İyiler
+</title>
+
+<meta
+name="description"
+content="TemizMescid en iyi mescidler alanı."
+>
+
+<meta
+name="keywords"
+content="TemizMescid en iyiler, mescid puanları, en temiz mescidler"
+>
+
+<meta name="theme-color" content="#0b2422">
+
+<link rel="stylesheet" href="style.css">
+
+<style>
+
+/* ========================= */
+/* RESET */
+/* ========================= */
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
+body{
+
+font-family:
+Inter,
+system-ui,
+sans-serif;
+
+background:
+radial-gradient(
+circle at top,
+#21454b 0%,
+#10252a 35%,
+#08171b 100%
+);
+
+min-height:100vh;
+
+overflow-x:hidden;
+
+}
+
+/* ========================= */
+/* PAGE */
+/* ========================= */
+
+.eniyiler-page{
+
+max-width:420px;
+
+margin:auto;
+
+padding:
+18px 18px 140px;
+
+}
+
+/* ========================= */
+/* HERO */
+/* ========================= */
+
+.eniyiler-hero{
+
+position:relative;
+
+overflow:hidden;
+
+background:
+linear-gradient(
+180deg,
+rgba(15,44,42,.96),
+rgba(11,36,34,.94)
+);
+
+border-radius:30px;
+
+padding:
+28px 24px 34px;
+
+margin-bottom:22px;
+
+min-height:220px;
+
+border:
+1px solid rgba(255,255,255,.04);
+
+box-shadow:
+0 12px 40px rgba(0,0,0,.22);
+
+backdrop-filter:
+blur(20px);
+
+}
+
+.eniyiler-hero::before{
+
+content:"";
+
+position:absolute;
+
+top:-120px;
+right:-80px;
+
+width:240px;
+height:240px;
+
+border-radius:50%;
+
+background:
+radial-gradient(
+circle,
+rgba(255,215,0,.18),
+transparent 70%
+);
+
+}
+
+/* BADGE */
+
+.hero-badge{
+
+display:inline-flex;
+align-items:center;
+justify-content:center;
+
+height:32px;
+
+padding:
+0 14px;
+
+border-radius:999px;
+
+background:
+rgba(255,255,255,.08);
+
+color:
+rgba(255,255,255,.86);
+
+font-size:12px;
+font-weight:700;
+
+letter-spacing:.3px;
+
+margin-bottom:18px;
+
+backdrop-filter:
+blur(10px);
+
+}
+
+/* TITLE */
+
+.eniyiler-hero h1{
+
+font-size:42px;
+font-weight:800;
+
+line-height:1.02;
+
+letter-spacing:-1.8px;
+
+color:#fff;
+
+margin-bottom:14px;
+
+text-shadow:
+0 2px 12px rgba(255,255,255,.06);
+
+}
+
+/* TEXT */
+
+.eniyiler-hero p{
+
+max-width:300px;
+
+font-size:14px;
+line-height:1.8;
+
+color:
+rgba(255,255,255,.72);
+
+}
+
+/* ========================= */
+/* EMPTY CARD */
+/* ========================= */
+
+.empty-card{
+
+position:relative;
+
+overflow:hidden;
+
+background:
+linear-gradient(
+180deg,
+rgba(255,255,255,.98),
+rgba(248,250,252,.96)
+);
+
+border:
+1px solid rgba(255,255,255,.55);
+
+border-radius:28px;
+
+padding:32px 24px;
+
+box-shadow:
+0 10px 30px rgba(0,0,0,.08);
+
+text-align:center;
+
+}
+
+/* ICON */
+
+.empty-icon{
+
+width:72px;
+height:72px;
+
+border-radius:22px;
+
+display:flex;
+align-items:center;
+justify-content:center;
+
+font-size:32px;
+
+margin:
+0 auto 18px;
+
+background:
+linear-gradient(
+135deg,
+#f59e0b,
+#d97706
+);
+
+color:#fff;
+
+box-shadow:
+0 10px 20px rgba(0,0,0,.14);
+
+}
+
+/* TITLE */
+
+.empty-card h2{
+
+font-size:22px;
+font-weight:800;
+
+line-height:1.3;
+
+color:#111827;
+
+margin-bottom:10px;
+
+}
+
+/* TEXT */
+
+.empty-card p{
+
+font-size:14px;
+line-height:1.8;
+
+color:#6b7280;
+
+}
+
+/* ========================= */
+/* FOOTER */
+/* ========================= */
+
+.footer{
+position:fixed;
+}
+
+/* ========================= */
+/* MOBILE */
+/* ========================= */
+
+@media(max-width:480px){
+
+.eniyiler-page{
+padding:
+16px 16px 140px;
+}
+
+.eniyiler-hero{
+padding:
+24px 20px 30px;
+}
+
+.eniyiler-hero h1{
+font-size:36px;
+}
+
+.empty-card{
+padding:24px 20px;
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<!-- ========================= -->
+<!-- PAGE -->
+<!-- ========================= -->
+
+<main class="eniyiler-page">
+
+<!-- HERO -->
+
+<section class="eniyiler-hero">
+
+<div class="hero-badge">
+TemizMescid Premium
+</div>
+
+<h1>
+En İyiler
+</h1>
+
+<p>
+Topluluk tarafından en yüksek puan alan mescidler burada yayınlanacak.
+</p>
+
+</section>
+
+<!-- EMPTY -->
+
+<section class="empty-card">
+
+<div class="empty-icon">
+★
+</div>
+
+<h2>
+Yakında Aktif
+</h2>
+
+<p>
+En yüksek puanlı ve öne çıkan mescidler çok yakında burada listelenecek.
+</p>
+
+</section>
+
+</main>
+
+<!-- ========================= -->
+<!-- FOOTER -->
+<!-- ========================= -->
+
+<nav class="footer">
+
+<div
+class="nav-item"
+onclick="location.href='index.html'"
+>
+
+<span class="nav-icon">⌂</span>
+
+<p>
+Ana
+</p>
+
+</div>
+
+<div class="nav-item active">
+
+<span class="nav-icon">★</span>
+
+<p>
+En İyiler
+</p>
+
+</div>
+
+<button
+type="button"
+class="center-btn"
+onclick="location.href='index.html'"
+>
++
+</button>
+
+<div
+class="nav-item"
+onclick="location.href='sosyal.html'"
+>
+
+<span class="nav-icon">◎</span>
+
+<p>
+Sosyal
+</p>
+
+</div>
+
+<div
+class="nav-item"
+onclick="location.href='iletisim.html'"
+>
+
+<span class="nav-icon">✉</span>
+
+<p>
+İletişim
+</p>
+
+</div>
+
+</nav>
+
+</body>
+</html>

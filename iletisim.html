@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+name="viewport"
+content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+>
+
+<title>
+TemizMescid | İletişim & Yasal Bilgilendirme
+</title>
+
+<meta
+name="description"
+content="TemizMescid iletişim, hakkımızda, KVKK, kullanıcı kuralları ve yasal bilgilendirme sayfası."
+>
+
+<meta
+name="keywords"
+content="TemizMescid, mescid, iletişim, kvkk, yasal metinler"
+>
+
+<meta name="theme-color" content="#0b2422">
+
+<link rel="stylesheet" href="style.css">
+
+<style>
+
+/* ========================= */
+/* RESET */
+/* ========================= */
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
+html{
+scroll-behavior:smooth;
+}
+
+body{
+
+font-family:
+Inter,
+system-ui,
+sans-serif;
+
+background:
+radial-gradient(
+circle at top,
+#21454b 0%,
+#10252a 35%,
+#08171b 100%
+);
+
+color:#111827;
+
+min-height:100vh;
+
+overflow-x:hidden;
+
+}
+
+/* ========================= */
+/* PAGE */
+/* ========================= */
+
+.contact-page{
+
+width:100%;
+max-width:420px;
+
+margin:auto;
+
+padding:
+18px 18px 140px;
+
+}
+
+/* ========================= */
+/* HERO */
+/* ========================= */
+
+.contact-hero{
+
+position:relative;
+
+overflow:hidden;
+
+background:
+linear-gradient(
+180deg,
+rgba(15,44,42,.96),
+rgba(11,36,34,.94)
+);
+
+border-radius:30px;
+
+padding:
+28px 24px 34px;
+
+margin-bottom:20px;
+
+min-height:210px;
+
+border:
+1px solid rgba(255,255,255,.04);
+
+box-shadow:
+0 12px 40px rgba(0,0,0,.22);
+
+backdrop-filter:
+blur(20px);
+
+}
+
+/* LIGHT EFFECT */
+
+.contact-hero::before{
+
+content:"";
+
+position:absolute;
+
+top:-120px;
+right:-80px;
+
+width:220px;
+height:220px;
+
+border-radius:50%;
+
+background:
+radial-gradient(
+circle,
+rgba(46,125,50,.24),
+transparent 70%
+);
+
+}
+
+/* BADGE */
+
+.hero-badge{
+
+display:inline-flex;
+align-items:center;
+justify-content:center;
+
+height:32px;
+
+padding:
+0 14px;
+
+border-radius:999px;
+
+background:
+rgba(255,255,255,.08);
+
+color:
+rgba(255,255,255,.86);
+
+font-size:12px;
+font-weight:700;
+
+letter-spacing:.3px;
+
+backdrop-filter:
+blur(10px);
+
+margin-bottom:18px;
+
+}
+
+/* TITLE */
+
+.contact-hero h1{
+
+font-size:42px;
+font-weight:800;
+
+line-height:1.02;
+
+letter-spacing:-1.8px;
+
+color:#fff;
+
+margin-bottom:14px;
+
+text-shadow:
+0 2px 12px rgba(255,255,255,.06);
+
+}
+
+/* TEXT */
+
+.contact-hero p{
+
+max-width:290px;
+
+font-size:14px;
+line-height:1.8;
+
+color:
+rgba(255,255,255,.72);
+
+}
+
+/* ========================= */
+/* INFO CARD */
+/* ========================= */
+
+.info-card{
+
+background:
+linear-gradient(
+180deg,
+rgba(255,255,255,.98),
+rgba(248,250,252,.96)
+);
+
+border:
+1px solid rgba(255,255,255,.55);
+
+border-radius:28px;
+
+padding:24px;
+
+margin-bottom:18px;
+
+box-shadow:
+0 10px 30px rgba(0,0,0,.08);
+
+backdrop-filter:
+blur(12px);
+
+}
+
+/* TITLE */
+
+.info-card h2{
+
+font-size:21px;
+font-weight:800;
+
+letter-spacing:-.4px;
+
+color:#111827;
+
+margin-bottom:16px;
+
+}
+
+/* TEXT */
+
+.info-card p{
+
+font-size:14px;
+line-height:1.9;
+
+color:#4b5563;
+
+margin-bottom:16px;
+
+}
+
+/* LIST */
+
+.info-card ul{
+padding-left:18px;
+}
+
+.info-card li{
+
+font-size:14px;
+line-height:1.9;
+
+color:#4b5563;
+
+margin-bottom:10px;
+
+}
+
+/* ========================= */
+/* FORM */
+/* ========================= */
+
+.contact-form{
+
+display:flex;
+flex-direction:column;
+gap:14px;
+
+margin-top:8px;
+
+}
+
+.contact-form input,
+.contact-form textarea{
+
+width:100%;
+
+border:none;
+outline:none;
+
+background:#f8fafc;
+
+padding:16px 18px;
+
+border-radius:20px;
+
+font-size:14px;
+
+color:#111827;
+
+box-shadow:
+inset 0 0 0 1px rgba(0,0,0,.05);
+
+transition:.22s ease;
+
+}
+
+/* FOCUS */
+
+.contact-form input:focus,
+.contact-form textarea:focus{
+
+background:#fff;
+
+box-shadow:
+0 0 0 3px rgba(46,125,50,.12),
+0 8px 24px rgba(0,0,0,.06);
+
+}
+
+/* TEXTAREA */
+
+.contact-form textarea{
+
+min-height:140px;
+
+resize:none;
+
+line-height:1.7;
+
+}
+
+/* BUTTON */
+
+.contact-form button{
+
+height:56px;
+
+border:none;
+border-radius:20px;
+
+background:
+linear-gradient(
+135deg,
+#2e7d32,
+#1b5e20
+);
+
+color:#fff;
+
+font-size:15px;
+font-weight:700;
+
+cursor:pointer;
+
+transition:.2s ease;
+
+box-shadow:
+0 12px 28px rgba(0,0,0,.16);
+
+}
+
+/* ACTIVE */
+
+.contact-form button:active{
+
+transform:
+scale(.985);
+
+}
+
+/* ========================= */
+/* FOOTER FIX */
+/* ========================= */
+
+.footer{
+position:fixed;
+}
+
+/* ========================= */
+/* MOBILE */
+/* ========================= */
+
+@media(max-width:480px){
+
+.contact-page{
+padding:
+16px 16px 140px;
+}
+
+.contact-hero{
+padding:
+24px 20px 30px;
+}
+
+.contact-hero h1{
+font-size:36px;
+}
+
+.info-card{
+padding:22px;
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<!-- ========================= -->
+<!-- PAGE -->
+<!-- ========================= -->
+
+<main class="contact-page">
+
+<!-- HERO -->
+
+<section class="contact-hero">
+
+<div class="hero-badge">
+TemizMescid
+</div>
+
+<h1>
+İletişim
+</h1>
+
+<p>
+Hakkımızda, KVKK, kullanıcı kuralları, yasal bilgilendirme ve iletişim alanı.
+</p>
+
+</section>
+
+<!-- HAKKIMIZDA -->
+
+<section class="info-card">
+
+<h2>
+Hakkımızda
+</h2>
+
+<p>
+TemizMescid uygulamasının amacı; AVM, metro, hastane, terminal, dinlenme tesisi ve benzeri kamuya açık alanlarda bulunan mescidlerin farkındalığını artırmaktır.
+</p>
+
+<p>
+Kullanıcı değerlendirmeleri sayesinde mescidlerin temizlik, erişilebilirlik, düzen ve kullanıcı deneyimi açısından gelişmesine katkı sağlanması hedeflenmektedir.
+</p>
+
+</section>
+
+<!-- KVKK -->
+
+<section class="info-card">
+
+<h2>
+KVKK & Gizlilik
+</h2>
+
+<p>
+TemizMescid kullanıcı gizliliğine önem verir. Paylaşılan bilgiler yalnızca hizmet kalitesini geliştirmek amacıyla kullanılmaktadır.
+</p>
+
+<ul>
+
+<li>
+Kişisel bilgiler üçüncü kişilerle paylaşılmaz.
+</li>
+
+<li>
+Veriler güvenli altyapılarda korunur.
+</li>
+
+<li>
+Değerlendirmeler topluluk bilgilendirme amacı taşır.
+</li>
+
+</ul>
+
+</section>
+
+<!-- YASAL -->
+
+<section class="info-card">
+
+<h2>
+Sorumluluk Reddi
+</h2>
+
+<p>
+Platform üzerinde paylaşılan değerlendirmeler kullanıcı deneyimlerini yansıtmaktadır ve yalnızca bilgilendirme amacı taşır.
+</p>
+
+<p>
+TemizMescid kullanıcı içeriklerinden doğabilecek durumlardan doğrudan sorumlu tutulamaz.
+</p>
+
+</section>
+
+<!-- KURALLAR -->
+
+<section class="info-card">
+
+<h2>
+Kullanıcı Kuralları
+</h2>
+
+<ul>
+
+<li>
+Hakaret, küfür ve ayrıştırıcı içerik paylaşılması yasaktır.
+</li>
+
+<li>
+Yanıltıcı değerlendirmeler kaldırılabilir.
+</li>
+
+<li>
+Platform yalnızca bilgilendirme amacıyla kullanılmalıdır.
+</li>
+
+<li>
+Topluluk düzenini bozacak içerikler silinebilir.
+</li>
+
+</ul>
+
+</section>
+
+<!-- FORM -->
+
+<section class="info-card">
+
+<h2>
+İletişim Formu
+</h2>
+
+<form class="contact-form">
+
+<input
+type="text"
+placeholder="Ad Soyad"
+required
+>
+
+<input
+type="email"
+placeholder="E-posta"
+required
+>
+
+<textarea
+placeholder="Mesajınız..."
+required
+></textarea>
+
+<button type="submit">
+Gönder
+</button>
+
+</form>
+
+</section>
+
+</main>
+
+<!-- ========================= -->
+<!-- FOOTER -->
+<!-- ========================= -->
+
+<nav class="footer">
+
+<div
+class="nav-item"
+onclick="location.href='index.html'"
+>
+
+<span class="nav-icon">⌂</span>
+
+<p>
+Ana
+</p>
+
+</div>
+
+<div
+class="nav-item"
+onclick="location.href='top10.html'"
+>
+
+<span class="nav-icon">★</span>
+
+<p>
+En İyiler
+</p>
+
+</div>
+
+<button
+type="button"
+class="center-btn"
+onclick="location.href='index.html'"
+>
++
+</button>
+
+<div
+class="nav-item"
+onclick="location.href='sosyal.html'"
+>
+
+<span class="nav-icon">◎</span>
+
+<p>
+Sosyal
+</p>
+
+</div>
+
+<div class="nav-item active">
+
+<span class="nav-icon">✉</span>
+
+<p>
+İletişim
+</p>
+
+</div>
+
+</nav>
+
+</body>
+</html>
