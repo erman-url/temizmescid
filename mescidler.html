@@ -1,0 +1,964 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+name="viewport"
+content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+>
+
+<title>
+TemizMescid | Mescidler
+</title>
+
+<meta
+name="description"
+content="Türkiye genelindeki mescidleri inceleyin, puanlayın ve değerlendirin."
+>
+
+<meta
+name="keywords"
+content="mescidler, mescid puanlama, avm mescidi, metro mescidi"
+>
+
+<meta name="theme-color" content="#0b2422">
+
+<link rel="stylesheet" href="style.css">
+
+<style>
+
+/* ========================= */
+/* RESET */
+/* ========================= */
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+-webkit-tap-highlight-color:transparent;
+}
+
+body{
+
+font-family:
+Inter,
+system-ui,
+sans-serif;
+
+background:
+radial-gradient(
+circle at top,
+#21454b 0%,
+#10252a 35%,
+#08171b 100%
+);
+
+min-height:100vh;
+
+overflow-x:hidden;
+
+color:#fff;
+
+}
+
+/* ========================= */
+/* PAGE */
+/* ========================= */
+
+.page{
+
+max-width:420px;
+
+margin:auto;
+
+padding:
+18px 18px 140px;
+
+}
+
+/* ========================= */
+/* HERO */
+/* ========================= */
+
+.hero{
+
+position:relative;
+
+overflow:hidden;
+
+background:
+linear-gradient(
+180deg,
+rgba(15,44,42,.98),
+rgba(11,36,34,.95)
+);
+
+border-radius:32px;
+
+padding:
+28px 24px 34px;
+
+margin-bottom:22px;
+
+min-height:210px;
+
+border:
+1px solid rgba(255,255,255,.05);
+
+box-shadow:
+0 14px 40px rgba(0,0,0,.28);
+
+backdrop-filter:
+blur(20px);
+
+}
+
+.hero::before{
+
+content:"";
+
+position:absolute;
+
+top:-120px;
+right:-80px;
+
+width:240px;
+height:240px;
+
+border-radius:50%;
+
+background:
+radial-gradient(
+circle,
+rgba(46,125,50,.28),
+transparent 70%
+);
+
+}
+
+/* BADGE */
+
+.hero-badge{
+
+display:inline-flex;
+align-items:center;
+justify-content:center;
+
+height:34px;
+
+padding:
+0 14px;
+
+border-radius:999px;
+
+background:
+rgba(255,255,255,.08);
+
+color:
+rgba(255,255,255,.88);
+
+font-size:12px;
+font-weight:700;
+
+letter-spacing:.3px;
+
+margin-bottom:18px;
+
+backdrop-filter:
+blur(10px);
+
+}
+
+/* TITLE */
+
+.hero h1{
+
+font-size:42px;
+font-weight:800;
+
+line-height:1.02;
+
+letter-spacing:-1.8px;
+
+color:#fff;
+
+margin-bottom:14px;
+
+text-shadow:
+0 2px 12px rgba(255,255,255,.06);
+
+}
+
+/* TEXT */
+
+.hero p{
+
+max-width:310px;
+
+font-size:14px;
+line-height:1.8;
+
+color:
+rgba(255,255,255,.72);
+
+}
+
+/* ========================= */
+/* SEARCH */
+/* ========================= */
+
+.search-box{
+
+margin-bottom:18px;
+
+}
+
+.search-box input{
+
+width:100%;
+
+height:58px;
+
+border:none;
+outline:none;
+
+padding:
+0 20px;
+
+border-radius:20px;
+
+background:
+rgba(255,255,255,.97);
+
+font-size:15px;
+font-weight:500;
+
+color:#111827;
+
+box-shadow:
+0 10px 24px rgba(0,0,0,.10);
+
+}
+
+/* ========================= */
+/* FILTER */
+/* ========================= */
+
+.filter-row{
+
+display:flex;
+
+gap:10px;
+
+overflow-x:auto;
+
+padding-bottom:6px;
+
+margin-bottom:24px;
+
+scrollbar-width:none;
+
+}
+
+.filter-row::-webkit-scrollbar{
+display:none;
+}
+
+.filter-btn{
+
+flex:none;
+
+height:42px;
+
+padding:
+0 18px;
+
+border:none;
+
+border-radius:999px;
+
+background:
+rgba(255,255,255,.1);
+
+color:#fff;
+
+font-size:13px;
+font-weight:700;
+
+backdrop-filter:
+blur(10px);
+
+cursor:pointer;
+
+transition:.2s ease;
+
+}
+
+.filter-btn.active{
+
+background:
+linear-gradient(
+135deg,
+#2e7d32,
+#1b5e20
+);
+
+box-shadow:
+0 8px 20px rgba(27,94,32,.32);
+
+}
+
+/* ========================= */
+/* LIST */
+/* ========================= */
+
+.list{
+
+display:flex;
+flex-direction:column;
+gap:18px;
+
+}
+
+/* ========================= */
+/* CARD */
+/* ========================= */
+
+.card{
+
+position:relative;
+
+overflow:hidden;
+
+background:
+linear-gradient(
+180deg,
+rgba(255,255,255,.985),
+rgba(248,250,252,.97)
+);
+
+border:
+1px solid rgba(255,255,255,.58);
+
+border-radius:30px;
+
+padding:18px;
+
+box-shadow:
+0 12px 34px rgba(0,0,0,.10);
+
+transition:
+transform .18s ease,
+box-shadow .18s ease;
+
+}
+
+.card:active{
+
+transform:
+scale(.985);
+
+}
+
+/* IMAGE */
+
+.card-image{
+
+width:100%;
+height:178px;
+
+border-radius:22px;
+
+overflow:hidden;
+
+margin-bottom:18px;
+
+background:#ddd;
+
+}
+
+.card-image img{
+
+width:100%;
+height:100%;
+
+object-fit:cover;
+
+display:block;
+
+}
+
+/* TOP */
+
+.card-top{
+
+display:flex;
+justify-content:space-between;
+align-items:flex-start;
+
+gap:12px;
+
+margin-bottom:10px;
+
+}
+
+/* TITLE */
+
+.card h2{
+
+font-size:20px;
+font-weight:800;
+
+line-height:1.28;
+
+color:#111827;
+
+margin-bottom:6px;
+
+letter-spacing:-.4px;
+
+}
+
+/* META */
+
+.meta{
+
+font-size:13px;
+
+color:#6b7280;
+
+line-height:1.75;
+
+}
+
+/* SCORE */
+
+.score{
+
+display:flex;
+align-items:center;
+gap:6px;
+
+padding:
+8px 12px;
+
+border-radius:14px;
+
+background:
+rgba(46,125,50,.08);
+
+font-size:14px;
+font-weight:800;
+
+color:#1b5e20;
+
+white-space:nowrap;
+
+}
+
+/* BUTTON */
+
+.rate-btn{
+
+margin-top:18px;
+
+width:100%;
+height:54px;
+
+border:none;
+
+border-radius:20px;
+
+background:
+linear-gradient(
+135deg,
+#2e7d32,
+#1b5e20
+);
+
+color:#fff;
+
+font-size:15px;
+font-weight:800;
+
+cursor:pointer;
+
+box-shadow:
+0 10px 24px rgba(0,0,0,.14);
+
+transition:.18s ease;
+
+}
+
+.rate-btn:active{
+
+transform:
+scale(.99);
+
+}
+
+/* EMPTY */
+
+.empty{
+
+padding:
+40px 20px;
+
+border-radius:24px;
+
+background:
+rgba(255,255,255,.08);
+
+text-align:center;
+
+font-size:14px;
+
+color:
+rgba(255,255,255,.7);
+
+}
+
+/* ========================= */
+/* FOOTER */
+/* ========================= */
+
+.footer{
+position:fixed;
+}
+
+/* ========================= */
+/* MOBILE */
+/* ========================= */
+
+@media(max-width:480px){
+
+.page{
+padding:
+16px 16px 140px;
+}
+
+.hero{
+padding:
+24px 20px 30px;
+}
+
+.hero h1{
+font-size:36px;
+}
+
+.card-image{
+height:165px;
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<!-- PAGE -->
+
+<main class="page">
+
+<!-- HERO -->
+
+<section class="hero">
+
+<div class="hero-badge">
+TemizMescid Rehberi
+</div>
+
+<h1>
+Mescidler
+</h1>
+
+<p>
+Yakındaki mescidleri inceleyin, değerlendirin ve puan verin.
+</p>
+
+</section>
+
+<!-- SEARCH -->
+
+<div class="search-box">
+
+<input
+type="text"
+placeholder="Mescid ara..."
+id="searchInput"
+>
+
+</div>
+
+<!-- FILTER -->
+
+<div class="filter-row">
+
+<button
+class="filter-btn active"
+data-filter="all"
+>
+Tümü
+</button>
+
+<button
+class="filter-btn"
+data-filter="AVM"
+>
+AVM
+</button>
+
+<button
+class="filter-btn"
+data-filter="Metro"
+>
+Metro
+</button>
+
+<button
+class="filter-btn"
+data-filter="Hastane"
+>
+Hastane
+</button>
+
+<button
+class="filter-btn"
+data-filter="Otel"
+>
+Otel
+</button>
+
+</div>
+
+<!-- LIST -->
+
+<section class="list" id="mescidList">
+
+<!-- CARD -->
+
+<div
+class="card"
+data-category="AVM"
+data-name="Metroport AVM Mescidi"
+>
+
+<div
+class="card-image"
+onclick="
+location.href=
+'mescid_detay.html?slug=metroport-avm-mescidi'
+"
+>
+
+<img
+src="https://images.unsplash.com/photo-1514890547357-a9ee288728e0?q=80&w=1200&auto=format&fit=crop"
+alt="Metroport AVM Mescidi"
+>
+
+</div>
+
+<div class="card-top">
+
+<div>
+
+<h2>
+Metroport AVM Mescidi
+</h2>
+
+<div class="meta">
+
+İstanbul / Bahçelievler<br>
+AVM Mescidi
+
+</div>
+
+</div>
+
+<div class="score">
+⭐ 4.8
+</div>
+
+</div>
+
+<button
+class="rate-btn"
+onclick="
+location.href=
+'mescid_detay.html?slug=metroport-avm-mescidi'
+"
+>
+
+Mescidi Puanla
+
+</button>
+
+</div>
+
+<!-- CARD -->
+
+<div
+class="card"
+data-category="AVM"
+data-name="Marmara Park Mescidi"
+>
+
+<div
+class="card-image"
+onclick="
+location.href=
+'mescid_detay.html?slug=marmara-park-mescidi'
+"
+>
+
+<img
+src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=1200&auto=format&fit=crop"
+alt="Marmara Park Mescidi"
+>
+
+</div>
+
+<div class="card-top">
+
+<div>
+
+<h2>
+Marmara Park Mescidi
+</h2>
+
+<div class="meta">
+
+İstanbul / Beylikdüzü<br>
+AVM Mescidi
+
+</div>
+
+</div>
+
+<div class="score">
+⭐ 4.6
+</div>
+
+</div>
+
+<button
+class="rate-btn"
+onclick="
+location.href=
+'mescid_detay.html?slug=marmara-park-mescidi'
+"
+>
+
+Mescidi Puanla
+
+</button>
+
+</div>
+
+</section>
+
+<!-- EMPTY -->
+
+<div
+class="empty"
+id="emptyState"
+style="display:none;"
+>
+
+Sonuç bulunamadı.
+
+</div>
+
+</main>
+
+<!-- FOOTER -->
+
+<nav class="footer">
+
+<div
+class="nav-item"
+onclick="location.href='index.html'"
+>
+
+<span class="nav-icon">⌂</span>
+
+<p>
+Ana
+</p>
+
+</div>
+
+<div
+class="nav-item active"
+onclick="location.href='mescidler.html'"
+>
+
+<span class="nav-icon">★</span>
+
+<p>
+Mescidler
+</p>
+
+</div>
+
+<button
+type="button"
+class="center-btn"
+onclick="startForm()"
+>
++
+</button>
+
+<div
+class="nav-item"
+onclick="location.href='sosyal.html'"
+>
+
+<span class="nav-icon">◎</span>
+
+<p>
+Sosyal
+</p>
+
+</div>
+
+<div
+class="nav-item"
+onclick="location.href='iletisim.html'"
+>
+
+<span class="nav-icon">✉</span>
+
+<p>
+İletişim
+</p>
+
+</div>
+
+</nav>
+
+<script>
+
+/* ========================= */
+/* SEARCH */
+/* ========================= */
+
+const searchInput =
+document.getElementById("searchInput");
+
+const cards =
+document.querySelectorAll(".card");
+
+const emptyState =
+document.getElementById("emptyState");
+
+const filterButtons =
+document.querySelectorAll(".filter-btn");
+
+let activeFilter = "all";
+
+/* ========================= */
+/* FILTER BUTTON */
+/* ========================= */
+
+filterButtons.forEach(button=>{
+
+button.addEventListener("click",()=>{
+
+filterButtons.forEach(btn=>{
+btn.classList.remove("active");
+});
+
+button.classList.add("active");
+
+activeFilter =
+button.dataset.filter;
+
+applyFilters();
+
+});
+
+});
+
+/* ========================= */
+/* SEARCH */
+/* ========================= */
+
+searchInput.addEventListener("input",()=>{
+
+applyFilters();
+
+});
+
+/* ========================= */
+/* APPLY */
+/* ========================= */
+
+function applyFilters(){
+
+const search =
+searchInput.value
+.toLowerCase()
+.trim();
+
+let visibleCount = 0;
+
+cards.forEach(card=>{
+
+const name =
+card.dataset.name
+.toLowerCase();
+
+const category =
+card.dataset.category;
+
+const searchMatch =
+name.includes(search);
+
+const filterMatch =
+activeFilter === "all"
+||
+category === activeFilter;
+
+if(searchMatch && filterMatch){
+
+card.style.display = "block";
+
+visibleCount++;
+
+}
+else{
+
+card.style.display = "none";
+
+}
+
+});
+
+emptyState.style.display =
+visibleCount === 0
+? "block"
+: "none";
+
+}
+
+/* ========================= */
+/* CENTER BUTTON */
+/* ========================= */
+
+function startForm(){
+
+location.href =
+"index.html";
+
+}
+
+</script>
+
+</body>
+</html>
