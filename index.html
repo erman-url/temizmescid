@@ -140,25 +140,27 @@ align-items:flex-start;
   </div>
 
 </section>
-
 <!-- CTA PREMIUM -->
 <section class="main-action">
 
-  <button class="cta-pro" onclick="startForm()">
+  <button
+    class="cta-pro"
+    onclick="location.href='mescidler.html'"
+  >
 
     <div class="cta-icon">
-      ＋
+      ★
     </div>
 
     <div class="cta-content">
 
       <div class="cta-title">
-        Mescid Değerlendir
+        Mescid Puanla
       </div>
 
-      <div class="cta-sub">
-        Fotoğraf ekle • Puan ver • Katkı sağla
-      </div>
+    <div class="cta-sub">
+  Yakındaki mescidleri incele ve puan ver
+</div>
 
     </div>
 
@@ -169,7 +171,6 @@ align-items:flex-start;
   </button>
 
 </section>
-
 <!-- AYET -->
 <section class="daily-verse">
 
@@ -228,9 +229,13 @@ align-items:flex-start;
     <p>En İyiler</p>
 </a>
 
-  <button type="button" class="center-btn" onclick="startForm()">
-    +
-  </button>
+<button
+  type="button"
+  class="center-btn"
+  onclick="startForm()"
+>
+  +
+</button>
 
   <div
   class="nav-item"
@@ -255,19 +260,30 @@ align-items:flex-start;
 
 </nav>
 <!-- MODAL -->
-<div id="formModal" class="modal hidden" onclick="closeForm()">
+<div
+id="formModal"
+class="modal hidden"
+onclick="closeForm()"
+>
 
-<div class="sheet" onclick="event.stopPropagation()">
+<div
+class="sheet"
+onclick="event.stopPropagation()"
+>
+<!-- MODAL HEADER -->
+<div class="modal-header">
 
-<div class="sheet-header">
+  <div class="modal-badge">
+    TemizMescid
+  </div>
 
   <h3>
-    Mescid Değerlendir
+    Yeni Mescid Ekle
   </h3>
 
-  <button type="button" onclick="closeForm()">
-    ✕
-  </button>
+  <p>
+    Yeni bir mescid ekleyerek topluluğa katkı sağlayabilirsiniz.
+  </p>
 
 </div>
 
@@ -290,6 +306,34 @@ align-items:flex-start;
     required
   >
 
+  <!-- LEGAL -->
+
+  <div class="legal-approve">
+
+    <label class="legal-row">
+
+      <input
+        type="checkbox"
+        id="legalApprove"
+        required
+      >
+
+      <span>
+        Kullanım koşullarını kabul ediyorum
+      </span>
+
+    </label>
+
+   <button
+  type="button"
+  class="legal-link"
+  onclick="openLegalModal()"
+>
+  Yasal Metni Oku
+</button>
+
+  </div>
+
   <div class="step-actions">
 
     <button
@@ -304,6 +348,7 @@ align-items:flex-start;
 
 </div>
 
+
 <!-- STEP 2 -->
 <div class="step" id="s2">
 
@@ -311,10 +356,28 @@ align-items:flex-start;
     Konum (Mescid Nerede)
   </h4>
 
+  <input
+    id="mescidName"
+    placeholder="Mescid Adı"
+    required
+  >
+
+  <input
+    id="city"
+    placeholder="Şehir"
+    required
+  >
+
+  <input
+    id="district"
+    placeholder="İlçe"
+    required
+  >
+
   <select id="type" required>
 
     <option value="">
-      Seçiniz
+      Kategori Seçiniz
     </option>
 
     <option>AVM</option>
@@ -329,7 +392,7 @@ align-items:flex-start;
 
   <input
     id="desc"
-    placeholder="Açıklama"
+    placeholder="Kısa Açıklama"
     required
   >
 
@@ -359,7 +422,7 @@ align-items:flex-start;
 <div class="step" id="s3">
 
 <h4>
-Değerlendirme
+Mescid Değerlendirmesi
 </h4>
 
 <div class="rating-block">
@@ -859,7 +922,68 @@ required
 </div>
 </div>
 </div>
+<!-- LEGAL MODAL -->
 
+<div
+id="legalModal"
+class="legal-modal hidden"
+onclick="closeLegalModal()"
+>
+
+<div
+class="legal-sheet"
+onclick="event.stopPropagation()"
+>
+
+  <div class="legal-top">
+
+    <h3>
+      Kullanım Koşulları
+    </h3>
+
+    <button
+      type="button"
+      onclick="closeLegalModal()"
+    >
+      ✕
+    </button>
+
+  </div>
+
+  <div class="legal-scroll">
+<p>
+  TemizMescid, kullanıcı katkılarıyla oluşturulan bağımsız bir topluluk platformudur. Uygulama; kamuya açık alanlarda bulunan mescidlerin temizlik, düzen, erişilebilirlik ve genel kullanım deneyimlerinin değerlendirilmesini amaçlamaktadır.
+</p>
+
+<p>
+  TemizMescid herhangi bir resmi kurum, kuruluş, vakıf veya dini otoriteye bağlı değildir. Uygulamanın Diyanet İşleri Başkanlığı ile doğrudan veya dolaylı herhangi bir resmi bağlantısı bulunmamaktadır.
+</p>
+
+<p>
+  Kullanıcılar tarafından paylaşılan puanlama, yorum, görsel ve içeriklerin hukuki, cezai ve etik sorumluluğu tamamen ilgili kullanıcıya aittir. Platform üzerinde yapılan paylaşımlar kullanıcı görüşü niteliğindedir.
+</p>
+
+<p>
+  Gerçek dışı, yanıltıcı, manipülatif, karalayıcı, küçük düşürücü, hakaret içeren veya kötü niyetli değerlendirmeler kesinlikle yasaktır. AVM, metro, hastane, otel, benzinlik ve benzeri tüm mekanlara yönelik sahte içerik, hedef gösterme veya itibar zedeleme amacı taşıyan paylaşımlar sistemden kaldırılabilir.
+</p>
+
+<p>
+  Spam içerik paylaşımı, toplu sahte puanlama girişimleri, manipülasyon amacı taşıyan değerlendirmeler ve kullanıcı deneyimini bozacak davranışlar tespit edildiğinde ilgili içerikler silinebilir, kullanıcı erişimi geçici veya kalıcı olarak sınırlandırılabilir.
+</p>
+
+<p>
+  Kullanıcı; yüklediği fotoğraf, görsel ve içeriklerin paylaşım hakkına sahip olduğunu kabul eder. Kişisel veri içeren, özel hayatın gizliliğini ihlal eden, izinsiz çekilmiş veya hukuka aykırı nitelikteki içeriklerin paylaşılması yasaktır.
+</p>
+
+<p>
+  TemizMescid; platform güvenliği, topluluk düzeni ve yasal yükümlülükler kapsamında içerikleri inceleme, kaldırma, erişimi sınırlandırma ve gerekli durumlarda teknik kayıtları yetkili mercilerle paylaşma hakkını saklı tutar.
+</p>
+
+  </div>
+
+</div>
+
+</div>
 <script src="app.js"></script>
 
 </body>
