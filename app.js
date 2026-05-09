@@ -544,3 +544,50 @@ async function loadTopMescids(){
 }
 
 loadTopMescids();
+
+function openLegalModal(){
+
+document
+.getElementById("legalModal")
+.classList.add("show");
+
+}
+
+function closeLegalModal(){
+
+document
+.getElementById("legalModal")
+.classList.remove("show");
+
+}
+
+function next(step){
+
+  /* STEP 1 LEGAL CONTROL */
+  if(step === 2){
+
+    const approved =
+    document.getElementById("legalApprove");
+
+    if(!approved.checked){
+
+      alert(
+        "Devam etmek için kullanım koşullarını kabul etmelisiniz."
+      );
+
+      return;
+    }
+
+  }
+
+  document
+  .querySelectorAll(".step")
+  .forEach(el=>el.classList.remove("active"));
+
+  document
+  .getElementById("s"+step)
+  .classList.add("active");
+
+  updateProgress(step);
+
+}
