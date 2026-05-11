@@ -2,13 +2,18 @@
 // INIT (DOM READY)
 // =========================
 document.addEventListener("DOMContentLoaded", () => {
+
   initSlider();
   initStars();
+
   updateDateTime();
   updatePrayerState();
 
   setInterval(updateDateTime, 1000);
   setInterval(updatePrayerState, 60000);
+
+  loadTopMescids();
+
 });
 
 
@@ -20,74 +25,115 @@ let sliderInterval = null;
 let slides = [];
 
 function initSlider(){
-  slides = document.querySelectorAll(".slide");
-  if (!slides.length) return;
+
+  slides =
+  document.querySelectorAll(".slide");
+
+  if(!slides.length) return;
 
   showSlide(sliderIndex);
 
-  if (sliderInterval) clearInterval(sliderInterval);
+  if(sliderInterval){
+    clearInterval(sliderInterval);
+  }
 
-  sliderInterval = setInterval(() => {
-    sliderIndex = (sliderIndex + 1) % slides.length;
+  sliderInterval = setInterval(()=>{
+
+    sliderIndex =
+    (sliderIndex + 1) % slides.length;
+
     showSlide(sliderIndex);
+
   }, 10000);
+
 }
 
 function showSlide(index){
-  slides.forEach((slide, i) => {
-    slide.classList.toggle("active", i === index);
+
+  slides.forEach((slide, i)=>{
+
+    slide.classList.toggle(
+      "active",
+      i === index
+    );
+
   });
+
 }
 
 
 // =========================
-// STAR INIT (SAFE)
+// STAR INIT
 // =========================
 function initStars(){
-  document.querySelectorAll(".star").forEach(el => {
 
-    if (el.dataset.initialized) return;
+  document
+  .querySelectorAll(".star")
+  .forEach(el=>{
+
+    if(el.dataset.initialized) return;
+
     el.dataset.initialized = "true";
 
     for(let i = 1; i <= 5; i++){
-      const s = document.createElement("span");
+
+      const s =
+      document.createElement("span");
+
       s.innerText = "★";
 
-      s.addEventListener("click", () => {
+      s.addEventListener("click", ()=>{
+
         el.dataset.val = i;
 
-        [...el.children].forEach((c, idx) => {
-          c.classList.toggle("active", idx < i);
+        [...el.children]
+        .forEach((c, idx)=>{
+
+          c.classList.toggle(
+            "active",
+            idx < i
+          );
+
         });
+
       });
 
       el.appendChild(s);
+
     }
+
   });
+
 }
 
 
 // =========================
-// MODAL (PRO)
+// MODAL
 // =========================
-
 let scrollY = 0;
 
 function startForm(){
 
-  const modal = document.getElementById("formModal");
+  const modal =
+  document.getElementById("formModal");
+
   if(!modal) return;
 
-  // 📱 Mobil kontrol (proje kuralına uygun)
-  if(!/Android|iPhone|iPad/i.test(navigator.userAgent)){
-    alert("Sadece mobil cihazdan değerlendirme yapılabilir");
+  if(
+    !/Android|iPhone|iPad/i
+    .test(navigator.userAgent)
+  ){
+
+    alert(
+      "Sadece mobil cihazdan değerlendirme yapılabilir"
+    );
+
     return;
+
   }
 
-  // 🔒 Scroll pozisyonunu kaydet
   scrollY = window.scrollY;
 
-  // 🔒 Body lock (kayma fix)
   document.body.style.position = "fixed";
   document.body.style.top = `-${scrollY}px`;
   document.body.style.left = "0";
@@ -96,11 +142,10 @@ function startForm(){
 
   document.body.classList.add("modal-open");
 
-  // 🎯 Modal aç
   modal.classList.remove("hidden");
 
-  // 🧭 Her zaman ilk step ile başlat
   goStep(1);
+
 }
 
 
@@ -109,12 +154,13 @@ function startForm(){
 // =========================
 function closeForm(){
 
-  const modal = document.getElementById("formModal");
+  const modal =
+  document.getElementById("formModal");
+
   if(!modal) return;
 
   modal.classList.add("hidden");
 
-  // 🔓 Body unlock (kayma fix)
   document.body.style.position = "";
   document.body.style.top = "";
   document.body.style.left = "";
@@ -123,26 +169,36 @@ function closeForm(){
 
   document.body.classList.remove("modal-open");
 
-  // 🔁 Scroll geri yükle
   window.scrollTo(0, scrollY);
+
 }
 
 
 // =========================
-// STEP MANAGER (PRO)
+// STEP MANAGER
 // =========================
 function goStep(step){
 
-  document.querySelectorAll(".step").forEach(s=>{
+  document
+  .querySelectorAll(".step")
+  .forEach(s=>{
     s.classList.remove("active");
   });
 
-  document.getElementById("s"+step)?.classList.add("active");
+  document
+  .getElementById("s"+step)
+  ?.classList.add("active");
 
-  const bar = document.getElementById("bar");
+  const bar =
+  document.getElementById("bar");
+
   if(bar){
-    bar.style.width = (step * 33) + "%";
+
+    bar.style.width =
+    (step * 33) + "%";
+
   }
+
 }
 
 
@@ -151,30 +207,102 @@ function goStep(step){
 // =========================
 function next(step){
 
-  const imagesInput = document.getElementById("images");
+  const imagesInput =
+  document.getElementById("images");
+
+  // =========================
+  // LEGAL CONTROL
+  // =========================
 
   if(step === 2){
-    if(!imagesInput || imagesInput.files.length < 1){
-      alert("En az 1 fotoğraf zorunlu");
+
+    const approved =
+    document.getElementById("legalApprove");
+
+    if(!approved?.checked){
+
+      alert(
+        "Devam etmek için kullanım koşullarını kabul etmelisiniz."
+      );
+
       return;
+
+    }
+
+    if(
+      !imagesInput ||
+      imagesInput.files.length < 1
+    ){
+
+      alert(
+        "En az 1 fotoğraf yüklemek zorunludur."
+      );
+
+      return;
+
     }
 
     if(imagesInput.files.length > 4){
-      alert("Max 4 fotoğraf");
+
+      alert(
+        "En fazla 4 fotoğraf yükleyebilirsiniz."
+      );
+
       return;
+
     }
+
   }
 
-  document.querySelectorAll(".step").forEach(s=>{
-    s.classList.remove("active");
+  // =========================
+  // STEP VALIDATION
+  // =========================
+
+  if(
+    step === 3 &&
+    !validateStep(3)
+  ){
+    return;
+  }
+
+  if(
+    step === 4 &&
+    !validateStep(4)
+  ){
+    return;
+  }
+
+  // =========================
+  // STEP CHANGE
+  // =========================
+
+  document
+  .querySelectorAll(".step")
+  .forEach(el=>{
+    el.classList.remove("active");
   });
 
-  document.getElementById("s"+step)?.classList.add("active");
+  document
+  .getElementById("s"+step)
+  ?.classList.add("active");
 
-  const bar = document.getElementById("bar");
+  // =========================
+  // PROGRESS BAR
+  // =========================
+
+  const bar =
+  document.getElementById("bar");
+
   if(bar){
-    bar.style.width = (step * 33) + "%";
+
+    const progress =
+    Math.min(step * 33, 100);
+
+    bar.style.width =
+    progress + "%";
+
   }
+
 }
 
 
@@ -182,17 +310,25 @@ function next(step){
 // ABDEST CONTROL
 // =========================
 function toggleAblution(){
-  const ablution = document.getElementById("ablution")?.value;
-  const area = document.getElementById("ablutionArea");
+
+  const ablution =
+  document.getElementById("ablution")?.value;
+
+  const area =
+  document.getElementById("ablutionArea");
 
   if(!area) return;
 
-  area.style.display = ablution === "Yok" ? "none" : "block";
+  area.style.display =
+  ablution === "Yok"
+    ? "none"
+    : "block";
+
 }
 
 
 // =========================
-// SCORE CALCULATION (PRO)
+// SCORE CALCULATION
 // =========================
 function calculateScore(){
 
@@ -202,138 +338,292 @@ function calculateScore(){
   let boolTotal = 0;
   let boolCount = 0;
 
-  const ablution = document.getElementById("ablution")?.value;
+  const ablution =
+  document.getElementById("ablution")?.value;
 
-  // ⭐ STAR
-  document.querySelectorAll(".star").forEach(el=>{
-    const key = el.dataset.key;
-    const val = Number(el.dataset.val || 0);
+  // =========================
+  // STAR
+  // =========================
 
-    if(ablution === "Yok" && (key === "ablution_clean" || key === "floor")){
+  document
+  .querySelectorAll(".star")
+  .forEach(el=>{
+
+    const key =
+    el.dataset.key;
+
+    const val =
+    Number(el.dataset.val || 0);
+
+    if(
+      ablution === "Yok" &&
+      (
+        key === "ablution_clean" ||
+        key === "floor"
+      )
+    ){
       return;
     }
 
     if(val){
+
       starTotal += val;
       starCount++;
+
     }
+
   });
-    
+
+  // =========================
+  // BOOLEAN
+  // =========================
+
   const bools = [
+
     {id:"staff"},
+
     {id:"reported"},
-    {id:"paper", depends:true},
-    {id:"library"} // ✅ YENİ
+
+    {
+      id:"paper",
+      depends:true
+    },
+
+    {id:"library"}
+
   ];
 
- 
   bools.forEach(b=>{
-    if(b.depends && ablution === "Yok") return;
 
-    const el = document.getElementById(b.id);
-    if(!el) return;
-
-    if(el.value === "Evet"){
-      boolTotal += 1;
-    }
-
-    boolCount++;
-  });
-
-  const starAvg = starCount ? (starTotal / starCount) : 0;
-  const boolAvg = boolCount ? (boolTotal / boolCount) : 0;
-
-  // 🎯 FINAL SCORE
-  const finalScore = (starAvg * 0.85) + (boolAvg * 5 * 0.15);
-
-  return Number(finalScore.toFixed(2));
-}
-
-
-// =========================
-// SCORE LABEL (UX)
-// =========================
-function getScoreLabel(score){
-
-  if(score >= 4.5) return "Mükemmel";
-  if(score >= 3.8) return "Çok İyi";
-  if(score >= 3.0) return "İyi";
-  if(score >= 2.0) return "Orta";
-  return "Zayıf";
-}
-// =========================
-// FORM SUBMIT (PRO)
-// =========================
-function submitForm(){
-
-  // 🔒 VALIDATION
-  if(!validateStep(4)) return;
-
-  const ablution = document.getElementById("ablution")?.value;
-
-  const score = calculateScore();
-
-  const data = {
-    type: document.getElementById("type")?.value,
-    desc: document.getElementById("desc")?.value?.trim(),
-    score,
-    label: getScoreLabel(score),
-
-    ratings: {},
-
-    boolean: {
-      staff: document.getElementById("staff")?.value === "Evet",
-      reported: document.getElementById("reported")?.value === "Evet",
-
-      // ✅ SADECE abdest varsa dahil
-      paper: ablution !== "Yok" 
-        ? document.getElementById("paper")?.value === "Evet"
-        : null,
-
-      // ✅ YENİ EKLENDİ
-      library: document.getElementById("library")?.value === "Evet"
-    }
-  };
-
-  // ⭐ STAR DATASI
-  document.querySelectorAll(".star").forEach(el=>{
-    const key = el.dataset.key;
-    const val = Number(el.dataset.val || 0);
-
-    // 🔒 Abdest yoksa ilgili ratingleri atla
-    if(ablution === "Yok" && (key === "ablution_clean" || key === "floor")){
+    if(
+      b.depends &&
+      ablution === "Yok"
+    ){
       return;
     }
 
-    data.ratings[key] = val;
+    const el =
+    document.getElementById(b.id);
+
+    if(!el) return;
+
+    if(el.value === "Evet"){
+
+      boolTotal += 1;
+
+    }
+
+    boolCount++;
+
   });
 
-  console.log("DATA:", data);
+  const starAvg =
+  starCount
+    ? (starTotal / starCount)
+    : 0;
 
-  alert(`⭐ ${score} - ${data.label}`);
+  const boolAvg =
+  boolCount
+    ? (boolTotal / boolCount)
+    : 0;
+
+  const finalScore =
+  (starAvg * 0.85) +
+  (boolAvg * 5 * 0.15);
+
+  return Number(
+    finalScore.toFixed(2)
+  );
+
 }
+
+
+// =========================
+// SCORE LABEL
+// =========================
+function getScoreLabel(score){
+
+  if(score >= 4.5){
+    return "Mükemmel";
+  }
+
+  if(score >= 3.8){
+    return "Çok İyi";
+  }
+
+  if(score >= 3.0){
+    return "İyi";
+  }
+
+  if(score >= 2.0){
+    return "Orta";
+  }
+
+  return "Zayıf";
+
+}
+
+
+// =========================
+// FORM SUBMIT
+// =========================
+async function submitForm(){
+
+  if(!validateStep(4)){
+    return;
+  }
+
+  try{
+
+    const name =
+    document.getElementById("mescidName")
+    ?.value
+    ?.trim();
+
+    const city =
+    document.getElementById("city")
+    ?.value
+    ?.trim();
+
+    const district =
+    document.getElementById("district")
+    ?.value
+    ?.trim();
+
+    const type =
+    document.getElementById("type")
+    ?.value;
+
+    const desc =
+    document.getElementById("desc")
+    ?.value
+    ?.trim();
+
+    if(
+      !name ||
+      !city ||
+      !district
+    ){
+
+      alert(
+        "Mescid adı, şehir ve ilçe zorunludur."
+      );
+
+      return;
+
+    }
+
+  const payload = {
+
+  name,
+
+  city,
+
+  district,
+
+  category:type,
+
+  address:desc,
+
+  lat:41.0082,
+
+  lng:28.9784
+
+};
+
+    const res = await fetch(
+
+      "https://spring-violet-7aa7.temizmescid.workers.dev/api/mescid/create",
+
+      {
+
+        method:"POST",
+
+        headers:{
+          "Content-Type":"application/json"
+        },
+
+        body:JSON.stringify(payload)
+
+      }
+
+    );
+
+    const data =
+    await res.json();
+
+    if(!res.ok){
+
+      alert(
+        data.error ||
+        "Mescid eklenemedi"
+      );
+
+      return;
+
+    }
+
+    alert(
+      "Mescid başarıyla eklendi"
+    );
+
+    closeForm();
+
+    location.href =
+    `mescid_detay.html?slug=${data.slug}`;
+
+  }
+
+  catch(err){
+
+    console.error(err);
+
+    alert(
+      "Bağlantı hatası oluştu"
+    );
+
+  }
+
+}
+
 
 // =========================
 // DATE + TIME
 // =========================
 function updateDateTime(){
-  const dateEl = document.getElementById("date");
-  const timeEl = document.getElementById("time");
 
-  if (!dateEl || !timeEl) return;
+  const dateEl =
+  document.getElementById("date");
+
+  const timeEl =
+  document.getElementById("time");
+
+  if(!dateEl || !timeEl){
+    return;
+  }
 
   const now = new Date();
 
-  dateEl.innerText = now.toLocaleDateString("tr-TR", {
-    weekday: "long",
-    day: "numeric",
-    month: "long"
+  dateEl.innerText =
+  now.toLocaleDateString("tr-TR", {
+
+    weekday:"long",
+
+    day:"numeric",
+
+    month:"long"
+
   });
 
-  timeEl.innerText = now.toLocaleTimeString("tr-TR", {
-    hour: "2-digit",
-    minute: "2-digit"
+  timeEl.innerText =
+  now.toLocaleTimeString("tr-TR", {
+
+    hour:"2-digit",
+
+    minute:"2-digit"
+
   });
+
 }
 
 
@@ -341,186 +631,318 @@ function updateDateTime(){
 // NAMAZ SMART SYSTEM
 // =========================
 const prayerTimes = {
- imsak: "04:12",
- ogle: "13:05",
- ikindi: "16:45",
- aksam: "19:32",
- yatsi: "20:55"
+
+  imsak:"04:12",
+
+  ogle:"13:05",
+
+  ikindi:"16:45",
+
+  aksam:"19:32",
+
+  yatsi:"20:55"
+
 };
 
 function getMinutes(t){
- const [h,m] = t.split(":").map(Number);
- return h*60+m;
+
+  const [h,m] =
+  t.split(":").map(Number);
+
+  return (h * 60) + m;
+
 }
 
 function updatePrayerState(){
 
- const now = new Date();
- const currentMin = now.getHours()*60 + now.getMinutes();
+  const now = new Date();
 
- const entries = Object.entries(prayerTimes);
+  const currentMin =
+  (now.getHours() * 60) +
+  now.getMinutes();
 
- let current = null;
- let next = null;
+  const entries =
+  Object.entries(prayerTimes);
 
- for(let i=0;i<entries.length;i++){
-   const [name,time] = entries[i];
-   const min = getMinutes(time);
+  let current = null;
+  let next = null;
 
-   if(currentMin >= min){
-     current = {name,time,min};
-     next = entries[i+1]
-       ? {name:entries[i+1][0],time:entries[i+1][1],min:getMinutes(entries[i+1][1])}
-       : null;
-   }
- }
+  for(let i=0;i<entries.length;i++){
 
- document.querySelectorAll(".prayer-item").forEach(el=>{
-   el.classList.remove("active");
-   if(el.dataset.name === current?.name){
-     el.classList.add("active");
-   }
- });
+    const [name,time] =
+    entries[i];
 
- const countdownEl = document.getElementById("countdown");
+    const min =
+    getMinutes(time);
 
- if(countdownEl){
-   if(next){
-     const diff = next.min - currentMin;
-     const h = Math.floor(diff/60);
-     const m = diff%60;
+    if(currentMin >= min){
 
-     countdownEl.innerText = `${next.name} ${h}s ${m}dk`;
-   } else {
-     countdownEl.innerText = "Yarın";
-   }
- }
+      current = {
+        name,
+        time,
+        min
+      };
+
+      next =
+      entries[i+1]
+
+      ? {
+
+        name:entries[i+1][0],
+
+        time:entries[i+1][1],
+
+        min:getMinutes(
+          entries[i+1][1]
+        )
+
+      }
+
+      : null;
+
+    }
+
+  }
+
+  document
+  .querySelectorAll(".prayer-item")
+  .forEach(el=>{
+
+    el.classList.remove("active");
+
+    if(
+      el.dataset.name === current?.name
+    ){
+
+      el.classList.add("active");
+
+    }
+
+  });
+
+  const countdownEl =
+  document.getElementById("countdown");
+
+  if(!countdownEl){
+    return;
+  }
+
+  if(next){
+
+    const diff =
+    next.min - currentMin;
+
+    const h =
+    Math.floor(diff / 60);
+
+    const m =
+    diff % 60;
+
+    countdownEl.innerText =
+    `${next.name} ${h}s ${m}dk`;
+
+  }
+
+  else{
+
+    countdownEl.innerText =
+    "Yarın";
+
+  }
+
 }
 
+
+// =========================
+// STEP VALIDATION
+// =========================
 function validateStep(step){
 
   // STEP 2
+
   if(step === 3){
-    const type = document.getElementById("type")?.value;
-    const desc = document.getElementById("desc")?.value?.trim();
+
+    const type =
+    document.getElementById("type")
+    ?.value;
+
+    const desc =
+    document.getElementById("desc")
+    ?.value
+    ?.trim();
 
     if(!type){
-      alert("Konum seçmek zorunlu");
+
+      alert(
+        "Konum seçmek zorunlu"
+      );
+
       return false;
+
     }
 
-    if(!desc || desc.length < 5){
-      alert("Açıklama en az 5 karakter olmalı");
+    if(
+      !desc ||
+      desc.length < 5
+    ){
+
+      alert(
+        "Açıklama en az 5 karakter olmalı"
+      );
+
       return false;
+
     }
+
   }
 
   // STEP 3
+
   if(step === 4){
 
     let allRated = true;
 
-    document.querySelectorAll(".star").forEach(el=>{
-      const key = el.dataset.key;
-      const val = Number(el.dataset.val || 0);
+    document
+    .querySelectorAll(".star")
+    .forEach(el=>{
 
-      const ablution = document.getElementById("ablution")?.value;
+      const key =
+      el.dataset.key;
 
-      if(ablution === "Yok" && (key === "ablution_clean" || key === "floor")){
+      const val =
+      Number(el.dataset.val || 0);
+
+      const ablution =
+      document.getElementById("ablution")
+      ?.value;
+
+      if(
+        ablution === "Yok" &&
+        (
+          key === "ablution_clean" ||
+          key === "floor"
+        )
+      ){
         return;
       }
 
       if(val === 0){
+
         allRated = false;
+
       }
+
     });
 
     if(!allRated){
-      alert("Tüm puanlamaları yapmak zorunlu");
+
+      alert(
+        "Tüm puanlamaları yapmak zorunlu"
+      );
+
       return false;
+
     }
 
     return true;
+
   }
 
   return true;
+
 }
 
+
+// =========================
+// TOGGLE BINARY
+// =========================
 function toggleBinary(el,inputId){
 
-const input = document.getElementById(inputId);
+  const input =
+  document.getElementById(inputId);
 
-/* DEFAULT -> YES */
+  if(!input) return;
 
-if(el.classList.contains('default')){
+  // DEFAULT -> YES
 
-el.classList.remove('default');
-el.classList.add('active-yes');
+  if(el.classList.contains("default")){
 
-if(inputId === 'ablution'){
-input.value='Var';
-}else{
-input.value='Evet';
+    el.classList.remove("default");
+
+    el.classList.add("active-yes");
+
+    input.value =
+    inputId === "ablution"
+      ? "Var"
+      : "Evet";
+
+    updateAblutionArea();
+
+    return;
+
+  }
+
+  // YES -> NO
+
+  if(el.classList.contains("active-yes")){
+
+    el.classList.remove("active-yes");
+
+    el.classList.add("active-no");
+
+    input.value =
+    inputId === "ablution"
+      ? "Yok"
+      : "Hayır";
+
+    updateAblutionArea();
+
+    return;
+
+  }
+
+  // NO -> YES
+
+  el.classList.remove("active-no");
+
+  el.classList.add("active-yes");
+
+  input.value =
+  inputId === "ablution"
+    ? "Var"
+    : "Evet";
+
+  updateAblutionArea();
+
 }
 
-return updateAblutionArea();
-}
 
-/* YES -> NO */
-
-if(el.classList.contains('active-yes')){
-
-el.classList.remove('active-yes');
-el.classList.add('active-no');
-
-if(inputId === 'ablution'){
-input.value='Yok';
-}else{
-input.value='Hayır';
-}
-
-return updateAblutionArea();
-}
-
-/* NO -> YES */
-
-el.classList.remove('active-no');
-el.classList.add('active-yes');
-
-if(inputId === 'ablution'){
-input.value='Var';
-}else{
-input.value='Evet';
-}
-
-updateAblutionArea();
-
-}
-
-/* ABDESTHANE ALANI */
-
+// =========================
+// ABDESTHANE AREA
+// =========================
 function updateAblutionArea(){
 
-const ablution =
-document.getElementById('ablution');
+  const ablution =
+  document.getElementById("ablution");
 
-const area =
-document.getElementById('ablutionArea');
+  const area =
+  document.getElementById("ablutionArea");
 
-if(!ablution || !area) return;
+  if(!ablution || !area){
+    return;
+  }
 
-if(ablution.value === 'Var'){
-
-area.style.display='block';
-
-}else{
-
-area.style.display='none';
-
-}
+  area.style.display =
+  ablution.value === "Var"
+    ? "block"
+    : "none";
 
 }
 
+
+// =========================
+// LOAD TOP MESCIDS
+// =========================
 async function loadTopMescids(){
 
   try{
@@ -529,9 +951,13 @@ async function loadTopMescids(){
       "https://spring-violet-7aa7.temizmescid.workers.dev/api/mescids/top"
     );
 
-    const data = await res.json();
+    const data =
+    await res.json();
 
-    console.log("CANLI MESCIDLER:", data);
+    console.log(
+      "CANLI MESCIDLER:",
+      data
+    );
 
   }
 
@@ -543,51 +969,22 @@ async function loadTopMescids(){
 
 }
 
-loadTopMescids();
 
+// =========================
+// LEGAL MODAL
+// =========================
 function openLegalModal(){
 
-document
-.getElementById("legalModal")
-.classList.add("show");
+  document
+  .getElementById("legalModal")
+  ?.classList.add("show");
 
 }
 
 function closeLegalModal(){
 
-document
-.getElementById("legalModal")
-.classList.remove("show");
-
-}
-
-function next(step){
-
-  /* STEP 1 LEGAL CONTROL */
-  if(step === 2){
-
-    const approved =
-    document.getElementById("legalApprove");
-
-    if(!approved.checked){
-
-      alert(
-        "Devam etmek için kullanım koşullarını kabul etmelisiniz."
-      );
-
-      return;
-    }
-
-  }
-
   document
-  .querySelectorAll(".step")
-  .forEach(el=>el.classList.remove("active"));
-
-  document
-  .getElementById("s"+step)
-  .classList.add("active");
-
-  updateProgress(step);
+  .getElementById("legalModal")
+  ?.classList.remove("show");
 
 }
