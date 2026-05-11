@@ -498,9 +498,20 @@ margin-bottom:10px;
 }
 
 .star-row{
-font-size:28px;
-letter-spacing:4px;
+display:flex;
+gap:6px;
+}
+
+.star-row span{
+font-size:30px;
+cursor:pointer;
 color:#d1d5db;
+transition:.2s;
+}
+
+.star-row span.active{
+color:#f59e0b;
+transform:scale(1.08);
 }
 
 .rating-divider{
@@ -631,7 +642,6 @@ padding:20px;
 </style>
 
 </head>
-
 <body>
 
 <main class="page" id="app">
@@ -710,6 +720,17 @@ const slug =
 params.get("slug");
 
 /* ========================= */
+/* GLOBAL */
+/* ========================= */
+
+const ratings = {};
+
+const toggles = {
+soap : null,
+paper : null
+};
+
+/* ========================= */
 /* INIT */
 /* ========================= */
 
@@ -746,6 +767,8 @@ render(data);
 }
 catch(e){
 
+console.error(e);
+
 document.getElementById("app").innerHTML = `
 <div class="loader">
 Bir hata oluştu
@@ -760,11 +783,27 @@ Bir hata oluştu
 /* ESCAPE */
 /* ========================= */
 
-function escapeHtml(text){
+function escapeHtml(text=""){
 
 return text
+.replaceAll("&","&amp;")
 .replaceAll("<","&lt;")
-.replaceAll(">","&gt;");
+.replaceAll(">","&gt;")
+.replaceAll('"',"&quot;")
+.replaceAll("'","&#039;");
+
+}
+
+/* ========================= */
+/* DATE */
+/* ========================= */
+
+function formatDate(date){
+
+if(!date) return "";
+
+return new Date(date)
+.toLocaleDateString("tr-TR");
 
 }
 
@@ -775,30 +814,46 @@ return text
 function render(data){
 
 const mescid =
-data.mescid;
+data.mescid || {};
 
 const reviews =
 data.reviews || [];
 
+const images =
+mescid.images?.length
+? mescid.images
+: [
+mescid.image ||
+"https://images.unsplash.com/photo-1514890547357-a9ee288728e0?q=80&w=1200&auto=format&fit=crop"
+];
+
 document.getElementById("app").innerHTML = `
+
+<!-- HERO -->
 
 <section class="hero">
 
+<div class="hero-slider">
+
+${images.map(img=>`
+
 <img
-src="${
-mescid.image ||
-'https://images.unsplash.com/photo-1514890547357-a9ee288728e0?q=80&w=1200&auto=format&fit=crop'
-}"
-alt="${mescid.name}"
+src="${img}"
+alt="${escapeHtml(mescid.name || "Mescid")}"
+loading="lazy"
 >
+
+`).join("")}
+
+</div>
 
 <div class="hero-overlay">
 
 <div class="hero-title-wrap">
 
-  <div class="hero-title">
-    ${mescid.name}
-  </div>
+<div class="hero-title">
+${escapeHtml(mescid.name || "-")}
+</div>
 
 </div>
 
@@ -809,7 +864,8 @@ alt="${mescid.name}"
 </div>
 
 <div class="location-box">
-📍 ${mescid.city} / ${mescid.district}
+📍 ${escapeHtml(mescid.city || "-")} /
+${escapeHtml(mescid.district || "-")}
 </div>
 
 </div>
@@ -817,6 +873,8 @@ alt="${mescid.name}"
 </div>
 
 </section>
+
+<!-- INFO -->
 
 <section class="card">
 
@@ -831,7 +889,7 @@ Mescid Bilgileri
 Kategori
 </div>
 <div class="info-value">
-${mescid.category || "-"}
+${escapeHtml(mescid.category || "-")}
 </div>
 </div>
 
@@ -849,7 +907,7 @@ ${mescid.review_count || 0} oy
 Şehir
 </div>
 <div class="info-value">
-${mescid.city || "-"}
+${escapeHtml(mescid.city || "-")}
 </div>
 </div>
 
@@ -858,13 +916,15 @@ ${mescid.city || "-"}
 İlçe
 </div>
 <div class="info-value">
-${mescid.district || "-"}
+${escapeHtml(mescid.district || "-")}
 </div>
 </div>
 
 </div>
 
 </section>
+
+<!-- SUMMARY -->
 
 <section class="card">
 
@@ -896,14 +956,14 @@ ${mescid.has_ablution ? "Var" : "Yok"}
 
 <button
 class="rate-btn"
-onclick="
-openRatingModal('${mescid.id}')
-"
+onclick="openRatingModal('${mescid.id}')"
 >
 Mescidi Puanla
 </button>
 
 </section>
+
+<!-- REVIEWS -->
 
 <section class="card">
 
@@ -931,7 +991,7 @@ reviews.map(review=>`
 <div class="review-top">
 
 <div class="review-score">
-⭐ ${review.overall_score}
+⭐ ${review.overall_score || "-"}
 </div>
 
 <div class="review-date">
@@ -980,9 +1040,12 @@ Henüz değerlendirme bulunmuyor.
 
 </section>
 
+<!-- MODAL -->
+
 <div
 id="ratingModal"
 class="rating-modal"
+onclick="closeRatingModal()"
 >
 
 <div
@@ -999,7 +1062,7 @@ Değerlendirme
 </div>
 
 <h3>
-${mescid.name}
+${escapeHtml(mescid.name || "-")}
 </h3>
 
 </div>
@@ -1014,17 +1077,30 @@ onclick="closeRatingModal()"
 
 </div>
 
+<!-- CLEAN -->
+
 <div class="rating-group">
 
 <label>
 Temizlik
 </label>
 
-<div class="star-row">
-★★★★★
+<div
+class="star-row"
+data-rating="cleanliness"
+>
+
+<span onclick="setRating(this,1)">★</span>
+<span onclick="setRating(this,2)">★</span>
+<span onclick="setRating(this,3)">★</span>
+<span onclick="setRating(this,4)">★</span>
+<span onclick="setRating(this,5)">★</span>
+
 </div>
 
 </div>
+
+<!-- SOUND -->
 
 <div class="rating-group">
 
@@ -1032,11 +1108,22 @@ Temizlik
 Sessizlik / Huzur
 </label>
 
-<div class="star-row">
-★★★★★
+<div
+class="star-row"
+data-rating="sound"
+>
+
+<span onclick="setRating(this,1)">★</span>
+<span onclick="setRating(this,2)">★</span>
+<span onclick="setRating(this,3)">★</span>
+<span onclick="setRating(this,4)">★</span>
+<span onclick="setRating(this,5)">★</span>
+
 </div>
 
 </div>
+
+<!-- AIR -->
 
 <div class="rating-group">
 
@@ -1044,11 +1131,22 @@ Sessizlik / Huzur
 Havalandırma
 </label>
 
-<div class="star-row">
-★★★★★
+<div
+class="star-row"
+data-rating="air"
+>
+
+<span onclick="setRating(this,1)">★</span>
+<span onclick="setRating(this,2)">★</span>
+<span onclick="setRating(this,3)">★</span>
+<span onclick="setRating(this,4)">★</span>
+<span onclick="setRating(this,5)">★</span>
+
 </div>
 
 </div>
+
+<!-- FLOOR -->
 
 <div class="rating-group">
 
@@ -1056,8 +1154,17 @@ Havalandırma
 Halı / Zemin
 </label>
 
-<div class="star-row">
-★★★★★
+<div
+class="star-row"
+data-rating="floor"
+>
+
+<span onclick="setRating(this,1)">★</span>
+<span onclick="setRating(this,2)">★</span>
+<span onclick="setRating(this,3)">★</span>
+<span onclick="setRating(this,4)">★</span>
+<span onclick="setRating(this,5)">★</span>
+
 </div>
 
 </div>
@@ -1079,8 +1186,17 @@ Abdesthane
 Abdesthane Temizlik
 </label>
 
-<div class="star-row">
-★★★★★
+<div
+class="star-row"
+data-rating="ablution_clean"
+>
+
+<span onclick="setRating(this,1)">★</span>
+<span onclick="setRating(this,2)">★</span>
+<span onclick="setRating(this,3)">★</span>
+<span onclick="setRating(this,4)">★</span>
+<span onclick="setRating(this,5)">★</span>
+
 </div>
 
 </div>
@@ -1091,8 +1207,17 @@ Abdesthane Temizlik
 Islak Zemin
 </label>
 
-<div class="star-row">
-★★★★★
+<div
+class="star-row"
+data-rating="wet_floor"
+>
+
+<span onclick="setRating(this,1)">★</span>
+<span onclick="setRating(this,2)">★</span>
+<span onclick="setRating(this,3)">★</span>
+<span onclick="setRating(this,4)">★</span>
+<span onclick="setRating(this,5)">★</span>
+
 </div>
 
 </div>
@@ -1105,8 +1230,12 @@ Islak Zemin
 Sabun
 </span>
 
-<button>
-Evet
+<button
+type="button"
+id="soapBtn"
+onclick="toggleOption('soap',this)"
+>
+Belirt
 </button>
 
 </div>
@@ -1117,8 +1246,12 @@ Evet
 Kağıt Havlu
 </span>
 
-<button>
-Evet
+<button
+type="button"
+id="paperBtn"
+onclick="toggleOption('paper',this)"
+>
+Belirt
 </button>
 
 </div>
@@ -1134,15 +1267,15 @@ Evet
 }
 
 <textarea
+id="reviewText"
 class="review-area"
+maxlength="300"
 placeholder="İsterseniz kısa değerlendirme yazabilirsiniz..."
 ></textarea>
 
 <button
 class="submit-rating"
-onclick="
-submitRating('${mescid.id}')
-"
+onclick="submitRating('${mescid.id}')"
 >
 Değerlendirmeyi Gönder
 </button>
@@ -1156,15 +1289,53 @@ Değerlendirmeyi Gönder
 }
 
 /* ========================= */
-/* DATE */
+/* STAR RATING */
 /* ========================= */
 
-function formatDate(date){
+function setRating(el,value){
 
-if(!date) return "";
+const row =
+el.parentElement;
 
-return new Date(date)
-.toLocaleDateString("tr-TR");
+const stars =
+row.querySelectorAll("span");
+
+stars.forEach((star,index)=>{
+
+star.classList.toggle(
+"active",
+index < value
+);
+
+});
+
+const key =
+row.dataset.rating;
+
+ratings[key] = value;
+
+}
+
+/* ========================= */
+/* TOGGLE */
+/* ========================= */
+
+function toggleOption(type,btn){
+
+toggles[type] =
+toggles[type] === true
+? false
+: true;
+
+btn.classList.toggle(
+"active",
+toggles[type]
+);
+
+btn.innerText =
+toggles[type]
+? "Var"
+: "Yok";
 
 }
 
@@ -1174,18 +1345,31 @@ return new Date(date)
 
 function openRatingModal(id){
 
-const rated =
+const ratedData =
 localStorage.getItem(
 `rated_${id}`
 );
 
-if(rated){
+if(ratedData){
+
+const lastVote =
+Number(ratedData);
+
+const diff =
+Date.now() - lastVote;
+
+const hours =
+diff / (1000*60*60);
+
+if(hours < 24){
 
 alert(
-"Bu mescidi bugün zaten değerlendirdiniz."
+"Bu mescidi son 24 saat içinde değerlendirdiniz."
 );
 
 return;
+
+}
 
 }
 
@@ -1207,7 +1391,84 @@ document
 /* SUBMIT */
 /* ========================= */
 
-function submitRating(id){
+async function submitRating(id){
+
+if(
+!ratings.cleanliness ||
+!ratings.sound ||
+!ratings.air ||
+!ratings.floor
+){
+
+alert(
+"Lütfen tüm puanlamaları tamamlayın."
+);
+
+return;
+
+}
+
+const payload = {
+
+mescid_id : id,
+
+cleanliness :
+ratings.cleanliness,
+
+sound :
+ratings.sound,
+
+air :
+ratings.air,
+
+floor :
+ratings.floor,
+
+ablution_clean :
+ratings.ablution_clean || null,
+
+wet_floor :
+ratings.wet_floor || null,
+
+soap :
+toggles.soap,
+
+paper :
+toggles.paper,
+
+comment :
+document
+.getElementById("reviewText")
+.value
+.trim()
+
+};
+
+try{
+
+const res = await fetch(
+`${API_BASE}/api/rate`,
+{
+method:"POST",
+headers:{
+"Content-Type":"application/json"
+},
+body:JSON.stringify(payload)
+}
+);
+
+const data =
+await res.json();
+
+if(!data.success){
+
+alert(
+"Değerlendirme gönderilemedi."
+);
+
+return;
+
+}
 
 localStorage.setItem(
 `rated_${id}`,
@@ -1215,10 +1476,23 @@ Date.now()
 );
 
 alert(
-"Değerlendirmeniz alındı."
+"Değerlendirmeniz kaydedildi."
 );
 
 closeRatingModal();
+
+loadMescid();
+
+}
+catch(e){
+
+console.error(e);
+
+alert(
+"Bir bağlantı hatası oluştu."
+);
+
+}
 
 }
 
