@@ -114,32 +114,6 @@ align-items:flex-start;
 
 <main class="app">
 
-<!-- SLIDER -->
-<section class="slider">
-
-  <div class="slide active">
-
-    <img src="https://images.unsplash.com/photo-1584551246679-0daf3d275d0f">
-
-    <div class="slide-overlay">
-      <h3>Metro Mescidi</h3>
-      <p>⭐ 4.6</p>
-    </div>
-
-  </div>
-
-  <div class="slide">
-
-    <img src="https://images.unsplash.com/photo-1591608971362-f08b2a75731a">
-
-    <div class="slide-overlay">
-      <h3>AVM Mescidi</h3>
-      <p>⭐ 4.8</p>
-    </div>
-
-  </div>
-
-</section>
 <!-- CTA PREMIUM -->
 <section class="main-action">
 
@@ -224,22 +198,30 @@ align-items:flex-start;
 
 </div>
 
-<a href="eniyiler.html" class="nav-item">
-    <span class="nav-icon">★</span>
-    <p>En İyiler</p>
-</a>
+<div
+class="nav-item"
+onclick="location.href='eniyiler.html'"
+>
+
+  <span class="nav-icon">★</span>
+
+  <p>
+    En İyiler
+  </p>
+
+</div>
 
 <button
-  type="button"
-  class="center-btn"
-  onclick="startForm()"
+type="button"
+class="center-btn"
+onclick="startForm()"
 >
-  +
++
 </button>
 
-  <div
-  class="nav-item"
-  onclick="location.href='sosyal.html'"
+<div
+class="nav-item"
+onclick="location.href='sosyal.html'"
 >
 
   <span class="nav-icon">◎</span>
