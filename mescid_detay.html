@@ -81,12 +81,7 @@ box-shadow:
 0 12px 40px rgba(0,0,0,.22);
 }
 
-.hero img{
-width:100%;
-height:100%;
-object-fit:cover;
-display:block;
-}
+
 
 .hero-overlay{
 position:absolute;
@@ -639,6 +634,38 @@ padding:20px;
 
 }
 
+.hero-slider{
+
+display:flex;
+width:100%;
+height:100%;
+overflow-x:auto;
+
+scroll-snap-type:x mandatory;
+scroll-behavior:smooth;
+
+-webkit-overflow-scrolling:touch;
+scrollbar-width:none;
+
+}
+
+.hero-slider::-webkit-scrollbar{
+display:none;
+}
+
+.hero-slider img{
+
+min-width:100%;
+height:100%;
+
+object-fit:cover;
+
+scroll-snap-align:start;
+
+flex-shrink:0;
+
+}
+
 </style>
 
 </head>
@@ -820,11 +847,19 @@ const reviews =
 data.reviews || [];
 
 const images =
-mescid.images?.length
-? mescid.images
+
+data.images?.length
+
+? data.images.map(
+x => x.image_url
+)
+
 : [
+
 mescid.image ||
+
 "https://images.unsplash.com/photo-1514890547357-a9ee288728e0?q=80&w=1200&auto=format&fit=crop"
+
 ];
 
 document.getElementById("app").innerHTML = `
