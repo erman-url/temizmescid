@@ -750,7 +750,6 @@ function updatePrayerState(){
 
 }
 
-
 // =========================
 // STEP VALIDATION
 // =========================
@@ -764,11 +763,6 @@ function validateStep(step){
     document.getElementById("type")
     ?.value;
 
-    const desc =
-    document.getElementById("desc")
-    ?.value
-    ?.trim();
-
     if(!type){
 
       alert(
@@ -779,17 +773,7 @@ function validateStep(step){
 
     }
 
-  if(
-  desc &&
-  desc.length > 0 &&
-  desc.length < 5
-){
-  alert(
-    "Açıklama en az 5 karakter olmalı"
-  );
-
-  return false;
-}
+  }
 
   // STEP 3
 
@@ -846,7 +830,6 @@ function validateStep(step){
   return true;
 
 }
-
 
 // =========================
 // TOGGLE BINARY
