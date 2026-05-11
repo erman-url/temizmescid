@@ -242,15 +242,15 @@ function next(step){
 
     }
 
-    if(imagesInput.files.length > 4){
+  if(imagesInput.files.length > 5){
 
-      alert(
-        "En fazla 4 fotoğraf yükleyebilirsiniz."
-      );
+  alert(
+    "En fazla 5 fotoğraf yükleyebilirsiniz."
+  );
 
-      return;
+  return;
 
-    }
+}
 
   }
 
@@ -258,10 +258,10 @@ function next(step){
   // STEP VALIDATION
   // =========================
 
-  if(
-    step === 3 &&
-    !validateStep(3)
-  ){
+ if(
+  step === 3 &&
+  !validateStep(2)
+){
     return;
   }
 
@@ -305,26 +305,6 @@ function next(step){
 
 }
 
-
-// =========================
-// ABDEST CONTROL
-// =========================
-function toggleAblution(){
-
-  const ablution =
-  document.getElementById("ablution")?.value;
-
-  const area =
-  document.getElementById("ablutionArea");
-
-  if(!area) return;
-
-  area.style.display =
-  ablution === "Yok"
-    ? "none"
-    : "block";
-
-}
 
 
 // =========================
@@ -463,10 +443,6 @@ function getScoreLabel(score){
 
 }
 
-
-// =========================
-// FORM SUBMIT
-// =========================
 async function submitForm(){
 
   if(!validateStep(4)){
@@ -475,61 +451,89 @@ async function submitForm(){
 
   try{
 
-    const name =
-    document.getElementById("mescidName")
-    ?.value
-    ?.trim();
-
-    const city =
-    document.getElementById("city")
-    ?.value
-    ?.trim();
-
-    const district =
-    document.getElementById("district")
-    ?.value
-    ?.trim();
-
-    const type =
-    document.getElementById("type")
-    ?.value;
-
-    const desc =
-    document.getElementById("desc")
-    ?.value
-    ?.trim();
+    const imagesInput =
+      document.getElementById("images");
 
     if(
-      !name ||
-      !city ||
-      !district
+      !imagesInput ||
+      imagesInput.files.length < 1
     ){
 
       alert(
-        "Mescid adı, şehir ve ilçe zorunludur."
+        "En az 1 fotoğraf gerekli"
       );
 
       return;
 
     }
 
-  const payload = {
+    if(imagesInput.files.length > 5){
 
-  name,
+      alert(
+        "En fazla 5 fotoğraf yükleyebilirsiniz"
+      );
 
-  city,
+      return;
 
-  district,
+    }
 
-  category:type,
+    const formData =
+      new FormData();
 
-  address:desc,
+    formData.append(
+      "name",
+      document.getElementById("mescidName")
+      ?.value
+      ?.trim()
+    );
 
-  lat:41.0082,
+    formData.append(
+      "city",
+      document.getElementById("city")
+      ?.value
+      ?.trim()
+    );
 
-  lng:28.9784
+    formData.append(
+      "district",
+      document.getElementById("district")
+      ?.value
+      ?.trim()
+    );
 
-};
+    formData.append(
+      "category",
+      document.getElementById("type")
+      ?.value
+    );
+
+    formData.append(
+      "address",
+      document.getElementById("desc")
+      ?.value
+      ?.trim()
+    );
+
+    formData.append(
+      "lat",
+      41.0082
+    );
+
+    formData.append(
+      "lng",
+      28.9784
+    );
+
+    Array
+    .from(imagesInput.files)
+    .forEach(file=>{
+
+      formData.append(
+        "images",
+        file
+      );
+
+    });
 
     const res = await fetch(
 
@@ -539,18 +543,14 @@ async function submitForm(){
 
         method:"POST",
 
-        headers:{
-          "Content-Type":"application/json"
-        },
-
-        body:JSON.stringify(payload)
+        body:formData
 
       }
 
     );
 
     const data =
-    await res.json();
+      await res.json();
 
     if(!res.ok){
 
@@ -570,7 +570,7 @@ async function submitForm(){
     closeForm();
 
     location.href =
-    `mescid_detay.html?slug=${data.slug}`;
+`mescid_detay.html?slug=${data.slug}`;
 
   }
 
@@ -760,7 +760,7 @@ function validateStep(step){
 
   // STEP 2
 
-  if(step === 3){
+  if(step === 2){
 
     const type =
     document.getElementById("type")
