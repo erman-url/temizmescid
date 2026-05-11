@@ -305,8 +305,6 @@ function next(step){
 
 }
 
-
-
 // =========================
 // SCORE CALCULATION
 // =========================
@@ -781,20 +779,17 @@ function validateStep(step){
 
     }
 
-    if(
-      !desc ||
-      desc.length < 5
-    ){
+  if(
+  desc &&
+  desc.length > 0 &&
+  desc.length < 5
+){
+  alert(
+    "Açıklama en az 5 karakter olmalı"
+  );
 
-      alert(
-        "Açıklama en az 5 karakter olmalı"
-      );
-
-      return false;
-
-    }
-
-  }
+  return false;
+}
 
   // STEP 3
 
