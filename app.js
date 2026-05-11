@@ -1,3 +1,11 @@
+/* =========================
+API URL
+========================= */
+
+const API_URL =
+"https://spring-violet-7aa7.temizmescid.workers.dev";
+
+
 // =========================
 // INIT (DOM READY)
 // =========================
@@ -966,3 +974,198 @@ function closeLegalModal(){
   ?.classList.remove("show");
 
 }
+
+
+/* =========================
+TOP MESCIDS
+========================= */
+
+async function loadTopMescids(){
+
+const slider =
+document.getElementById(
+  "topSlider"
+);
+
+if(!slider) return;
+
+/* LOADING */
+
+slider.innerHTML = `
+<div class="top-loading">
+
+  <div class="top-skeleton"></div>
+
+  <div class="top-skeleton"></div>
+
+</div>
+`;
+
+try{
+
+/* API */
+
+const res = await fetch(
+`${API_URL}/api/mescids/top`
+);
+
+if(!res.ok){
+
+throw new Error(
+"Top mescid fetch failed"
+);
+
+}
+
+const data =
+await res.json();
+
+/* EMPTY */
+
+if(
+!Array.isArray(data) ||
+data.length === 0
+){
+
+slider.innerHTML = `
+<p style="
+color:#94a3b8;
+padding:20px 0;
+font-size:14px;
+">
+Henüz öne çıkan mescid bulunmuyor.
+</p>
+`;
+
+return;
+
+}
+
+/* RENDER */
+
+slider.innerHTML = "";
+
+data.forEach(item=>{
+
+const card =
+document.createElement(
+"article"
+);
+
+card.className =
+"top-card";
+
+card.onclick = ()=>{
+
+location.href =
+`mescid_detay.html?id=${item.id}`;
+
+};
+
+card.innerHTML = `
+
+<img
+loading="lazy"
+src="${
+item.image ||
+'assets/img/default.jpg'
+}"
+alt="${
+item.name || 'Mescid'
+}"
+>
+
+<div class="top-overlay"></div>
+
+<div class="top-content">
+
+<div class="top-badge">
+⭐ ${
+Number(
+item.average_score || 0
+).toFixed(1)
+}
+</div>
+
+<h3>
+${item.name || 'Mescid'}
+</h3>
+
+<div class="top-meta">
+
+<span>
+${item.district || '-'}
+</span>
+
+<div class="top-dot"></div>
+
+<span>
+${item.category || '-'}
+</span>
+
+</div>
+
+</div>
+`;
+
+slider.appendChild(card);
+
+});
+
+/* AUTO SLIDE */
+
+let autoSlide =
+setInterval(()=>{
+
+slider.scrollBy({
+left:320,
+behavior:"smooth"
+});
+
+if(
+slider.scrollLeft +
+slider.clientWidth >=
+slider.scrollWidth - 30
+){
+
+slider.scrollTo({
+left:0,
+behavior:"smooth"
+});
+
+}
+
+},7000);
+
+/* STOP ON TOUCH */
+
+slider.addEventListener(
+"touchstart",
+()=>clearInterval(autoSlide),
+{ passive:true }
+);
+
+}catch(err){
+
+console.error(err);
+
+slider.innerHTML = `
+<p style="
+color:#ef4444;
+padding:20px 0;
+font-size:14px;
+">
+Öne çıkan mescidler yüklenemedi.
+</p>
+`;
+
+}
+
+}
+
+/* INIT */
+
+document.addEventListener(
+"DOMContentLoaded",
+loadTopMescids
+);

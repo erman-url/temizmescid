@@ -63,6 +63,186 @@ color:#888;
 align-items:flex-start;
 }
 
+
+/* =========================
+TOP SLIDER
+========================= */
+
+.top-slider-wrap{
+padding:0 16px;
+margin-top:18px;
+}
+
+.top-head{
+display:flex;
+align-items:center;
+justify-content:space-between;
+margin-bottom:14px;
+}
+
+.top-mini{
+font-size:11px;
+font-weight:700;
+letter-spacing:.4px;
+text-transform:uppercase;
+color:#22c55e;
+margin-bottom:4px;
+}
+
+.top-head h2{
+font-size:22px;
+font-weight:800;
+color:#fff;
+line-height:1.2;
+}
+
+.top-all-btn{
+border:none;
+background:#1f2937;
+color:#fff;
+height:38px;
+padding:0 14px;
+border-radius:12px;
+font-size:13px;
+font-weight:600;
+}
+
+.top-slider{
+display:flex;
+gap:14px;
+overflow-x:auto;
+scroll-snap-type:x mandatory;
+scrollbar-width:none;
+padding-bottom:4px;
+-webkit-overflow-scrolling:touch;
+}
+
+.top-slider::-webkit-scrollbar{
+display:none;
+}
+
+.top-card{
+position:relative;
+min-width:84%;
+height:210px;
+border-radius:26px;
+overflow:hidden;
+scroll-snap-align:center;
+background:#111827;
+flex-shrink:0;
+box-shadow:
+0 10px 30px rgba(0,0,0,.28);
+}
+
+.top-card img{
+width:100%;
+height:100%;
+object-fit:cover;
+display:block;
+background:#0f172a;
+}
+
+.top-overlay{
+position:absolute;
+inset:0;
+background:
+linear-gradient(
+to top,
+rgba(0,0,0,.86),
+rgba(0,0,0,.1)
+);
+}
+
+.top-content{
+position:absolute;
+left:16px;
+right:16px;
+bottom:16px;
+z-index:2;
+}
+
+.top-badge{
+display:inline-flex;
+align-items:center;
+gap:4px;
+padding:6px 10px;
+border-radius:999px;
+background:rgba(255,255,255,.14);
+backdrop-filter:blur(10px);
+font-size:12px;
+font-weight:700;
+color:#fff;
+margin-bottom:10px;
+}
+
+.top-content h3{
+font-size:21px;
+font-weight:800;
+color:#fff;
+margin-bottom:5px;
+line-height:1.2;
+}
+
+.top-meta{
+display:flex;
+align-items:center;
+gap:8px;
+font-size:13px;
+color:rgba(255,255,255,.82);
+}
+
+.top-dot{
+width:4px;
+height:4px;
+border-radius:999px;
+background:rgba(255,255,255,.5);
+}
+
+.top-loading{
+display:flex;
+gap:14px;
+overflow:hidden;
+}
+
+.top-skeleton{
+min-width:84%;
+height:210px;
+border-radius:26px;
+background:
+linear-gradient(
+90deg,
+#1e293b 25%,
+#334155 50%,
+#1e293b 75%
+);
+background-size:400% 100%;
+animation:loading 1.4s infinite;
+}
+
+@keyframes loading{
+
+0%{
+background-position:100% 0;
+}
+
+100%{
+background-position:-100% 0;
+}
+
+}
+
+@media(min-width:768px){
+
+.top-card{
+min-width:420px;
+}
+
+.top-skeleton{
+min-width:420px;
+}
+
+}
+
 </style>
 
 </head>
@@ -145,6 +325,50 @@ align-items:flex-start;
   </button>
 
 </section>
+
+<!-- ========================= -->
+<!-- TOP MESCID SLIDER -->
+<!-- ========================= -->
+
+<section class="top-slider-wrap">
+
+  <div class="top-head">
+
+    <div>
+
+      <div class="top-mini">
+        TemizMescid
+      </div>
+
+      <h2>
+        Öne Çıkan Mescidler
+      </h2>
+
+    </div>
+
+    <button
+      type="button"
+      class="top-all-btn"
+      onclick="location.href='eniyiler.html'"
+    >
+      Tümü
+    </button>
+
+  </div>
+
+  <!-- SLIDER -->
+
+  <div
+    class="top-slider"
+    id="topSlider"
+  >
+
+    <!-- DYNAMIC -->
+
+  </div>
+
+</section>
+
 <!-- AYET -->
 <section class="daily-verse">
 
