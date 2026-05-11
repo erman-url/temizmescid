@@ -640,125 +640,6 @@ Otel
 
 <section class="list" id="mescidList">
 
-<!-- CARD -->
-
-<div
-class="card"
-data-category="AVM"
-data-name="Metroport AVM Mescidi"
->
-
-<div
-class="card-image"
-onclick="
-location.href=
-'mescid_detay.html?slug=metroport-avm-mescidi'
-"
->
-
-<img
-src="https://images.unsplash.com/photo-1514890547357-a9ee288728e0?q=80&w=1200&auto=format&fit=crop"
-alt="Metroport AVM Mescidi"
->
-
-</div>
-
-<div class="card-top">
-
-<div>
-
-<h2>
-Metroport AVM Mescidi
-</h2>
-
-<div class="meta">
-
-İstanbul / Bahçelievler<br>
-AVM Mescidi
-
-</div>
-
-</div>
-
-<div class="score">
-⭐ 4.8
-</div>
-
-</div>
-
-<button
-class="rate-btn"
-onclick="
-location.href=
-'mescid_detay.html?slug=metroport-avm-mescidi'
-"
->
-
-Mescidi Puanla
-
-</button>
-
-</div>
-
-<!-- CARD -->
-
-<div
-class="card"
-data-category="AVM"
-data-name="Marmara Park Mescidi"
->
-
-<div
-class="card-image"
-onclick="
-location.href=
-'mescid_detay.html?slug=marmara-park-mescidi'
-"
->
-
-<img
-src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?q=80&w=1200&auto=format&fit=crop"
-alt="Marmara Park Mescidi"
->
-
-</div>
-
-<div class="card-top">
-
-<div>
-
-<h2>
-Marmara Park Mescidi
-</h2>
-
-<div class="meta">
-
-İstanbul / Beylikdüzü<br>
-AVM Mescidi
-
-</div>
-
-</div>
-
-<div class="score">
-⭐ 4.6
-</div>
-
-</div>
-
-<button
-class="rate-btn"
-onclick="
-location.href=
-'mescid_detay.html?slug=marmara-park-mescidi'
-"
->
-
-Mescidi Puanla
-
-</button>
-
-</div>
 
 </section>
 
@@ -851,8 +732,7 @@ onclick="location.href='iletisim.html'"
 const searchInput =
 document.getElementById("searchInput");
 
-const cards =
-document.querySelectorAll(".card");
+
 
 const emptyState =
 document.getElementById("emptyState");
@@ -908,22 +788,29 @@ searchInput.value
 
 let visibleCount = 0;
 
-cards.forEach(card=>{
+document
+.querySelectorAll(".card")
+.forEach(card=>{
 
 const name =
 card.dataset.name
 .toLowerCase();
 
 const category =
-card.dataset.category;
+(card.dataset.category || "")
+.toLowerCase();
 
 const searchMatch =
 name.includes(search);
 
 const filterMatch =
+
 activeFilter === "all"
+
 ||
-category === activeFilter;
+
+category ===
+activeFilter.toLowerCase();
 
 if(searchMatch && filterMatch){
 
@@ -957,6 +844,156 @@ location.href =
 "index.html";
 
 }
+
+// =========================
+// API LOAD
+// =========================
+async function loadMescids(){
+
+try{
+
+const res = await fetch(
+"https://spring-violet-7aa7.temizmescid.workers.dev/api/mescids/top"
+);
+
+if(!res.ok){
+
+throw new Error(
+"API bağlantı hatası"
+);
+
+}
+
+const response =
+await res.json();
+
+const data =
+response.results ||
+response.data ||
+response;
+
+renderMescids(data);
+
+}
+catch(err){
+
+console.error(err);
+
+emptyState.style.display =
+"block";
+
+}
+
+}
+
+// =========================
+// RENDER
+// =========================
+
+function renderMescids(data){
+
+const list =
+document.getElementById("mescidList");
+
+if(!list) return;
+
+list.innerHTML = "";
+
+if(
+!Array.isArray(data)
+||
+!data.length
+){
+
+emptyState.style.display = "block";
+
+return;
+
+}
+
+emptyState.style.display = "none";
+
+data.forEach(item=>{
+
+const card =
+document.createElement("div");
+
+card.className = "card";
+
+card.dataset.category =
+item.category || "";
+
+card.dataset.name =
+item.name || "";
+
+card.innerHTML = `
+
+<div
+class="card-image"
+onclick="
+location.href=
+'mescid_detay.html?slug=${item.slug}'
+"
+>
+
+<img
+src="${
+item.image ||
+'https://images.unsplash.com/photo-1514890547357-a9ee288728e0?q=80&w=1200&auto=format&fit=crop'
+}"
+alt="${item.name}"
+>
+
+</div>
+
+<div class="card-top">
+
+<div>
+
+<h2>
+${item.name}
+</h2>
+
+<div class="meta">
+
+${item.city} / ${item.district}<br>
+${item.category}
+
+</div>
+
+</div>
+
+<div class="score">
+⭐ ${Number(item.average_score || 0).toFixed(1)}
+</div>
+
+</div>
+
+<button
+class="rate-btn"
+onclick="
+location.href=
+'mescid_detay.html?slug=${item.slug}'
+"
+>
+
+Mescidi Puanla
+
+</button>
+
+`;
+
+list.appendChild(card);
+
+});
+
+}
+
+// =========================
+// INIT
+// =========================
+
+loadMescids();
 
 </script>
 
