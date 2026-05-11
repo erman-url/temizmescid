@@ -926,35 +926,6 @@ function updateAblutionArea(){
 }
 
 
-// =========================
-// LOAD TOP MESCIDS
-// =========================
-async function loadTopMescids(){
-
-  try{
-
-    const res = await fetch(
-      "https://spring-violet-7aa7.temizmescid.workers.dev/api/mescids/top"
-    );
-
-    const data =
-    await res.json();
-
-    console.log(
-      "CANLI MESCIDLER:",
-      data
-    );
-
-  }
-
-  catch(err){
-
-    console.error(err);
-
-  }
-
-}
-
 
 // =========================
 // LEGAL MODAL
@@ -1058,7 +1029,7 @@ card.className =
 card.onclick = ()=>{
 
 location.href =
-`mescid_detay.html?id=${item.id}`;
+`mescid_detay.html?slug=${item.slug}`;
 
 };
 

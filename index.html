@@ -115,6 +115,8 @@ scroll-snap-type:x mandatory;
 scrollbar-width:none;
 padding-bottom:4px;
 -webkit-overflow-scrolling:touch;
+scroll-padding-left:16px;
+scroll-padding-right:16px;
 }
 
 .top-slider::-webkit-scrollbar{
@@ -123,7 +125,8 @@ display:none;
 
 .top-card{
 position:relative;
-min-width:84%;
+width:100%;
+min-width:100%;
 aspect-ratio:4/3;
 height:auto;
 border-radius:26px;
@@ -210,7 +213,7 @@ overflow:hidden;
 
 .top-skeleton{
 min-width:84%;
-height:210px;
+aspect-ratio:4/3;
 border-radius:26px;
 background:
 linear-gradient(
