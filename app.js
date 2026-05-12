@@ -76,8 +76,8 @@ function showSlide(index){
 function initStars(){
 
   document
-  .querySelectorAll(".star")
-  .forEach(el=>{
+.querySelectorAll("#s4 .star")
+.forEach(el=>{
 
     if(el.dataset.initialized) return;
 
