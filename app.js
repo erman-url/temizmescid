@@ -520,6 +520,11 @@ formData.append(
   ?.trim()
 );
 
+console.log(
+  document.getElementById("ablution")?.value
+);
+
+
 formData.append(
   "has_ablution",
   document.querySelector(
