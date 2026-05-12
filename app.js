@@ -527,10 +527,13 @@ console.log(
 
 formData.append(
   "has_ablution",
-  document.querySelector(
-    '.toggle-btn.active'
-  )?.innerText.trim() === "Var"
+
+  document.getElementById(
+    "ablution"
+  )?.value === "Var"
+
     ? 1
+
     : 0
 );
 
