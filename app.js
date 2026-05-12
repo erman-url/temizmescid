@@ -513,17 +513,25 @@ async function submitForm(){
       ?.value
     );
 
-    formData.append(
-      "address",
-      document.getElementById("desc")
-      ?.value
-      ?.trim()
-    );
+formData.append(
+  "address",
+  document.getElementById("desc")
+  ?.value
+  ?.trim()
+);
 
-    formData.append(
-      "lat",
-      41.0082
-    );
+formData.append(
+  "has_ablution",
+  document.getElementById("ablution")
+  ?.value === "Var"
+    ? 1
+    : 0
+);
+
+formData.append(
+  "lat",
+  41.0082
+);
 
     formData.append(
       "lng",
