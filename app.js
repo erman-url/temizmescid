@@ -76,8 +76,8 @@ function showSlide(index){
 function initStars(){
 
   document
-.querySelectorAll("#s4 .star")
-.forEach(el=>{
+  .querySelectorAll(".star")
+  .forEach(el=>{
 
     if(el.dataset.initialized) return;
 
@@ -527,13 +527,10 @@ console.log(
 
 formData.append(
   "has_ablution",
-
-  document.getElementById(
-    "ablution"
-  )?.value === "Var"
-
+  document.querySelector(
+    '.toggle-btn.active'
+  )?.innerText.trim() === "Var"
     ? 1
-
     : 0
 );
 
