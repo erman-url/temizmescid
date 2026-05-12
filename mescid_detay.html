@@ -1027,8 +1027,8 @@ ${escapeHtml(mescid.district || "-")}
 <strong>
 ${
 Number(mescid.has_ablution) === 1
-? "Var"
-: "Yok"
+? "Evet"
+: "Hayır"
 }
 </strong>
 </div>
@@ -1318,7 +1318,7 @@ type="button"
 id="soapBtn"
 onclick="toggleOption('soap',this)"
 >
-Belirt
+Hayır
 </button>
 
 </div>
@@ -1334,7 +1334,7 @@ type="button"
 id="paperBtn"
 onclick="toggleOption('paper',this)"
 >
-Belirt
+Hayır
 </button>
 
 </div>
@@ -1467,8 +1467,8 @@ toggles[type]
 
 btn.innerText =
 toggles[type]
-? "Var"
-: "Yok";
+? "Evet"
+: "Hayır";
 
 }
 
