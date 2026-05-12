@@ -522,8 +522,9 @@ formData.append(
 
 formData.append(
   "has_ablution",
-  document.getElementById("ablution")
-  ?.value === "Var"
+  document.querySelector(
+    '.toggle-btn.active'
+  )?.innerText.trim() === "Var"
     ? 1
     : 0
 );
