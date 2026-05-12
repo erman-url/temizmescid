@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+name="viewport"
+content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+>
+
+<title>
+Namaz Vakitleri | TemizMescid
+</title>
+
+<meta
+name="description"
+content="İstanbul namaz vakitleri, cuma saati, günlük ibadet hatırlatmaları ve yaklaşan ezan bilgileri."
+>
+
+<meta
+name="keywords"
+content="namaz vakitleri, ezan saati, cuma vakti, imsakiye, TemizMescid"
+>
+
+<meta
+name="theme-color"
+content="#0b2422"
+>
+
+<meta property="og:title" content="Namaz Vakitleri | TemizMescid">
+<meta property="og:description" content="Güncel namaz vakitleri ve yaklaşan ezan bilgileri.">
+<meta property="og:type" content="website">
+
+<link rel="stylesheet" href="style.css">
+
+<style>
+
+/* ========================= */
+/* RESET */
+/* ========================= */
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
+body{
+
+font-family:
+Inter,
+system-ui,
+sans-serif;
+
+background:
+radial-gradient(
+circle at top,
+#21454b 0%,
+#10252a 35%,
+#08171b 100%
+);
+
+min-height:100vh;
+
+overflow-x:hidden;
+
+color:#fff;
+
+}
+
+/* ========================= */
+/* PAGE */
+/* ========================= */
+
+.namaz-page{
+
+max-width:420px;
+
+margin:auto;
+
+padding:
+18px 18px 140px;
+
+}
+
+/* ========================= */
+/* HERO */
+/* ========================= */
+
+.namaz-hero{
+
+position:relative;
+
+overflow:hidden;
+
+border-radius:32px;
+
+padding:
+28px 24px 30px;
+
+margin-bottom:22px;
+
+background:
+linear-gradient(
+180deg,
+rgba(15,44,42,.96),
+rgba(11,36,34,.94)
+);
+
+border:
+1px solid rgba(255,255,255,.05);
+
+box-shadow:
+0 14px 40px rgba(0,0,0,.22);
+
+backdrop-filter:
+blur(20px);
+
+}
+
+.namaz-hero::before{
+
+content:"";
+
+position:absolute;
+
+top:-100px;
+right:-100px;
+
+width:240px;
+height:240px;
+
+border-radius:50%;
+
+background:
+radial-gradient(
+circle,
+rgba(76,175,80,.22),
+transparent 70%
+);
+
+}
+
+.hero-badge{
+
+display:inline-flex;
+
+align-items:center;
+
+padding:
+8px 14px;
+
+border-radius:999px;
+
+background:
+rgba(255,255,255,.08);
+
+font-size:12px;
+font-weight:700;
+
+margin-bottom:16px;
+
+color:
+rgba(255,255,255,.84);
+
+}
+
+.namaz-hero h1{
+
+font-size:40px;
+font-weight:900;
+
+line-height:1.05;
+
+letter-spacing:-1.8px;
+
+margin-bottom:14px;
+
+}
+
+.namaz-hero p{
+
+font-size:14px;
+line-height:1.7;
+
+max-width:290px;
+
+color:
+rgba(255,255,255,.72);
+
+}
+
+/* ========================= */
+/* NEXT PRAYER */
+/* ========================= */
+
+.next-prayer{
+
+margin-top:24px;
+
+padding:
+22px;
+
+border-radius:26px;
+
+background:
+linear-gradient(
+135deg,
+#1b5e20,
+#2e7d32
+);
+
+box-shadow:
+0 10px 24px rgba(0,0,0,.18);
+
+}
+
+.next-label{
+
+font-size:13px;
+font-weight:700;
+
+opacity:.85;
+
+margin-bottom:8px;
+
+}
+
+.next-name{
+
+font-size:28px;
+font-weight:900;
+
+margin-bottom:8px;
+
+}
+
+.next-time{
+
+font-size:18px;
+font-weight:700;
+
+}
+
+/* ========================= */
+/* VAKIT GRID */
+/* ========================= */
+
+.vakit-grid{
+
+display:grid;
+
+grid-template-columns:
+1fr 1fr;
+
+gap:14px;
+
+margin-bottom:22px;
+
+}
+
+/* ========================= */
+/* VAKIT CARD */
+/* ========================= */
+
+.vakit-card{
+
+background:
+rgba(255,255,255,.96);
+
+border-radius:26px;
+
+padding:
+22px 18px;
+
+color:#111827;
+
+box-shadow:
+0 8px 24px rgba(0,0,0,.10);
+
+}
+
+.vakit-name{
+
+font-size:15px;
+font-weight:800;
+
+margin-bottom:10px;
+
+}
+
+.vakit-time{
+
+font-size:28px;
+font-weight:900;
+
+color:#1b5e20;
+
+}
+
+/* ========================= */
+/* INFO CARD */
+/* ========================= */
+
+.info-card{
+
+background:
+linear-gradient(
+180deg,
+rgba(255,255,255,.96),
+rgba(248,250,252,.96)
+);
+
+border-radius:30px;
+
+padding:
+24px;
+
+box-shadow:
+0 10px 30px rgba(0,0,0,.10);
+
+margin-bottom:18px;
+
+}
+
+.info-title{
+
+font-size:20px;
+font-weight:900;
+
+color:#111827;
+
+margin-bottom:12px;
+
+}
+
+.info-text{
+
+font-size:14px;
+line-height:1.8;
+
+color:#4b5563;
+
+}
+
+/* ========================= */
+/* QUICK ACTIONS */
+/* ========================= */
+
+.quick-actions{
+
+display:grid;
+
+grid-template-columns:
+1fr 1fr;
+
+gap:14px;
+
+}
+
+.action-card{
+
+background:
+linear-gradient(
+135deg,
+#0f2c2a,
+#163a37
+);
+
+border-radius:24px;
+
+padding:
+22px;
+
+min-height:120px;
+
+border:
+1px solid rgba(255,255,255,.04);
+
+}
+
+.action-icon{
+
+font-size:28px;
+
+margin-bottom:14px;
+
+}
+
+.action-title{
+
+font-size:16px;
+font-weight:800;
+
+margin-bottom:6px;
+
+}
+
+.action-text{
+
+font-size:13px;
+line-height:1.6;
+
+color:
+rgba(255,255,255,.70);
+
+}
+
+/* ========================= */
+/* MOBILE */
+/* ========================= */
+
+@media(max-width:480px){
+
+.namaz-page{
+padding:
+16px 16px 140px;
+}
+
+.namaz-hero h1{
+font-size:36px;
+}
+
+.vakit-time{
+font-size:24px;
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<main class="namaz-page">
+
+<!-- HERO -->
+
+<section class="namaz-hero">
+
+<div class="hero-badge">
+TemizMescid İbadet
+</div>
+
+<h1>
+Namaz
+Vakitleri
+</h1>
+
+<p>
+Güncel ezan saatleri, yaklaşan namaz vakti ve günlük ibadet takibi.
+</p>
+
+<div class="next-prayer">
+
+<div class="next-label">
+Yaklaşan Vakit
+</div>
+
+<div class="next-name">
+Öğle Namazı
+</div>
+
+<div class="next-time">
+13:05
+</div>
+
+</div>
+
+</section>
+
+<!-- VAKİTLER -->
+
+<section class="vakit-grid">
+
+<div class="vakit-card">
+<div class="vakit-name">İmsak</div>
+<div class="vakit-time">04:12</div>
+</div>
+
+<div class="vakit-card">
+<div class="vakit-name">Güneş</div>
+<div class="vakit-time">05:49</div>
+</div>
+
+<div class="vakit-card">
+<div class="vakit-name">Öğle</div>
+<div class="vakit-time">13:05</div>
+</div>
+
+<div class="vakit-card">
+<div class="vakit-name">İkindi</div>
+<div class="vakit-time">16:45</div>
+</div>
+
+<div class="vakit-card">
+<div class="vakit-name">Akşam</div>
+<div class="vakit-time">19:32</div>
+</div>
+
+<div class="vakit-card">
+<div class="vakit-name">Yatsı</div>
+<div class="vakit-time">20:55</div>
+</div>
+
+</section>
+
+<!-- INFO -->
+
+<section class="info-card">
+
+<div class="info-title">
+Bugünün Hatırlatması
+</div>
+
+<div class="info-text">
+“Namaz müminin miracıdır.” Gün içinde kısa da olsa manevi mola vermek zihinsel dinginlik sağlar.
+</div>
+
+</section>
+
+<!-- QUICK ACTIONS -->
+
+<section class="quick-actions">
+
+<div class="action-card">
+
+<div class="action-icon">
+🧭
+</div>
+
+<div class="action-title">
+Kıble Bul
+</div>
+
+<div class="action-text">
+Konumunuza göre kıble yönünü hızlıca öğrenin.
+</div>
+
+</div>
+
+<div class="action-card">
+
+<div class="action-icon">
+📖
+</div>
+
+<div class="action-title">
+Ayet & Hadis
+</div>
+
+<div class="action-text">
+Günlük manevi içeriklere erişin.
+</div>
+
+</div>
+
+</section>
+
+</main>
+
+<!-- FOOTER -->
+
+<nav class="footer">
+
+<div
+class="nav-item"
+onclick="location.href='index.html'"
+>
+
+<span class="nav-icon">⌂</span>
+
+<p>Ana</p>
+
+</div>
+
+<div
+class="nav-item"
+onclick="location.href='eniyiler.html'"
+>
+
+<span class="nav-icon">★</span>
+
+<p>Mescidler</p>
+
+</div>
+
+<button
+type="button"
+class="center-btn"
+onclick="location.href='index.html'"
+>
++
+</button>
+
+<div class="nav-item active">
+
+<span class="nav-icon">◎</span>
+
+<p>Sosyal</p>
+
+</div>
+
+<div
+class="nav-item"
+onclick="location.href='iletisim.html'"
+>
+
+<span class="nav-icon">✉</span>
+
+<p>İletişim</p>
+
+</div>
+
+</nav>
+
+</body>
+</html>

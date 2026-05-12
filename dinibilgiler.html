@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+name="viewport"
+content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+>
+
+<title>
+Dini Bilgiler | TemizMescid
+</title>
+
+<meta
+name="description"
+content="Namaz bilgileri, dini kıssalar, sureler, hadisler ve faydalı İslami içerikler."
+>
+
+<meta
+name="keywords"
+content="dini bilgiler, namaz, kıssalar, hadisler, sureler, islam"
+>
+
+<meta
+name="theme-color"
+content="#0b2422"
+>
+
+<meta property="og:title" content="Dini Bilgiler | TemizMescid">
+<meta property="og:description" content="Namaz, kıssalar, sureler ve İslami içerikler.">
+<meta property="og:type" content="website">
+
+<link rel="stylesheet" href="style.css">
+
+<style>
+
+/* ========================= */
+/* RESET */
+/* ========================= */
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
+body{
+
+font-family:
+Inter,
+system-ui,
+sans-serif;
+
+background:
+radial-gradient(
+circle at top,
+#21454b 0%,
+#10252a 35%,
+#08171b 100%
+);
+
+min-height:100vh;
+
+overflow-x:hidden;
+
+color:#fff;
+
+}
+
+/* ========================= */
+/* PAGE */
+/* ========================= */
+
+.dini-page{
+
+max-width:420px;
+
+margin:auto;
+
+padding:
+18px 18px 140px;
+
+}
+
+/* ========================= */
+/* HERO */
+/* ========================= */
+
+.dini-hero{
+
+position:relative;
+
+overflow:hidden;
+
+border-radius:32px;
+
+padding:
+28px 24px 34px;
+
+margin-bottom:24px;
+
+background:
+linear-gradient(
+180deg,
+rgba(15,44,42,.96),
+rgba(11,36,34,.94)
+);
+
+border:
+1px solid rgba(255,255,255,.05);
+
+box-shadow:
+0 14px 40px rgba(0,0,0,.24);
+
+backdrop-filter:
+blur(20px);
+
+}
+
+.dini-hero::before{
+
+content:"";
+
+position:absolute;
+
+top:-120px;
+right:-80px;
+
+width:240px;
+height:240px;
+
+border-radius:50%;
+
+background:
+radial-gradient(
+circle,
+rgba(46,125,50,.20),
+transparent 70%
+);
+
+}
+
+.hero-badge{
+
+display:inline-flex;
+
+align-items:center;
+
+padding:
+8px 14px;
+
+border-radius:999px;
+
+background:
+rgba(255,255,255,.08);
+
+font-size:12px;
+font-weight:700;
+
+margin-bottom:16px;
+
+color:
+rgba(255,255,255,.84);
+
+}
+
+.dini-hero h1{
+
+font-size:40px;
+font-weight:900;
+
+line-height:1.05;
+
+letter-spacing:-1.8px;
+
+margin-bottom:14px;
+
+}
+
+.dini-hero p{
+
+font-size:14px;
+line-height:1.8;
+
+max-width:300px;
+
+color:
+rgba(255,255,255,.72);
+
+}
+
+/* ========================= */
+/* GRID */
+/* ========================= */
+
+.category-grid{
+
+display:grid;
+
+grid-template-columns:
+1fr 1fr;
+
+gap:16px;
+
+}
+
+/* ========================= */
+/* CARD */
+/* ========================= */
+
+.category-card{
+
+position:relative;
+
+overflow:hidden;
+
+background:
+linear-gradient(
+180deg,
+rgba(255,255,255,.98),
+rgba(248,250,252,.96)
+);
+
+border-radius:30px;
+
+padding:
+22px;
+
+min-height:180px;
+
+box-shadow:
+0 12px 30px rgba(0,0,0,.10);
+
+border:
+1px solid rgba(255,255,255,.55);
+
+transition:.22s ease;
+
+cursor:pointer;
+
+}
+
+.category-card:active{
+
+transform:
+scale(.985);
+
+}
+
+.category-icon{
+
+width:62px;
+height:62px;
+
+border-radius:20px;
+
+display:flex;
+align-items:center;
+justify-content:center;
+
+font-size:30px;
+
+margin-bottom:20px;
+
+background:
+linear-gradient(
+135deg,
+#2e7d32,
+#1b5e20
+);
+
+color:#fff;
+
+box-shadow:
+0 10px 20px rgba(0,0,0,.14);
+
+}
+
+.category-title{
+
+font-size:19px;
+font-weight:900;
+
+line-height:1.3;
+
+color:#111827;
+
+margin-bottom:10px;
+
+}
+
+.category-text{
+
+font-size:13px;
+line-height:1.7;
+
+color:#6b7280;
+
+}
+
+/* FULL */
+
+.category-card.full{
+grid-column:1 / -1;
+}
+
+/* ========================= */
+/* MOBILE */
+/* ========================= */
+
+@media(max-width:480px){
+
+.dini-page{
+padding:
+16px 16px 140px;
+}
+
+.dini-hero{
+padding:
+24px 20px 30px;
+}
+
+.dini-hero h1{
+font-size:36px;
+}
+
+.category-card{
+min-height:170px;
+padding:20px;
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<main class="dini-page">
+
+<!-- HERO -->
+
+<section class="dini-hero">
+
+<div class="hero-badge">
+TemizMescid Eğitim
+</div>
+
+<h1>
+Dini
+Bilgiler
+</h1>
+
+<p>
+Namaz, kıssalar, hadisler ve günlük manevi içeriklere erişin.
+</p>
+
+</section>
+
+<!-- GRID -->
+
+<section class="category-grid">
+
+<!-- NAMAZ -->
+
+<div
+class="category-card"
+onclick="location.href='namaz.html'"
+>
+
+<div class="category-icon">
+🕌
+</div>
+
+<div class="category-title">
+Namaz
+</div>
+
+<div class="category-text">
+Namaz vakitleri, nasıl kılınır rehberi ve ibadet bilgileri.
+</div>
+
+</div>
+
+<!-- KISSALAR -->
+
+<div
+class="category-card"
+onclick="location.href='kissalar.html'"
+>
+
+<div class="category-icon">
+📜
+</div>
+
+<div class="category-title">
+Kıssalar
+</div>
+
+<div class="category-text">
+Peygamber kıssaları ve ibretlik dini hikayeler.
+</div>
+
+</div>
+
+<!-- HADİSLER -->
+
+<div
+class="category-card"
+onclick="location.href='hadisler.html'"
+>
+
+<div class="category-icon">
+📖
+</div>
+
+<div class="category-title">
+Hadisler
+</div>
+
+<div class="category-text">
+Günlük hadisler ve sahih kaynaklardan içerikler.
+</div>
+
+</div>
+
+<!-- SURELER -->
+
+<div
+class="category-card"
+onclick="location.href='sureler.html'"
+>
+
+<div class="category-icon">
+☪
+</div>
+
+<div class="category-title">
+Sureler
+</div>
+
+<div class="category-text">
+Kur'an sureleri, anlamları ve okunuşları.
+</div>
+
+</div>
+
+<!-- ÇOCUK -->
+
+<div
+class="category-card full"
+onclick="location.href='cocuk-egitim.html'"
+>
+
+<div class="category-icon">
+🌙
+</div>
+
+<div class="category-title">
+Çocuk Eğitim Alanı
+</div>
+
+<div class="category-text">
+Çocuklar için eğitici dini içerikler, kısa videolar ve öğretici bilgiler.
+</div>
+
+</div>
+
+</section>
+
+</main>
+
+<!-- FOOTER -->
+
+<nav class="footer">
+
+<div
+class="nav-item"
+onclick="location.href='index.html'"
+>
+
+<span class="nav-icon">⌂</span>
+
+<p>
+Ana
+</p>
+
+</div>
+
+<div
+class="nav-item"
+onclick="location.href='eniyiler.html'"
+>
+
+<span class="nav-icon">★</span>
+
+<p>
+Mescidler
+</p>
+
+</div>
+
+<button
+type="button"
+class="center-btn"
+onclick="location.href='index.html'"
+>
++
+</button>
+
+<div class="nav-item active">
+
+<span class="nav-icon">◎</span>
+
+<p>
+Sosyal
+</p>
+
+</div>
+
+<div
+class="nav-item"
+onclick="location.href='iletisim.html'"
+>
+
+<span class="nav-icon">✉</span>
+
+<p>
+İletişim
+</p>
+
+</div>
+
+</nav>
+
+</body>
+</html>
