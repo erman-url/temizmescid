@@ -66,106 +66,6 @@ margin:auto;
 padding:18px 18px 140px;
 }
 
-/* ========================= */
-/* HERO */
-/* ========================= */
-
-.hero{
-position:relative;
-height:260px;
-border-radius:32px;
-overflow:hidden;
-margin-bottom:18px;
-background:#222;
-box-shadow:
-0 12px 40px rgba(0,0,0,.22);
-}
-
-
-
-.hero-overlay{
-position:absolute;
-inset:0;
-
-background:
-linear-gradient(
-180deg,
-rgba(0,0,0,.08),
-rgba(0,0,0,.72)
-);
-
-display:flex;
-flex-direction:column;
-justify-content:flex-end;
-
-padding:24px;
-}
-
-.hero-title{
-font-size:34px;
-font-weight:800;
-line-height:1.05;
-letter-spacing:-1.4px;
-color:#fff;
-margin-bottom:14px;
-text-shadow:
-0 4px 20px rgba(0,0,0,.4);
-}
-
-.hero-title-wrap{
-
-display:inline-flex;
-
-align-self:flex-start;
-
-max-width:100%;
-
-padding:
-14px 18px;
-
-border-radius:24px;
-
-background:
-rgba(0,0,0,.24);
-
-backdrop-filter:
-blur(16px);
-
--webkit-backdrop-filter:
-blur(16px);
-
-box-shadow:
-0 4px 20px rgba(0,0,0,.18);
-
-margin-bottom:14px;
-
-border:
-1px solid rgba(255,255,255,.08);
-
-}
-
-.hero-title{
-
-font-size:34px;
-font-weight:800;
-
-line-height:1.02;
-
-letter-spacing:-1.5px;
-
-color:#fff;
-
-text-shadow:
-0 2px 12px rgba(0,0,0,.45);
-
-}
-
-.hero-meta{
-display:flex;
-align-items:center;
-gap:10px;
-flex-wrap:wrap;
-}
 
 .score-box{
 display:flex;
@@ -620,9 +520,6 @@ position:fixed;
 padding:16px 16px 140px;
 }
 
-.hero{
-height:240px;
-}
 
 .hero-title{
 font-size:30px;
@@ -634,18 +531,52 @@ padding:20px;
 
 }
 
+
+.hero-slider::-webkit-scrollbar{
+display:none;
+}
+
+
+/* =========================
+DETAIL HERO GALLERY
+========================= */
+
+.hero-gallery{
+
+position:relative;
+
+width:100%;
+aspect-ratio:4/3;
+
+border-radius:32px;
+
+overflow:hidden;
+
+background:#111827;
+
+margin-bottom:18px;
+
+box-shadow:
+0 12px 40px rgba(0,0,0,.25);
+
+}
+
 .hero-slider{
 
 display:flex;
+
 width:100%;
 height:100%;
+
 overflow-x:auto;
 
 scroll-snap-type:x mandatory;
-scroll-behavior:smooth;
+
+scrollbar-width:none;
 
 -webkit-overflow-scrolling:touch;
-scrollbar-width:none;
+
+scroll-behavior:smooth;
 
 }
 
@@ -653,16 +584,137 @@ scrollbar-width:none;
 display:none;
 }
 
-.hero-slider img{
+.hero-slide{
 
 min-width:100%;
+width:100%;
+height:100%;
+
+position:relative;
+
+scroll-snap-align:center;
+
+flex-shrink:0;
+
+overflow:hidden;
+
+}
+
+.hero-slide img{
+
+width:100%;
 height:100%;
 
 object-fit:cover;
 
-scroll-snap-align:start;
+display:block;
 
-flex-shrink:0;
+user-select:none;
+-webkit-user-drag:none;
+pointer-events:none;
+
+}
+
+.hero-overlay{
+
+position:absolute;
+inset:0;
+
+background:
+linear-gradient(
+180deg,
+rgba(0,0,0,.08),
+rgba(0,0,0,.72)
+);
+
+z-index:2;
+
+}
+
+.hero-content{
+
+position:absolute;
+
+left:20px;
+right:20px;
+bottom:24px;
+
+z-index:3;
+
+}
+
+.hero-title{
+
+display:inline-block;
+
+padding:
+14px 18px;
+
+border-radius:24px;
+
+background:
+rgba(0,0,0,.22);
+
+backdrop-filter:
+blur(14px);
+
+font-size:34px;
+font-weight:800;
+
+line-height:1;
+
+color:#fff;
+
+margin-bottom:14px;
+
+}
+
+.hero-meta{
+
+display:flex;
+align-items:center;
+gap:10px;
+flex-wrap:wrap;
+
+}
+
+.hero-dots{
+
+position:absolute;
+
+left:0;
+right:0;
+bottom:10px;
+
+display:flex;
+
+justify-content:center;
+
+gap:8px;
+
+z-index:5;
+
+}
+
+.hero-dots span{
+
+width:8px;
+height:8px;
+
+border-radius:999px;
+
+background:
+rgba(255,255,255,.35);
+
+transition:.25s;
+
+}
+
+.hero-dots span.active{
+
+width:24px;
+
+background:#fff;
 
 }
 
@@ -846,50 +898,80 @@ data.mescid || {};
 const reviews =
 data.reviews || [];
 
-const images =
+/* =========================
+IMAGES
+========================= */
 
-data.images?.length
+const images = [
 
-? data.images.map(
-x => x.image_url
-)
-
-: [
-
-mescid.image ||
-
-"https://images.unsplash.com/photo-1514890547357-a9ee288728e0?q=80&w=1200&auto=format&fit=crop"
+...(data.images || [])
+.map(x => x.image_url)
+.filter(Boolean)
 
 ];
+
+if(
+images.length === 0 &&
+mescid.image
+){
+
+images.push(
+mescid.image
+);
+
+}
+
+if(images.length === 0){
+
+images.push(
+"https://images.unsplash.com/photo-1514890547357-a9ee288728e0?q=80&w=1200&auto=format&fit=crop"
+);
+
+}
+
+/* =========================
+RENDER
+========================= */
 
 document.getElementById("app").innerHTML = `
 
 <!-- HERO -->
 
-<section class="hero">
+<section class="hero-gallery">
 
-<div class="hero-slider">
+<div
+class="hero-slider"
+id="heroSlider"
+>
 
-${images.map(img=>`
+${images.map((img,index)=>`
+
+<div class="hero-slide">
 
 <img
 src="${img}"
 alt="${escapeHtml(mescid.name || "Mescid")}"
-loading="lazy"
+loading="${index === 0 ? 'eager' : 'lazy'}"
+decoding="async"
 >
+
+<div class="hero-overlay"></div>
+
+</div>
 
 `).join("")}
 
 </div>
 
-<div class="hero-overlay">
+<div
+class="hero-dots"
+id="heroDots"
+></div>
 
-<div class="hero-title-wrap">
+<div class="hero-content">
 
 <div class="hero-title">
 ${escapeHtml(mescid.name || "-")}
-</div>
-
 </div>
 
 <div class="hero-meta">
@@ -903,56 +985,6 @@ ${escapeHtml(mescid.name || "-")}
 ${escapeHtml(mescid.district || "-")}
 </div>
 
-</div>
-
-</div>
-
-</section>
-
-<!-- INFO -->
-
-<section class="card">
-
-<div class="card-title">
-Mescid Bilgileri
-</div>
-
-<div class="info-grid">
-
-<div class="info-item">
-<div class="info-label">
-Kategori
-</div>
-<div class="info-value">
-${escapeHtml(mescid.category || "-")}
-</div>
-</div>
-
-<div class="info-item">
-<div class="info-label">
-Değerlendirme
-</div>
-<div class="info-value">
-${mescid.review_count || 0} oy
-</div>
-</div>
-
-<div class="info-item">
-<div class="info-label">
-Şehir
-</div>
-<div class="info-value">
-${escapeHtml(mescid.city || "-")}
-</div>
-</div>
-
-<div class="info-item">
-<div class="info-label">
-İlçe
-</div>
-<div class="info-value">
-${escapeHtml(mescid.district || "-")}
-</div>
 </div>
 
 </div>
@@ -1074,6 +1106,8 @@ Henüz değerlendirme bulunmuyor.
 }
 
 </section>
+
+
 
 <!-- MODAL -->
 
@@ -1320,6 +1354,56 @@ Değerlendirmeyi Gönder
 </div>
 
 `;
+
+/* =========================
+HERO DOTS
+========================= */
+
+const heroSlider =
+document.getElementById(
+"heroSlider"
+);
+
+const heroDots =
+document.getElementById(
+"heroDots"
+);
+
+if(heroSlider && heroDots){
+
+heroDots.innerHTML =
+images.map((_,i)=>`
+<span class="${
+i === 0 ? 'active' : ''
+}"></span>
+`).join("");
+
+const dots =
+heroDots.querySelectorAll("span");
+
+heroSlider.addEventListener(
+"scroll",
+()=>{
+
+const index =
+Math.round(
+heroSlider.scrollLeft /
+heroSlider.clientWidth
+);
+
+dots.forEach((dot,i)=>{
+
+dot.classList.toggle(
+"active",
+i === index
+);
+
+});
+
+}
+);
+
+}
 
 }
 

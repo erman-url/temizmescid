@@ -1028,6 +1028,21 @@ card.className =
 
 card.onclick = ()=>{
 
+if(!item.slug){
+
+console.error(
+"Slug eksik:",
+item
+);
+
+alert(
+"Bu mescid detay sayfası henüz hazır değil."
+);
+
+return;
+
+}
+
 location.href =
 `mescid_detay.html?slug=${item.slug}`;
 
