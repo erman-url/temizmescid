@@ -342,7 +342,7 @@ function calculateScore(){
     Number(el.dataset.val || 0);
 
     if(
-      ablution === "Yok" &&
+      ablution === "Hayır" &&
       (
         key === "ablution_clean" ||
         key === "floor"
@@ -383,7 +383,7 @@ function calculateScore(){
 
     if(
       b.depends &&
-      ablution === "Yok"
+      ablution === "Hayır"
     ){
       return;
     }
@@ -527,10 +527,13 @@ console.log(
 
 formData.append(
   "has_ablution",
-  document.querySelector(
-    '.toggle-btn.active'
-  )?.innerText.trim() === "Var"
+
+  document.getElementById(
+    "ablution"
+  )?.value === "Evet"
+
     ? 1
+
     : 0
 );
 
@@ -796,7 +799,6 @@ function validateStep(step){
     }
 
   }
-
   // STEP 3
 
   if(step === 4){
@@ -818,7 +820,7 @@ function validateStep(step){
       ?.value;
 
       if(
-        ablution === "Yok" &&
+        ablution === "Hayır" &&
         (
           key === "ablution_clean" ||
           key === "floor"
@@ -838,7 +840,7 @@ function validateStep(step){
     if(!allRated){
 
       alert(
-        "Tüm puanlamaları yapmak zorunlu"
+        "Lütfen tüm puanlamaları tamamlayın."
       );
 
       return false;
@@ -852,6 +854,7 @@ function validateStep(step){
   return true;
 
 }
+
 
 // =========================
 // TOGGLE BINARY
@@ -871,17 +874,13 @@ function toggleBinary(el,inputId){
 
     el.classList.add("active-yes");
 
-    input.value =
-    inputId === "ablution"
-      ? "Var"
-      : "Evet";
+input.value = "Evet";
 
-    updateAblutionArea();
+updateAblutionArea();
 
-    return;
+return;
 
   }
-
   // YES -> NO
 
   if(el.classList.contains("active-yes")){
@@ -890,27 +889,20 @@ function toggleBinary(el,inputId){
 
     el.classList.add("active-no");
 
-    input.value =
-    inputId === "ablution"
-      ? "Yok"
-      : "Hayır";
+    input.value = "Hayır";
 
     updateAblutionArea();
 
     return;
 
   }
-
   // NO -> YES
 
   el.classList.remove("active-no");
 
   el.classList.add("active-yes");
 
-  input.value =
-  inputId === "ablution"
-    ? "Var"
-    : "Evet";
+  input.value = "Evet";
 
   updateAblutionArea();
 
@@ -933,7 +925,7 @@ function updateAblutionArea(){
   }
 
   area.style.display =
-  ablution.value === "Var"
+  ablution.value === "Evet"
     ? "block"
     : "none";
 
