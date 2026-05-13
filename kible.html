@@ -495,35 +495,59 @@ document.getElementById(
 
 let qiblaBearing = 0;
 
+let compassStarted = false;
+
+/* =========================
+UTILS
+========================= */
+
 function toRad(deg){
+
 return deg * Math.PI / 180;
+
 }
 
 function toDeg(rad){
+
 return rad * 180 / Math.PI;
+
 }
+
+/* =========================
+QIBLA CALC
+========================= */
 
 function calculateQibla(
 lat,
 lng
 ){
 
-const phiK = toRad(KAABA_LAT);
-const lambdaK = toRad(KAABA_LNG);
+const phiK =
+toRad(KAABA_LAT);
 
-const phi = toRad(lat);
-const lambda = toRad(lng);
+const lambdaK =
+toRad(KAABA_LNG);
+
+const phi =
+toRad(lat);
+
+const lambda =
+toRad(lng);
 
 const y =
 Math.sin(lambdaK - lambda);
 
 const x =
-Math.cos(phi) * Math.tan(phiK)
+Math.cos(phi) *
+Math.tan(phiK)
 -
-Math.sin(phi) * Math.cos(lambdaK - lambda);
+Math.sin(phi) *
+Math.cos(lambdaK - lambda);
 
 let bearing =
-toDeg(Math.atan2(y, x));
+toDeg(
+Math.atan2(y, x)
+);
 
 bearing =
 (bearing + 360) % 360;
@@ -532,22 +556,187 @@ return bearing;
 
 }
 
+/* =========================
+COMPASS UI
+========================= */
+
 function updateCompass(
 heading
 ){
 
+if(
+heading === null ||
+isNaN(heading)
+){
+
+return;
+
+}
+
 const rotation =
-(qiblaBearing - heading + 360) % 360;
+
+(qiblaBearing - heading + 360)
+% 360;
 
 arrow.style.transform =
+
 `translate(-50%,-100%) rotate(${rotation}deg)`;
 
 }
 
+/* =========================
+ORIENTATION
+========================= */
+
+function handleOrientation(e){
+
+let heading = null;
+
+/* iPhone Safari */
+
+if(
+typeof e.webkitCompassHeading === "number"
+){
+
+heading =
+e.webkitCompassHeading;
+
+}
+
+/* Android */
+
+else if(
+typeof e.alpha === "number"
+){
+
+heading =
+360 - e.alpha;
+
+}
+
+/* INVALID */
+
+if(
+heading === null ||
+isNaN(heading)
+){
+
+return;
+
+}
+
+updateCompass(heading);
+
+}
+
+/* =========================
+ENABLE COMPASS
+========================= */
+
+async function enableCompass(){
+
+/* Prevent duplicate listeners */
+
+if(compassStarted){
+return;
+}
+
+compassStarted = true;
+
+/* iOS Safari */
+
+if(
+window.DeviceOrientationEvent &&
+typeof DeviceOrientationEvent
+.requestPermission === "function"
+){
+
+try{
+
+const permission =
+
+await DeviceOrientationEvent
+.requestPermission();
+
+if(
+permission !== "granted"
+){
+
+directionText.innerHTML =
+"Pusula izni reddedildi";
+
+return;
+
+}
+
+window.addEventListener(
+"deviceorientation",
+handleOrientation,
+true
+);
+
+directionText.innerHTML =
+"Kıble Yönü Hazır";
+
+}
+catch(e){
+
+console.error(e);
+
+directionText.innerHTML =
+"Pusula başlatılamadı";
+
+}
+
+}
+
+/* Android */
+
+else{
+
+window.addEventListener(
+"deviceorientationabsolute",
+handleOrientation,
+true
+);
+
+window.addEventListener(
+"deviceorientation",
+handleOrientation,
+true
+);
+
+directionText.innerHTML =
+"Kıble Yönü Hazır";
+
+}
+
+}
+
+/* =========================
+INIT
+========================= */
+
 function initCompass(){
 
+if(
+!navigator.geolocation
+){
+
+alert(
+"Konum desteği bulunamadı."
+);
+
+return;
+
+}
+
+directionText.innerHTML =
+"Konum alınıyor...";
+
 navigator.geolocation.getCurrentPosition(
-(position)=>{
+
+async(position)=>{
 
 const lat =
 position.coords.latitude;
@@ -556,94 +745,52 @@ const lng =
 position.coords.longitude;
 
 qiblaBearing =
-calculateQibla(lat,lng);
-
-const rounded =
-Math.round(qiblaBearing);
+calculateQibla(
+lat,
+lng
+);
 
 degreeText.innerHTML =
-`${rounded}°`;
+
+`${Math.round(qiblaBearing)}°`;
 
 locationText.innerHTML =
+
 `${lat.toFixed(4)}, ${lng.toFixed(4)}`;
 
-if(
-window.DeviceOrientationEvent &&
-typeof DeviceOrientationEvent.requestPermission === 'function'
-){
-
-DeviceOrientationEvent
-.requestPermission()
-.then(permission=>{
-
-if(permission === 'granted'){
-
-window.addEventListener(
-'deviceorientation',
-(e)=>{
-
-const heading =
-e.webkitCompassHeading ||
-(360 - e.alpha);
-
-updateCompass(heading);
-
-}
-);
-
-}
-
-});
-
-}else{
-
-window.addEventListener(
-'deviceorientation',
-(e)=>{
-
-let heading = null;
-
-if(e.webkitCompassHeading){
-
-heading =
-e.webkitCompassHeading;
-
-}else if(e.alpha !== null){
-
-heading =
-360 - e.alpha;
-
-}
-
-if(heading !== null){
-
-updateCompass(heading);
-
-}
+await enableCompass();
 
 },
-true
-);
 
-}
+(error)=>{
 
-directionText.innerHTML =
-"Kıble Yönü Hazır";
-
-},
-()=>{
+console.error(error);
 
 alert(
 "Konum izni gerekli"
 );
 
+directionText.innerHTML =
+"Konum alınamadı";
+
+},
+
+{
+enableHighAccuracy:true,
+timeout:10000,
+maximumAge:0
 }
+
 );
 
 }
 
+/* =========================
+START
+========================= */
+
 startBtn.addEventListener(
-'click',
+"click",
 initCompass
 );
 
