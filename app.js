@@ -5,7 +5,36 @@ API URL
 const API_URL =
 "https://spring-violet-7aa7.temizmescid.workers.dev";
 
+// =========================
+// INIT (DOM READY)
+// =========================
 
+document.addEventListener(
+"DOMContentLoaded",
+()=>{
+
+  initSlider();
+
+  initStars();
+
+  updateDateTime();
+
+  updatePrayerState();
+
+  setInterval(
+    updateDateTime,
+    1000
+  );
+
+  setInterval(
+    updatePrayerState,
+    60000
+  );
+
+  loadTopMescids();
+
+}
+);
 
 
 // =========================
