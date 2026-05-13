@@ -1185,7 +1185,19 @@ day % window.VERSES.length
 ];
 
 verseEl.innerHTML = `
-"${verse.text}"
+“${verse.text}”
 `;
+
+const sourceEl =
+document.getElementById(
+"dailyVerseSource"
+);
+
+if(sourceEl){
+
+sourceEl.innerHTML =
+`— ${verse.source}`;
+
+}
 
 }
