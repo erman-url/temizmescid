@@ -1024,6 +1024,27 @@ slider.innerHTML = "";
 
 data.forEach(item=>{
 
+console.log(
+"TOP MESCID ITEM:",
+item
+);
+
+/* IMAGE FIX */
+
+const imageUrl =
+
+item.images?.[0] ||
+
+item.image ||
+
+item.image_url ||
+
+item.photos?.[0] ||
+
+item.gallery?.[0] ||
+
+"assets/img/default.jpg";
+
 const card =
 document.createElement(
 "article"
@@ -1058,13 +1079,14 @@ card.innerHTML = `
 
 <img
 loading="lazy"
-src="${
-item.image ||
-'assets/img/default.jpg'
-}"
+src="${imageUrl}"
 alt="${
 item.name || 'Mescid'
 }"
+onerror="
+this.onerror=null;
+this.src='assets/img/default.jpg';
+"
 >
 
 <div class="top-overlay"></div>
