@@ -537,7 +537,7 @@ heading
 ){
 
 const rotation =
-qiblaBearing - heading;
+(qiblaBearing - heading + 360) % 360;
 
 arrow.style.transform =
 `translate(-50%,-100%) rotate(${rotation}deg)`;
@@ -598,15 +598,31 @@ updateCompass(heading);
 }else{
 
 window.addEventListener(
-'deviceorientationabsolute',
+'deviceorientation',
 (e)=>{
 
-const heading =
+let heading = null;
+
+if(e.webkitCompassHeading){
+
+heading =
+e.webkitCompassHeading;
+
+}else if(e.alpha !== null){
+
+heading =
 360 - e.alpha;
+
+}
+
+if(heading !== null){
 
 updateCompass(heading);
 
 }
+
+},
+true
 );
 
 }
