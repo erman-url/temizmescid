@@ -245,7 +245,7 @@ transform-origin:
 bottom center;
 
 transition:
-transform .25s linear;
+transform .12s linear;
 
 z-index:3;
 
@@ -759,6 +759,11 @@ locationText.innerHTML =
 `${lat.toFixed(4)}, ${lng.toFixed(4)}`;
 
 await enableCompass();
+
+startBtn.disabled = true;
+
+startBtn.innerHTML =
+"Pusula Aktif";
 
 },
 
