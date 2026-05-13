@@ -240,32 +240,72 @@ background-position:-100% 0;
 
 }
 
-
 /* =========================
-DAILY VERSE FINAL CLEAN
+DAILY VERSE FINAL
 ========================= */
-
 .daily-verse{
+
+position:relative;
+
+overflow:hidden;
+
+display:block !important;
 
 margin:20px 16px;
 
 padding:22px 20px;
 
-border-radius:24px;
+border-radius:28px;
 
 background:
-rgba(255,255,255,.06);
+linear-gradient(
+135deg,
+rgba(255,255,255,.10),
+rgba(255,255,255,.04)
+);
 
-backdrop-filter:blur(10px);
+backdrop-filter:blur(22px);
+
+-webkit-backdrop-filter:blur(22px);
 
 border:
-1px solid rgba(255,255,255,.04);
+1px solid rgba(255,255,255,.08);
+
+box-shadow:
+0 12px 40px rgba(0,0,0,.22),
+inset 0 1px 0 rgba(255,255,255,.08);
 
 text-align:center;
 
 }
 
+
+.daily-verse::before{
+
+content:"";
+
+position:absolute;
+
+top:-60px;
+
+right:-60px;
+
+width:140px;
+
+height:140px;
+
+border-radius:999px;
+
+background:
+rgba(255,255,255,.08);
+
+filter:blur(40px);
+
+}
+
 .verse-label{
+
+display:block !important;
 
 font-size:12px;
 
@@ -283,25 +323,32 @@ margin-bottom:14px;
 
 .verse-text{
 
-font-size:17px;
+display:block !important;
 
-line-height:1.7;
+position:relative;
+
+z-index:2;
+
+font-size:18px;
+
+line-height:1.8;
 
 font-weight:700;
 
+letter-spacing:-.3px;
+
 color:#fff;
 
-max-width:100%;
-
-word-break:normal;
-
-overflow-wrap:break-word;
-
 margin-bottom:14px;
+
+text-shadow:
+0 2px 10px rgba(0,0,0,.18);
 
 }
 
 .verse-source{
+
+display:block !important;
 
 font-size:13px;
 
