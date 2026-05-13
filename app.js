@@ -6,23 +6,6 @@ const API_URL =
 "https://spring-violet-7aa7.temizmescid.workers.dev";
 
 
-// =========================
-// INIT (DOM READY)
-// =========================
-document.addEventListener("DOMContentLoaded", () => {
-
-  initSlider();
-  initStars();
-
-  updateDateTime();
-  updatePrayerState();
-
-  setInterval(updateDateTime, 1000);
-  setInterval(updatePrayerState, 60000);
-
-  loadTopMescids();
-
-});
 
 
 // =========================
@@ -520,9 +503,6 @@ formData.append(
   ?.trim()
 );
 
-console.log(
-  document.getElementById("ablution")?.value
-);
 
 
 formData.append(
@@ -1024,20 +1004,6 @@ slider.innerHTML = "";
 
 data.forEach(item=>{
 
-console.log(
-"TOP MESCID ITEM:",
-item
-);
-/* RENDER */
-
-slider.innerHTML = "";
-
-data.forEach(item=>{
-
-/* =========================
-IMAGE URL NORMALIZE
-========================= */
-
 let imageUrl =
 
 item.image ||
@@ -1050,9 +1016,9 @@ item.photos?.[0] ||
 
 item.gallery?.[0] ||
 
-"";
+"assets/img/default.jpg";
 
-/* ARRAY STRING FIX */
+/* STRING ARRAY FIX */
 
 if(
 typeof imageUrl === "string" &&
@@ -1061,18 +1027,15 @@ imageUrl.startsWith("[")
 
 try{
 
-const parsed =
-JSON.parse(imageUrl);
-
 imageUrl =
-parsed?.[0] || "";
+JSON.parse(imageUrl)?.[0]
+||
+"assets/img/default.jpg";
 
 }catch(e){
 
-console.error(
-"Image parse error:",
-e
-);
+imageUrl =
+"assets/img/default.jpg";
 
 }
 
@@ -1103,15 +1066,12 @@ imageUrl =
 
 }
 
-/* SPACE FIX */
-
 imageUrl =
 String(imageUrl).trim();
 
-/* HTTP FIX */
+/* RELATIVE URL FIX */
 
 if(
-imageUrl &&
 !imageUrl.startsWith("http") &&
 !imageUrl.startsWith("assets/")
 ){
@@ -1121,16 +1081,7 @@ imageUrl =
 
 }
 
-/* DEBUG */
-
-console.log(
-"TOP IMAGE URL:",
-imageUrl
-);
-
-/* =========================
-CARD
-========================= */
+/* CARD */
 
 const card =
 document.createElement(
@@ -1140,16 +1091,11 @@ document.createElement(
 card.className =
 "top-card";
 
-/* NAVIGATION */
+/* CLICK */
 
 card.onclick = ()=>{
 
 if(!item.slug){
-
-console.error(
-"Slug eksik:",
-item
-);
 
 alert(
 "Bu mescid detay sayfası henüz hazır değil."
@@ -1171,13 +1117,10 @@ card.innerHTML = `
 <img
 loading="lazy"
 decoding="async"
-referrerpolicy="no-referrer"
-crossorigin="anonymous"
-
 src="${imageUrl}"
 
 alt="${
-item.name || 'Mescid'
+item.name || "Mescid"
 }"
 
 style="
@@ -1192,7 +1135,6 @@ background:#111827;
 "
 
 onerror="
-console.error('IMAGE LOAD FAILED:', this.src);
 this.onerror=null;
 this.src='assets/img/default.jpg';
 "
@@ -1211,19 +1153,19 @@ item.average_score || 0
 </div>
 
 <h3>
-${item.name || 'Mescid'}
+${item.name || "Mescid"}
 </h3>
 
 <div class="top-meta">
 
 <span>
-${item.district || '-'}
+${item.district || "-"}
 </span>
 
 <div class="top-dot"></div>
 
 <span>
-${item.category || '-'}
+${item.category || "-"}
 </span>
 
 </div>
@@ -1237,7 +1179,16 @@ slider.appendChild(card);
 
 /* AUTO SLIDE */
 
-let autoSlide =
+
+if(window.topSliderInterval){
+
+clearInterval(
+window.topSliderInterval
+);
+
+}
+
+window.topSliderInterval =
 setInterval(()=>{
 
 slider.scrollBy({
@@ -1260,13 +1211,23 @@ behavior:"smooth"
 
 },7000);
 
+
+
 /* STOP ON TOUCH */
 
 slider.addEventListener(
 "touchstart",
-()=>clearInterval(autoSlide),
+()=>{
+
+clearInterval(
+window.topSliderInterval
+);
+
+},
 { passive:true }
 );
+
+
 
 }catch(err){
 
@@ -1286,12 +1247,7 @@ font-size:14px;
 
 }
 
-/* INIT */
 
-document.addEventListener(
-"DOMContentLoaded",
-loadTopMescids
-);
 
 /* =========================
 DAILY VERSE
