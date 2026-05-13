@@ -728,6 +728,73 @@ background:#fff;
 
 }
 
+/* =========================
+DETAIL GALLERY
+========================= */
+
+.gallery-section{
+
+margin-bottom:18px;
+
+}
+
+.gallery-title{
+
+font-size:18px;
+
+font-weight:800;
+
+color:#fff;
+
+margin-bottom:14px;
+
+padding:0 4px;
+
+}
+
+.gallery-row{
+
+display:flex;
+
+gap:12px;
+
+overflow-x:auto;
+
+scroll-snap-type:x mandatory;
+
+scrollbar-width:none;
+
+-webkit-overflow-scrolling:touch;
+
+padding-bottom:4px;
+
+}
+
+.gallery-row::-webkit-scrollbar{
+display:none;
+}
+
+.gallery-image{
+
+width:160px;
+
+height:120px;
+
+object-fit:cover;
+
+border-radius:20px;
+
+flex-shrink:0;
+
+scroll-snap-align:start;
+
+background:#111827;
+
+box-shadow:
+0 8px 24px rgba(0,0,0,.22);
+
+}
+
 </style>
 
 </head>
@@ -1000,6 +1067,34 @@ ${escapeHtml(mescid.district || "-")}
 </div>
 
 </section>
+
+<!-- GALLERY -->
+
+<section class="gallery-section">
+
+<div class="gallery-title">
+📷 Fotoğraflar
+</div>
+
+<div class="gallery-row">
+
+${images.map(img=>`
+
+<img
+src="${img}"
+class="gallery-image"
+loading="lazy"
+decoding="async"
+>
+
+`).join("")}
+
+</div>
+
+</section>
+
+
+
 
 <!-- SUMMARY -->
 
