@@ -1067,6 +1067,7 @@ src="${img}"
 alt="${escapeHtml(mescid.name || "Mescid")}"
 loading="${index === 0 ? 'eager' : 'lazy'}"
 decoding="async"
+referrerpolicy="no-referrer"
 >
 
 <div class="hero-overlay"></div>
@@ -1120,11 +1121,11 @@ ${images.map(img=>`
 <img
 src="${img}"
 referrerpolicy="no-referrer"
-crossorigin="anonymous"
 class="gallery-image"
 loading="lazy"
 decoding="async"
 >
+
 
 `).join("")}
 
