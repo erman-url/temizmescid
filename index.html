@@ -239,87 +239,45 @@ background-position:-100% 0;
 }
 
 }
-
-
 /* =========================
-DAILY VERSE PREMIUM
+DAILY VERSE FINAL
 ========================= */
 
 .daily-verse{
-
-position:relative;
-
-overflow:hidden;
 
 margin:20px 16px;
 
 padding:18px;
 
-border-radius:24px;
+border-radius:22px;
 
 background:
-linear-gradient(
-180deg,
-rgba(255,255,255,.08),
-rgba(255,255,255,.04)
-);
+rgba(255,255,255,.06);
 
-backdrop-filter:blur(14px);
+backdrop-filter:blur(10px);
 
 border:
-1px solid rgba(255,255,255,.05);
-
-box-shadow:
-0 10px 24px rgba(0,0,0,.18);
+1px solid rgba(255,255,255,.04);
 
 }
 
-.verse-glow{
-
-position:absolute;
-
-top:-40px;
-
-right:-40px;
-
-width:120px;
-
-height:120px;
-
-border-radius:999px;
-
-background:
-rgba(250,204,21,.10);
-
-filter:blur(40px);
-
-}
-
-.verse-title{
-
-position:relative;
-
-z-index:2;
+.verse-label{
 
 font-size:11px;
 
-font-weight:800;
+font-weight:700;
 
 letter-spacing:.7px;
 
 text-transform:uppercase;
 
-color:rgba(255,255,255,.58);
+color:rgba(255,255,255,.5);
 
-margin-bottom:12px;
+margin-bottom:10px;
 
 }
 
 .verse-text{
-
-position:relative;
-
-z-index:2;
 
 font-size:15px;
 
@@ -329,21 +287,13 @@ font-weight:700;
 
 color:#fff;
 
-display:-webkit-box;
+word-break:normal;
 
--webkit-line-clamp:3;
-
--webkit-box-orient:vertical;
-
-overflow:hidden;
+overflow-wrap:break-word;
 
 }
 
 .verse-source{
-
-position:relative;
-
-z-index:2;
 
 margin-top:10px;
 
@@ -351,7 +301,7 @@ font-size:12px;
 
 font-weight:600;
 
-color:rgba(255,255,255,.52);
+color:rgba(255,255,255,.5);
 
 }
 
@@ -418,37 +368,6 @@ min-width:420px;
 
 <main class="app">
 
-<!-- CTA PREMIUM -->
-<section class="main-action">
-
-  <button
-    class="cta-pro"
-    onclick="location.href='mescidler.html'"
-  >
-
-    <div class="cta-icon">
-      ★
-    </div>
-
-    <div class="cta-content">
-
-      <div class="cta-title">
-        Mescid Puanla
-      </div>
-
-    <div class="cta-sub">
-  Yakındaki mescidleri incele ve puan ver
-</div>
-
-    </div>
-
-    <div class="cta-arrow">
-      →
-    </div>
-
-  </button>
-
-</section>
 
 <!-- ========================= -->
 <!-- TOP MESCID SLIDER -->
@@ -494,14 +413,43 @@ min-width:420px;
 </section>
 
 
+<!-- CTA PREMIUM -->
+<section class="main-action">
+
+  <button
+    class="cta-pro"
+    onclick="location.href='mescidler.html'"
+  >
+
+    <div class="cta-icon">
+      ★
+    </div>
+
+    <div class="cta-content">
+
+      <div class="cta-title">
+        Mescid Puanla
+      </div>
+
+    <div class="cta-sub">
+  Yakındaki mescidleri incele ve puan ver
+</div>
+
+    </div>
+
+    <div class="cta-arrow">
+      →
+    </div>
+
+  </button>
+
+</section>
+
 
 <!-- AYET -->
-
 <section class="daily-verse">
 
-  <div class="verse-glow"></div>
-
-  <div class="verse-title">
+  <div class="verse-label">
     Günün Ayeti
   </div>
 
@@ -519,6 +467,7 @@ min-width:420px;
   </div>
 
 </section>
+
 
 <!-- HERO -->
 <section class="hero">
