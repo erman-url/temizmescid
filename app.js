@@ -1028,22 +1028,109 @@ console.log(
 "TOP MESCID ITEM:",
 item
 );
+/* RENDER */
 
-/* IMAGE FIX */
+slider.innerHTML = "";
 
-const imageUrl =
+data.forEach(item=>{
 
-item.images?.[0] ||
+/* =========================
+IMAGE URL NORMALIZE
+========================= */
+
+let imageUrl =
 
 item.image ||
 
 item.image_url ||
 
+item.images?.[0] ||
+
 item.photos?.[0] ||
 
 item.gallery?.[0] ||
 
+"";
+
+/* ARRAY STRING FIX */
+
+if(
+typeof imageUrl === "string" &&
+imageUrl.startsWith("[")
+){
+
+try{
+
+const parsed =
+JSON.parse(imageUrl);
+
+imageUrl =
+parsed?.[0] || "";
+
+}catch(e){
+
+console.error(
+"Image parse error:",
+e
+);
+
+}
+
+}
+
+/* OBJECT FIX */
+
+if(
+typeof imageUrl === "object" &&
+imageUrl?.image_url
+){
+
+imageUrl =
+imageUrl.image_url;
+
+}
+
+/* EMPTY FIX */
+
+if(
+!imageUrl ||
+imageUrl === "undefined" ||
+imageUrl === "null"
+){
+
+imageUrl =
 "assets/img/default.jpg";
+
+}
+
+/* SPACE FIX */
+
+imageUrl =
+String(imageUrl).trim();
+
+/* HTTP FIX */
+
+if(
+imageUrl &&
+!imageUrl.startsWith("http") &&
+!imageUrl.startsWith("assets/")
+){
+
+imageUrl =
+`${API_URL}/${imageUrl.replace(/^\/+/,"")}`;
+
+}
+
+/* DEBUG */
+
+console.log(
+"TOP IMAGE URL:",
+imageUrl
+);
+
+/* =========================
+CARD
+========================= */
 
 const card =
 document.createElement(
@@ -1052,6 +1139,8 @@ document.createElement(
 
 card.className =
 "top-card";
+
+/* NAVIGATION */
 
 card.onclick = ()=>{
 
@@ -1075,15 +1164,35 @@ location.href =
 
 };
 
+/* HTML */
+
 card.innerHTML = `
 
 <img
 loading="lazy"
+decoding="async"
+referrerpolicy="no-referrer"
+crossorigin="anonymous"
+
 src="${imageUrl}"
+
 alt="${
 item.name || 'Mescid'
 }"
+
+style="
+position:absolute;
+inset:0;
+width:100%;
+height:100%;
+object-fit:cover;
+display:block;
+z-index:1;
+background:#111827;
+"
+
 onerror="
+console.error('IMAGE LOAD FAILED:', this.src);
 this.onerror=null;
 this.src='assets/img/default.jpg';
 "
