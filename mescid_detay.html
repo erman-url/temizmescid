@@ -995,7 +995,6 @@ data.mescid || {};
 
 const reviews =
 data.reviews || [];
-
 /* =========================
 IMAGES
 ========================= */
@@ -1003,7 +1002,24 @@ IMAGES
 const images = [
 
 ...(data.images || [])
-.map(x => x.image_url)
+
+.map(x => {
+
+if(typeof x === "string"){
+
+return x.trim();
+
+}
+
+return (
+x?.image_url ||
+x?.image ||
+x?.url ||
+""
+).trim();
+
+})
+
 .filter(Boolean)
 
 ];
@@ -1014,7 +1030,7 @@ mescid.image
 ){
 
 images.push(
-mescid.image
+String(mescid.image).trim()
 );
 
 }
