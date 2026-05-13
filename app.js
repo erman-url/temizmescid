@@ -1161,3 +1161,31 @@ document.addEventListener(
 "DOMContentLoaded",
 loadTopMescids
 );
+
+/* =========================
+DAILY VERSE
+========================= */
+
+const verseEl =
+document.getElementById(
+"dailyVerse"
+);
+
+if(
+verseEl &&
+window.VERSES?.length
+){
+
+const day =
+new Date().getDate();
+
+const verse =
+window.VERSES[
+day % window.VERSES.length
+];
+
+verseEl.innerHTML = `
+"${verse.text}"
+`;
+
+}
