@@ -583,45 +583,7 @@ Topluluk paylaşımları getiriliyor.
 
 </main>
 
-<script type="module">
-
-import {
-initializeApp
-} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
-
-import {
-getFirestore,
-collection,
-query,
-orderBy,
-limit,
-getDocs
-} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
-
-/* =========================
-FIREBASE CONFIG
-========================= */
-
-const firebaseConfig = {
-
-apiKey:"API_KEY",
-authDomain:"PROJECT.firebaseapp.com",
-projectId:"PROJECT_ID",
-storageBucket:"PROJECT.appspot.com",
-messagingSenderId:"XXXX",
-appId:"XXXX"
-
-};
-
-const app =
-initializeApp(firebaseConfig);
-
-const db =
-getFirestore(app);
-
-/* =========================
-ELEMENTS
-========================= */
+<script>
 
 const feed =
 document.getElementById(
@@ -666,26 +628,20 @@ return str
 TIME FORMAT
 ========================= */
 
-function timeAgo(timestamp){
+function timeAgo(date){
 
-if(!timestamp){
+if(!date){
 return "Yeni";
 }
 
-let value = timestamp;
+const now =
+Date.now();
 
-if(typeof timestamp === "object"){
-
-if(timestamp.seconds){
-value = timestamp.seconds * 1000;
-}
-
-}
-
-const now = Date.now();
+const created =
+new Date(date).getTime();
 
 const diff =
-now - value;
+now - created;
 
 const minutes =
 Math.floor(diff / 60000);
@@ -738,36 +694,24 @@ async function loadFeed(){
 
 try{
 
-const q =
-query(
-collection(db,"mescids"),
-orderBy("createdAt","desc"),
-limit(20)
-);
+const response =
+await fetch("/api/mescids");
 
-const snap =
-await getDocs(q);
+const data =
+await response.json();
 
 feed.innerHTML = "";
 
-let total = 0;
 let comments = 0;
 
-snap.forEach(doc=>{
+data.forEach(item=>{
 
-const data = doc.data();
-
-total++;
-
-if(
-data.extraNote &&
-data.extraNote.trim() !== ""
-){
+if(item.comment){
 comments++;
 }
 
 const image =
-data.images?.[0] ||
+item.image ||
 "assets/img/default.jpg";
 
 feed.innerHTML += `
@@ -790,27 +734,22 @@ Yeni Eklenen
 </div>
 
 <div class="feed-time">
-${timeAgo(data.createdAt)}
+${timeAgo(item.created_at)}
 </div>
 
 </div>
 
 <div class="feed-title">
 ${escapeHtml(
-data.mescidName ||
-"İsimsiz Mescid"
+item.name || "İsimsiz Mescid"
 )}
 </div>
 
 <div class="feed-location">
 📍
-${escapeHtml(
-data.district || "-"
-)}
+${escapeHtml(item.district || "-")}
 /
-${escapeHtml(
-data.city || "-"
-)}
+${escapeHtml(item.city || "-")}
 </div>
 
 <div class="feed-scores">
@@ -821,9 +760,7 @@ data.city || "-"
 </span>
 
 <b>
-${safeScore(
-data.cleanliness
-)}
+${safeScore(item.clean_score)}
 </b>
 
 </div>
@@ -835,9 +772,7 @@ data.cleanliness
 </span>
 
 <b>
-${safeScore(
-data.sound
-)}
+${safeScore(item.sound_score)}
 </b>
 
 </div>
@@ -849,9 +784,7 @@ data.sound
 </span>
 
 <b>
-${safeScore(
-data.air
-)}
+${safeScore(item.air_score)}
 </b>
 
 </div>
@@ -863,7 +796,7 @@ data.air
 </span>
 
 <b>
-${data.ablution === "yes"
+${item.has_ablution
 ? "Var"
 : "Yok"}
 </b>
@@ -874,10 +807,7 @@ ${data.ablution === "yes"
 
 <div class="feed-comment">
 
-${escapeHtml(
-data.extraNote ||
-"Topluluk değerlendirmesi eklendi."
-)}
+Topluluk değerlendirmesi eklendi.
 
 </div>
 
@@ -885,7 +815,7 @@ data.extraNote ||
 class="feed-btn"
 onclick="
 location.href=
-'mescid-detay.html?id=${doc.id}'
+'mescid-detay.html?slug=${item.slug}'
 "
 >
 Mescidi İncele
@@ -900,15 +830,15 @@ Mescidi İncele
 });
 
 totalMescid.textContent =
-total;
+data.length;
 
 totalReviews.textContent =
-total;
+data.length;
 
 totalComments.textContent =
 comments;
 
-if(total === 0){
+if(data.length === 0){
 
 feed.innerHTML = `
 
@@ -941,7 +871,7 @@ Veriler yüklenemedi
 </h3>
 
 <p>
-Lütfen daha sonra tekrar deneyin.
+Sunucu bağlantısı kurulamadı.
 </p>
 
 </div>
