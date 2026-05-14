@@ -11,6 +11,14 @@ echo TEMIZMESCID DEPLOY
 echo =====================================
 
 REM =====================================
+REM SAVE WARNING
+REM =====================================
+
+echo.
+echo Dosyalarin kaydedildiginden emin olun...
+timeout /t 1 >nul
+
+REM =====================================
 REM GIT STATUS
 REM =====================================
 
@@ -39,22 +47,6 @@ set newVersion=%major%.%minor%.%patch%
 echo.
 echo Yeni Version:
 echo v%newVersion%
-
-REM =====================================
-REM PULL FIRST
-REM =====================================
-
-echo.
-echo Remote kontrol ediliyor...
-
-git pull origin %REPO_BRANCH% --rebase
-
-if %errorlevel% neq 0 (
-    echo.
-    echo REBASE HATASI
-    pause
-    exit
-)
 
 REM =====================================
 REM JS CHECK
@@ -115,6 +107,9 @@ REM =====================================
 REM COMMIT
 REM =====================================
 
+echo.
+echo Commit olusturuluyor...
+
 git commit -m "Deploy v%newVersion%"
 
 if %errorlevel% neq 0 (
@@ -125,8 +120,27 @@ if %errorlevel% neq 0 (
 )
 
 REM =====================================
+REM REMOTE REBASE
+REM =====================================
+
+echo.
+echo Remote senkron kontrol...
+
+git pull origin %REPO_BRANCH% --rebase
+
+if %errorlevel% neq 0 (
+    echo.
+    echo REBASE HATASI
+    pause
+    exit
+)
+
+REM =====================================
 REM PUSH
 REM =====================================
+
+echo.
+echo Github push yapiliyor...
 
 git push origin %REPO_BRANCH%
 
@@ -150,8 +164,8 @@ echo.
 echo Version : v%newVersion%
 echo Branch  : %REPO_BRANCH%
 echo.
-echo Cache temizlemeyi unutma:
-echo Cloudflare > Purge Everything
+echo Cloudflare cache temizlemeyi unutma
+echo Purge Everything onerilir
 echo =====================================
 
 start https://temizmescid.com.tr?v=%newVersion%
