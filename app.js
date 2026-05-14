@@ -556,6 +556,78 @@ formData.append(
       28.9784
     );
 
+/* =========================
+STAR SCORES
+========================= */
+
+document
+.querySelectorAll(".star")
+.forEach(el=>{
+
+const key =
+el.dataset.key;
+
+const val =
+Number(el.dataset.val || 0);
+
+formData.append(
+key,
+val
+);
+
+});
+
+/* =========================
+BOOLEAN FIELDS
+========================= */
+
+[
+"library",
+"hanger",
+"airCondition",
+"staff",
+"socket",
+"womenArea",
+"soap",
+"paper"
+]
+.forEach(id=>{
+
+const value =
+document.getElementById(id)?.value;
+
+if(value){
+
+formData.append(
+id,
+value === "Evet" ? 1 : 0
+);
+
+}
+
+});
+
+/* =========================
+GENERAL SCORE
+========================= */
+
+formData.append(
+"average_score",
+calculateScore()
+);
+
+/* =========================
+COMMENT
+========================= */
+
+formData.append(
+"comment",
+document.getElementById("extraNote")
+?.value
+?.trim() || ""
+);
+
+
     Array
     .from(imagesInput.files)
     .forEach(file=>{
