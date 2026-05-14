@@ -1826,7 +1826,6 @@ document
 .classList.remove("show");
 
 }
-
 /* ========================= */
 /* SUBMIT */
 /* ========================= */
@@ -1852,29 +1851,49 @@ const payload = {
 
 mescid_id : id,
 
+/* MAIN */
+
+location :
+ratings.location || 0,
+
 cleanliness :
-ratings.cleanliness,
+ratings.cleanliness || 0,
 
 sound :
-ratings.sound,
+ratings.sound || 0,
 
 air :
-ratings.air,
+ratings.air || 0,
+
+light :
+ratings.light || 0,
 
 floor :
-ratings.floor,
+ratings.floor || 0,
+
+/* ABDEST */
 
 ablution_clean :
-ratings.ablution_clean || null,
+ratings.ablution_clean || 0,
 
 wet_floor :
-ratings.wet_floor || null,
+ratings.wet_floor || 0,
+
+/* BOOLEAN */
+
+library :
+toggles.library || false,
+
+staff :
+toggles.staff || false,
 
 soap :
-toggles.soap,
+toggles.soap || false,
 
 paper :
-toggles.paper,
+toggles.paper || false,
+
+/* COMMENT */
 
 comment :
 document
@@ -1903,6 +1922,7 @@ await res.json();
 if(!data.success){
 
 alert(
+data.error ||
 "Değerlendirme gönderilemedi."
 );
 
@@ -1935,7 +1955,6 @@ alert(
 }
 
 }
-
 /* ========================= */
 /* NEW MESCID */
 /* ========================= */
