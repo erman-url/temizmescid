@@ -274,10 +274,15 @@ color:#1b5e20;
 }
 
 .review-breakdown{
-display:flex;
+
+display:grid;
+
+grid-template-columns:1fr 1fr;
+
 gap:10px;
-flex-wrap:wrap;
-margin-bottom:12px;
+
+margin-bottom:14px;
+
 }
 
 .review-breakdown span{
@@ -287,6 +292,41 @@ border-radius:12px;
 font-size:11px;
 font-weight:700;
 color:#374151;
+}
+
+
+.summary-mini{
+
+display:flex;
+align-items:center;
+justify-content:space-between;
+
+gap:10px;
+
+width:100%;
+
+padding:12px 14px;
+
+border-radius:14px;
+
+background:#f8fafc;
+
+border:1px solid rgba(0,0,0,.05);
+
+font-size:12px;
+font-weight:700;
+
+color:#374151;
+
+}
+
+.summary-mini b{
+
+font-size:13px;
+font-weight:800;
+
+color:#1b5e20;
+
 }
 
 .review-text{
