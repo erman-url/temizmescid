@@ -1258,56 +1258,27 @@ ${formatDate(review.created_at)}
 </div>
 
 </div>
-
 <div class="review-breakdown">
 
-${review.location ? `
-<span>
-📍 ${review.location}
-</span>
-` : ""}
+<div class="summary-mini">
+<span>🧼 Temizlik</span>
+<b>${review.cleanliness || "-"}</b>
+</div>
 
-${review.cleanliness ? `
-<span>
-🧼 ${review.cleanliness}
-</span>
-` : ""}
+<div class="summary-mini">
+<span>🤫 Sessizlik</span>
+<b>${review.sound || "-"}</b>
+</div>
 
-${review.sound ? `
-<span>
-🤫 ${review.sound}
-</span>
-` : ""}
+<div class="summary-mini">
+<span>💨 Havalandırma</span>
+<b>${review.air || "-"}</b>
+</div>
 
-${review.air ? `
-<span>
-💨 ${review.air}
-</span>
-` : ""}
-
-${review.light ? `
-<span>
-💡 ${review.light}
-</span>
-` : ""}
-
-${review.floor ? `
-<span>
-🕌 ${review.floor}
-</span>
-` : ""}
-
-${review.ablution_clean ? `
-<span>
-🚿 ${review.ablution_clean}
-</span>
-` : ""}
-
-${review.wet_floor ? `
-<span>
-🪑 ${review.wet_floor}
-</span>
-` : ""}
+<div class="summary-mini">
+<span>🕌 Halı / Zemin</span>
+<b>${review.floor || "-"}</b>
+</div>
 
 </div>
 
@@ -1332,7 +1303,6 @@ Henüz değerlendirme bulunmuyor.
 `
 
 }
-
 </section>
 
 
