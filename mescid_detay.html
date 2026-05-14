@@ -1166,91 +1166,33 @@ decoding="async"
 
 
 
-
 <!-- SUMMARY -->
 
 <section class="card">
 
 <div class="rating-summary">
 
-${mescid.location_score ? `
-<div class="summary-item">
-<span>📍 Konum</span>
-<strong>${mescid.location_score}</strong>
-</div>
-` : ""}
-
-${mescid.access_score ? `
-<div class="summary-item">
-<span>🚶 Ulaşım</span>
-<strong>${mescid.access_score}</strong>
-</div>
-` : ""}
-
-${mescid.clean_score ? `
 <div class="summary-item">
 <span>🧼 Temizlik</span>
-<strong>${mescid.clean_score}</strong>
-</div>
-` : ""}
-
-${mescid.sound_score ? `
-<div class="summary-item">
-<span>🤫 Sessizlik</span>
-<strong>${mescid.sound_score}</strong>
-</div>
-` : ""}
-
-${mescid.air_score ? `
-<div class="summary-item">
-<span>💨 Havalandırma</span>
-<strong>${mescid.air_score}</strong>
-</div>
-` : ""}
-
-${mescid.light_score ? `
-<div class="summary-item">
-<span>💡 Işıklandırma</span>
-<strong>${mescid.light_score}</strong>
-</div>
-` : ""}
-
-${mescid.floor_score ? `
-<div class="summary-item">
-<span>🕌 Halı / Zemin</span>
-<strong>${mescid.floor_score}</strong>
-</div>
-` : ""}
-
-${mescid.library_score ? `
-<div class="summary-item">
-<span>📚 Kütüphane</span>
-<strong>${mescid.library_score}</strong>
-</div>
-` : ""}
-
-${
-mescid.has_staff !== null &&
-mescid.has_staff !== undefined
-? `
-<div class="summary-item">
-<span>🧹 Görevli</span>
 <strong>
-${
-Number(mescid.has_staff) === 1
-? "Var"
-: "Yok"
-}
+${mescid.clean_score || "-"}
 </strong>
 </div>
-`
-: ""
-}
 
-${
-mescid.has_ablution !== null &&
-mescid.has_ablution !== undefined
-? `
+<div class="summary-item">
+<span>🤫 Sessizlik</span>
+<strong>
+${mescid.sound_score || "-"}
+</strong>
+</div>
+
+<div class="summary-item">
+<span>💨 Havalandırma</span>
+<strong>
+${mescid.air_score || "-"}
+</strong>
+</div>
+
 <div class="summary-item">
 <span>🚿 Abdesthane</span>
 <strong>
@@ -1261,41 +1203,6 @@ Number(mescid.has_ablution) === 1
 }
 </strong>
 </div>
-`
-: ""
-}
-
-${mescid.ablution_clean_score ? `
-<div class="summary-item">
-<span>🚿 Abdest Temizlik</span>
-<strong>${mescid.ablution_clean_score}</strong>
-</div>
-` : ""}
-
-${mescid.wet_floor_score ? `
-<div class="summary-item">
-<span>🪑 Islak Zemin</span>
-<strong>${mescid.wet_floor_score}</strong>
-</div>
-` : ""}
-
-${
-mescid.paper_supply !== null &&
-mescid.paper_supply !== undefined
-? `
-<div class="summary-item">
-<span>🧻 Kağıt Havlu</span>
-<strong>
-${
-Number(mescid.paper_supply) === 1
-? "Var"
-: "Yok"
-}
-</strong>
-</div>
-`
-: ""
-}
 
 </div>
 
