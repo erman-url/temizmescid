@@ -1,0 +1,890 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+name="viewport"
+content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+>
+
+<title>
+Abdest Rehberi | TemizMescid
+</title>
+
+<meta
+name="description"
+content="Abdest nasıl alınır, abdestin farzları, abdesti bozan durumlar, ayetler ve hadislerle detaylı abdest rehberi."
+>
+
+<meta
+name="keywords"
+content="abdest nasıl alınır, abdestin farzları, abdesti bozan şeyler, abdest rehberi"
+>
+
+<meta
+name="theme-color"
+content="#0b2422"
+>
+
+<meta property="og:title" content="Abdest Rehberi">
+<meta property="og:description" content="Detaylı ve modern abdest rehberi">
+<meta property="og:type" content="website">
+
+<link rel="stylesheet" href="style.css">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+-webkit-tap-highlight-color:transparent;
+scroll-behavior:smooth;
+}
+
+body{
+
+font-family:
+Inter,
+system-ui,
+sans-serif;
+
+background:
+radial-gradient(
+circle at top,
+#21454b 0%,
+#10252a 35%,
+#08171b 100%
+);
+
+color:#fff;
+
+min-height:100vh;
+overflow-x:hidden;
+
+}
+
+.page{
+
+max-width:430px;
+
+margin:auto;
+
+padding:
+18px 18px 140px;
+
+}
+
+/* HERO */
+
+.hero{
+
+position:relative;
+
+overflow:hidden;
+
+padding:
+30px 24px;
+
+border-radius:34px;
+
+margin-bottom:22px;
+
+background:
+linear-gradient(
+135deg,
+rgba(255,255,255,.12),
+rgba(255,255,255,.05)
+);
+
+backdrop-filter:blur(22px);
+
+border:
+1px solid rgba(255,255,255,.08);
+
+box-shadow:
+0 18px 40px rgba(0,0,0,.22);
+
+}
+
+.hero::before{
+
+content:"";
+
+position:absolute;
+
+top:-70px;
+right:-70px;
+
+width:200px;
+height:200px;
+
+border-radius:999px;
+
+background:
+rgba(255,255,255,.06);
+
+filter:blur(40px);
+
+}
+
+.hero-icon{
+
+width:82px;
+height:82px;
+
+border-radius:28px;
+
+display:flex;
+align-items:center;
+justify-content:center;
+
+font-size:38px;
+
+background:
+linear-gradient(
+135deg,
+#2e7d32,
+#1b5e20
+);
+
+margin-bottom:22px;
+
+box-shadow:
+0 14px 26px rgba(0,0,0,.2);
+
+}
+
+.hero h1{
+
+font-size:40px;
+font-weight:900;
+
+line-height:1.05;
+
+margin-bottom:14px;
+
+letter-spacing:-1px;
+
+}
+
+.hero p{
+
+font-size:14px;
+line-height:1.9;
+
+max-width:320px;
+
+color:
+rgba(255,255,255,.76);
+
+}
+
+/* QUICK MENU */
+
+.quick-menu{
+
+display:grid;
+
+grid-template-columns:
+1fr 1fr;
+
+gap:12px;
+
+margin-bottom:24px;
+
+}
+
+.quick-btn{
+
+display:flex;
+align-items:center;
+justify-content:center;
+
+min-height:68px;
+
+padding:14px;
+
+border-radius:22px;
+
+background:
+rgba(255,255,255,.08);
+
+backdrop-filter:blur(14px);
+
+border:
+1px solid rgba(255,255,255,.06);
+
+text-align:center;
+
+font-size:13px;
+font-weight:800;
+
+color:#fff;
+
+text-decoration:none;
+
+}
+
+/* CARD */
+
+.card{
+
+overflow:hidden;
+
+border-radius:32px;
+
+background:
+linear-gradient(
+180deg,
+rgba(255,255,255,.985),
+rgba(248,250,252,.97)
+);
+
+padding:24px;
+
+margin-bottom:18px;
+
+box-shadow:
+0 12px 30px rgba(0,0,0,.08);
+
+color:#111827;
+
+}
+
+/* HEAD */
+
+.section-head{
+
+display:flex;
+align-items:center;
+gap:14px;
+
+margin-bottom:20px;
+
+}
+
+.section-icon{
+
+width:54px;
+height:54px;
+
+border-radius:18px;
+
+display:flex;
+align-items:center;
+justify-content:center;
+
+font-size:24px;
+
+background:#ecfdf3;
+
+color:#15803d;
+
+}
+
+.section-title{
+
+font-size:26px;
+font-weight:900;
+
+line-height:1.2;
+
+}
+
+/* TEXT */
+
+.card p{
+
+font-size:15px;
+line-height:2;
+
+color:#374151;
+
+margin-bottom:16px;
+
+}
+
+/* STEP */
+
+.step{
+
+display:flex;
+gap:14px;
+
+padding:18px;
+
+border-radius:22px;
+
+background:#f8fafc;
+
+border:
+1px solid rgba(0,0,0,.05);
+
+margin-bottom:14px;
+
+}
+
+.step-number{
+
+min-width:42px;
+height:42px;
+
+border-radius:14px;
+
+display:flex;
+align-items:center;
+justify-content:center;
+
+background:#1b5e20;
+
+color:#fff;
+
+font-size:15px;
+font-weight:900;
+
+}
+
+.step-content strong{
+
+display:block;
+
+font-size:15px;
+font-weight:900;
+
+margin-bottom:6px;
+
+color:#111827;
+
+}
+
+.step-content span{
+
+font-size:14px;
+line-height:1.8;
+
+color:#4b5563;
+
+}
+
+/* LIST */
+
+.info-list{
+
+display:flex;
+flex-direction:column;
+gap:12px;
+
+}
+
+.info-item{
+
+display:flex;
+gap:12px;
+
+padding:16px;
+
+border-radius:20px;
+
+background:#f8fafc;
+
+border:
+1px solid rgba(0,0,0,.05);
+
+font-size:14px;
+line-height:1.8;
+
+color:#374151;
+
+}
+
+.info-item span{
+
+font-size:18px;
+
+}
+
+/* AYET */
+
+.quote{
+
+padding:22px;
+
+border-radius:24px;
+
+background:
+linear-gradient(
+135deg,
+#1b5e20,
+#2e7d32
+);
+
+color:#fff;
+
+margin-bottom:14px;
+
+}
+
+.quote p{
+
+font-size:16px;
+line-height:2;
+
+margin-bottom:12px;
+
+color:#fff;
+
+}
+
+.quote strong{
+
+font-size:13px;
+font-weight:800;
+
+opacity:.85;
+
+}
+
+/* MOBILE */
+
+@media(max-width:480px){
+
+.hero h1{
+font-size:34px;
+}
+
+.section-title{
+font-size:22px;
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<main class="page">
+
+<!-- HERO -->
+
+<section class="hero">
+
+<div class="hero-icon">
+🚿
+</div>
+
+<h1>
+Abdest
+Rehberi
+</h1>
+
+<p>
+Abdestin alınışı, farzları, abdesti bozan durumlar ve ilgili ayet-hadislerle detaylı rehber.
+</p>
+
+</section>
+
+<!-- QUICK -->
+
+<section class="quick-menu">
+
+<a href="#nasil" class="quick-btn">
+Abdest Nasıl Alınır
+</a>
+
+<a href="#farz" class="quick-btn">
+Abdestin Farzları
+</a>
+
+<a href="#bozan" class="quick-btn">
+Abdesti Bozanlar
+</a>
+
+<a href="#ayet" class="quick-btn">
+Ayet ve Hadisler
+</a>
+
+</section>
+
+<!-- NASIL -->
+
+<section class="card" id="nasil">
+
+<div class="section-head">
+
+<div class="section-icon">
+🧼
+</div>
+
+<div class="section-title">
+Abdest Nasıl Alınır?
+</div>
+
+</div>
+
+<p>
+Abdest, namaz gibi ibadetler öncesinde yapılan manevi ve fiziksel temizliktir.
+</p>
+
+<div class="step">
+
+<div class="step-number">
+1
+</div>
+
+<div class="step-content">
+
+<strong>
+Niyet edilir
+</strong>
+
+<span>
+Kalben abdest almaya niyet edilir ve besmele çekilir.
+</span>
+
+</div>
+
+</div>
+
+<div class="step">
+
+<div class="step-number">
+2
+</div>
+
+<div class="step-content">
+
+<strong>
+Eller yıkanır
+</strong>
+
+<span>
+Bileklere kadar eller üç kez yıkanır.
+</span>
+
+</div>
+
+</div>
+
+<div class="step">
+
+<div class="step-number">
+3
+</div>
+
+<div class="step-content">
+
+<strong>
+Ağız ve burun temizlenir
+</strong>
+
+<span>
+Ağıza ve buruna üçer defa su verilir.
+</span>
+
+</div>
+
+</div>
+
+<div class="step">
+
+<div class="step-number">
+4
+</div>
+
+<div class="step-content">
+
+<strong>
+Yüz yıkanır
+</strong>
+
+<span>
+Yüz tamamen üç defa yıkanır.
+</span>
+
+</div>
+
+</div>
+
+<div class="step">
+
+<div class="step-number">
+5
+</div>
+
+<div class="step-content">
+
+<strong>
+Kollar yıkanır
+</strong>
+
+<span>
+Dirseklerle birlikte önce sağ sonra sol kol üçer defa yıkanır.
+</span>
+
+</div>
+
+</div>
+
+<div class="step">
+
+<div class="step-number">
+6
+</div>
+
+<div class="step-content">
+
+<strong>
+Baş mesh edilir
+</strong>
+
+<span>
+Islak elle başın dörtte biri mesh edilir.
+</span>
+
+</div>
+
+</div>
+
+<div class="step">
+
+<div class="step-number">
+7
+</div>
+
+<div class="step-content">
+
+<strong>
+Ayaklar yıkanır
+</strong>
+
+<span>
+Topuklarla birlikte ayaklar üçer defa yıkanır.
+</span>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- FARZ -->
+
+<section class="card" id="farz">
+
+<div class="section-head">
+
+<div class="section-icon">
+📖
+</div>
+
+<div class="section-title">
+Abdestin Farzları
+</div>
+
+</div>
+
+<div class="info-list">
+
+<div class="info-item">
+<span>
+1️⃣
+</span>
+
+<div>
+Yüzü bir kez yıkamak
+</div>
+
+</div>
+
+<div class="info-item">
+<span>
+2️⃣
+</span>
+
+<div>
+Kolları dirseklerle birlikte yıkamak
+</div>
+
+</div>
+
+<div class="info-item">
+<span>
+3️⃣
+</span>
+
+<div>
+Başın dörtte birini mesh etmek
+</div>
+
+</div>
+
+<div class="info-item">
+<span>
+4️⃣
+</span>
+
+<div>
+Ayakları topuklarla birlikte yıkamak
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- BOZAN -->
+
+<section class="card" id="bozan">
+
+<div class="section-head">
+
+<div class="section-icon">
+⚠
+</div>
+
+<div class="section-title">
+Abdesti Bozan Şeyler
+</div>
+
+</div>
+
+<div class="info-list">
+
+<div class="info-item">
+<span>
+🔹
+</span>
+
+<div>
+Tuvalet ihtiyacının giderilmesi
+</div>
+
+</div>
+
+<div class="info-item">
+<span>
+🔹
+</span>
+
+<div>
+Ağız dolusu kusmak
+</div>
+
+</div>
+
+<div class="info-item">
+<span>
+🔹
+</span>
+
+<div>
+Bayılmak veya aklın gitmesi
+</div>
+
+</div>
+
+<div class="info-item">
+<span>
+🔹
+</span>
+
+<div>
+Kan, irin gibi akıntıların çıkması
+</div>
+
+</div>
+
+<div class="info-item">
+<span>
+🔹
+</span>
+
+<div>
+Namazda yanındakinin duyacağı şekilde gülmek
+</div>
+
+</div>
+
+<div class="info-item">
+<span>
+🔹
+</span>
+
+<div>
+Derin uykuya dalmak
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- AYET -->
+
+<section class="card" id="ayet">
+
+<div class="section-head">
+
+<div class="section-icon">
+☪
+</div>
+
+<div class="section-title">
+Ayet ve Hadisler
+</div>
+
+</div>
+
+<div class="quote">
+
+<p>
+“Ey iman edenler! Namaza kalktığınız zaman yüzlerinizi ve dirseklere kadar ellerinizi yıkayın...”
+</p>
+
+<strong>
+Maide Suresi 6. Ayet
+</strong>
+
+</div>
+
+<div class="quote">
+
+<p>
+“Kim güzelce abdest alırsa günahları bedeninden çıkar.”
+</p>
+
+<strong>
+Hadis-i Şerif
+</strong>
+
+</div>
+
+<div class="quote">
+
+<p>
+“Temizlik imanın yarısıdır.”
+</p>
+
+<strong>
+Hadis-i Şerif
+</strong>
+
+</div>
+
+</section>
+
+</main>
+
+<script src="footer.js"></script>
+
+</body>
+
+</html>
