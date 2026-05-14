@@ -139,18 +139,26 @@ function startForm(){
 
   if(!modal) return;
 
-  if(
-    !/Android|iPhone|iPad/i
-    .test(navigator.userAgent)
-  ){
+ const isMobile =
 
-    alert(
-      "Sadece mobil cihazdan değerlendirme yapılabilir"
-    );
+/Android|iPhone|iPad|iPod/i
+.test(navigator.userAgent);
 
-    return;
+/* DESKTOP TEST MODE */
 
-  }
+const isSimulator =
+
+window.innerWidth <= 900;
+
+/* BLOCK ONLY REAL DESKTOP */
+
+if(!isMobile && !isSimulator){
+
+alert(
+"Bu özellik mobil kullanım için optimize edilmiştir."
+);
+
+}
 
   scrollY = window.scrollY;
 
