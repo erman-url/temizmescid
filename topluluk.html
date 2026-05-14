@@ -16,12 +16,12 @@ Topluluk Paylaşımları | TemizMescid
 
 <meta
 name="description"
-content="Kullanıcıların eklediği mescidleri, yorumları ve son değerlendirmeleri keşfedin."
+content="Kullanıcıların eklediği gerçek mescid değerlendirmelerini keşfedin."
 >
 
 <meta
 name="keywords"
-content="mescid yorumları, topluluk paylaşımları, mescid puanlama, mescid deneyimleri"
+content="mescid yorumları, topluluk paylaşımları, mescid puanlama"
 >
 
 <meta
@@ -29,11 +29,7 @@ name="theme-color"
 content="#0b2422"
 >
 
-<meta property="og:title" content="Topluluk Paylaşımları">
-<meta property="og:description" content="Mescid deneyimleri ve topluluk akışı">
-<meta property="og:type" content="website">
-
-<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="style.css?v=2">
 
 <style>
 
@@ -98,8 +94,6 @@ linear-gradient(
 rgba(255,255,255,.12),
 rgba(255,255,255,.05)
 );
-
-backdrop-filter:blur(22px);
 
 border:
 1px solid rgba(255,255,255,.08);
@@ -203,8 +197,6 @@ border-radius:24px;
 background:
 rgba(255,255,255,.08);
 
-backdrop-filter:blur(16px);
-
 border:
 1px solid rgba(255,255,255,.06);
 
@@ -273,6 +265,8 @@ height:210px;
 object-fit:cover;
 
 display:block;
+
+background:#e5e7eb;
 
 }
 
@@ -444,6 +438,41 @@ font-weight:800;
 
 }
 
+/* EMPTY */
+
+.empty-state{
+
+padding:40px 24px;
+
+border-radius:28px;
+
+background:
+rgba(255,255,255,.08);
+
+text-align:center;
+
+border:
+1px solid rgba(255,255,255,.08);
+
+}
+
+.empty-state h3{
+
+font-size:22px;
+margin-bottom:12px;
+
+}
+
+.empty-state p{
+
+font-size:14px;
+line-height:1.8;
+
+color:
+rgba(255,255,255,.7);
+
+}
+
 /* MOBILE */
 
 @media(max-width:480px){
@@ -484,7 +513,7 @@ Paylaşımları
 </h1>
 
 <p>
-Kullanıcıların eklediği mescidleri, yorumları ve son değerlendirmeleri keşfedin.
+Topluluk tarafından eklenen gerçek mescid değerlendirmelerini keşfedin.
 </p>
 
 </section>
@@ -494,46 +523,262 @@ Kullanıcıların eklediği mescidleri, yorumları ve son değerlendirmeleri ke�
 <section class="stats">
 
 <div class="stat-card">
-<strong>
-248
+
+<strong id="totalMescid">
+0
 </strong>
+
 <span>
 Toplam Mescid
 </span>
+
 </div>
 
 <div class="stat-card">
-<strong>
-1.2K
+
+<strong id="totalReviews">
+0
 </strong>
+
 <span>
 Değerlendirme
 </span>
+
 </div>
 
 <div class="stat-card">
-<strong>
-347
+
+<strong id="totalComments">
+0
 </strong>
+
 <span>
 Topluluk Yorumu
 </span>
+
 </div>
 
 </section>
 
 <!-- FEED -->
 
-<section class="feed">
+<section
+class="feed"
+id="communityFeed"
+>
 
-<!-- CARD -->
+<div class="empty-state">
+
+<h3>
+Yükleniyor...
+</h3>
+
+<p>
+Topluluk paylaşımları getiriliyor.
+</p>
+
+</div>
+
+</section>
+
+</main>
+
+<script type="module">
+
+import {
+initializeApp
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+
+import {
+getFirestore,
+collection,
+query,
+orderBy,
+limit,
+getDocs
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+/* =========================
+FIREBASE CONFIG
+========================= */
+
+const firebaseConfig = {
+
+apiKey:"API_KEY",
+authDomain:"PROJECT.firebaseapp.com",
+projectId:"PROJECT_ID",
+storageBucket:"PROJECT.appspot.com",
+messagingSenderId:"XXXX",
+appId:"XXXX"
+
+};
+
+const app =
+initializeApp(firebaseConfig);
+
+const db =
+getFirestore(app);
+
+/* =========================
+ELEMENTS
+========================= */
+
+const feed =
+document.getElementById(
+"communityFeed"
+);
+
+const totalMescid =
+document.getElementById(
+"totalMescid"
+);
+
+const totalReviews =
+document.getElementById(
+"totalReviews"
+);
+
+const totalComments =
+document.getElementById(
+"totalComments"
+);
+
+/* =========================
+SAFE HTML
+========================= */
+
+function escapeHtml(str){
+
+if(!str){
+return "";
+}
+
+return str
+.replace(/&/g,"&amp;")
+.replace(/</g,"&lt;")
+.replace(/>/g,"&gt;")
+.replace(/"/g,"&quot;")
+.replace(/'/g,"&#039;");
+
+}
+
+/* =========================
+TIME FORMAT
+========================= */
+
+function timeAgo(timestamp){
+
+if(!timestamp){
+return "Yeni";
+}
+
+let value = timestamp;
+
+if(typeof timestamp === "object"){
+
+if(timestamp.seconds){
+value = timestamp.seconds * 1000;
+}
+
+}
+
+const now = Date.now();
+
+const diff =
+now - value;
+
+const minutes =
+Math.floor(diff / 60000);
+
+const hours =
+Math.floor(diff / 3600000);
+
+const days =
+Math.floor(diff / 86400000);
+
+if(minutes < 1){
+return "Az önce";
+}
+
+if(minutes < 60){
+return `${minutes} dk önce`;
+}
+
+if(hours < 24){
+return `${hours} saat önce`;
+}
+
+return `${days} gün önce`;
+
+}
+
+/* =========================
+SAFE SCORE
+========================= */
+
+function safeScore(val){
+
+if(
+val === undefined ||
+val === null ||
+val === ""
+){
+return "-";
+}
+
+return Number(val).toFixed(0);
+
+}
+
+/* =========================
+LOAD FEED
+========================= */
+
+async function loadFeed(){
+
+try{
+
+const q =
+query(
+collection(db,"mescids"),
+orderBy("createdAt","desc"),
+limit(20)
+);
+
+const snap =
+await getDocs(q);
+
+feed.innerHTML = "";
+
+let total = 0;
+let comments = 0;
+
+snap.forEach(doc=>{
+
+const data = doc.data();
+
+total++;
+
+if(
+data.extraNote &&
+data.extraNote.trim() !== ""
+){
+comments++;
+}
+
+const image =
+data.images?.[0] ||
+"assets/img/default.jpg";
+
+feed.innerHTML += `
 
 <article class="feed-card">
 
 <img
-src="https://images.unsplash.com/photo-1519817914152-22f90e1c49b7?q=80&w=1200&auto=format&fit=crop"
+src="${image}"
 class="feed-image"
 alt="Mescid"
+loading="lazy"
 >
 
 <div class="feed-content">
@@ -545,17 +790,27 @@ Yeni Eklenen
 </div>
 
 <div class="feed-time">
-2 saat önce
+${timeAgo(data.createdAt)}
 </div>
 
 </div>
 
 <div class="feed-title">
-Marmara Forum AVM Mescidi
+${escapeHtml(
+data.mescidName ||
+"İsimsiz Mescid"
+)}
 </div>
 
 <div class="feed-location">
-📍 Bakırköy / İstanbul
+📍
+${escapeHtml(
+data.district || "-"
+)}
+/
+${escapeHtml(
+data.city || "-"
+)}
 </div>
 
 <div class="feed-scores">
@@ -564,49 +819,74 @@ Marmara Forum AVM Mescidi
 <span>
 🧼 Temizlik
 </span>
+
 <b>
-5
+${safeScore(
+data.cleanliness
+)}
 </b>
+
 </div>
 
 <div class="score-box">
+
 <span>
 🤫 Sessizlik
 </span>
+
 <b>
-4
+${safeScore(
+data.sound
+)}
 </b>
+
 </div>
 
 <div class="score-box">
+
 <span>
 💨 Havalandırma
 </span>
+
 <b>
-5
+${safeScore(
+data.air
+)}
 </b>
+
 </div>
 
 <div class="score-box">
+
 <span>
 🚿 Abdesthane
 </span>
+
 <b>
-Var
+${data.ablution === "yes"
+? "Var"
+: "Yok"}
 </b>
+
 </div>
 
 </div>
 
 <div class="feed-comment">
 
-Oldukça temiz ve ferah bir mescid. Özellikle öğle saatlerinde sakin oluyor.
+${escapeHtml(
+data.extraNote ||
+"Topluluk değerlendirmesi eklendi."
+)}
 
 </div>
 
 <button
 class="feed-btn"
-onclick="location.href='mescid-detay.html'"
+onclick="
+location.href=
+'mescid-detay.html?id=${doc.id}'
+"
 >
 Mescidi İncele
 </button>
@@ -615,189 +895,68 @@ Mescidi İncele
 
 </article>
 
-<!-- CARD -->
+`;
 
-<article class="feed-card">
+});
 
-<img
-src="https://images.unsplash.com/photo-1564769625905-50e93615e769?q=80&w=1200&auto=format&fit=crop"
-class="feed-image"
-alt="Mescid"
->
+totalMescid.textContent =
+total;
 
-<div class="feed-content">
+totalReviews.textContent =
+total;
 
-<div class="feed-top">
+totalComments.textContent =
+comments;
 
-<div class="feed-type">
-Son Değerlendirme
-</div>
+if(total === 0){
 
-<div class="feed-time">
-Bugün
-</div>
+feed.innerHTML = `
 
-</div>
+<div class="empty-state">
 
-<div class="feed-title">
-Forum İstanbul Mescidi
-</div>
+<h3>
+Henüz paylaşım yok
+</h3>
 
-<div class="feed-location">
-📍 Bayrampaşa / İstanbul
-</div>
-
-<div class="feed-scores">
-
-<div class="score-box">
-<span>
-🧼 Temizlik
-</span>
-<b>
-4
-</b>
-</div>
-
-<div class="score-box">
-<span>
-🤫 Sessizlik
-</span>
-<b>
-3
-</b>
-</div>
-
-<div class="score-box">
-<span>
-💨 Havalandırma
-</span>
-<b>
-4
-</b>
-</div>
-
-<div class="score-box">
-<span>
-🚿 Abdesthane
-</span>
-<b>
-Var
-</b>
-</div>
+<p>
+Topluluk tarafından eklenen ilk mescidi sen paylaş.
+</p>
 
 </div>
 
-<div class="feed-comment">
+`;
 
-Abdest alanı temizdi. Cuma saatlerinde biraz yoğun olabiliyor.
+}
 
-</div>
+}catch(err){
 
-<button
-class="feed-btn"
-onclick="location.href='mescid-detay.html'"
->
-Mescidi İncele
-</button>
+console.error(err);
 
-</div>
+feed.innerHTML = `
 
-</article>
+<div class="empty-state">
 
-<!-- CARD -->
+<h3>
+Veriler yüklenemedi
+</h3>
 
-<article class="feed-card">
-
-<img
-src="https://images.unsplash.com/photo-1591604129939-f1efa4d9f7fa?q=80&w=1200&auto=format&fit=crop"
-class="feed-image"
-alt="Mescid"
->
-
-<div class="feed-content">
-
-<div class="feed-top">
-
-<div class="feed-type">
-Topluluk Yorumu
-</div>
-
-<div class="feed-time">
-1 gün önce
-</div>
+<p>
+Lütfen daha sonra tekrar deneyin.
+</p>
 
 </div>
 
-<div class="feed-title">
-Sabiha Gökçen Havalimanı Mescidi
-</div>
+`;
 
-<div class="feed-location">
-📍 Pendik / İstanbul
-</div>
+}
 
-<div class="feed-scores">
+}
 
-<div class="score-box">
-<span>
-🧼 Temizlik
-</span>
-<b>
-5
-</b>
-</div>
+loadFeed();
 
-<div class="score-box">
-<span>
-🤫 Sessizlik
-</span>
-<b>
-5
-</b>
-</div>
+</script>
 
-<div class="score-box">
-<span>
-💨 Havalandırma
-</span>
-<b>
-4
-</b>
-</div>
-
-<div class="score-box">
-<span>
-🚿 Abdesthane
-</span>
-<b>
-Var
-</b>
-</div>
-
-</div>
-
-<div class="feed-comment">
-
-Yolculuk öncesi namaz için oldukça uygun ve düzenli bir alan.
-
-</div>
-
-<button
-class="feed-btn"
-onclick="location.href='mescid-detay.html'"
->
-Mescidi İncele
-</button>
-
-</div>
-
-</article>
-
-</section>
-
-</main>
-
-<script src="footer.js"></script>
+<script src="footer.js?v=2"></script>
 
 </body>
 </html>
