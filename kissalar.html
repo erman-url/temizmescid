@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+name="viewport"
+content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+>
+
+<title>
+TemizMescid | Kıssalar
+</title>
+
+<meta
+name="description"
+content="Peygamber kıssaları ve ibretlik dini hikayeleri mobil uyumlu modern deneyimle okuyun."
+>
+
+<meta
+name="keywords"
+content="kıssalar, peygamber kıssaları, dini hikayeler, islami içerik"
+>
+
+<meta
+name="theme-color"
+content="#0b2422"
+>
+
+<link rel="stylesheet" href="style.css">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+-webkit-tap-highlight-color:transparent;
+}
+
+body{
+
+font-family:
+Inter,
+system-ui,
+sans-serif;
+
+background:
+radial-gradient(
+circle at top,
+#21454b 0%,
+#10252a 35%,
+#08171b 100%
+);
+
+min-height:100vh;
+overflow-x:hidden;
+
+color:#fff;
+
+}
+
+.page{
+max-width:430px;
+margin:auto;
+padding:18px 18px 140px;
+}
+
+/* HERO */
+
+.hero{
+
+position:relative;
+
+overflow:hidden;
+
+padding:28px 24px;
+
+border-radius:34px;
+
+background:
+linear-gradient(
+135deg,
+rgba(255,255,255,.14),
+rgba(255,255,255,.05)
+);
+
+backdrop-filter:blur(22px);
+
+border:
+1px solid rgba(255,255,255,.08);
+
+margin-bottom:22px;
+
+box-shadow:
+0 18px 40px rgba(0,0,0,.24);
+
+}
+
+.hero::before{
+
+content:"";
+
+position:absolute;
+
+top:-60px;
+right:-60px;
+
+width:180px;
+height:180px;
+
+border-radius:999px;
+
+background:
+rgba(255,255,255,.08);
+
+filter:blur(40px);
+
+}
+
+.hero-icon{
+
+width:78px;
+height:78px;
+
+border-radius:26px;
+
+display:flex;
+align-items:center;
+justify-content:center;
+
+font-size:36px;
+
+background:
+linear-gradient(
+135deg,
+#2e7d32,
+#1b5e20
+);
+
+margin-bottom:20px;
+
+box-shadow:
+0 12px 24px rgba(0,0,0,.2);
+
+}
+
+.hero h1{
+
+font-size:36px;
+font-weight:800;
+line-height:1.1;
+
+margin-bottom:12px;
+
+}
+
+.hero p{
+
+font-size:15px;
+line-height:1.8;
+
+color:
+rgba(255,255,255,.76);
+
+max-width:320px;
+
+}
+
+/* TOP INFO */
+
+.top-info{
+
+display:flex;
+gap:12px;
+
+margin-bottom:20px;
+
+}
+
+.info-box{
+
+flex:1;
+
+padding:16px;
+
+border-radius:22px;
+
+background:
+rgba(255,255,255,.08);
+
+backdrop-filter:blur(16px);
+
+border:
+1px solid rgba(255,255,255,.06);
+
+}
+
+.info-box strong{
+
+display:block;
+
+font-size:24px;
+font-weight:800;
+
+margin-bottom:6px;
+
+}
+
+.info-box span{
+
+font-size:12px;
+line-height:1.5;
+
+color:
+rgba(255,255,255,.72);
+
+}
+
+/* STORY */
+
+.story{
+
+position:relative;
+
+overflow:hidden;
+
+padding:22px;
+
+border-radius:30px;
+
+background:
+linear-gradient(
+180deg,
+rgba(255,255,255,.985),
+rgba(248,250,252,.97)
+);
+
+margin-bottom:18px;
+
+box-shadow:
+0 10px 30px rgba(0,0,0,.08);
+
+color:#111827;
+
+}
+
+.story-tag{
+
+display:inline-flex;
+align-items:center;
+justify-content:center;
+
+height:30px;
+padding:0 14px;
+
+border-radius:999px;
+
+background:#ecfdf3;
+
+color:#15803d;
+
+font-size:12px;
+font-weight:800;
+
+margin-bottom:16px;
+
+}
+
+.story h2{
+
+font-size:26px;
+font-weight:800;
+line-height:1.2;
+
+margin-bottom:14px;
+
+}
+
+.story-meta{
+
+display:flex;
+align-items:center;
+gap:10px;
+
+font-size:12px;
+font-weight:700;
+
+color:#6b7280;
+
+margin-bottom:18px;
+
+}
+
+.story-dot{
+
+width:5px;
+height:5px;
+
+border-radius:999px;
+
+background:#9ca3af;
+
+}
+
+.story-text{
+
+font-size:15px;
+line-height:2;
+
+color:#374151;
+
+margin-bottom:18px;
+
+}
+
+.story-lesson{
+
+padding:18px;
+
+border-radius:22px;
+
+background:#f8fafc;
+
+border:
+1px solid rgba(0,0,0,.05);
+
+}
+
+.story-lesson strong{
+
+display:block;
+
+font-size:13px;
+font-weight:800;
+
+color:#15803d;
+
+margin-bottom:8px;
+
+}
+
+.story-lesson p{
+
+font-size:14px;
+line-height:1.8;
+
+color:#4b5563;
+
+}
+
+/* FOOTER */
+
+.footer{
+position:fixed;
+}
+
+/* MOBILE */
+
+@media(max-width:480px){
+
+.hero h1{
+font-size:30px;
+}
+
+.story h2{
+font-size:23px;
+}
+
+}
+
+</style>
+
+</head>
+<body>
+
+<main class="page">
+
+<!-- HERO -->
+
+<section class="hero">
+
+<div class="hero-icon">
+📜
+</div>
+
+<h1>
+Kıssalar
+</h1>
+
+<p>
+Peygamber kıssaları ve ibretlik dini hikayeler ile manevi yolculuğa çıkın.
+</p>
+
+</section>
+
+<!-- TOP INFO -->
+
+<section class="top-info">
+
+<div class="info-box">
+<strong>
+4
+</strong>
+<span>
+Özel kıssa içeriği
+</span>
+</div>
+
+<div class="info-box">
+<strong>
+100%
+</strong>
+<span>
+Mobil uyumlu okuma deneyimi
+</span>
+</div>
+
+</section>
+
+<!-- STORY -->
+
+<article class="story">
+
+<div class="story-tag">
+Hz. Yusuf
+</div>
+
+<h2>
+Sabır ve Affetmenin Gücü
+</h2>
+
+<div class="story-meta">
+
+<span>
+📖 Kur’an Kıssası
+</span>
+
+<div class="story-dot"></div>
+
+<span>
+Yusuf Suresi
+</span>
+
+</div>
+
+<div class="story-text">
+
+Hz. Yusuf kardeşleri tarafından kuyuya atıldı, köle olarak satıldı ve yıllarca zorluk yaşadı. Buna rağmen Allah’a olan güvenini kaybetmedi. Sonunda Mısır’da yüksek bir makama geldi ve kendisine kötülük yapan kardeşlerini affetti.
+
+</div>
+
+<div class="story-lesson">
+
+<strong>
+İbret
+</strong>
+
+<p>
+Sabır, tevekkül ve affetmek insanı yüceltir. Zorluklar geçicidir.
+</p>
+
+</div>
+
+</article>
+
+<!-- STORY -->
+
+<article class="story">
+
+<div class="story-tag">
+Hz. Musa
+</div>
+
+<h2>
+Denizin Yarılması
+</h2>
+
+<div class="story-meta">
+
+<span>
+🌊 Mucize
+</span>
+
+<div class="story-dot"></div>
+
+<span>
+Firavun Dönemi
+</span>
+
+</div>
+
+<div class="story-text">
+
+Hz. Musa ve inananlar Firavun’un ordusundan kaçarken denizin kenarında sıkıştı. Allah’ın izniyle deniz yarıldı ve inananlar kurtuldu. Firavun ve ordusu ise suda boğuldu.
+
+</div>
+
+<div class="story-lesson">
+
+<strong>
+İbret
+</strong>
+
+<p>
+Allah’a güvenen için umulmadık kapılar açılır.
+</p>
+
+</div>
+
+</article>
+
+<!-- STORY -->
+
+<article class="story">
+
+<div class="story-tag">
+Ashab-ı Kehf
+</div>
+
+<h2>
+İnancını Koruyan Gençler
+</h2>
+
+<div class="story-meta">
+
+<span>
+🕋 Sadakat
+</span>
+
+<div class="story-dot"></div>
+
+<span>
+Kehf Suresi
+</span>
+
+</div>
+
+<div class="story-text">
+
+İnançlarını korumak isteyen gençler bir mağaraya sığındı. Allah onları uzun yıllar uyuttu ve korudu. Uyandıklarında ise zaman değişmişti.
+
+</div>
+
+<div class="story-lesson">
+
+<strong>
+İbret
+</strong>
+
+<p>
+Samimi iman sahibi olanlar Allah’ın koruması altındadır.
+</p>
+
+</div>
+
+</article>
+
+<!-- STORY -->
+
+<article class="story">
+
+<div class="story-tag">
+Hz. İbrahim
+</div>
+
+<h2>
+Ateşte Bile Teslimiyet
+</h2>
+
+<div class="story-meta">
+
+<span>
+🔥 Tevekkül
+</span>
+
+<div class="story-dot"></div>
+
+<span>
+İman Mücadelesi
+</span>
+
+</div>
+
+<div class="story-text">
+
+Hz. İbrahim putlara karşı çıktığı için ateşe atıldı. Ancak Allah’ın izniyle ateş ona zarar vermedi ve serin oldu.
+
+</div>
+
+<div class="story-lesson">
+
+<strong>
+İbret
+</strong>
+
+<p>
+Hak yolunda kararlı duranlar Allah’ın yardımıyla korunur.
+</p>
+
+</div>
+
+</article>
+
+</main>
+
+<!-- FOOTER -->
+
+<nav class="footer">
+
+<div
+class="nav-item"
+onclick="location.href='index.html'"
+>
+<span class="nav-icon">⌂</span>
+<p>Ana</p>
+</div>
+
+<div
+class="nav-item"
+onclick="location.href='mescidler.html'"
+>
+<span class="nav-icon">★</span>
+<p>Mescidler</p>
+</div>
+
+<button
+type="button"
+class="center-btn"
+onclick="location.href='index.html'"
+>
++
+</button>
+
+<div
+class="nav-item active"
+onclick="location.href='kissalar.html'"
+>
+<span class="nav-icon">◎</span>
+<p>Kıssalar</p>
+</div>
+
+<div
+class="nav-item"
+onclick="location.href='iletisim.html'"
+>
+<span class="nav-icon">✉</span>
+<p>İletişim</p>
+</div>
+
+</nav>
+
+</body>
+</html>
