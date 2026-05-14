@@ -1,0 +1,822 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+name="viewport"
+content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+>
+
+<title>
+TemizMescid | Bilgi Yarışması
+</title>
+
+<meta
+name="description"
+content="İslami bilgi yarışması ile bilginizi test edin. Süreli ve puanlı mobil uyumlu test deneyimi."
+>
+
+<meta
+name="keywords"
+content="islami bilgi yarışması, dini test, islam testi, bilgi yarışması"
+>
+
+<meta
+name="theme-color"
+content="#0b2422"
+>
+
+<link rel="stylesheet" href="style.css">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+-webkit-tap-highlight-color:transparent;
+}
+
+body{
+
+font-family:
+Inter,
+system-ui,
+sans-serif;
+
+background:
+radial-gradient(
+circle at top,
+#21454b 0%,
+#10252a 35%,
+#08171b 100%
+);
+
+min-height:100vh;
+overflow-x:hidden;
+
+color:#fff;
+
+}
+
+.page{
+max-width:420px;
+margin:auto;
+padding:18px 18px 140px;
+}
+
+/* HERO */
+
+.quiz-hero{
+
+padding:26px 22px;
+
+border-radius:30px;
+
+background:
+linear-gradient(
+135deg,
+rgba(255,255,255,.12),
+rgba(255,255,255,.04)
+);
+
+backdrop-filter:blur(18px);
+
+border:
+1px solid rgba(255,255,255,.08);
+
+margin-bottom:18px;
+
+}
+
+.quiz-badge{
+
+display:inline-flex;
+align-items:center;
+justify-content:center;
+
+width:64px;
+height:64px;
+
+border-radius:22px;
+
+background:
+linear-gradient(
+135deg,
+#2e7d32,
+#1b5e20
+);
+
+font-size:28px;
+
+margin-bottom:18px;
+
+}
+
+.quiz-hero h1{
+
+font-size:32px;
+font-weight:800;
+line-height:1.1;
+
+margin-bottom:10px;
+
+}
+
+.quiz-hero p{
+
+font-size:14px;
+line-height:1.7;
+
+color:
+rgba(255,255,255,.76);
+
+}
+
+/* CARD */
+
+.card{
+
+background:
+linear-gradient(
+180deg,
+rgba(255,255,255,.985),
+rgba(248,250,252,.97)
+);
+
+border-radius:28px;
+
+padding:22px;
+
+margin-bottom:18px;
+
+color:#111827;
+
+box-shadow:
+0 10px 30px rgba(0,0,0,.08);
+
+}
+
+/* TOP */
+
+.quiz-top{
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin-bottom:22px;
+}
+
+.quiz-count{
+
+font-size:14px;
+font-weight:800;
+color:#1b5e20;
+
+}
+
+.quiz-timer{
+
+width:62px;
+height:62px;
+
+border-radius:18px;
+
+background:#1b5e20;
+
+display:flex;
+align-items:center;
+justify-content:center;
+
+font-size:22px;
+font-weight:800;
+
+color:#fff;
+
+}
+
+/* QUESTION */
+
+.question{
+
+font-size:24px;
+font-weight:800;
+line-height:1.4;
+
+margin-bottom:24px;
+
+}
+
+/* ANSWERS */
+
+.answers{
+display:flex;
+flex-direction:column;
+gap:12px;
+}
+
+.answer-btn{
+
+width:100%;
+
+min-height:64px;
+
+border:none;
+
+border-radius:18px;
+
+padding:16px;
+
+text-align:left;
+
+font-size:15px;
+font-weight:700;
+
+background:#f3f4f6;
+
+color:#111827;
+
+transition:.2s;
+
+cursor:pointer;
+
+}
+
+.answer-btn:active{
+transform:scale(.98);
+}
+
+.answer-btn.correct{
+
+background:#dcfce7;
+color:#166534;
+
+}
+
+.answer-btn.wrong{
+
+background:#fee2e2;
+color:#991b1b;
+
+}
+
+/* SCORE */
+
+.score-box{
+
+display:flex;
+justify-content:space-between;
+align-items:center;
+
+padding:18px;
+
+border-radius:22px;
+
+background:
+rgba(255,255,255,.08);
+
+margin-bottom:18px;
+
+}
+
+.score-item{
+text-align:center;
+flex:1;
+}
+
+.score-item strong{
+
+display:block;
+
+font-size:24px;
+font-weight:800;
+
+margin-bottom:4px;
+
+}
+
+.score-item span{
+
+font-size:12px;
+color:
+rgba(255,255,255,.7);
+
+}
+
+/* RESULT */
+
+.result-box{
+
+text-align:center;
+
+padding:30px 20px;
+
+}
+
+.result-box h2{
+
+font-size:30px;
+font-weight:800;
+
+margin-bottom:12px;
+
+}
+
+.result-box p{
+
+font-size:15px;
+line-height:1.8;
+
+color:#6b7280;
+
+margin-bottom:22px;
+
+}
+
+.restart-btn{
+
+width:100%;
+height:56px;
+
+border:none;
+
+border-radius:18px;
+
+background:
+linear-gradient(
+135deg,
+#2e7d32,
+#1b5e20
+);
+
+color:#fff;
+
+font-size:15px;
+font-weight:800;
+
+}
+
+/* FOOTER */
+
+.footer{
+position:fixed;
+}
+
+</style>
+
+</head>
+<body>
+
+<main class="page">
+
+<section class="quiz-hero">
+
+<div class="quiz-badge">
+🧠
+</div>
+
+<h1>
+Bilgi Yarışması
+</h1>
+
+<p>
+İslami bilgi seviyenizi test edin. Her soru için 30 saniyeniz var.
+</p>
+
+</section>
+
+<div class="score-box">
+
+<div class="score-item">
+<strong id="scoreValue">
+0
+</strong>
+<span>Puan</span>
+</div>
+
+<div class="score-item">
+<strong id="correctValue">
+0
+</strong>
+<span>Doğru</span>
+</div>
+
+<div class="score-item">
+<strong id="wrongValue">
+0
+</strong>
+<span>Yanlış</span>
+</div>
+
+</div>
+
+<section class="card" id="quizCard">
+
+<div class="quiz-top">
+
+<div class="quiz-count" id="questionCount">
+1 / 10
+</div>
+
+<div class="quiz-timer" id="timer">
+30
+</div>
+
+</div>
+
+<div class="question" id="questionText">
+Yükleniyor...
+</div>
+
+<div class="answers" id="answers">
+</div>
+
+</section>
+
+</main>
+
+<nav class="footer">
+
+<div
+class="nav-item"
+onclick="location.href='index.html'"
+>
+<span class="nav-icon">⌂</span>
+<p>Ana</p>
+</div>
+
+<div
+class="nav-item"
+onclick="location.href='mescidler.html'"
+>
+<span class="nav-icon">★</span>
+<p>Mescidler</p>
+</div>
+
+<button
+type="button"
+class="center-btn"
+onclick="location.href='index.html'"
+>
++
+</button>
+
+<div
+class="nav-item active"
+onclick="location.href='bilgi-yarismasi.html'"
+>
+<span class="nav-icon">◎</span>
+<p>Yarışma</p>
+</div>
+
+<div
+class="nav-item"
+onclick="location.href='iletisim.html'"
+>
+<span class="nav-icon">✉</span>
+<p>İletişim</p>
+</div>
+
+</nav>
+
+<script>
+
+/* =========================
+QUESTION POOL
+========================= */
+
+const QUESTION_POOL = [
+
+{
+q:"Kur'an-ı Kerim kaç sureden oluşur?",
+a:[
+"114",
+"99",
+"124",
+"86"
+],
+correct:0
+},
+
+{
+q:"İslam'ın ilk şartı nedir?",
+a:[
+"Oruç tutmak",
+"Kelime-i Şehadet",
+"Zekat vermek",
+"Hacca gitmek"
+],
+correct:1
+},
+
+{
+q:"Namaz hangi vakitle farz kılınmıştır?",
+a:[
+"Miraç",
+"Hicret",
+"Bedir",
+"Uhud"
+],
+correct:0
+},
+
+{
+q:"Kur'an hangi ayda indirilmeye başlanmıştır?",
+a:[
+"Muharrem",
+"Şaban",
+"Ramazan",
+"Recep"
+],
+correct:2
+},
+
+{
+q:"Peygamberimizin doğduğu şehir hangisidir?",
+a:[
+"Medine",
+"Kudüs",
+"Mekke",
+"Taif"
+],
+correct:2
+},
+
+{
+q:"İlk vahiy hangi mağarada gelmiştir?",
+a:[
+"Sevr",
+"Hira",
+"Uhud",
+"Nur"
+],
+correct:1
+},
+
+{
+q:"İslam'da zekat vermek kaçıncı şarttır?",
+a:[
+"2",
+"3",
+"4",
+"5"
+],
+correct:1
+},
+
+{
+q:"Kıblenin bulunduğu şehir hangisidir?",
+a:[
+"Mekke",
+"Medine",
+"Kudüs",
+"Kahire"
+],
+correct:0
+},
+
+{
+q:"Kur'an'ın ilk suresi hangisidir?",
+a:[
+"Bakara",
+"İhlas",
+"Fatiha",
+"Yasin"
+],
+correct:2
+},
+
+{
+q:"Peygamberimizin babasının adı nedir?",
+a:[
+"Ebu Talib",
+"Abdullah",
+"Abdulmuttalib",
+"Hamza"
+],
+correct:1
+}
+
+];
+
+/* RANDOM FUTURE READY */
+
+const questions =
+[...QUESTION_POOL]
+.sort(()=>Math.random()-0.5)
+.slice(0,10);
+
+let current = 0;
+let score = 0;
+let correct = 0;
+let wrong = 0;
+
+let timer = 30;
+let interval = null;
+
+/* ELEMENTS */
+
+const timerEl =
+document.getElementById("timer");
+
+const questionEl =
+document.getElementById("questionText");
+
+const answersEl =
+document.getElementById("answers");
+
+const countEl =
+document.getElementById("questionCount");
+
+/* START */
+
+renderQuestion();
+
+/* RENDER */
+
+function renderQuestion(){
+
+clearInterval(interval);
+
+timer = 30;
+
+startTimer();
+
+const q =
+questions[current];
+
+countEl.innerText =
+`${current+1} / ${questions.length}`;
+
+questionEl.innerText =
+q.q;
+
+answersEl.innerHTML =
+q.a.map((answer,index)=>`
+
+<button
+class="answer-btn"
+onclick="selectAnswer(${index})"
+>
+${answer}
+</button>
+
+`).join("");
+
+}
+
+/* TIMER */
+
+function startTimer(){
+
+timerEl.innerText = timer;
+
+interval = setInterval(()=>{
+
+timer--;
+
+timerEl.innerText = timer;
+
+if(timer <= 0){
+
+clearInterval(interval);
+
+wrong++;
+
+updateScore();
+
+nextQuestion();
+
+}
+
+},1000);
+
+}
+
+/* ANSWER */
+
+function selectAnswer(index){
+
+clearInterval(interval);
+
+const q =
+questions[current];
+
+const buttons =
+document.querySelectorAll(".answer-btn");
+
+buttons.forEach((btn,i)=>{
+
+btn.disabled = true;
+
+if(i === q.correct){
+
+btn.classList.add("correct");
+
+}
+
+if(
+i === index &&
+i !== q.correct
+){
+
+btn.classList.add("wrong");
+
+}
+
+});
+
+if(index === q.correct){
+
+score += 10;
+correct++;
+
+}else{
+
+wrong++;
+
+}
+
+updateScore();
+
+setTimeout(()=>{
+nextQuestion();
+},1000);
+
+}
+
+/* NEXT */
+
+function nextQuestion(){
+
+current++;
+
+if(current >= questions.length){
+
+finishQuiz();
+return;
+
+}
+
+renderQuestion();
+
+}
+
+/* SCORE */
+
+function updateScore(){
+
+document.getElementById(
+"scoreValue"
+).innerText = score;
+
+document.getElementById(
+"correctValue"
+).innerText = correct;
+
+document.getElementById(
+"wrongValue"
+).innerText = wrong;
+
+}
+
+/* FINISH */
+
+function finishQuiz(){
+
+document.getElementById(
+"quizCard"
+).innerHTML = `
+
+<div class="result-box">
+
+<h2>
+🏆 ${score} Puan
+</h2>
+
+<p>
+Yarışmayı tamamladınız.
+<br>
+Doğru: ${correct}
+<br>
+Yanlış: ${wrong}
+</p>
+
+<button
+class="restart-btn"
+onclick="location.reload()"
+>
+Tekrar Başlat
+</button>
+
+</div>
+
+`;
+
+}
+
+</script>
+
+</body>
+</html>
