@@ -1227,7 +1227,7 @@ item.photos?.[0] ||
 
 item.gallery?.[0] ||
 
-"assets/img/default.jpg";
+"https://placehold.co/600x400?text=Mescid";
 
 /* STRING ARRAY FIX */
 
