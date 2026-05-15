@@ -917,6 +917,9 @@ const res = await fetch(
 `${API_BASE}/api/mescid/${slug}`
 );
 
+console.log(await res.text());
+return;
+
 const data = await res.json();
 
 if(!data.success){
