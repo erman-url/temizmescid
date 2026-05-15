@@ -728,8 +728,20 @@ document.getElementById("extraNote")
 
     closeForm();
 
-    location.href =
-`mescid_detay.html?slug=${data.slug}`;
+  if(!data.slug){
+
+alert(
+"Mescid oluşturuldu fakat slug alınamadı."
+);
+
+location.href = "mescidler.html";
+
+return;
+
+}
+
+location.href =
+`mescid_detay.html?slug=${encodeURIComponent(data.slug)}`;
 
   }
 
