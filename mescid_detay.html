@@ -1034,12 +1034,22 @@ if(typeof item === "string"){
 const clean =
 item.trim();
 
+if(clean){
+
+let finalUrl = clean;
+
+/* RELATIVE URL FIX */
+
 if(
-clean &&
-clean.startsWith("http")
+!finalUrl.startsWith("http")
 ){
 
-images.push(clean);
+finalUrl =
+`${R2_BASE}/${finalUrl.replace(/^\/+/,"")}`;
+
+}
+
+images.push(finalUrl);
 
 }
 
@@ -1713,6 +1723,11 @@ Değerlendirmeyi Gönder
 /* =========================
 HERO DOTS
 ========================= */
+/* =========================
+HERO DOTS SAFE
+========================= */
+
+requestAnimationFrame(()=>{
 
 const heroSlider =
 document.getElementById(
@@ -1724,17 +1739,37 @@ document.getElementById(
 "heroDots"
 );
 
-if(heroSlider && heroDots){
+/* SAFE EXIT */
+
+if(
+!heroSlider ||
+!heroDots
+){
+
+console.warn(
+"Hero slider elements missing"
+);
+
+return;
+
+}
+
+/* DOTS */
 
 heroDots.innerHTML =
+
 filteredImages.map((_,i)=>`
+
 <span class="${
-i === 0 ? 'active' : ''
+i === 0 ? "active" : ""
 }"></span>
+
 `).join("");
 
 const dots =
 heroDots.querySelectorAll("span");
+
+/* SCROLL */
 
 heroSlider.addEventListener(
 "scroll",
@@ -1755,10 +1790,11 @@ i === index
 
 });
 
-}
+},
+{ passive:true }
 );
 
-}
+});
 
 }
 
