@@ -1781,10 +1781,6 @@ Değerlendirmeyi Gönder
 </div>
 
 `;
-
-/* =========================
-HERO DOTS
-========================= */
 /* =========================
 HERO DOTS SAFE
 ========================= */
@@ -1854,8 +1850,9 @@ i === index
 
 });
 
-}
+/* RENDER END */
 
+}
 /* ========================= */
 /* STAR RATING */
 /* ========================= */
@@ -2007,7 +2004,18 @@ localStorage.getItem("user_hash");
 if(!hash){
 
 hash =
-crypto.randomUUID();
+hash =
+
+window.crypto &&
+crypto.randomUUID
+
+? crypto.randomUUID()
+
+: "user_" +
+Date.now() +
+Math.random()
+.toString(36)
+.slice(2);
 
 localStorage.setItem(
 "user_hash",
@@ -2069,10 +2077,11 @@ toggles.paper || false,
 /* COMMENT */
 
 comment :
+(
 document
 .getElementById("reviewText")
-.value
-.trim()
+?.value || ""
+).trim()
 
 };
 
@@ -2114,7 +2123,7 @@ alert(
 
 closeRatingModal();
 
-loadMescid();
+// loadMescid();
 
 }
 catch(e){
