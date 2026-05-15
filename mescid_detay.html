@@ -1691,25 +1691,37 @@ document
 .getElementById("ratingModal")
 .classList.remove("show");
 
-}
-/* ========================= */
+}/* ========================= */
 /* SUBMIT */
 /* ========================= */
 
 async function submitRating(id){
 
-if(
+const requiresAblution = 
+Number(currentMescid?.has_ablution) === 1;
+
+const missingMainScores =
+
 !ratings.cleanliness ||
 !ratings.sound ||
 !ratings.air ||
-!ratings.floor ||
-(
-Number(currentMescid?.has_ablution) === 1 &&
-(
+!ratings.floor;
+
+const missingAblutionScores =
+
+requiresAblution && (
+
 !ratings.ablution_clean ||
 !ratings.wet_floor
-)
-)
+
+);
+
+if(
+
+missingMainScores ||
+
+missingAblutionScores
+
 ){
 
 alert(
