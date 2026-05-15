@@ -854,6 +854,21 @@ box-shadow:
 
 }
 
+
+
+.hero-slide img,
+.gallery-image{
+
+content-visibility:auto;
+contain-intrinsic-size:300px;
+
+will-change:transform;
+transform:translateZ(0);
+backface-visibility:hidden;
+
+}
+
+
 </style>
 
 </head>
@@ -916,17 +931,34 @@ window.addEventListener(
 loadMescid();
 
 }
-);
-/* ========================= */
+);/* ========================= */
 /* FETCH */
 /* ========================= */
 
 async function loadMescid(){
 
+/* SLUG VALIDATION */
+
+if(!slug){
+
+document.getElementById("app").innerHTML = `
+<div class="loader">
+Geçersiz mescid bağlantısı
+</div>
+`;
+
+return;
+
+}
+
 try{
 
 const res = await fetch(
-`${API_BASE}/api/mescid/${slug}`
+`${API_BASE}/api/mescid/${slug}`,
+{
+method:"GET",
+cache:"no-store"
+}
 );
 
 if(!res.ok){
@@ -939,6 +971,14 @@ throw new Error(
 
 const text =
 await res.text();
+
+if(!text){
+
+throw new Error(
+"EMPTY API RESPONSE"
+);
+
+}
 
 let data;
 
@@ -958,7 +998,10 @@ throw err;
 
 }
 
-if(!data.success){
+if(
+!data ||
+!data.success
+){
 
 document.getElementById("app").innerHTML = `
 <div class="loader">
@@ -975,7 +1018,10 @@ render(data);
 }
 catch(e){
 
-console.error(e);
+console.error(
+"LOAD MESCID ERROR:",
+e
+);
 
 document.getElementById("app").innerHTML = `
 <div class="loader">
@@ -993,12 +1039,15 @@ Bir hata oluştu
 
 function escapeHtml(text=""){
 
+text = String(text ?? "");
+
 return text
 .replaceAll("&","&amp;")
 .replaceAll("<","&lt;")
 .replaceAll(">","&gt;")
 .replaceAll('"',"&quot;")
 .replaceAll("'","&#039;");
+
 
 }
 
@@ -1092,7 +1141,7 @@ if(
 ){
 
 finalUrl =
-`https://pub-383b8df02aad4d3589d64a0709ff5b71.r2.dev/${finalUrl.replace(/^\/+/,"")}`;
+`${R2_BASE}/${finalUrl.replace(/^\/+/,"")}`;
 
 }
 
@@ -1127,6 +1176,7 @@ return (
 );
 
 });
+
 /* =========================
 FALLBACK
 ========================= */
@@ -1212,14 +1262,13 @@ class="hero-slider"
 id="heroSlider"
 >
 
-${[...filteredImages]
-.reverse()
-.map((img,index)=>`
+${filteredImages.map((img,index)=>`
 
 <div class="hero-slide">
 
 <img
 src="${img}"
+crossorigin="anonymous"
 alt="${escapeHtml(mescid.name || "Mescid")}"
 loading="${index === 0 ? 'eager' : 'lazy'}"
 decoding="async"
@@ -1276,6 +1325,7 @@ ${filteredImages.map(img=>`
 
 <img
 src="${img}"
+crossorigin="anonymous"
 referrerpolicy="no-referrer"
 class="gallery-image"
 loading="lazy"
@@ -1783,9 +1833,7 @@ heroDots.querySelectorAll("span");
 
 /* SCROLL */
 
-heroSlider.addEventListener(
-"scroll",
-()=>{
+heroSlider.onscroll = ()=>{
 
 const index =
 Math.round(
@@ -1802,9 +1850,7 @@ i === index
 
 });
 
-},
-{ passive:true }
-);
+};
 
 });
 
