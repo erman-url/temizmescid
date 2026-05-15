@@ -1138,7 +1138,7 @@ ${escapeHtml(mescid.name || "-")}
 <div class="hero-meta">
 
 <div class="score-box">
-⭐ ${mescid.average_score || "0.0"}
+⭐ ${Number(mescid.average_score ?? 0).toFixed(1)}
 </div>
 
 <div class="location-box">
@@ -1258,7 +1258,7 @@ Son Değerlendirmeler
 </div>
 
 <div class="review-count">
-${reviews.length} değerlendirme
+${mescid.review_count ?? 0} değerlendirme
 </div>
 
 </div>
@@ -1302,8 +1302,6 @@ ${formatDate(review.created_at)}
 <div class="summary-mini">
 <span>🕌 Halı / Zemin</span>
 <b>${review.floor ?? 0}</b>
-</div>
-
 </div>
 
 <div class="review-text">
@@ -1784,9 +1782,11 @@ Number(currentMescid?.has_ablution) === 1;
 
 const missingMainScores =
 
+!ratings.location ||
 !ratings.cleanliness ||
 !ratings.sound ||
 !ratings.air ||
+!ratings.light ||
 !ratings.floor;
 
 const missingAblutionScores = (
