@@ -875,7 +875,7 @@ Yükleniyor...
 /* ========================= */
 
 const API_BASE =
-"https://spring-violet-7aa7.temizmescid.workers.dev";
+window.location.origin;
 
 /* ========================= */
 /* PARAMS */
@@ -1704,7 +1704,7 @@ if(
 !ratings.air ||
 !ratings.floor ||
 (
-Number(currentMescid?.has_ablution) === 1
+Number(currentMescid?.has_ablution) === 1 &&
 (
 !ratings.ablution_clean ||
 !ratings.wet_floor
@@ -1788,7 +1788,7 @@ document
 try{
 
 const res = await fetch(
-`${API_BASE}/api/rate`,
+`${API_BASE}/api/review/create`,
 {
 method:"POST",
 headers:{
