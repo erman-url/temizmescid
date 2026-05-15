@@ -1058,12 +1058,22 @@ item.url ||
 
 ).trim();
 
+if(url){
+
+let finalUrl = url;
+
+/* RELATIVE PATH FIX */
+
 if(
-url &&
-url.startsWith("http")
+!finalUrl.startsWith("http")
 ){
 
-images.push(url);
+finalUrl =
+`https://pub-383b8df02aad4d3589d64a0709ff5b71.r2.dev/${finalUrl.replace(/^\/+/,"")}`;
+
+}
+
+images.push(finalUrl);
 
 }
 
@@ -1109,10 +1119,16 @@ String(
 mescid.image
 ).trim();
 
+if(fallbackImage){
+
 if(
-fallbackImage &&
-fallbackImage.startsWith("http")
+!fallbackImage.startsWith("http")
 ){
+
+fallbackImage =
+`https://pub-383b8df02aad4d3589d64a0709ff5b71.r2.dev/${fallbackImage.replace(/^\/+/,"")}`;
+
+}
 
 filteredImages.push(
 fallbackImage
