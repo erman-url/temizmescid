@@ -1155,8 +1155,6 @@ decoding="async"
 
 </section>
 
-
-
 <!-- SUMMARY -->
 
 <section class="card">
@@ -1166,21 +1164,35 @@ decoding="async"
 <div class="summary-item">
 <span>🧼 Temizlik</span>
 <strong>
-${mescid.clean_score || "-"}
+${mescid.clean_score ?? 0}
 </strong>
 </div>
 
 <div class="summary-item">
 <span>🤫 Sessizlik</span>
 <strong>
-${mescid.sound_score || "-"}
+${mescid.sound_score ?? 0}
 </strong>
 </div>
 
 <div class="summary-item">
 <span>💨 Havalandırma</span>
 <strong>
-${mescid.air_score || "-"}
+${mescid.air_score ?? 0}
+</strong>
+</div>
+
+<div class="summary-item">
+<span>💡 Işıklandırma</span>
+<strong>
+${mescid.light_score ?? 0}
+</strong>
+</div>
+
+<div class="summary-item">
+<span>🕌 Halı / Zemin</span>
+<strong>
+${mescid.floor_score ?? 0}
 </strong>
 </div>
 
@@ -1205,8 +1217,6 @@ Mescidi Puanla
 </button>
 
 </section>
-
-
 
 
 
@@ -1241,7 +1251,7 @@ reviews.map(review=>`
 <div class="review-top">
 
 <div class="review-score">
-⭐ ${review.overall_score || "-"}
+⭐ ${review.overall_score ?? 0}
 </div>
 
 <div class="review-date">
@@ -1249,26 +1259,25 @@ ${formatDate(review.created_at)}
 </div>
 
 </div>
-<div class="review-breakdown">
 
 <div class="summary-mini">
 <span>🧼 Temizlik</span>
-<b>${review.cleanliness || "-"}</b>
+<b>${review.cleanliness ?? 0}</b>
 </div>
 
 <div class="summary-mini">
 <span>🤫 Sessizlik</span>
-<b>${review.sound || "-"}</b>
+<b>${review.sound ?? 0}</b>
 </div>
 
 <div class="summary-mini">
 <span>💨 Havalandırma</span>
-<b>${review.air || "-"}</b>
+<b>${review.air ?? 0}</b>
 </div>
 
 <div class="summary-mini">
 <span>🕌 Halı / Zemin</span>
-<b>${review.floor || "-"}</b>
+<b>${review.floor ?? 0}</b>
 </div>
 
 </div>
@@ -1336,6 +1345,30 @@ onclick="closeRatingModal()"
 </div>
 
 <!-- CLEAN -->
+
+<!-- LOCATION -->
+
+<div class="rating-group">
+
+<label>
+Konum / Ulaşım
+</label>
+
+<div
+class="star-row"
+data-rating="location"
+>
+
+<span onclick="setRating(this,1)">★</span>
+<span onclick="setRating(this,2)">★</span>
+<span onclick="setRating(this,3)">★</span>
+<span onclick="setRating(this,4)">★</span>
+<span onclick="setRating(this,5)">★</span>
+
+</div>
+
+</div>
+
 
 <div class="rating-group">
 
@@ -1405,6 +1438,29 @@ data-rating="air"
 </div>
 
 <!-- FLOOR -->
+
+<!-- LIGHT -->
+
+<div class="rating-group">
+
+<label>
+Işıklandırma
+</label>
+
+<div
+class="star-row"
+data-rating="light"
+>
+
+<span onclick="setRating(this,1)">★</span>
+<span onclick="setRating(this,2)">★</span>
+<span onclick="setRating(this,3)">★</span>
+<span onclick="setRating(this,4)">★</span>
+<span onclick="setRating(this,5)">★</span>
+
+</div>
+
+</div>
 
 <div class="rating-group">
 
@@ -1737,10 +1793,26 @@ const payload = {
 
 mescid_id : id,
 
-user_hash :
-localStorage.getItem("user_hash")
-||
-crypto.randomUUID(),
+user_hash : (()=>{
+
+let hash =
+localStorage.getItem("user_hash");
+
+if(!hash){
+
+hash =
+crypto.randomUUID();
+
+localStorage.setItem(
+"user_hash",
+hash
+);
+
+}
+
+return hash;
+
+})(),
 
 /* SCORES */
 
