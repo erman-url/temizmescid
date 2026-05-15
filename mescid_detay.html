@@ -917,8 +917,7 @@ const res = await fetch(
 `${API_BASE}/api/mescid/${slug}`
 );
 
-console.log(await res.text());
-return;
+
 
 const data = await res.json();
 
@@ -1711,14 +1710,11 @@ const missingMainScores =
 !ratings.floor;
 
 const missingAblutionScores = (
-
-requiresAblution && (
-
-!ratings.ablution_clean ||
-!ratings.wet_floor
-
-)
-
+  requiresAblution &&
+  (
+    !ratings.ablution_clean ||
+    !ratings.wet_floor
+  )
 );
 
 if(
