@@ -578,37 +578,84 @@ el.dataset.key;
 const val =
 Number(el.dataset.val || 0);
 
+const scoreMap = {
+
+location:
+"location_score",
+
+cleanliness:
+"cleanliness_score",
+
+air:
+"climate_score",
+
+sound:
+"peace_score",
+
+light:
+"light_score",
+
+floor:
+"carpet_score",
+
+ablution_clean:
+"ablution_clean_score",
+
+wet_floor:
+"wet_floor_score"
+
+};
+
+const dbKey =
+scoreMap[key];
+
+if(dbKey){
+
 formData.append(
-key,
+dbKey,
 val
 );
 
-});
+}
 
+});
 /* =========================
 BOOLEAN FIELDS
 ========================= */
 
-[
-"library",
-"hanger",
-"airCondition",
-"staff",
-"socket",
-"womenArea",
-"soap",
-"paper"
-]
-.forEach(id=>{
+const binaryMap = {
+
+library:
+"library_exists",
+
+staff:
+"staff_exists",
+
+airCondition:
+"air_condition_exists",
+
+womenArea:
+"women_area_exists",
+
+paper:
+"paper_towel_exists"
+
+};
+
+Object.entries(binaryMap)
+.forEach(([inputId, dbKey])=>{
 
 const value =
-document.getElementById(id)?.value;
+document.getElementById(inputId)?.value;
 
 if(value){
 
 formData.append(
-id,
+
+dbKey,
+
 value === "Evet" ? 1 : 0
+
 );
 
 }
