@@ -683,80 +683,123 @@ document.getElementById("extraNote")
 );
 
 
-    Array
-    .from(imagesInput.files)
-    .forEach(file=>{
+Array
+.from(imagesInput.files)
+.forEach(file=>{
 
-      formData.append(
-        "images",
-        file
-      );
+formData.append(
+"images",
+file
+);
 
-    });
+});
 
-    const res = await fetch(
+const res = await fetch(
 
-      "https://spring-violet-7aa7.temizmescid.workers.dev/api/mescid/create",
+"https://spring-violet-7aa7.temizmescid.workers.dev/api/mescid/create",
 
-      {
+{
 
-        method:"POST",
+method:"POST",
 
-        body:formData
+body:formData
 
-      }
+}
 
-    );
+);
 
-    const data =
-      await res.json();
+const data =
+await res.json();
 
-    if(!res.ok){
+if(!res.ok){
 
-      alert(
-        data.error ||
-        "Mescid eklenemedi"
-      );
+alert(
+data.error ||
+"Mescid eklenemedi"
+);
 
-      return;
+return;
 
-    }
+}
 
-    alert(
-      "Mescid başarıyla eklendi"
-    );
+alert(
+"Mescid başarıyla eklendi"
+);
 
-    closeForm();
+closeForm();
 
-  if(!data.slug){
+if(!data.slug){
 
 alert(
 "Mescid oluşturuldu fakat slug alınamadı."
 );
 
-location.href = "mescidler.html";
+location.href =
+"mescidler.html";
+
+return;
+
+}
+
+const targetSlug =
+encodeURIComponent(data.slug);
+
+let ready = false;
+
+for(let i=0;i<10;i++){
+
+try{
+
+const check = await fetch(
+`${API_URL}/api/mescid/${targetSlug}`
+);
+
+if(check.ok){
+
+ready = true;
+
+break;
+
+}
+
+}
+catch(e){}
+
+await new Promise(resolve=>
+setTimeout(resolve,700)
+);
+
+}
+
+if(!ready){
+
+alert(
+"Mescid oluşturuldu fakat detay sayfası henüz hazır değil."
+);
+
+location.href =
+"mescidler.html";
 
 return;
 
 }
 
 location.href =
-`mescid_detay.html?slug=${encodeURIComponent(data.slug)}`;
-
-  }
-
-  catch(err){
-
-    console.error(err);
-
-    alert(
-      "Bağlantı hatası oluştu"
-    );
-
-  }
+`mescid_detay.html?slug=${targetSlug}`;
 
 }
 
+catch(err){
+
+console.error(err);
+
+alert(
+"Bağlantı hatası oluştu"
+);
+
+}
+
+}
 
 // =========================
 // DATE + TIME
