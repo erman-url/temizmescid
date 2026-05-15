@@ -892,6 +892,7 @@ params.get("slug");
 /* ========================= */
 
 const ratings = {};
+let currentMescid = null;
 
 const toggles = {
 soap : null,
@@ -983,6 +984,8 @@ function render(data){
 
 const mescid =
 data.mescid || {};
+
+currentMescid = mescid;
 
 const reviews =
 data.reviews || [];
@@ -1699,7 +1702,14 @@ if(
 !ratings.cleanliness ||
 !ratings.sound ||
 !ratings.air ||
-!ratings.floor
+!ratings.floor ||
+(
+Number(currentMescid?.has_ablution) === 1
+(
+!ratings.ablution_clean ||
+!ratings.wet_floor
+)
+)
 ){
 
 alert(
@@ -1714,46 +1724,55 @@ const payload = {
 
 mescid_id : id,
 
-/* MAIN */
+user_hash :
+localStorage.getItem("user_hash")
+||
+crypto.randomUUID(),
 
-location :
+/* SCORES */
+
+location_score :
 ratings.location || 0,
 
-cleanliness :
+cleanliness_score :
 ratings.cleanliness || 0,
 
-sound :
+peace_score :
 ratings.sound || 0,
 
-air :
+climate_score :
 ratings.air || 0,
 
-light :
+light_score :
 ratings.light || 0,
 
-floor :
+carpet_score :
 ratings.floor || 0,
 
-/* ABDEST */
-
-ablution_clean :
+ablution_clean_score :
 ratings.ablution_clean || 0,
 
-wet_floor :
+wet_floor_score :
 ratings.wet_floor || 0,
 
 /* BOOLEAN */
 
-library :
+library_exists :
 toggles.library || false,
 
-staff :
+staff_exists :
 toggles.staff || false,
 
-soap :
-toggles.soap || false,
+air_condition_exists :
+toggles.airCondition || false,
 
-paper :
+women_area_exists :
+toggles.womenArea || false,
+
+ablution_exists :
+Number(currentMescid?.has_ablution) === 1,
+
+paper_towel_exists :
 toggles.paper || false,
 
 /* COMMENT */
