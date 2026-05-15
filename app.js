@@ -471,6 +471,76 @@ function getScoreLabel(score){
 
 async function submitForm(){
 
+async function compressImage(file){
+
+  return new Promise((resolve)=>{
+
+    const img = new Image();
+
+    img.onload = ()=>{
+
+      const canvas =
+      document.createElement("canvas");
+
+      const maxWidth = 1200;
+
+      let width = img.width;
+      let height = img.height;
+
+      if(width > maxWidth){
+
+        height *= maxWidth / width;
+        width = maxWidth;
+
+      }
+
+      canvas.width = width;
+      canvas.height = height;
+
+      const ctx =
+      canvas.getContext("2d");
+
+      ctx.drawImage(
+        img,
+        0,
+        0,
+        width,
+        height
+      );
+
+      canvas.toBlob(
+
+        (blob)=>{
+
+          resolve(
+            new File(
+              [blob],
+              file.name.replace(
+                /\.(jpg|jpeg|png)$/i,
+                ".webp"
+              ),
+              {
+                type:"image/webp"
+              }
+            )
+          );
+
+        },
+
+        "image/webp",
+        0.7
+
+      );
+
+    };
+
+    img.src =
+    URL.createObjectURL(file);
+
+  });
+
+}
+
   if(!validateStep(4)){
     return;
   }
@@ -683,16 +753,17 @@ document.getElementById("extraNote")
 );
 
 
-Array
-.from(imagesInput.files)
-.forEach(file=>{
+for(const file of imagesInput.files){
 
-formData.append(
-"images",
-file
-);
+  const compressed =
+  await compressImage(file);
 
-});
+  formData.append(
+    "images",
+    compressed
+  );
+
+}
 
 const res = await fetch(
 
