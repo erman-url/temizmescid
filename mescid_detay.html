@@ -1001,7 +1001,6 @@ return new Date(date)
 .toLocaleDateString("tr-TR");
 
 }
-
 /* ========================= */
 /* RENDER */
 /* ========================= */
@@ -1020,36 +1019,67 @@ data.reviews || [];
 IMAGES
 ========================= */
 
-const images = [
+const images = [];
 
-...(data.images || [])
+for (
+const item of (data.images || [])
+){
 
-.map(x => {
+if(!item) continue;
 
-if(typeof x === "string"){
+/* STRING */
 
-return x.trim();
+if(typeof item === "string"){
+
+const clean =
+item.trim();
+
+if(
+clean &&
+clean.startsWith("http")
+){
+
+images.push(clean);
 
 }
 
-return (
-x?.image_url ||
-x?.image ||
-x?.url ||
+continue;
+
+}
+
+/* OBJECT */
+
+const url = String(
+
+item.image_url ||
+item.image ||
+item.url ||
 ""
+
 ).trim();
 
-})
+if(
+url &&
+url.startsWith("http")
+){
 
-.filter(Boolean)
+images.push(url);
 
-];
+}
 
-/* LOW QUALITY FILTER */
+}
+
+/* =========================
+LOW QUALITY FILTER
+========================= */
 
 const filteredImages =
 
-images.filter(img=>{
+images
+
+.filter(Boolean)
+
+.filter(img=>{
 
 const lower =
 img.toLowerCase();
@@ -1065,16 +1095,30 @@ return (
 
 });
 
-/* FALLBACK */
+/* =========================
+FALLBACK
+========================= */
 
 if(
 filteredImages.length === 0 &&
 mescid.image
 ){
 
+const fallbackImage =
+String(
+mescid.image
+).trim();
+
+if(
+fallbackImage &&
+fallbackImage.startsWith("http")
+){
+
 filteredImages.push(
-String(mescid.image).trim()
+fallbackImage
 );
+
+}
 
 }
 
@@ -1085,8 +1129,6 @@ filteredImages.push(
 );
 
 }
-
-
 /* =========================
 RENDER
 ========================= */
