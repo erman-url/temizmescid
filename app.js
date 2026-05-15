@@ -1358,8 +1358,11 @@ if(
 !imageUrl.startsWith("assets/")
 ){
 
+const R2_BASE =
+"https://pub-383b8df02aad4d3589d64a0709ff5b71.r2.dev";
+
 imageUrl =
-`${API_URL}/${imageUrl.replace(/^\/+/,"")}`;
+`${R2_BASE}/${imageUrl.replace(/^\/+/,"")}`;
 
 }
 

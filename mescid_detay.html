@@ -1104,31 +1104,58 @@ return (
 );
 
 });
-
 /* =========================
 FALLBACK
 ========================= */
+
+const R2_BASE =
+"https://pub-383b8df02aad4d3589d64a0709ff5b71.r2.dev";
 
 if(
 filteredImages.length === 0 &&
 mescid.image
 ){
 
-const fallbackImage =
+let fallbackImage =
 String(
 mescid.image
 ).trim();
 
-if(fallbackImage){
+/* STRING ARRAY FIX */
 
 if(
+fallbackImage.startsWith("[")
+){
+
+try{
+
+fallbackImage =
+JSON.parse(fallbackImage)?.[0] || "";
+
+}
+catch(e){
+
+fallbackImage = "";
+
+}
+
+}
+
+/* RELATIVE URL FIX */
+
+if(
+fallbackImage &&
 !fallbackImage.startsWith("http")
 ){
 
 fallbackImage =
-`https://pub-383b8df02aad4d3589d64a0709ff5b71.r2.dev/${fallbackImage.replace(/^\/+/,"")}`;
+`${R2_BASE}/${fallbackImage.replace(/^\/+/,"")}`;
 
 }
+
+/* PUSH */
+
+if(fallbackImage){
 
 filteredImages.push(
 fallbackImage
@@ -1138,11 +1165,14 @@ fallbackImage
 
 }
 
+/* FINAL FALLBACK */
+
 if(filteredImages.length === 0){
 
 filteredImages.push(
 "https://images.unsplash.com/photo-1514890547357-a9ee288728e0?q=80&w=1200&auto=format&fit=crop"
 );
+
 
 }
 /* =========================
