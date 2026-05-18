@@ -482,17 +482,42 @@ async function compressImage(file){
       const canvas =
       document.createElement("canvas");
 
-      const maxWidth = 900;
+ const MAX_SIZE = 900;
 
-      let width = img.width;
-      let height = img.height;
+let width = img.width;
+let height = img.height;
 
-      if(width > maxWidth){
+/* LANDSCAPE */
 
-        height *= maxWidth / width;
-        width = maxWidth;
+if(width > height){
 
-      }
+  if(width > MAX_SIZE){
+
+    height = Math.round(
+      height * (MAX_SIZE / width)
+    );
+
+    width = MAX_SIZE;
+
+  }
+
+}
+
+/* PORTRAIT */
+
+else{
+
+  if(height > MAX_SIZE){
+
+    width = Math.round(
+      width * (MAX_SIZE / height)
+    );
+
+    height = MAX_SIZE;
+
+  }
+
+}
 
       canvas.width = width;
       canvas.height = height;
