@@ -655,22 +655,46 @@ Kuralları ihlal eden kullanıcıların erişimi geçici veya kalıcı olarak s�
 <h2>
 İletişim Formu
 </h2>
+<form
+class="contact-form"
+action="https://api.web3forms.com/submit"
+method="POST"
+>
 
-<form class="contact-form">
+<input
+type="hidden"
+name="access_key"
+value="f5b0ff92-de5a-4eb8-81d8-ebb665255583"
+>
+
+<input
+type="hidden"
+name="subject"
+value="TemizMescid İletişim Formu"
+>
+
+<input
+type="hidden"
+name="from_name"
+value="TemizMescid"
+>
 
 <input
 type="text"
+name="name"
 placeholder="Ad Soyad"
 required
 >
 
 <input
 type="email"
+name="email"
 placeholder="E-posta"
 required
 >
 
 <textarea
+name="message"
 placeholder="Mesajınız..."
 required
 ></textarea>
