@@ -1495,10 +1495,26 @@ async function loadPrayerTimes(){
 
     if(cached){
 
-      const parsed =
-        JSON.parse(cached);
+     const parsed =
+  JSON.parse(cached);
 
-      renderPrayerTimes(parsed);
+const isFresh =
+
+Date.now() -
+parsed.createdAt <
+
+1000 * 60 * 60 * 6;
+
+if(
+  isFresh &&
+  parsed.timings
+){
+
+  renderPrayerTimes(
+    parsed.timings
+  );
+
+}
 
     }
 
@@ -1541,13 +1557,19 @@ async function loadPrayerTimes(){
         SAVE CACHE
         ========================= */
 
-        localStorage.setItem(
+     localStorage.setItem(
 
-          "tm_prayer_times",
+  "tm_prayer_times",
 
-          JSON.stringify(timings)
+  JSON.stringify({
 
-        );
+    createdAt:Date.now(),
+
+    timings
+
+  })
+
+);
 
         /* =========================
         RENDER
