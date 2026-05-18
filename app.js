@@ -19,19 +19,14 @@ document.addEventListener(
 
   updateDateTime();
 
-  updatePrayerState();
-
   setInterval(
     updateDateTime,
     1000
   );
 
-  setInterval(
-    updatePrayerState,
-    60000
-  );
-
   loadTopMescids();
+
+  loadPrayerTimes();
 
 }
 );
@@ -937,130 +932,12 @@ function updateDateTime(){
 }
 
 
-// =========================
-// NAMAZ SMART SYSTEM
-// =========================
-const prayerTimes = {
 
-  imsak:"04:12",
 
-  ogle:"13:05",
 
-  ikindi:"16:45",
 
-  aksam:"19:32",
 
-  yatsi:"20:55"
 
-};
-
-function getMinutes(t){
-
-  const [h,m] =
-  t.split(":").map(Number);
-
-  return (h * 60) + m;
-
-}
-
-function updatePrayerState(){
-
-  const now = new Date();
-
-  const currentMin =
-  (now.getHours() * 60) +
-  now.getMinutes();
-
-  const entries =
-  Object.entries(prayerTimes);
-
-  let current = null;
-  let next = null;
-
-  for(let i=0;i<entries.length;i++){
-
-    const [name,time] =
-    entries[i];
-
-    const min =
-    getMinutes(time);
-
-    if(currentMin >= min){
-
-      current = {
-        name,
-        time,
-        min
-      };
-
-      next =
-      entries[i+1]
-
-      ? {
-
-        name:entries[i+1][0],
-
-        time:entries[i+1][1],
-
-        min:getMinutes(
-          entries[i+1][1]
-        )
-
-      }
-
-      : null;
-
-    }
-
-  }
-
-  document
-  .querySelectorAll(".prayer-item")
-  .forEach(el=>{
-
-    el.classList.remove("active");
-
-    if(
-      el.dataset.name === current?.name
-    ){
-
-      el.classList.add("active");
-
-    }
-
-  });
-
-  const countdownEl =
-  document.getElementById("countdown");
-
-  if(!countdownEl){
-    return;
-  }
-
-  if(next){
-
-    const diff =
-    next.min - currentMin;
-
-    const h =
-    Math.floor(diff / 60);
-
-    const m =
-    diff % 60;
-
-    countdownEl.innerText =
-    `${next.name} ${h}s ${m}dk`;
-
-  }
-
-  else{
-
-    countdownEl.innerText =
-    "Yarın";
-
-  }
-
-}
 
 // =========================
 // STEP VALIDATION
@@ -1682,13 +1559,27 @@ async function loadPrayerTimes(){
 
       },
 
-      ()=>{
+ ()=>{
 
-        console.log(
-          "Konum alınamadı"
-        );
+  console.log(
+    "Konum alınamadı"
+  );
 
-      },
+  renderPrayerTimes({
+
+    Fajr:"04:30",
+
+    Dhuhr:"13:00",
+
+    Asr:"16:45",
+
+    Maghrib:"19:35",
+
+    Isha:"21:00"
+
+  });
+
+},
 
       {
 
@@ -1734,7 +1625,8 @@ function renderPrayerTimes(
     if(el){
 
       el.textContent =
-        value || "--:--";
+        (value || "--:--")
+          .split(" ")[0];
 
     }
 
