@@ -679,6 +679,14 @@ name="from_name"
 value="TemizMescid"
 >
 
+
+<input
+type="hidden"
+name="redirect"
+value="https://temizmescid.com.tr/iletisim.html?success=true"
+>
+
+
 <input
 type="text"
 name="name"
@@ -696,9 +704,23 @@ required
 <textarea
 name="message"
 placeholder="Mesajınız..."
+autocomplete="off"
 required
 ></textarea>
 
+
+<input
+type="checkbox"
+name="kvkk_approval"
+required
+>
+
+<span style="
+font-size:12px;
+color:#6b7280;
+">
+İletişim formu kapsamında verilerimin işlenmesini kabul ediyorum.
+</span>
 <button type="submit">
 Gönder
 </button>
