@@ -1598,3 +1598,177 @@ sourceEl.innerHTML =
 }
 
 }
+
+/* =========================
+PRAYER TIMES
+========================= */
+
+async function loadPrayerTimes(){
+
+  try{
+
+    /* =========================
+    CACHE
+    ========================= */
+
+    const cached =
+      localStorage.getItem(
+        "tm_prayer_times"
+      );
+
+    if(cached){
+
+      const parsed =
+        JSON.parse(cached);
+
+      renderPrayerTimes(parsed);
+
+    }
+
+    /* =========================
+    LOCATION
+    ========================= */
+
+    navigator.geolocation.getCurrentPosition(
+
+      async(position)=>{
+
+        const lat =
+          position.coords.latitude;
+
+        const lng =
+          position.coords.longitude;
+
+        /* =========================
+        API
+        ========================= */
+
+        const res =
+          await fetch(
+
+`https://api.aladhan.com/v1/timings?latitude=${lat}&longitude=${lng}&method=13`
+
+          );
+
+        const data =
+          await res.json();
+
+        const timings =
+          data?.data?.timings;
+
+        if(!timings){
+          return;
+        }
+
+        /* =========================
+        SAVE CACHE
+        ========================= */
+
+        localStorage.setItem(
+
+          "tm_prayer_times",
+
+          JSON.stringify(timings)
+
+        );
+
+        /* =========================
+        RENDER
+        ========================= */
+
+        renderPrayerTimes(
+          timings
+        );
+
+      },
+
+      ()=>{
+
+        console.log(
+          "Konum alınamadı"
+        );
+
+      },
+
+      {
+
+        enableHighAccuracy:false,
+
+        timeout:10000,
+
+        maximumAge:1000 * 60 * 60
+
+      }
+
+    );
+
+  }
+
+  catch(e){
+
+    console.log(
+      "Prayer Error",
+      e
+    );
+
+  }
+
+}
+
+/* =========================
+RENDER
+========================= */
+
+function renderPrayerTimes(
+  timings
+){
+
+  const setText = (
+    id,
+    value
+  )=>{
+
+    const el =
+      document.getElementById(id);
+
+    if(el){
+
+      el.textContent =
+        value || "--:--";
+
+    }
+
+  };
+
+  setText(
+    "fajrTime",
+    timings.Fajr
+  );
+
+  setText(
+    "dhuhrTime",
+    timings.Dhuhr
+  );
+
+  setText(
+    "asrTime",
+    timings.Asr
+  );
+
+  setText(
+    "maghribTime",
+    timings.Maghrib
+  );
+
+  setText(
+    "ishaTime",
+    timings.Isha
+  );
+
+}
+
+/* =========================
+INIT
+========================= */
+
+loadPrayerTimes();
