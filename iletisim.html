@@ -443,6 +443,11 @@ padding:22px;
 
 </style>
 
+<script
+src="https://challenges.cloudflare.com/turnstile/v0/api.js"
+defer
+></script>
+
 </head>
 
 <body>
@@ -715,6 +720,7 @@ value="https://temizmescid.com.tr/iletisim.html?success=true"
 <input
 type="text"
 name="name"
+autocomplete="name"
 placeholder="Ad Soyad"
 maxlength="120"
 required
@@ -723,6 +729,8 @@ required
 <input
 type="email"
 name="email"
+autocomplete="email"
+inputmode="email"
 maxlength="120"
 placeholder="E-posta"
 required
@@ -760,6 +768,15 @@ margin-top:-6px;
 ">
 İletişim formu kapsamında verilerimin işlenmesini kabul ediyorum.
 </span>
+
+<div
+class="cf-turnstile"
+data-sitekey="0x4AAAAAADRs91Vm-1aY3Ko6"
+style="
+margin-top:6px;
+margin-bottom:4px;
+"
+></div>
 
 <button type="submit">
 Gönder
