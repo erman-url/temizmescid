@@ -378,6 +378,193 @@ margin-top:18px;
 
 
 /* =========================
+HIJRI CARD
+========================= */
+
+.hijri-card{
+
+position:relative;
+
+overflow:hidden;
+
+margin:18px 16px;
+
+padding:22px 20px;
+
+border-radius:30px;
+
+background:
+linear-gradient(
+135deg,
+rgba(255,255,255,.10),
+rgba(255,255,255,.04)
+);
+
+backdrop-filter:blur(22px);
+
+-webkit-backdrop-filter:blur(22px);
+
+border:
+1px solid rgba(255,255,255,.08);
+
+box-shadow:
+0 12px 40px rgba(0,0,0,.20),
+inset 0 1px 0 rgba(255,255,255,.06);
+
+}
+
+.hijri-card::before{
+
+content:"";
+
+position:absolute;
+
+top:-80px;
+right:-80px;
+
+width:180px;
+height:180px;
+
+border-radius:999px;
+
+background:
+radial-gradient(
+circle,
+rgba(34,197,94,.18),
+transparent 72%
+);
+
+filter:blur(20px);
+
+}
+
+.hijri-top{
+
+position:relative;
+
+z-index:2;
+
+display:flex;
+
+align-items:center;
+
+gap:14px;
+
+margin-bottom:18px;
+
+}
+
+.hijri-badge{
+
+width:58px;
+height:58px;
+
+border-radius:18px;
+
+display:flex;
+
+align-items:center;
+justify-content:center;
+
+font-size:26px;
+
+background:
+linear-gradient(
+135deg,
+#2e7d32,
+#1b5e20
+);
+
+box-shadow:
+0 10px 24px rgba(0,0,0,.16);
+
+color:#fff;
+
+}
+
+.hijri-mini{
+
+font-size:11px;
+
+font-weight:800;
+
+letter-spacing:1px;
+
+text-transform:uppercase;
+
+color:
+rgba(255,255,255,.45);
+
+margin-bottom:4px;
+
+}
+
+.hijri-card h3{
+
+font-size:24px;
+
+font-weight:900;
+
+line-height:1.1;
+
+letter-spacing:-.4px;
+
+color:#fff;
+
+}
+
+.hijri-date{
+
+position:relative;
+
+z-index:2;
+
+font-size:17px;
+
+font-weight:700;
+
+line-height:1.6;
+
+color:
+rgba(255,255,255,.88);
+
+margin-bottom:12px;
+
+}
+
+.hijri-countdown{
+
+position:relative;
+
+z-index:2;
+
+display:inline-flex;
+
+align-items:center;
+
+padding:
+10px 16px;
+
+border-radius:999px;
+
+background:
+rgba(255,255,255,.08);
+
+border:
+1px solid rgba(255,255,255,.06);
+
+font-size:13px;
+
+font-weight:800;
+
+color:#fff;
+
+backdrop-filter:blur(12px);
+
+}
+
+
+/* =========================
 FOOTER
 ========================= */
 
@@ -595,6 +782,49 @@ margin:0;
     class="verse-source"
     id="dailyVerseSource"
   >
+  </div>
+
+</section>
+
+
+<!-- ========================= -->
+<!-- HICRI CARD -->
+<!-- ========================= -->
+
+<section class="hijri-card">
+
+  <div class="hijri-top">
+
+    <div class="hijri-badge">
+      ☪
+    </div>
+
+    <div>
+
+      <div class="hijri-mini">
+        Hicri Takvim
+      </div>
+
+      <h3 id="hijriTitle">
+        Kurban Bayramı
+      </h3>
+
+    </div>
+
+  </div>
+
+  <div
+    class="hijri-date"
+    id="hijriDate"
+  >
+    27 Mayıs Çarşamba
+  </div>
+
+  <div
+    class="hijri-countdown"
+    id="hijriCountdown"
+  >
+    Hesaplanıyor...
   </div>
 
 </section>

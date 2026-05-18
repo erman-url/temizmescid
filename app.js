@@ -1686,3 +1686,70 @@ INIT
 ========================= */
 
 loadPrayerTimes();
+
+
+/* =========================
+HIJRI COUNTDOWN
+========================= */
+
+function initHijriCard(){
+
+  const eventDate =
+
+    new Date(
+      "2026-05-27T00:00:00"
+    );
+
+  function update(){
+
+    const now =
+      new Date();
+
+    const diff =
+      eventDate - now;
+
+    if(diff <= 0){
+
+      document.getElementById(
+        "hijriCountdown"
+      ).textContent =
+
+      "Kurban Bayramı Başladı";
+
+      return;
+
+    }
+
+    const days =
+      Math.floor(
+        diff / (1000*60*60*24)
+      );
+
+    const hours =
+      Math.floor(
+        (diff / (1000*60*60)) % 24
+      );
+
+    const mins =
+      Math.floor(
+        (diff / (1000*60)) % 60
+      );
+
+    document.getElementById(
+      "hijriCountdown"
+    ).textContent =
+
+`${days} Gün ${hours} Saat ${mins} Dk. Kaldı`;
+
+  }
+
+  update();
+
+  setInterval(
+    update,
+    60000
+  );
+
+}
+
+initHijriCard();
