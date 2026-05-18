@@ -15,17 +15,17 @@ TemizMescid | Bilgi Yarışması
 
 <meta
 name="description"
-content="İslami bilgi yarışması ile bilginizi test edin. Süreli ve puanlı mobil uyumlu test deneyimi."
+content="İslami bilgi yarışması ile dini bilgi seviyenizi test edin. Siyer, ilmihal, Kur'an ve genel dini bilgiler."
 >
 
 <meta
 name="keywords"
-content="islami bilgi yarışması, dini test, islam testi, bilgi yarışması"
+content="islami bilgi yarışması, dini test, ilmihal soruları, siyer testi, islam bilgi yarışması"
 >
 
 <meta
 name="theme-color"
-content="#0b2422"
+content="#08171b"
 >
 
 <link rel="stylesheet" href="style.css">
@@ -55,6 +55,7 @@ circle at top,
 );
 
 min-height:100vh;
+
 overflow-x:hidden;
 
 color:#fff;
@@ -62,18 +63,28 @@ color:#fff;
 }
 
 .page{
-max-width:420px;
+
+max-width:520px;
+
 margin:auto;
-padding:18px 18px 140px;
+
+padding:
+18px 18px 140px;
+
 }
 
 /* HERO */
 
 .quiz-hero{
 
-padding:26px 22px;
+position:relative;
 
-border-radius:30px;
+overflow:hidden;
+
+padding:
+28px 24px;
+
+border-radius:34px;
 
 background:
 linear-gradient(
@@ -82,25 +93,52 @@ rgba(255,255,255,.12),
 rgba(255,255,255,.04)
 );
 
-backdrop-filter:blur(18px);
+backdrop-filter:blur(20px);
 
 border:
 1px solid rgba(255,255,255,.08);
 
 margin-bottom:18px;
 
+box-shadow:
+0 18px 40px rgba(0,0,0,.18);
+
+}
+
+.quiz-hero::before{
+
+content:"";
+
+position:absolute;
+
+top:-100px;
+right:-100px;
+
+width:240px;
+height:240px;
+
+border-radius:50%;
+
+background:
+radial-gradient(
+circle,
+rgba(76,175,80,.18),
+transparent 70%
+);
+
 }
 
 .quiz-badge{
 
 display:inline-flex;
+
 align-items:center;
 justify-content:center;
 
-width:64px;
-height:64px;
+width:72px;
+height:72px;
 
-border-radius:22px;
+border-radius:24px;
 
 background:
 linear-gradient(
@@ -109,33 +147,92 @@ linear-gradient(
 #1b5e20
 );
 
-font-size:28px;
+font-size:32px;
 
 margin-bottom:18px;
+
+box-shadow:
+0 10px 24px rgba(0,0,0,.16);
 
 }
 
 .quiz-hero h1{
 
-font-size:32px;
-font-weight:800;
-line-height:1.1;
+font-size:38px;
+font-weight:900;
 
-margin-bottom:10px;
+line-height:1.08;
+
+margin-bottom:12px;
+
+letter-spacing:-1px;
 
 }
 
 .quiz-hero p{
 
 font-size:14px;
-line-height:1.7;
+line-height:1.8;
 
 color:
 rgba(255,255,255,.76);
 
+max-width:320px;
+
 }
 
-/* CARD */
+/* SCORE */
+
+.score-box{
+
+display:grid;
+
+grid-template-columns:
+1fr 1fr 1fr;
+
+gap:12px;
+
+margin-bottom:18px;
+
+}
+
+.score-item{
+
+background:
+rgba(255,255,255,.08);
+
+border-radius:22px;
+
+padding:
+18px 14px;
+
+text-align:center;
+
+backdrop-filter:blur(12px);
+
+}
+
+.score-item strong{
+
+display:block;
+
+font-size:28px;
+font-weight:900;
+
+margin-bottom:6px;
+
+}
+
+.score-item span{
+
+font-size:12px;
+
+color:
+rgba(255,255,255,.72);
+
+}
+
+/* QUIZ CARD */
 
 .card{
 
@@ -146,53 +243,95 @@ rgba(255,255,255,.985),
 rgba(248,250,252,.97)
 );
 
-border-radius:28px;
+border-radius:32px;
 
-padding:22px;
+padding:
+24px;
 
 margin-bottom:18px;
 
 color:#111827;
 
 box-shadow:
-0 10px 30px rgba(0,0,0,.08);
+0 14px 36px rgba(0,0,0,.10);
 
 }
 
 /* TOP */
 
 .quiz-top{
+
 display:flex;
+
 justify-content:space-between;
+
 align-items:center;
-margin-bottom:22px;
+
+margin-bottom:26px;
+
 }
 
 .quiz-count{
 
 font-size:14px;
+
 font-weight:800;
-color:#1b5e20;
+
+color:#166534;
 
 }
 
 .quiz-timer{
 
-width:62px;
-height:62px;
+width:70px;
+height:70px;
 
-border-radius:18px;
+border-radius:22px;
 
-background:#1b5e20;
+background:
+linear-gradient(
+135deg,
+#1b5e20,
+#2e7d32
+);
 
 display:flex;
+
 align-items:center;
 justify-content:center;
 
-font-size:22px;
-font-weight:800;
+font-size:24px;
+font-weight:900;
 
 color:#fff;
+
+box-shadow:
+0 10px 24px rgba(0,0,0,.12);
+
+}
+
+/* CATEGORY */
+
+.quiz-category{
+
+display:inline-flex;
+
+align-items:center;
+
+padding:
+8px 14px;
+
+border-radius:999px;
+
+background:
+rgba(22,101,52,.10);
+
+color:#166534;
+
+font-size:12px;
+font-weight:800;
+
+margin-bottom:18px;
 
 }
 
@@ -200,9 +339,10 @@ color:#fff;
 
 .question{
 
-font-size:24px;
-font-weight:800;
-line-height:1.4;
+font-size:25px;
+font-weight:900;
+
+line-height:1.5;
 
 margin-bottom:24px;
 
@@ -211,22 +351,27 @@ margin-bottom:24px;
 /* ANSWERS */
 
 .answers{
+
 display:flex;
+
 flex-direction:column;
+
 gap:12px;
+
 }
 
 .answer-btn{
 
 width:100%;
 
-min-height:64px;
+min-height:68px;
 
 border:none;
 
-border-radius:18px;
+border-radius:20px;
 
-padding:16px;
+padding:
+18px;
 
 text-align:left;
 
@@ -250,6 +395,7 @@ transform:scale(.98);
 .answer-btn.correct{
 
 background:#dcfce7;
+
 color:#166534;
 
 }
@@ -257,50 +403,8 @@ color:#166534;
 .answer-btn.wrong{
 
 background:#fee2e2;
+
 color:#991b1b;
-
-}
-
-/* SCORE */
-
-.score-box{
-
-display:flex;
-justify-content:space-between;
-align-items:center;
-
-padding:18px;
-
-border-radius:22px;
-
-background:
-rgba(255,255,255,.08);
-
-margin-bottom:18px;
-
-}
-
-.score-item{
-text-align:center;
-flex:1;
-}
-
-.score-item strong{
-
-display:block;
-
-font-size:24px;
-font-weight:800;
-
-margin-bottom:4px;
-
-}
-
-.score-item span{
-
-font-size:12px;
-color:
-rgba(255,255,255,.7);
 
 }
 
@@ -310,38 +414,63 @@ rgba(255,255,255,.7);
 
 text-align:center;
 
-padding:30px 20px;
+padding:
+24px 10px;
 
 }
 
 .result-box h2{
 
-font-size:30px;
-font-weight:800;
+font-size:36px;
 
-margin-bottom:12px;
+font-weight:900;
+
+margin-bottom:14px;
 
 }
 
 .result-box p{
 
 font-size:15px;
-line-height:1.8;
+
+line-height:1.9;
 
 color:#6b7280;
 
-margin-bottom:22px;
+margin-bottom:24px;
+
+}
+
+.result-badge{
+
+display:inline-flex;
+
+padding:
+10px 16px;
+
+border-radius:999px;
+
+background:
+rgba(22,101,52,.08);
+
+color:#166534;
+
+font-size:13px;
+font-weight:800;
+
+margin-bottom:18px;
 
 }
 
 .restart-btn{
 
 width:100%;
-height:56px;
+
+height:58px;
 
 border:none;
 
-border-radius:18px;
+border-radius:20px;
 
 background:
 linear-gradient(
@@ -353,19 +482,36 @@ linear-gradient(
 color:#fff;
 
 font-size:15px;
-font-weight:800;
+font-weight:900;
+
+box-shadow:
+0 10px 24px rgba(0,0,0,.16);
 
 }
 
-/* FOOTER */
+/* MOBILE */
 
-.footer{
-position:fixed;
+@media(max-width:480px){
+
+.page{
+padding:
+16px 16px 140px;
+}
+
+.quiz-hero h1{
+font-size:34px;
+}
+
+.question{
+font-size:22px;
+}
+
 }
 
 </style>
 
 </head>
+
 <body>
 
 <main class="page">
@@ -377,11 +523,12 @@ position:fixed;
 </div>
 
 <h1>
-Bilgi Yarışması
+Bilgi
+Yarışması
 </h1>
 
 <p>
-İslami bilgi seviyenizi test edin. Her soru için 30 saniyeniz var.
+Kur'an, ilmihal, siyer, ibadetler ve genel dini bilgiler ile bilginizi test edin.
 </p>
 
 </section>
@@ -416,7 +563,7 @@ Bilgi Yarışması
 <div class="quiz-top">
 
 <div class="quiz-count" id="questionCount">
-1 / 10
+1 / 30
 </div>
 
 <div class="quiz-timer" id="timer">
@@ -425,17 +572,29 @@ Bilgi Yarışması
 
 </div>
 
-<div class="question" id="questionText">
+<div
+class="quiz-category"
+id="categoryText"
+>
+Genel Dini Bilgi
+</div>
+
+<div
+class="question"
+id="questionText"
+>
 Yükleniyor...
 </div>
 
-<div class="answers" id="answers">
+<div
+class="answers"
+id="answers"
+>
 </div>
 
 </section>
 
 </main>
-
 
 <script>
 
@@ -446,17 +605,14 @@ QUESTION POOL
 const QUESTION_POOL = [
 
 {
+category:"Kur'an",
 q:"Kur'an-ı Kerim kaç sureden oluşur?",
-a:[
-"114",
-"99",
-"124",
-"86"
-],
+a:["114","99","124","86"],
 correct:0
 },
 
 {
+category:"İslam",
 q:"İslam'ın ilk şartı nedir?",
 a:[
 "Oruç tutmak",
@@ -468,17 +624,19 @@ correct:1
 },
 
 {
-q:"Namaz hangi vakitle farz kılınmıştır?",
+category:"Namaz",
+q:"Namaz hangi olaydan sonra farz kılınmıştır?",
 a:[
 "Miraç",
 "Hicret",
 "Bedir",
-"Uhud"
+"Hudeybiye"
 ],
 correct:0
 },
 
 {
+category:"Kur'an",
 q:"Kur'an hangi ayda indirilmeye başlanmıştır?",
 a:[
 "Muharrem",
@@ -490,6 +648,7 @@ correct:2
 },
 
 {
+category:"Siyer",
 q:"Peygamberimizin doğduğu şehir hangisidir?",
 a:[
 "Medine",
@@ -501,6 +660,7 @@ correct:2
 },
 
 {
+category:"Siyer",
 q:"İlk vahiy hangi mağarada gelmiştir?",
 a:[
 "Sevr",
@@ -512,18 +672,15 @@ correct:1
 },
 
 {
+category:"İslam",
 q:"İslam'da zekat vermek kaçıncı şarttır?",
-a:[
-"2",
-"3",
-"4",
-"5"
-],
+a:["2","3","4","5"],
 correct:1
 },
 
 {
-q:"Kıblenin bulunduğu şehir hangisidir?",
+category:"Namaz",
+q:"Kıble hangi şehirde bulunmaktadır?",
 a:[
 "Mekke",
 "Medine",
@@ -534,6 +691,7 @@ correct:0
 },
 
 {
+category:"Kur'an",
 q:"Kur'an'ın ilk suresi hangisidir?",
 a:[
 "Bakara",
@@ -545,6 +703,7 @@ correct:2
 },
 
 {
+category:"Siyer",
 q:"Peygamberimizin babasının adı nedir?",
 a:[
 "Ebu Talib",
@@ -553,16 +712,259 @@ a:[
 "Hamza"
 ],
 correct:1
+},
+
+{
+category:"İlmihal",
+q:"Abdestte yüzü yıkamak farz mıdır?",
+a:[
+"Evet",
+"Hayır",
+"Sünnettir",
+"Mekruhtur"
+],
+correct:0
+},
+
+{
+category:"Kur'an",
+q:"En uzun sure hangisidir?",
+a:[
+"Yasin",
+"Nisa",
+"Bakara",
+"Kehf"
+],
+correct:2
+},
+
+{
+category:"Siyer",
+q:"Hicret hangi şehre yapılmıştır?",
+a:[
+"Taif",
+"Şam",
+"Medine",
+"Kudüs"
+],
+correct:2
+},
+
+{
+category:"İslam",
+q:"Oruç hangi ayda tutulur?",
+a:[
+"Şevval",
+"Ramazan",
+"Muharrem",
+"Recep"
+],
+correct:1
+},
+
+{
+category:"Namaz",
+q:"Günde kaç vakit farz namaz vardır?",
+a:[
+"3",
+"4",
+"5",
+"6"
+],
+correct:2
+},
+
+{
+category:"Kur'an",
+q:"İhlas suresi kaç ayettir?",
+a:[
+"3",
+"4",
+"5",
+"6"
+],
+correct:1
+},
+
+{
+category:"Siyer",
+q:"Peygamberimizin annesinin adı nedir?",
+a:[
+"Aişe",
+"Hatice",
+"Amine",
+"Hafsa"
+],
+correct:2
+},
+
+{
+category:"İlmihal",
+q:"Teyemmüm ne ile yapılır?",
+a:[
+"Toprak",
+"Su",
+"Sabun",
+"Yağmur"
+],
+correct:0
+},
+
+{
+category:"Kur'an",
+q:"Kur'an hangi dilde indirilmiştir?",
+a:[
+"Farsça",
+"Türkçe",
+"Arapça",
+"İbranice"
+],
+correct:2
+},
+
+{
+category:"Siyer",
+q:"İlk Müslüman kadın kimdir?",
+a:[
+"Aişe",
+"Hatice",
+"Fatma",
+"Hafsa"
+],
+correct:1
+},
+
+{
+category:"İslam",
+q:"Hac ibadeti nerede yapılır?",
+a:[
+"Medine",
+"Mekke",
+"Kudüs",
+"Şam"
+],
+correct:1
+},
+
+{
+category:"Namaz",
+q:"Cuma namazı haftada kaç kez farzdır?",
+a:[
+"1",
+"2",
+"3",
+"5"
+],
+correct:0
+},
+
+{
+category:"İlmihal",
+q:"Abdestte ayakları yıkamak farz mıdır?",
+a:[
+"Evet",
+"Hayır",
+"Sünnettir",
+"Mekruhtur"
+],
+correct:0
+},
+
+{
+category:"Kur'an",
+q:"Kur'an'da adı geçen peygamberlerden biri hangisidir?",
+a:[
+"Lukman",
+"Lokman",
+"Yusuf",
+"Harun"
+],
+correct:2
+},
+
+{
+category:"Siyer",
+q:"Peygamberimizin dedesinin adı nedir?",
+a:[
+"Abdulmuttalib",
+"Ebu Talib",
+"Abdullah",
+"Hamza"
+],
+correct:0
+},
+
+{
+category:"İslam",
+q:"Zekat kimlere verilir?",
+a:[
+"İhtiyaç sahiplerine",
+"Sadece akrabalara",
+"Herkese",
+"Sadece çocuklara"
+],
+correct:0
+},
+
+{
+category:"Namaz",
+q:"Sabah namazı kaç rekattır?",
+a:[
+"2",
+"3",
+"4",
+"5"
+],
+correct:0
+},
+
+{
+category:"İlmihal",
+q:"Namazdan önce yapılan temizlik nedir?",
+a:[
+"Gusül",
+"Abdest",
+"İtikaf",
+"Sadaka"
+],
+correct:1
+},
+
+{
+category:"Kur'an",
+q:"Kur'an kaç yılda tamamlanmıştır?",
+a:[
+"10",
+"15",
+"23",
+"40"
+],
+correct:2
+},
+
+{
+category:"Siyer",
+q:"Peygamberimizin lakabı nedir?",
+a:[
+"El-Emin",
+"Faruk",
+"Zinnureyn",
+"Sıddık"
+],
+correct:0
 }
 
 ];
 
-/* RANDOM FUTURE READY */
+/* =========================
+QUESTIONS
+========================= */
 
 const questions =
+
 [...QUESTION_POOL]
 .sort(()=>Math.random()-0.5)
-.slice(0,10);
+.slice(0,30);
 
 let current = 0;
 let score = 0;
@@ -586,11 +988,16 @@ document.getElementById("answers");
 const countEl =
 document.getElementById("questionCount");
 
+const categoryEl =
+document.getElementById("categoryText");
+
 /* START */
 
 renderQuestion();
 
-/* RENDER */
+/* =========================
+RENDER
+========================= */
 
 function renderQuestion(){
 
@@ -609,7 +1016,11 @@ countEl.innerText =
 questionEl.innerText =
 q.q;
 
+categoryEl.innerText =
+q.category;
+
 answersEl.innerHTML =
+
 q.a.map((answer,index)=>`
 
 <button
@@ -623,7 +1034,9 @@ ${answer}
 
 }
 
-/* TIMER */
+/* =========================
+TIMER
+========================= */
 
 function startTimer(){
 
@@ -651,7 +1064,9 @@ nextQuestion();
 
 }
 
-/* ANSWER */
+/* =========================
+ANSWER
+========================= */
 
 function selectAnswer(index){
 
@@ -698,12 +1113,16 @@ wrong++;
 updateScore();
 
 setTimeout(()=>{
+
 nextQuestion();
-},1000);
+
+},1200);
 
 }
 
-/* NEXT */
+/* =========================
+NEXT
+========================= */
 
 function nextQuestion(){
 
@@ -720,7 +1139,9 @@ renderQuestion();
 
 }
 
-/* SCORE */
+/* =========================
+SCORE
+========================= */
 
 function updateScore(){
 
@@ -738,9 +1159,21 @@ document.getElementById(
 
 }
 
-/* FINISH */
+/* =========================
+FINISH
+========================= */
 
 function finishQuiz(){
+
+let level =
+"Başlangıç";
+
+if(score >= 250){
+level = "İleri Seviye";
+}
+else if(score >= 180){
+level = "Orta Seviye";
+}
 
 document.getElementById(
 "quizCard"
@@ -748,16 +1181,24 @@ document.getElementById(
 
 <div class="result-box">
 
+<div class="result-badge">
+${level}
+</div>
+
 <h2>
 🏆 ${score} Puan
 </h2>
 
 <p>
+
 Yarışmayı tamamladınız.
-<br>
+<br><br>
+
 Doğru: ${correct}
 <br>
+
 Yanlış: ${wrong}
+
 </p>
 
 <button
