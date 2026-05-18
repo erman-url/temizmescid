@@ -716,12 +716,14 @@ value="https://temizmescid.com.tr/iletisim.html?success=true"
 type="text"
 name="name"
 placeholder="Ad Soyad"
+maxlength="120"
 required
 >
 
 <input
 type="email"
 name="email"
+maxlength="120"
 placeholder="E-posta"
 required
 >
@@ -730,9 +732,18 @@ required
 name="message"
 placeholder="Mesajınız..."
 autocomplete="off"
+maxlength="600"
 required
 ></textarea>
 
+
+<input
+type="checkbox"
+name="botcheck"
+style="display:none"
+tabindex="-1"
+autocomplete="off"
+>
 
 <input
 type="checkbox"
@@ -743,9 +754,13 @@ required
 <span style="
 font-size:12px;
 color:#6b7280;
+line-height:1.6;
+display:block;
+margin-top:-6px;
 ">
 İletişim formu kapsamında verilerimin işlenmesini kabul ediyorum.
 </span>
+
 <button type="submit">
 Gönder
 </button>
