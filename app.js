@@ -482,7 +482,7 @@ async function compressImage(file){
       const canvas =
       document.createElement("canvas");
 
-      const maxWidth = 1200;
+      const maxWidth = 900;
 
       let width = img.width;
       let height = img.height;
@@ -528,7 +528,7 @@ async function compressImage(file){
         },
 
         "image/webp",
-        0.7
+        0.58
 
       );
 
