@@ -11,35 +11,50 @@ content="width=device-width, initial-scale=1.0, viewport-fit=cover"
 >
 
 <title>
-Namaz Vakitleri | TemizMescid
+Namaz Bilgileri | TemizMescid
 </title>
 
 <meta
 name="description"
-content="İstanbul namaz vakitleri, cuma saati, günlük ibadet hatırlatmaları ve yaklaşan ezan bilgileri."
+content="Konuma göre güncel namaz vakitleri, yaklaşan ezan saati, geri sayım ve günlük ibadet bilgileri."
 >
 
 <meta
 name="keywords"
-content="namaz vakitleri, ezan saati, cuma vakti, imsakiye, TemizMescid"
+content="namaz vakitleri, ezan saati, kıble, imsakiye, mescid, cuma saati, TemizMescid"
 >
 
 <meta
 name="theme-color"
-content="#0b2422"
+content="#08171b"
 >
 
-<meta property="og:title" content="Namaz Vakitleri | TemizMescid">
-<meta property="og:description" content="Güncel namaz vakitleri ve yaklaşan ezan bilgileri.">
+<meta property="og:title" content="Namaz Bilgileri | TemizMescid">
+
+<meta
+property="og:description"
+content="Konumunuza göre güncel namaz vakitleri ve yaklaşan ezan bilgileri."
+>
+
 <meta property="og:type" content="website">
+
+<meta
+property="og:url"
+content="https://temizmescid.com.tr/namaz.html"
+>
+
+<link
+rel="canonical"
+href="https://temizmescid.com.tr/namaz.html"
+>
 
 <link rel="stylesheet" href="style.css">
 
 <style>
 
-/* ========================= */
-/* RESET */
-/* ========================= */
+/* =========================
+RESET
+========================= */
 
 *{
 margin:0;
@@ -57,26 +72,26 @@ sans-serif;
 background:
 radial-gradient(
 circle at top,
-#21454b 0%,
-#10252a 35%,
-#08171b 100%
+#1d4d46 0%,
+#0c2427 38%,
+#071316 100%
 );
+
+color:#fff;
 
 min-height:100vh;
 
 overflow-x:hidden;
 
-color:#fff;
-
 }
 
-/* ========================= */
-/* PAGE */
-/* ========================= */
+/* =========================
+PAGE
+========================= */
 
 .namaz-page{
 
-max-width:420px;
+max-width:520px;
 
 margin:auto;
 
@@ -85,65 +100,116 @@ padding:
 
 }
 
-/* ========================= */
-/* HERO */
-/* ========================= */
+/* =========================
+TOP BAR
+========================= */
 
-.namaz-hero{
+.top-bar{
+
+display:flex;
+
+align-items:center;
+
+justify-content:space-between;
+
+margin-bottom:18px;
+
+}
+
+.top-chip{
+
+display:inline-flex;
+
+align-items:center;
+
+gap:8px;
+
+padding:
+10px 14px;
+
+border-radius:999px;
+
+background:
+rgba(255,255,255,.08);
+
+font-size:12px;
+
+font-weight:700;
+
+backdrop-filter:blur(12px);
+
+}
+
+.live-dot{
+
+width:8px;
+height:8px;
+
+border-radius:999px;
+
+background:#22c55e;
+
+box-shadow:
+0 0 12px #22c55e;
+
+}
+
+/* =========================
+HERO
+========================= */
+
+.hero{
 
 position:relative;
 
 overflow:hidden;
 
-border-radius:32px;
+border-radius:34px;
 
 padding:
 28px 24px 30px;
 
-margin-bottom:22px;
-
 background:
 linear-gradient(
 180deg,
-rgba(15,44,42,.96),
-rgba(11,36,34,.94)
+rgba(14,42,40,.98),
+rgba(9,25,28,.96)
 );
 
 border:
-1px solid rgba(255,255,255,.05);
+1px solid rgba(255,255,255,.06);
 
 box-shadow:
-0 14px 40px rgba(0,0,0,.22);
+0 18px 50px rgba(0,0,0,.28);
 
-backdrop-filter:
-blur(20px);
+margin-bottom:22px;
 
 }
 
-.namaz-hero::before{
+.hero::before{
 
 content:"";
 
 position:absolute;
 
-top:-100px;
-right:-100px;
+top:-120px;
+right:-120px;
 
-width:240px;
-height:240px;
+width:260px;
+height:260px;
 
 border-radius:50%;
 
 background:
 radial-gradient(
 circle,
-rgba(76,175,80,.22),
-transparent 70%
+rgba(34,197,94,.22),
+transparent 72%
 );
 
 }
 
-.hero-badge{
+.hero-label{
 
 display:inline-flex;
 
@@ -167,43 +233,44 @@ rgba(255,255,255,.84);
 
 }
 
-.namaz-hero h1{
+.hero h1{
 
-font-size:40px;
+font-size:42px;
 font-weight:900;
 
 line-height:1.05;
 
-letter-spacing:-1.8px;
+letter-spacing:-2px;
 
-margin-bottom:14px;
+margin-bottom:12px;
 
 }
 
-.namaz-hero p{
+.hero p{
 
 font-size:14px;
+
 line-height:1.7;
 
-max-width:290px;
+max-width:320px;
 
 color:
 rgba(255,255,255,.72);
 
 }
 
-/* ========================= */
-/* NEXT PRAYER */
-/* ========================= */
+/* =========================
+NEXT CARD
+========================= */
 
-.next-prayer{
+.next-card{
 
 margin-top:24px;
 
 padding:
-22px;
+24px;
 
-border-radius:26px;
+border-radius:28px;
 
 background:
 linear-gradient(
@@ -213,40 +280,70 @@ linear-gradient(
 );
 
 box-shadow:
-0 10px 24px rgba(0,0,0,.18);
+0 12px 30px rgba(0,0,0,.24);
 
 }
 
 .next-label{
 
 font-size:13px;
+
 font-weight:700;
 
-opacity:.85;
+opacity:.82;
 
-margin-bottom:8px;
+margin-bottom:10px;
 
 }
 
 .next-name{
 
-font-size:28px;
+font-size:30px;
+
 font-weight:900;
 
-margin-bottom:8px;
+margin-bottom:10px;
 
 }
 
 .next-time{
 
-font-size:18px;
+font-size:20px;
+
 font-weight:700;
+
+margin-bottom:12px;
 
 }
 
-/* ========================= */
-/* VAKIT GRID */
-/* ========================= */
+.next-countdown{
+
+font-size:14px;
+
+font-weight:600;
+
+opacity:.9;
+
+}
+
+/* =========================
+LOCATION
+========================= */
+
+.location-box{
+
+margin-top:16px;
+
+font-size:13px;
+
+color:
+rgba(255,255,255,.72);
+
+}
+
+/* =========================
+GRID
+========================= */
 
 .vakit-grid{
 
@@ -257,52 +354,73 @@ grid-template-columns:
 
 gap:14px;
 
-margin-bottom:22px;
+margin-bottom:24px;
 
 }
 
-/* ========================= */
-/* VAKIT CARD */
-/* ========================= */
-
 .vakit-card{
+
+position:relative;
+
+overflow:hidden;
 
 background:
 rgba(255,255,255,.96);
 
-border-radius:26px;
+border-radius:28px;
 
 padding:
-22px 18px;
+24px 18px;
 
 color:#111827;
 
 box-shadow:
-0 8px 24px rgba(0,0,0,.10);
+0 10px 28px rgba(0,0,0,.12);
 
+}
+
+.vakit-card.active{
+
+background:
+linear-gradient(
+135deg,
+#1b5e20,
+#2e7d32
+);
+
+color:#fff;
+
+transform:translateY(-2px);
+
+}
+
+.vakit-card.active .vakit-time{
+color:#fff;
 }
 
 .vakit-name{
 
 font-size:15px;
+
 font-weight:800;
 
-margin-bottom:10px;
+margin-bottom:12px;
 
 }
 
 .vakit-time{
 
-font-size:28px;
+font-size:30px;
+
 font-weight:900;
 
-color:#1b5e20;
+color:#166534;
 
 }
 
-/* ========================= */
-/* INFO CARD */
-/* ========================= */
+/* =========================
+INFO
+========================= */
 
 .info-card{
 
@@ -328,6 +446,7 @@ margin-bottom:18px;
 .info-title{
 
 font-size:20px;
+
 font-weight:900;
 
 color:#111827;
@@ -339,15 +458,16 @@ margin-bottom:12px;
 .info-text{
 
 font-size:14px;
+
 line-height:1.8;
 
 color:#4b5563;
 
 }
 
-/* ========================= */
-/* QUICK ACTIONS */
-/* ========================= */
+/* =========================
+ACTIONS
+========================= */
 
 .quick-actions{
 
@@ -369,21 +489,24 @@ linear-gradient(
 #163a37
 );
 
-border-radius:24px;
+border-radius:28px;
 
 padding:
-22px;
+24px;
 
-min-height:120px;
+min-height:132px;
 
 border:
 1px solid rgba(255,255,255,.04);
+
+box-shadow:
+0 8px 24px rgba(0,0,0,.18);
 
 }
 
 .action-icon{
 
-font-size:28px;
+font-size:30px;
 
 margin-bottom:14px;
 
@@ -391,26 +514,28 @@ margin-bottom:14px;
 
 .action-title{
 
-font-size:16px;
+font-size:17px;
+
 font-weight:800;
 
-margin-bottom:6px;
+margin-bottom:8px;
 
 }
 
 .action-text{
 
 font-size:13px;
-line-height:1.6;
+
+line-height:1.7;
 
 color:
-rgba(255,255,255,.70);
+rgba(255,255,255,.72);
 
 }
 
-/* ========================= */
-/* MOBILE */
-/* ========================= */
+/* =========================
+MOBILE
+========================= */
 
 @media(max-width:480px){
 
@@ -419,12 +544,12 @@ padding:
 16px 16px 140px;
 }
 
-.namaz-hero h1{
+.hero h1{
 font-size:36px;
 }
 
 .vakit-time{
-font-size:24px;
+font-size:26px;
 }
 
 }
@@ -437,73 +562,162 @@ font-size:24px;
 
 <main class="namaz-page">
 
+<!-- TOP -->
+
+<div class="top-bar">
+
+<div class="top-chip">
+
+<div class="live-dot"></div>
+
+Canlı Namaz Bilgileri
+
+</div>
+
+<div
+class="top-chip"
+id="currentDate"
+>
+--
+</div>
+
+</div>
+
 <!-- HERO -->
 
-<section class="namaz-hero">
+<section class="hero">
 
-<div class="hero-badge">
+<div class="hero-label">
 TemizMescid İbadet
 </div>
 
 <h1>
 Namaz
-Vakitleri
+Bilgileri
 </h1>
 
 <p>
-Güncel ezan saatleri, yaklaşan namaz vakti ve günlük ibadet takibi.
+Konumunuza göre güncel namaz vakitleri, yaklaşan ezan bilgisi ve günlük ibadet takibi.
 </p>
 
-<div class="next-prayer">
+<div class="next-card">
 
 <div class="next-label">
 Yaklaşan Vakit
 </div>
 
-<div class="next-name">
-Öğle Namazı
+<div
+class="next-name"
+id="nextPrayerName"
+>
+Yükleniyor
 </div>
 
-<div class="next-time">
-13:05
+<div
+class="next-time"
+id="nextPrayerTime"
+>
+--:--
 </div>
 
+<div
+class="next-countdown"
+id="countdown"
+>
+Hesaplanıyor...
+</div>
+
+</div>
+
+<div
+class="location-box"
+id="locationText"
+>
+Konum algılanıyor...
 </div>
 
 </section>
 
-<!-- VAKİTLER -->
+<!-- GRID -->
 
 <section class="vakit-grid">
 
-<div class="vakit-card">
+<div
+class="vakit-card"
+id="cardFajr"
+>
 <div class="vakit-name">İmsak</div>
-<div class="vakit-time">04:12</div>
+<div
+class="vakit-time"
+id="fajrTime"
+>
+--:--
+</div>
 </div>
 
-<div class="vakit-card">
+<div
+class="vakit-card"
+id="cardSunrise"
+>
 <div class="vakit-name">Güneş</div>
-<div class="vakit-time">05:49</div>
+<div
+class="vakit-time"
+id="sunriseTime"
+>
+--:--
+</div>
 </div>
 
-<div class="vakit-card">
+<div
+class="vakit-card"
+id="cardDhuhr"
+>
 <div class="vakit-name">Öğle</div>
-<div class="vakit-time">13:05</div>
+<div
+class="vakit-time"
+id="dhuhrTime"
+>
+--:--
+</div>
 </div>
 
-<div class="vakit-card">
+<div
+class="vakit-card"
+id="cardAsr"
+>
 <div class="vakit-name">İkindi</div>
-<div class="vakit-time">16:45</div>
+<div
+class="vakit-time"
+id="asrTime"
+>
+--:--
+</div>
 </div>
 
-<div class="vakit-card">
+<div
+class="vakit-card"
+id="cardMaghrib"
+>
 <div class="vakit-name">Akşam</div>
-<div class="vakit-time">19:32</div>
+<div
+class="vakit-time"
+id="maghribTime"
+>
+--:--
+</div>
 </div>
 
-<div class="vakit-card">
+<div
+class="vakit-card"
+id="cardIsha"
+>
 <div class="vakit-name">Yatsı</div>
-<div class="vakit-time">20:55</div>
+<div
+class="vakit-time"
+id="ishaTime"
+>
+--:--
+</div>
 </div>
 
 </section>
@@ -522,22 +736,22 @@ Bugünün Hatırlatması
 
 </section>
 
-<!-- QUICK ACTIONS -->
+<!-- ACTIONS -->
 
 <section class="quick-actions">
 
 <div class="action-card">
 
 <div class="action-icon">
-🧭
+🕌
 </div>
 
 <div class="action-title">
-Kıble Bul
+Namaz Bilgileri
 </div>
 
 <div class="action-text">
-Konumunuza göre kıble yönünü hızlıca öğrenin.
+Konuma göre canlı vakitler, yaklaşan ezan saati ve günlük ibadet takibi.
 </div>
 
 </div>
@@ -553,7 +767,7 @@ Ayet & Hadis
 </div>
 
 <div class="action-text">
-Günlük manevi içeriklere erişin.
+Günlük manevi içerikler ve kısa hatırlatmalar.
 </div>
 
 </div>
@@ -561,6 +775,453 @@ Günlük manevi içeriklere erişin.
 </section>
 
 </main>
+
+<script>
+
+/* =========================
+DATE
+========================= */
+
+document.getElementById(
+"currentDate"
+).textContent =
+
+new Date().toLocaleDateString(
+"tr-TR",
+{
+day:"numeric",
+month:"long"
+}
+);
+
+/* =========================
+CACHE KEY
+========================= */
+
+const CACHE_KEY =
+"tm_prayer_times_v2";
+
+/* =========================
+PRAYER ORDER
+========================= */
+
+const prayerOrder = [
+
+{
+key:"Fajr",
+label:"İmsak",
+card:"cardFajr"
+},
+
+{
+key:"Sunrise",
+label:"Güneş",
+card:"cardSunrise"
+},
+
+{
+key:"Dhuhr",
+label:"Öğle",
+card:"cardDhuhr"
+},
+
+{
+key:"Asr",
+label:"İkindi",
+card:"cardAsr"
+},
+
+{
+key:"Maghrib",
+label:"Akşam",
+card:"cardMaghrib"
+},
+
+{
+key:"Isha",
+label:"Yatsı",
+card:"cardIsha"
+}
+
+];
+
+/* =========================
+LOAD
+========================= */
+
+async function loadPrayerTimes(){
+
+try{
+
+const cached =
+localStorage.getItem(
+CACHE_KEY
+);
+
+if(cached){
+
+const parsed =
+JSON.parse(cached);
+
+const isFresh =
+
+Date.now() -
+parsed.createdAt <
+
+1000 * 60 * 60 * 6;
+
+if(
+isFresh &&
+parsed.timings
+){
+
+renderPrayerTimes(
+parsed.timings
+);
+
+if(parsed.city){
+
+document.getElementById(
+"locationText"
+).textContent =
+parsed.city;
+
+}
+
+}
+
+}
+
+navigator.geolocation.getCurrentPosition(
+
+async(position)=>{
+
+const lat =
+position.coords.latitude;
+
+const lng =
+position.coords.longitude;
+
+const res =
+await fetch(
+
+`https://api.aladhan.com/v1/timings?latitude=${lat}&longitude=${lng}&method=13`
+
+);
+
+const data =
+await res.json();
+
+const timings =
+data?.data?.timings;
+
+const city =
+data?.data?.meta?.timezone
+||
+"Konum aktif";
+
+if(!timings){
+return;
+}
+
+localStorage.setItem(
+
+CACHE_KEY,
+
+JSON.stringify({
+
+createdAt:
+Date.now(),
+
+timings,
+
+city
+
+})
+
+);
+
+document.getElementById(
+"locationText"
+).textContent =
+city;
+
+renderPrayerTimes(
+timings
+);
+
+},
+
+()=>{
+
+document.getElementById(
+"locationText"
+).textContent =
+
+"Konum izni verilmedi";
+
+renderPrayerTimes({
+
+Fajr:"04:30",
+Sunrise:"06:00",
+Dhuhr:"13:00",
+Asr:"16:45",
+Maghrib:"19:35",
+Isha:"21:00"
+
+});
+
+},
+
+{
+
+enableHighAccuracy:false,
+
+timeout:10000,
+
+maximumAge:
+1000 * 60 * 60
+
+}
+
+);
+
+}
+
+catch(e){
+
+console.log(e);
+
+}
+
+}
+
+/* =========================
+RENDER
+========================= */
+
+function renderPrayerTimes(
+timings
+){
+
+setTime(
+"fajrTime",
+timings.Fajr
+);
+
+setTime(
+"sunriseTime",
+timings.Sunrise
+);
+
+setTime(
+"dhuhrTime",
+timings.Dhuhr
+);
+
+setTime(
+"asrTime",
+timings.Asr
+);
+
+setTime(
+"maghribTime",
+timings.Maghrib
+);
+
+setTime(
+"ishaTime",
+timings.Isha
+);
+
+updateNextPrayer(
+timings
+);
+
+}
+
+/* =========================
+SET TIME
+========================= */
+
+function setTime(
+id,
+value
+){
+
+const el =
+document.getElementById(id);
+
+if(!el) return;
+
+el.textContent =
+(value || "--:--")
+.split(" ")[0];
+
+}
+
+/* =========================
+NEXT PRAYER
+========================= */
+
+function updateNextPrayer(
+timings
+){
+
+const now =
+new Date();
+
+const currentMinutes =
+(now.getHours() * 60) +
+now.getMinutes();
+
+let nextPrayer = null;
+
+for(
+const prayer of prayerOrder
+){
+
+if(prayer.key === "Sunrise"){
+continue;
+}
+
+const time =
+timings[prayer.key]
+.split(" ")[0];
+
+const [h,m] =
+time.split(":")
+.map(Number);
+
+const total =
+(h * 60) + m;
+
+if(total > currentMinutes){
+
+nextPrayer = {
+
+...prayer,
+
+time,
+total
+
+};
+
+break;
+
+}
+
+}
+
+if(!nextPrayer){
+
+nextPrayer = {
+
+label:"İmsak",
+
+time:
+timings.Fajr
+.split(" ")[0],
+
+total:1440
+
+};
+
+}
+
+document.getElementById(
+"nextPrayerName"
+).textContent =
+nextPrayer.label;
+
+document.getElementById(
+"nextPrayerTime"
+).textContent =
+nextPrayer.time;
+
+document
+.querySelectorAll(
+".vakit-card"
+)
+.forEach(card=>{
+card.classList.remove(
+"active"
+);
+});
+
+if(nextPrayer.card){
+
+document
+.getElementById(
+nextPrayer.card
+)
+?.classList.add(
+"active"
+);
+
+}
+
+updateCountdown(
+nextPrayer.total
+);
+
+}
+
+/* =========================
+COUNTDOWN
+========================= */
+
+function updateCountdown(
+targetMinutes
+){
+
+function tick(){
+
+const now =
+new Date();
+
+const current =
+(now.getHours() * 60) +
+now.getMinutes();
+
+let diff =
+targetMinutes - current;
+
+if(diff < 0){
+diff += 1440;
+}
+
+const hours =
+Math.floor(diff / 60);
+
+const mins =
+diff % 60;
+
+document.getElementById(
+"countdown"
+).textContent =
+
+`${hours}s ${mins}dk kaldı`;
+
+}
+
+tick();
+
+setInterval(
+tick,
+60000
+);
+
+}
+
+/* =========================
+INIT
+========================= */
+
+loadPrayerTimes();
+
+</script>
+
 <script src="footer.js"></script>
 
 </body>
