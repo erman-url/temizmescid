@@ -1270,6 +1270,7 @@ filteredImages.push(
 
 
 }
+
 /* =========================
 RENDER
 ========================= */
@@ -1290,7 +1291,9 @@ ${filteredImages.map((img,index)=>`
 <div class="hero-slide">
 
 <img
+
 src="${img}"
+
 alt="${escapeHtml(mescid.name || "Mescid")}"
 
 loading="${index === 0 ? 'eager' : 'lazy'}"
@@ -1300,6 +1303,26 @@ fetchpriority="${index === 0 ? 'high' : 'low'}"
 decoding="async"
 
 referrerpolicy="no-referrer"
+
+onerror="
+this.onerror=null;
+this.src='assets/img/default.jpg';
+"
+
+style="
+position:absolute;
+inset:0;
+width:100%;
+height:100%;
+object-fit:cover;
+object-position:center;
+display:block;
+background:#111827;
+transform:translateZ(0);
+backface-visibility:hidden;
+-webkit-backface-visibility:hidden;
+"
+
 >
 
 <div class="hero-overlay"></div>

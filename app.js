@@ -608,8 +608,19 @@ generate();
 
 };
 
-img.src =
+const objectUrl =
 URL.createObjectURL(file);
+
+img.onload = ()=>{
+
+  URL.revokeObjectURL(
+    objectUrl
+  );
+
+  // mevcut kod...
+};
+
+img.src = objectUrl;
 
 });
 
