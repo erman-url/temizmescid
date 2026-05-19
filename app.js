@@ -464,311 +464,156 @@ function getScoreLabel(score){
 
 }
 
-async function submitForm(){
-
 async function compressImage(file){
 
-  return new Promise((resolve)=>{
+  return new Promise((resolve,reject)=>{
 
-    const img = new Image();
+    const img =
+    new Image();
+
+    const objectUrl =
+    URL.createObjectURL(file);
 
     img.onload = ()=>{
 
+      URL.revokeObjectURL(
+        objectUrl
+      );
+
       const canvas =
-      document.createElement("canvas");
-
- const MAX_SIZE = 1200;
-
-let width = img.width;
-let height = img.height;
-
-/* LANDSCAPE */
-
-if(width > height){
-
-  if(width > MAX_SIZE){
-
-    height = Math.round(
-      height * (MAX_SIZE / width)
-    );
-
-    width = MAX_SIZE;
-
-  }
-
-}
-
-/* PORTRAIT */
-
-else{
-
-  if(height > MAX_SIZE){
-
-    width = Math.round(
-      width * (MAX_SIZE / height)
-    );
-
-    height = MAX_SIZE;
-
-  }
-
-}
-
-canvas.width = width;
-canvas.height = height;
-
-const ctx =
-canvas.getContext("2d");
-
-/* IOS SAFARI MEMORY FIX */
-
-ctx.imageSmoothingEnabled = true;
-
-ctx.imageSmoothingQuality = "high";
-
-ctx.drawImage(
-  img,
-  0,
-  0,
-  width,
-  height
-);
-/* =========================
-ITERATIVE COMPRESS
-========================= */
-
-let quality = 0.60;
-
-function generate(){
-
-  canvas.toBlob(
-
-    (blob)=>{
-
-      /* FAILSAFE */
-
-      if(!blob){
-
-        alert(
-          "Görsel işlenemedi"
-        );
-
-        return;
-
-      }
-
-      /* SIZE CONTROL */
-
-      if(
-        blob.size > 350000 &&
-        quality > 0.30
-      ){
-
-        quality -= 0.08;
-
-        generate();
-
-        return;
-
-      }
-
-      /* FINAL FILE */
-
-      resolve(
-
-        new File(
-
-          [blob],
-
-          file.name.replace(
-            /\.(jpg|jpeg|png|heic|heif)$/i,
-            ".webp"
-          ),
-
-          {
-            type:"image/webp"
-          }
-
-        )
-
+      document.createElement(
+        "canvas"
       );
 
-    },
+      const MAX_SIZE = 1200;
 
-    "image/webp",
+      let width = img.width;
+      let height = img.height;
 
-    quality
+      /* LANDSCAPE */
 
-  );
+      if(width > height){
 
-}
+        if(width > MAX_SIZE){
 
-generate();
-
-};
-
-/* =========================
-OBJECT URL
-========================= */
-
-const objectUrl =
-URL.createObjectURL(file);
-
-/* =========================
-IMAGE LOAD
-========================= */
-
-img.onload = ()=>{
-
-  /* MEMORY CLEANUP */
-
-  URL.revokeObjectURL(
-    objectUrl
-  );
-
-  const canvas =
-  document.createElement("canvas");
-
-  const MAX_SIZE = 1200;
-
-  let width = img.width;
-  let height = img.height;
-
-  /* LANDSCAPE */
-
-  if(width > height){
-
-    if(width > MAX_SIZE){
-
-      height = Math.round(
-        height * (MAX_SIZE / width)
-      );
-
-      width = MAX_SIZE;
-
-    }
-
-  }
-
-  /* PORTRAIT */
-
-  else{
-
-    if(height > MAX_SIZE){
-
-      width = Math.round(
-        width * (MAX_SIZE / height)
-      );
-
-      height = MAX_SIZE;
-
-    }
-
-  }
-
-  canvas.width = width;
-  canvas.height = height;
-
-  const ctx =
-  canvas.getContext("2d");
-
-  /* IOS SAFARI FIX */
-
-  ctx.imageSmoothingEnabled = true;
-
-  ctx.imageSmoothingQuality = "high";
-
-  ctx.drawImage(
-    img,
-    0,
-    0,
-    width,
-    height
-  );
-
-  /* =========================
-  ITERATIVE COMPRESS
-  ========================= */
-
-  let quality = 0.60;
-
-  function generate(){
-
-    canvas.toBlob(
-
-      (blob)=>{
-
-        /* FAILSAFE */
-
-        if(!blob){
-
-          alert(
-            "Görsel işlenemedi"
+          height = Math.round(
+            height *
+            (MAX_SIZE / width)
           );
 
-          return;
+          width = MAX_SIZE;
 
         }
 
-        /* SIZE CONTROL */
+      }
 
-        if(
-          blob.size > 350000 &&
-          quality > 0.30
-        ){
+      /* PORTRAIT */
 
-          quality -= 0.08;
+      else{
 
-          generate();
+        if(height > MAX_SIZE){
 
-          return;
+          width = Math.round(
+            width *
+            (MAX_SIZE / height)
+          );
+
+          height = MAX_SIZE;
 
         }
 
-        /* FINAL FILE */
+      }
 
-        resolve(
+      canvas.width = width;
+      canvas.height = height;
 
-          new File(
+      const ctx =
+      canvas.getContext("2d");
 
-            [blob],
+      ctx.imageSmoothingEnabled =
+      true;
 
-            file.name.replace(
-              /\.(jpg|jpeg|png|heic|heif)$/i,
-              ".webp"
-            ),
+      ctx.imageSmoothingQuality =
+      "high";
 
-            {
-              type:"image/webp"
-            }
+      ctx.drawImage(
+        img,
+        0,
+        0,
+        width,
+        height
+      );
 
-          )
+      /* MOBILE STABLE JPEG */
 
-        );
+      canvas.toBlob(
 
-      },
+        (blob)=>{
 
-      "image/webp",
+          if(!blob){
 
-      quality
+            reject(
+              new Error(
+                "Görsel işlenemedi"
+              )
+            );
 
-    );
+            return;
 
-  }
+          }
 
-  generate();
+          resolve(
 
-};
+            new File(
 
-/* =========================
-START LOAD
-========================= */
+              [blob],
 
-img.src = objectUrl;
+              file.name.replace(
+                /\.(jpg|jpeg|png|heic|heif|webp)$/i,
+                ".jpg"
+              ),
 
-});
+              {
+                type:"image/jpeg"
+              }
+
+            )
+
+          );
+
+        },
+
+        "image/jpeg",
+
+        0.72
+
+      );
+
+    };
+
+    img.onerror = ()=>{
+
+      URL.revokeObjectURL(
+        objectUrl
+      );
+
+      reject(
+        new Error(
+          "Görsel yüklenemedi"
+        )
+      );
+
+    };
+
+    img.src = objectUrl;
+
+  });
 
 }
+
+async function submitForm(){
+
+
 
 if(!validateStep(4)){
   return;
@@ -1007,8 +852,22 @@ body:formData
 
 );
 
-const data =
-await res.json();
+let data = {};
+
+try{
+
+  data =
+  await res.json();
+
+}catch(e){
+
+  alert(
+    "Sunucu yanıtı okunamadı"
+  );
+
+  return;
+
+}
 
 if(!res.ok){
 
@@ -1889,12 +1748,6 @@ function renderPrayerTimes(
   );
 
 }
-
-/* =========================
-INIT
-========================= */
-
-loadPrayerTimes();
 
 
 /* =========================
