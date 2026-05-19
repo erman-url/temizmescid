@@ -1451,6 +1451,9 @@ location.href =
 
 /* HTML */
 
+console.log(item);
+console.log(imageUrl);
+
 card.innerHTML = `
 
 <img
