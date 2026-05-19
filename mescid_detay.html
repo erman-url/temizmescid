@@ -581,6 +581,7 @@ DETAIL HERO GALLERY
 position:relative;
 
 width:100%;
+
 aspect-ratio:16/10;
 
 border-radius:32px;
@@ -593,6 +594,20 @@ margin-bottom:18px;
 
 box-shadow:
 0 12px 40px rgba(0,0,0,.25);
+
+/* IOS SAFARI FIX */
+
+contain:layout paint;
+
+transform:translateZ(0);
+
+will-change:transform;
+
+backface-visibility:hidden;
+
+-webkit-backface-visibility:hidden;
+
+isolation:isolate;
 
 }
 
@@ -632,6 +647,14 @@ scroll-snap-align:center;
 flex-shrink:0;
 
 overflow:hidden;
+
+contain:paint;
+
+transform:translateZ(0);
+
+will-change:transform;
+
+isolation:isolate;
 
 }
 
@@ -1269,8 +1292,13 @@ ${filteredImages.map((img,index)=>`
 <img
 src="${img}"
 alt="${escapeHtml(mescid.name || "Mescid")}"
+
 loading="${index === 0 ? 'eager' : 'lazy'}"
+
+fetchpriority="${index === 0 ? 'high' : 'low'}"
+
 decoding="async"
+
 referrerpolicy="no-referrer"
 >
 
@@ -1324,9 +1352,15 @@ ${filteredImages.map(img=>`
 
 <img
 src="${img}"
+
 referrerpolicy="no-referrer"
+
 class="gallery-image"
+
 loading="lazy"
+
+fetchpriority="low"
+
 decoding="async"
 >
 
