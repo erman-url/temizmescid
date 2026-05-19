@@ -477,7 +477,7 @@ async function compressImage(file){
       const canvas =
       document.createElement("canvas");
 
- const MAX_SIZE = 900;
+ const MAX_SIZE = 1200;
 
 let width = img.width;
 let height = img.height;
@@ -514,146 +514,198 @@ else{
 
 }
 
-      canvas.width = width;
-      canvas.height = height;
+canvas.width = width;
+canvas.height = height;
 
-      const ctx =
-      canvas.getContext("2d");
+const ctx =
+canvas.getContext("2d");
 
-      ctx.drawImage(
-        img,
-        0,
-        0,
-        width,
-        height
+/* IOS SAFARI MEMORY FIX */
+
+ctx.imageSmoothingEnabled = true;
+
+ctx.imageSmoothingQuality = "high";
+
+ctx.drawImage(
+  img,
+  0,
+  0,
+  width,
+  height
+);
+
+/* =========================
+ITERATIVE COMPRESS
+========================= */
+
+let quality = 0.60;
+
+function generate(){
+
+  canvas.toBlob(
+
+    (blob)=>{
+
+      /* FAILSAFE */
+
+      if(!blob){
+
+        alert(
+          "Görsel işlenemedi"
+        );
+
+        return;
+
+      }
+
+      /* SIZE CONTROL */
+
+      if(
+        blob.size > 350000 &&
+        quality > 0.30
+      ){
+
+        quality -= 0.08;
+
+        generate();
+
+        return;
+
+      }
+
+      /* FINAL FILE */
+
+      resolve(
+
+        new File(
+
+          [blob],
+
+          file.name.replace(
+            /\.(jpg|jpeg|png|heic|heif)$/i,
+            ".webp"
+          ),
+
+          {
+            type:"image/webp"
+          }
+
+        )
+
       );
 
-      canvas.toBlob(
+    },
 
-        (blob)=>{
+    "image/webp",
 
-          resolve(
-            new File(
-              [blob],
-              file.name.replace(
-                /\.(jpg|jpeg|png)$/i,
-                ".webp"
-              ),
-              {
-                type:"image/webp"
-              }
-            )
-          );
+    quality
 
-        },
-
-        "image/webp",
-        0.58
-
-      );
-
-    };
-
-    img.src =
-    URL.createObjectURL(file);
-
-  });
+  );
 
 }
 
-  if(!validateStep(4)){
+generate();
+
+};
+
+img.src =
+URL.createObjectURL(file);
+
+});
+
+}
+
+if(!validateStep(4)){
+  return;
+}
+
+try{
+
+  const imagesInput =
+    document.getElementById("images");
+
+  if(
+    !imagesInput ||
+    imagesInput.files.length < 1
+  ){
+
+    alert(
+      "En az 1 fotoğraf gerekli"
+    );
+
     return;
+
   }
 
-  try{
+  if(imagesInput.files.length > 5){
 
-    const imagesInput =
-      document.getElementById("images");
-
-    if(
-      !imagesInput ||
-      imagesInput.files.length < 1
-    ){
-
-      alert(
-        "En az 1 fotoğraf gerekli"
-      );
-
-      return;
-
-    }
-
-    if(imagesInput.files.length > 5){
-
-      alert(
-        "En fazla 5 fotoğraf yükleyebilirsiniz"
-      );
-
-      return;
-
-    }
-
-    const formData =
-      new FormData();
-
-    formData.append(
-      "name",
-      document.getElementById("mescidName")
-      ?.value
-      ?.trim()
+    alert(
+      "En fazla 5 fotoğraf yükleyebilirsiniz"
     );
 
-    formData.append(
-      "city",
-      document.getElementById("city")
-      ?.value
-      ?.trim()
-    );
+    return;
 
-    formData.append(
-      "district",
-      document.getElementById("district")
-      ?.value
-      ?.trim()
-    );
+  }
 
-    formData.append(
-      "category",
-      document.getElementById("type")
-      ?.value
-    );
+  const formData =
+    new FormData();
 
-formData.append(
-  "address",
-  document.getElementById("desc")
-  ?.value
-  ?.trim()
-);
+  formData.append(
+    "name",
+    document.getElementById("mescidName")
+    ?.value
+    ?.trim()
+  );
 
+  formData.append(
+    "city",
+    document.getElementById("city")
+    ?.value
+    ?.trim()
+  );
 
+  formData.append(
+    "district",
+    document.getElementById("district")
+    ?.value
+    ?.trim()
+  );
 
-formData.append(
-  "has_ablution",
+  formData.append(
+    "category",
+    document.getElementById("type")
+    ?.value
+  );
 
-  document.getElementById(
-    "ablution"
-  )?.value === "Evet"
+  formData.append(
+    "address",
+    document.getElementById("desc")
+    ?.value
+    ?.trim()
+  );
 
-    ? 1
+  formData.append(
+    "has_ablution",
 
-    : 0
-);
+    document.getElementById(
+      "ablution"
+    )?.value === "Evet"
 
-formData.append(
-  "lat",
-  41.0082
-);
+      ? 1
 
-    formData.append(
-      "lng",
-      28.9784
-    );
+      : 0
+  );
 
+  formData.append(
+    "lat",
+    41.0082
+  );
+
+  formData.append(
+    "lng",
+    28.9784
+  );
+  
 /* =========================
 STAR SCORES
 ========================= */
@@ -1304,6 +1356,7 @@ card.innerHTML = `
 <img
 loading="lazy"
 decoding="async"
+fetchpriority="low"
 src="${imageUrl}"
 
 alt="${
