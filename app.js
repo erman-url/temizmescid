@@ -1255,19 +1255,104 @@ slider.innerHTML = "";
 
 data.forEach(item=>{
 
-let imageUrl =
+let imageUrl = "";
 
-item.image ||
+/* =========================
+PRIORITY IMAGE PICK
+========================= */
 
-item.image_url ||
+if(
+  Array.isArray(item.images) &&
+  item.images.length
+){
 
-item.images?.[0] ||
+  imageUrl =
+  item.images[0];
 
-item.photos?.[0] ||
+}
 
-item.gallery?.[0] ||
+else if(
+  typeof item.images === "string" &&
+  item.images.startsWith("[")
+){
 
-"https://placehold.co/600x400?text=Mescid";
+  try{
+
+    const parsed =
+    JSON.parse(item.images);
+
+    if(
+      Array.isArray(parsed) &&
+      parsed.length
+    ){
+
+      imageUrl =
+      parsed[0];
+
+    }
+
+  }catch(e){}
+
+}
+
+else if(
+  item.image_url &&
+  item.image_url !== "null" &&
+  item.image_url !== "undefined"
+){
+
+  imageUrl =
+  item.image_url;
+
+}
+
+else if(
+  item.image &&
+  item.image !== "null" &&
+  item.image !== "undefined"
+){
+
+  imageUrl =
+  item.image;
+
+}
+
+else if(
+  Array.isArray(item.photos) &&
+  item.photos.length
+){
+
+  imageUrl =
+  item.photos[0];
+
+}
+
+else if(
+  Array.isArray(item.gallery) &&
+  item.gallery.length
+){
+
+  imageUrl =
+  item.gallery[0];
+
+}
+
+/* =========================
+FINAL FALLBACK
+========================= */
+
+if(
+  !imageUrl ||
+  typeof imageUrl !== "string"
+){
+
+  imageUrl =
+  "assets/img/default.jpg";
+
+}
+
+imageUrl =
+imageUrl.trim();
 
 /* STRING ARRAY FIX */
 
