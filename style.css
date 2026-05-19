@@ -39,7 +39,7 @@ body{
  display:flex;
  justify-content:space-between;
  background:rgba(0,0,0,0.35);
- backdrop-filter:blur(20px);
+ backdrop-filter:blur(8px);
  font-size:12px;
  z-index:999;
  border-radius:0 0 14px 14px;
@@ -52,7 +52,7 @@ body{
  display:flex;
  gap:12px;
  background:rgba(255,255,255,0.08);
- backdrop-filter:blur(15px);
+ backdrop-filter:blur(6px);
  border-radius:12px;
  z-index:998;
 }
@@ -129,7 +129,7 @@ linear-gradient(
  #0f3d24 100%
 );
 
- backdrop-filter:blur(25px);
+ backdrop-filter:blur(10px);
 
  display:flex;
  justify-content:space-around;
@@ -1223,4 +1223,28 @@ color:#15803d;
 text-decoration:underline;
 
 flex:none;
+}
+
+img{
+
+display:block;
+
+max-width:100%;
+
+height:auto;
+
+content-visibility:auto;
+
+contain:paint;
+
+}
+
+.slide,
+.slide img,
+.mescid-card{
+
+transform:translateZ(0);
+
+will-change:transform;
+
 }
