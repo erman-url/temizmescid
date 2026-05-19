@@ -861,7 +861,7 @@ try{
     28.9784
   );
 
-  
+
 /* =========================
 STAR SCORES
 ========================= */
@@ -1900,29 +1900,33 @@ loadPrayerTimes();
 /* =========================
 HIJRI COUNTDOWN
 ========================= */
-
 function initHijriCard(){
 
-  const eventDate =
+  const countdownEl =
+  document.getElementById(
+    "hijriCountdown"
+  );
 
-    new Date(
-      "2026-05-27T00:00:00"
-    );
+  if(!countdownEl){
+    return;
+  }
+
+  const eventDate =
+  new Date(
+    "2026-05-27T00:00:00"
+  );
 
   function update(){
 
     const now =
-      new Date();
+    new Date();
 
     const diff =
-      eventDate - now;
+    eventDate - now;
 
     if(diff <= 0){
 
-      document.getElementById(
-        "hijriCountdown"
-      ).textContent =
-
+      countdownEl.textContent =
       "Kurban Bayramı Başladı";
 
       return;
@@ -1930,23 +1934,21 @@ function initHijriCard(){
     }
 
     const days =
-      Math.floor(
-        diff / (1000*60*60*24)
-      );
+    Math.floor(
+      diff / (1000*60*60*24)
+    );
 
     const hours =
-      Math.floor(
-        (diff / (1000*60*60)) % 24
-      );
+    Math.floor(
+      (diff / (1000*60*60)) % 24
+    );
 
     const mins =
-      Math.floor(
-        (diff / (1000*60)) % 60
-      );
+    Math.floor(
+      (diff / (1000*60)) % 60
+    );
 
-    document.getElementById(
-      "hijriCountdown"
-    ).textContent =
+    countdownEl.textContent =
 
 `${days} Gün ${hours} Saat ${mins} Dk. Kaldı`;
 
@@ -1961,4 +1963,9 @@ function initHijriCard(){
 
 }
 
-initHijriCard();
+document.addEventListener(
+  "DOMContentLoaded",
+  ()=>{
+    initHijriCard();
+  }
+);
