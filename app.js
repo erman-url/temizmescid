@@ -533,7 +533,6 @@ ctx.drawImage(
   width,
   height
 );
-
 /* =========================
 ITERATIVE COMPRESS
 ========================= */
@@ -608,17 +607,162 @@ generate();
 
 };
 
+/* =========================
+OBJECT URL
+========================= */
+
 const objectUrl =
 URL.createObjectURL(file);
 
+/* =========================
+IMAGE LOAD
+========================= */
+
 img.onload = ()=>{
+
+  /* MEMORY CLEANUP */
 
   URL.revokeObjectURL(
     objectUrl
   );
 
-  // mevcut kod...
+  const canvas =
+  document.createElement("canvas");
+
+  const MAX_SIZE = 1200;
+
+  let width = img.width;
+  let height = img.height;
+
+  /* LANDSCAPE */
+
+  if(width > height){
+
+    if(width > MAX_SIZE){
+
+      height = Math.round(
+        height * (MAX_SIZE / width)
+      );
+
+      width = MAX_SIZE;
+
+    }
+
+  }
+
+  /* PORTRAIT */
+
+  else{
+
+    if(height > MAX_SIZE){
+
+      width = Math.round(
+        width * (MAX_SIZE / height)
+      );
+
+      height = MAX_SIZE;
+
+    }
+
+  }
+
+  canvas.width = width;
+  canvas.height = height;
+
+  const ctx =
+  canvas.getContext("2d");
+
+  /* IOS SAFARI FIX */
+
+  ctx.imageSmoothingEnabled = true;
+
+  ctx.imageSmoothingQuality = "high";
+
+  ctx.drawImage(
+    img,
+    0,
+    0,
+    width,
+    height
+  );
+
+  /* =========================
+  ITERATIVE COMPRESS
+  ========================= */
+
+  let quality = 0.60;
+
+  function generate(){
+
+    canvas.toBlob(
+
+      (blob)=>{
+
+        /* FAILSAFE */
+
+        if(!blob){
+
+          alert(
+            "Görsel işlenemedi"
+          );
+
+          return;
+
+        }
+
+        /* SIZE CONTROL */
+
+        if(
+          blob.size > 350000 &&
+          quality > 0.30
+        ){
+
+          quality -= 0.08;
+
+          generate();
+
+          return;
+
+        }
+
+        /* FINAL FILE */
+
+        resolve(
+
+          new File(
+
+            [blob],
+
+            file.name.replace(
+              /\.(jpg|jpeg|png|heic|heif)$/i,
+              ".webp"
+            ),
+
+            {
+              type:"image/webp"
+            }
+
+          )
+
+        );
+
+      },
+
+      "image/webp",
+
+      quality
+
+    );
+
+  }
+
+  generate();
+
 };
+
+/* =========================
+START LOAD
+========================= */
 
 img.src = objectUrl;
 
@@ -716,6 +860,7 @@ try{
     "lng",
     28.9784
   );
+
   
 /* =========================
 STAR SCORES
