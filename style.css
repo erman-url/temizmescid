@@ -1238,18 +1238,16 @@ max-width:100%;
 
 height:auto;
 
-content-visibility:auto;
-
-contain:paint;
-
 }
+
+/* IOS / MOBILE RENDER FIX */
 
 .slide,
 .slide img,
 .mescid-card{
 
-transform:translateZ(0);
+transform:none;
 
-will-change:transform;
+will-change:auto;
 
 }
