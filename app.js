@@ -1457,9 +1457,9 @@ console.log(imageUrl);
 card.innerHTML = `
 
 <img
-loading="lazy"
-decoding="async"
-fetchpriority="low"
+loading="eager"
+decoding="sync"
+fetchpriority="high"
 src="${imageUrl}"
 
 alt="${
