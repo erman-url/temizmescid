@@ -840,14 +840,12 @@ for(const file of imagesInput.files){
 
 const res = await fetch(
 
-"https://spring-violet-7aa7.temizmescid.workers.dev/api/mescid/create",
+`https://spring-violet-7aa7.temizmescid.workers.dev/api/mescid/create?t=${Date.now()}`,
 
 {
-
-method:"POST",
-
-body:formData
-
+  method:"POST",
+  body:formData,
+  cache:"no-store"
 }
 
 );
@@ -909,7 +907,13 @@ for(let i=0;i<10;i++){
 try{
 
 const check = await fetch(
-`${API_URL}/api/mescid/${targetSlug}`
+
+`${API_URL}/api/mescid/${targetSlug}?t=${Date.now()}`,
+
+{
+  cache:"no-store"
+}
+
 );
 
 if(check.ok){
@@ -1214,7 +1218,13 @@ try{
 /* API */
 
 const res = await fetch(
-`${API_URL}/api/mescids/top`
+
+`${API_URL}/api/mescids/top?t=${Date.now()}`,
+
+{
+  cache:"no-store"
+}
+
 );
 
 if(!res.ok){
