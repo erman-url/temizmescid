@@ -977,10 +977,13 @@ return;
 try{
 
 const res = await fetch(
-`${API_BASE}/api/mescid/${slug}`,
+`${API_BASE}/api/mescid/${slug}?t=${Date.now()}`,
 {
 method:"GET",
-cache:"default"
+cache:"no-store",
+headers:{
+"Cache-Control":"no-cache"
+}
 }
 );
 

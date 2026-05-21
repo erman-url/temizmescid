@@ -269,7 +269,6 @@ linear-gradient(
    width:calc(100% - 16px);
   max-width:420px;
 
-  transform:translateZ(0);
 
   background:linear-gradient(180deg,#ffffff,#f7f7f7);
   border-radius:28px 28px 0 0;
