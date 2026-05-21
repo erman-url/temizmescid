@@ -1548,7 +1548,7 @@ card.innerHTML = `
 
 <img
 loading="eager"
-decoding="sync"
+decoding="async"
 fetchpriority="high"
 src="${imageUrl}"
 
@@ -1564,7 +1564,6 @@ height:100%;
 object-fit:cover;
 display:block;
 z-index:1;
-background:#111827;
 "
 
 onerror="
@@ -1610,10 +1609,9 @@ slider.appendChild(card);
 
 });
 
-/* AUTO SLIDE */
 
 /* =========================
-AUTO SLIDE
+AUTO SLIDE PREMIUM STABLE
 ========================= */
 
 const cards =
@@ -1623,28 +1621,50 @@ let currentIndex = 0;
 
 if(window.topSliderInterval){
 
-  clearInterval(
-    window.topSliderInterval
-  );
+clearInterval(
+window.topSliderInterval
+);
 
 }
+
+/* GPU PREP */
+
+slider.style.willChange =
+"transform";
+
+slider.style.transform =
+"translate3d(0,0,0)";
+
+/* SLIDE FUNCTION */
+
+function moveSlider(index){
+
+requestAnimationFrame(()=>{
+
+slider.style.transform =
+
+`translate3d(-${index * 100}%,0,0)`;
+
+});
+
+}
+
+/* AUTO LOOP */
 
 window.topSliderInterval =
 setInterval(()=>{
 
-  currentIndex++;
+currentIndex++;
 
-  if(currentIndex >= cards.length){
+if(currentIndex >= cards.length){
 
-    currentIndex = 0;
+currentIndex = 0;
 
-  }
+}
 
-  slider.style.transform =
-  `translateX(-${currentIndex * 100}%)`;
+moveSlider(currentIndex);
 
 },7000);
-
 
 
 
