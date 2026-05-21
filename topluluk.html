@@ -694,8 +694,13 @@ async function loadFeed(){
 
 try{
 
+const API_BASE =
+"https://spring-violet-7aa7.temizmescid.workers.dev";
+
 const response =
-await fetch("/api/mescids");
+await fetch(
+`${API_BASE}/api/mescids`
+);
 
 const data =
 await response.json();
