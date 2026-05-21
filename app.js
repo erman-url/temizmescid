@@ -1548,7 +1548,7 @@ if(window.topSliderInterval){
   );
 
 }
-/*
+
 window.topSliderInterval =
 setInterval(()=>{
 
@@ -1564,7 +1564,7 @@ setInterval(()=>{
   `translateX(-${currentIndex * 100}%)`;
 
 },7000);
-*/
+
 
 
 
