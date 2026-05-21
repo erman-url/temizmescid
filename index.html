@@ -112,19 +112,30 @@ font-weight:600;
 }
 
 .top-slider{
-display:flex;
-gap:14px;
-overflow-x:auto;
-scroll-snap-type:x mandatory;
-scrollbar-width:none;
-padding-bottom:4px;
--webkit-overflow-scrolling:touch;
-scroll-padding-left:16px;
-scroll-padding-right:16px;
+
+overflow:hidden;
+
+position:relative;
+
+width:100%;
+
 }
 
 .top-slider::-webkit-scrollbar{
 display:none;
+}
+
+
+.top-track{
+
+display:flex;
+
+gap:14px;
+
+transition:transform .45s ease;
+
+will-change:transform;
+
 }
 
 .top-card{
@@ -142,7 +153,6 @@ border-radius:26px;
 
 overflow:hidden;
 
-scroll-snap-align:center;
 
 background:#111827;
 
@@ -748,14 +758,20 @@ margin:0;
 
   <!-- SLIDER -->
 
+<div
+  class="top-slider"
+>
+
   <div
-    class="top-slider"
+    class="top-track"
     id="topSlider"
   >
 
     <!-- DYNAMIC -->
 
   </div>
+
+</div>
 
 </section>
 

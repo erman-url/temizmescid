@@ -1522,53 +1522,38 @@ slider.appendChild(card);
 
 /* AUTO SLIDE */
 
+/* =========================
+AUTO SLIDE
+========================= */
+
+const cards =
+slider.querySelectorAll(".top-card");
+
+let currentIndex = 0;
 
 if(window.topSliderInterval){
 
-clearInterval(
-window.topSliderInterval
-);
+  clearInterval(
+    window.topSliderInterval
+  );
 
 }
 
 window.topSliderInterval =
 setInterval(()=>{
 
-slider.scrollBy({
-left:320,
-behavior:"smooth"
-});
+  currentIndex++;
 
-if(
-slider.scrollLeft +
-slider.clientWidth >=
-slider.scrollWidth - 30
-){
+  if(currentIndex >= cards.length){
 
-slider.scrollTo({
-left:0,
-behavior:"smooth"
-});
+    currentIndex = 0;
 
-}
+  }
+
+  slider.style.transform =
+  `translateX(-${currentIndex * 100}%)`;
 
 },7000);
-
-
-
-/* STOP ON TOUCH */
-
-slider.addEventListener(
-"touchstart",
-()=>{
-
-clearInterval(
-window.topSliderInterval
-);
-
-},
-{ passive:true }
-);
 
 
 
