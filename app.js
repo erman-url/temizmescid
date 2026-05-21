@@ -253,17 +253,29 @@ function next(step){
     }
 
     if(
-      !imagesInput ||
-      imagesInput.files.length < 1
-    ){
+  !imagesInput ||
+  imagesInput.files.length < 1
+){
 
-      alert(
-        "En az 1 fotoğraf yüklemek zorunludur."
-      );
+  clearInterval(
+    uploadInterval
+  );
 
-      return;
+  document
+  .getElementById(
+    "uploadLoader"
+  )
+  ?.classList.add(
+    "hidden"
+  );
 
-    }
+  alert(
+    "En az 1 fotoğraf gerekli"
+  );
+
+  return;
+
+}
 
   if(imagesInput.files.length > 5){
 
@@ -614,9 +626,24 @@ async function compressImage(file){
 async function submitForm(){
 
 
+showUploadLoader();
 
 if(!validateStep(4)){
-  return;
+
+document
+.getElementById(
+"uploadLoader"
+)
+?.classList.add(
+"hidden"
+);
+
+clearInterval(
+uploadInterval
+);
+
+return;
+
 }
 
 try{
@@ -636,16 +663,27 @@ try{
     return;
 
   }
+if(imagesInput.files.length > 5){
 
-  if(imagesInput.files.length > 5){
+  clearInterval(
+    uploadInterval
+  );
 
-    alert(
-      "En fazla 5 fotoğraf yükleyebilirsiniz"
-    );
+  document
+  .getElementById(
+    "uploadLoader"
+  )
+  ?.classList.add(
+    "hidden"
+  );
 
-    return;
+  alert(
+    "En fazla 5 fotoğraf yükleyebilirsiniz"
+  );
 
-  }
+  return;
+
+}
 
   const formData =
     new FormData();
@@ -859,15 +897,39 @@ try{
 
 }catch(e){
 
-  alert(
-    "Sunucu yanıtı okunamadı"
-  );
+clearInterval(
+uploadInterval
+);
 
-  return;
+document
+.getElementById(
+"uploadLoader"
+)
+?.classList.add(
+"hidden"
+);
+
+alert(
+"Sunucu yanıtı okunamadı"
+);
+
+return;
 
 }
 
 if(!res.ok){
+
+clearInterval(
+uploadInterval
+);
+
+document
+.getElementById(
+"uploadLoader"
+)
+?.classList.add(
+"hidden"
+);
 
 alert(
 data.error ||
@@ -878,11 +940,17 @@ return;
 
 }
 
+finishUploadLoader();
+
+setTimeout(()=>{
+
 alert(
 "Mescid başarıyla eklendi"
 );
 
 closeForm();
+
+},800);
 
 if(!data.slug){
 
@@ -952,6 +1020,18 @@ location.href =
 }
 
 catch(err){
+
+clearInterval(
+uploadInterval
+);
+
+document
+.getElementById(
+"uploadLoader"
+)
+?.classList.add(
+"hidden"
+);
 
 console.error(err);
 
@@ -1906,3 +1986,127 @@ document.addEventListener(
     initHijriCard();
   }
 );
+
+/* =========================
+UPLOAD LOADER
+========================= */
+
+let uploadFakeProgress = 0;
+
+let uploadInterval = null;
+
+function showUploadLoader(){
+
+const loader =
+document.getElementById(
+"uploadLoader"
+);
+
+if(loader){
+
+loader.classList.remove(
+"hidden"
+);
+
+}
+
+const percent =
+document.getElementById(
+"uploadPercent"
+);
+
+const text =
+document.getElementById(
+"uploadText"
+);
+
+uploadFakeProgress = 0;
+
+percent.textContent = "%0";
+
+text.textContent =
+"Görseller hazırlanıyor...";
+
+clearInterval(
+uploadInterval
+);
+
+uploadInterval =
+setInterval(()=>{
+
+if(uploadFakeProgress >= 92){
+return;
+}
+
+uploadFakeProgress +=
+Math.floor(
+Math.random() * 8
+) + 2;
+
+if(uploadFakeProgress > 92){
+uploadFakeProgress = 92;
+}
+
+percent.textContent =
+`%${uploadFakeProgress}`;
+
+if(uploadFakeProgress > 20){
+
+text.textContent =
+"Görseller optimize ediliyor...";
+
+}
+
+if(uploadFakeProgress > 45){
+
+text.textContent =
+"Mescid bilgileri yükleniyor...";
+
+}
+
+if(uploadFakeProgress > 70){
+
+text.textContent =
+"Son kontroller yapılıyor...";
+
+}
+
+},220);
+
+}
+
+function finishUploadLoader(){
+
+clearInterval(
+uploadInterval
+);
+
+const percent =
+document.getElementById(
+"uploadPercent"
+);
+
+const text =
+document.getElementById(
+"uploadText"
+);
+
+percent.textContent =
+"%100";
+
+text.textContent =
+"Mescid başarıyla eklendi";
+
+setTimeout(()=>{
+
+document
+.getElementById(
+"uploadLoader"
+)
+?.classList.add(
+"hidden"
+);
+
+},700);
+
+}

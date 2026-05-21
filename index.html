@@ -663,6 +663,115 @@ margin:0;
 
 }
 
+/* =========================
+UPLOAD LOADER
+========================= */
+
+.upload-loader{
+
+position:fixed;
+
+inset:0;
+
+z-index:99999;
+
+display:flex;
+
+align-items:center;
+
+justify-content:center;
+
+background:
+rgba(3,7,18,.82);
+
+backdrop-filter:blur(18px);
+
+-webkit-backdrop-filter:blur(18px);
+
+}
+
+.upload-loader.hidden{
+display:none;
+}
+
+.upload-box{
+
+width:260px;
+
+padding:
+34px 24px;
+
+border-radius:32px;
+
+background:
+linear-gradient(
+180deg,
+rgba(15,23,42,.96),
+rgba(17,24,39,.96)
+);
+
+border:
+1px solid rgba(255,255,255,.08);
+
+box-shadow:
+0 20px 60px rgba(0,0,0,.45);
+
+text-align:center;
+
+}
+
+.upload-spinner{
+
+width:72px;
+height:72px;
+
+margin:
+0 auto 24px;
+
+border-radius:999px;
+
+border:
+6px solid rgba(255,255,255,.08);
+
+border-top:
+6px solid #22c55e;
+
+animation:
+spin 1s linear infinite;
+
+}
+
+@keyframes spin{
+
+100%{
+transform:rotate(360deg);
+}
+
+}
+
+.upload-percent{
+
+font-size:42px;
+
+font-weight:900;
+
+color:#fff;
+
+margin-bottom:10px;
+
+}
+
+.upload-text{
+
+font-size:14px;
+
+line-height:1.6;
+
+color:
+rgba(255,255,255,.72);
+
+}
+
 </style>
 
 </head>
@@ -1626,6 +1735,35 @@ onclick="event.stopPropagation()"
 </div>
 
 </div>
+
+<!-- ========================= -->
+<!-- UPLOAD LOADER -->
+<!-- ========================= -->
+
+<div
+id="uploadLoader"
+class="upload-loader hidden"
+>
+
+  <div class="upload-box">
+
+    <div class="upload-spinner"></div>
+
+    <div class="upload-percent" id="uploadPercent">
+      %0
+    </div>
+
+    <div
+    class="upload-text"
+    id="uploadText"
+    >
+      Görseller hazırlanıyor...
+    </div>
+
+  </div>
+
+</div>
+
 
 <script src="verses.js"></script>
 <script src="app.js"></script>
