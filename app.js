@@ -2222,10 +2222,21 @@ document
 },700);
 
 }
-
 /* =========================
-CITY / DISTRICT SYSTEM
+CITY / DISTRICT SYSTEM FINAL
 ========================= */
+
+function normalizeTR(text){
+
+return String(text || "")
+
+.toLocaleLowerCase("tr-TR")
+
+.normalize("NFC")
+
+.trim();
+
+}
 
 function initCitySystem(){
 
@@ -2235,18 +2246,68 @@ document.getElementById("city");
 const districtSelect =
 document.getElementById("district");
 
+/* =========================
+ELEMENT CHECK
+========================= */
+
 if(
 !citySelect ||
 !districtSelect ||
-!window.CITY_DATA
+typeof window.CITY_DATA !== "object"
 ){
 return;
 }
 
-/* CITY FILL */
+/* =========================
+RESET
+========================= */
+
+citySelect.innerHTML = `
+<option value="">
+Şehir Seçiniz
+</option>
+`;
+
+districtSelect.innerHTML = `
+<option value="">
+Önce Şehir Seçin
+</option>
+`;
+
+districtSelect.disabled = true;
+
+/* =========================
+CITY LIST
+========================= */
+
+const cities =
 
 Object.keys(window.CITY_DATA)
-.forEach(city=>{
+
+.filter(city=>
+
+city &&
+typeof city === "string"
+
+)
+
+.sort((a,b)=>
+
+a.localeCompare(
+b,
+"tr"
+)
+
+);
+
+/* =========================
+CITY APPEND
+========================= */
+
+const cityFragment =
+document.createDocumentFragment();
+
+cities.forEach(city=>{
 
 const option =
 document.createElement("option");
@@ -2255,18 +2316,33 @@ option.value = city;
 
 option.textContent = city;
 
-citySelect.appendChild(option);
+cityFragment.appendChild(option);
 
 });
 
-/* CHANGE */
+citySelect.appendChild(
+cityFragment
+);
+
+/* =========================
+CHANGE EVENT
+========================= */
 
 citySelect.addEventListener(
 "change",
-()=>{
+handleCityChange
+);
+
+/* =========================
+HANDLER
+========================= */
+
+function handleCityChange(){
 
 const selectedCity =
 citySelect.value;
+
+/* RESET DISTRICT */
 
 districtSelect.innerHTML = `
 <option value="">
@@ -2276,15 +2352,86 @@ districtSelect.innerHTML = `
 
 districtSelect.disabled = true;
 
+/* EMPTY */
+
+if(!selectedCity){
+return;
+}
+
+/* INVALID CITY */
+
 if(
-!selectedCity ||
-!window.CITY_DATA[selectedCity]
+!Object.prototype.hasOwnProperty.call(
+window.CITY_DATA,
+selectedCity
+)
 ){
 return;
 }
 
-window.CITY_DATA[selectedCity]
-.forEach(district=>{
+/* =========================
+DISTRICTS
+========================= */
+
+const rawDistricts =
+window.CITY_DATA[selectedCity];
+
+/* INVALID */
+
+if(
+!Array.isArray(rawDistricts)
+){
+return;
+}
+
+/* =========================
+CLEAN + UNIQUE
+========================= */
+
+const uniqueDistricts =
+
+[...new Set(
+
+rawDistricts
+
+.filter(district=>
+
+district &&
+typeof district === "string"
+
+)
+
+.map(district=>
+
+district.trim()
+
+)
+
+)]
+
+.sort((a,b)=>
+
+a.localeCompare(
+b,
+"tr"
+)
+
+);
+
+/* EMPTY */
+
+if(!uniqueDistricts.length){
+return;
+}
+
+/* =========================
+APPEND
+========================= */
+
+const districtFragment =
+document.createDocumentFragment();
+
+uniqueDistricts.forEach(district=>{
 
 const option =
 document.createElement("option");
@@ -2293,16 +2440,20 @@ option.value = district;
 
 option.textContent = district;
 
-districtSelect.appendChild(option);
+districtFragment.appendChild(option);
 
 });
+
+districtSelect.appendChild(
+districtFragment
+);
 
 districtSelect.disabled = false;
 
 }
-);
 
 }
+
 
 /* =========================
 MESCID NAME VALIDATION

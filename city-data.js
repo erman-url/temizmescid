@@ -1,305 +1,258 @@
-window.CITY_DATA = {
+/* =========================
+CITY / DISTRICT SYSTEM FINAL
+========================= */
 
-  "Adana":[
-    "Aladağ",
-    "Ceyhan",
-    "Çukurova",
-    "Feke",
-    "İmamoğlu",
-    "Karaisalı",
-    "Karataş",
-    "Kozan",
-    "Pozantı",
-    "Saimbeyli",
-    "Sarıçam",
-    "Seyhan",
-    "Tufanbeyli",
-    "Yumurtalık",
-    "Yüreğir"
-  ],
+function normalizeTR(text){
 
-  "Adıyaman":[
-    "Besni",
-    "Çelikhan",
-    "Gerger",
-    "Gölbaşı",
-    "Kahta",
-    "Merkez",
-    "Samsat",
-    "Sincik",
-    "Tut"
-  ],
+return String(text || "")
 
-  "Afyonkarahisar":[
-    "Başmakçı",
-    "Bayat",
-    "Bolvadin",
-    "Çay",
-    "Çobanlar",
-    "Dazkırı",
-    "Dinar",
-    "Emirdağ",
-    "Evciler",
-    "Hocalar",
-    "İhsaniye",
-    "İscehisar",
-    "Kızılören",
-    "Merkez",
-    "Sandıklı",
-    "Sinanpaşa",
-    "Sultandağı",
-    "Şuhut"
-  ],
+.toLocaleLowerCase("tr-TR")
 
-  "Ağrı":[
-    "Diyadin",
-    "Doğubayazıt",
-    "Eleşkirt",
-    "Hamur",
-    "Merkez",
-    "Patnos",
-    "Taşlıçay",
-    "Tutak"
-  ],
+.normalize("NFC")
 
-  "Amasya":[
-    "Göynücek",
-    "Gümüşhacıköy",
-    "Hamamözü",
-    "Merkez",
-    "Merzifon",
-    "Suluova",
-    "Taşova"
-  ],
+.trim();
 
-  "Ankara":[
-    "Akyurt",
-    "Altındağ",
-    "Ayaş",
-    "Bala",
-    "Beypazarı",
-    "Çamlıdere",
-    "Çankaya",
-    "Çubuk",
-    "Elmadağ",
-    "Etimesgut",
-    "Evren",
-    "Gölbaşı",
-    "Güdül",
-    "Haymana",
-    "Kahramankazan",
-    "Kalecik",
-    "Keçiören",
-    "Kızılcahamam",
-    "Mamak",
-    "Nallıhan",
-    "Polatlı",
-    "Pursaklar",
-    "Sincan",
-    "Şereflikoçhisar",
-    "Yenimahalle"
-  ],
+}
 
-  "Antalya":[
-    "Akseki",
-    "Aksu",
-    "Alanya",
-    "Demre",
-    "Döşemealtı",
-    "Elmalı",
-    "Finike",
-    "Gazipaşa",
-    "Gündoğmuş",
-    "İbradı",
-    "Kaş",
-    "Kemer",
-    "Kepez",
-    "Konyaaltı",
-    "Korkuteli",
-    "Kumluca",
-    "Manavgat",
-    "Muratpaşa",
-    "Serik"
-  ],
+function initCitySystem(){
 
-  "Artvin":[
-    "Ardanuç",
-    "Arhavi",
-    "Borçka",
-    "Hopa",
-    "Kemalpaşa",
-    "Merkez",
-    "Murgul",
-    "Şavşat",
-    "Yusufeli"
-  ],
+const citySelect =
+document.getElementById("city");
 
-  "Aydın":[
-    "Bozdoğan",
-    "Buharkent",
-    "Çine",
-    "Didim",
-    "Efeler",
-    "Germencik",
-    "İncirliova",
-    "Karacasu",
-    "Karpuzlu",
-    "Koçarlı",
-    "Köşk",
-    "Kuşadası",
-    "Kuyucak",
-    "Nazilli",
-    "Söke",
-    "Sultanhisar",
-    "Yenipazar"
-  ],
+const districtSelect =
+document.getElementById("district");
 
-  "Balıkesir":[
-    "Altıeylül",
-    "Ayvalık",
-    "Balya",
-    "Bandırma",
-    "Bigadiç",
-    "Burhaniye",
-    "Dursunbey",
-    "Edremit",
-    "Erdek",
-    "Gömeç",
-    "Gönen",
-    "Havran",
-    "İvrindi",
-    "Karesi",
-    "Kepsut",
-    "Manyas",
-    "Marmara",
-    "Savaştepe",
-    "Sındırgı",
-    "Susurluk"
-  ],
+/* =========================
+ELEMENT CHECK
+========================= */
 
-  "Bilecik":[
-    "Bozüyük",
-    "Gölpazarı",
-    "İnhisar",
-    "Merkez",
-    "Osmaneli",
-    "Pazaryeri",
-    "Söğüt",
-    "Yenipazar"
-  ],
+if(
+!citySelect ||
+!districtSelect ||
+typeof window.CITY_DATA !== "object" ||
+window.CITY_DATA === null
+){
+return;
+}
 
-  "Bingöl":[
-    "Adaklı",
-    "Genç",
-    "Karlıova",
-    "Kiğı",
-    "Merkez",
-    "Solhan",
-    "Yayladere",
-    "Yedisu"
-  ],
+/* =========================
+RESET SELECTS
+========================= */
 
-  "Bitlis":[
-    "Adilcevaz",
-    "Ahlat",
-    "Güroymak",
-    "Hizan",
-    "Merkez",
-    "Mutki",
-    "Tatvan"
-  ],
+citySelect.innerHTML = `
+<option value="">
+Şehir Seçiniz
+</option>
+`;
 
-  "Bolu":[
-    "Dörtdivan",
-    "Gerede",
-    "Göynük",
-    "Kıbrıscık",
-    "Mengen",
-    "Merkez",
-    "Mudurnu",
-    "Seben",
-    "Yeniçağa"
-  ],
+districtSelect.innerHTML = `
+<option value="">
+Önce Şehir Seçin
+</option>
+`;
 
-  "Burdur":[
-    "Ağlasun",
-    "Altınyayla",
-    "Bucak",
-    "Çavdır",
-    "Çeltikçi",
-    "Gölhisar",
-    "Karamanlı",
-    "Kemer",
-    "Merkez",
-    "Tefenni",
-    "Yeşilova"
-  ],
+districtSelect.disabled = true;
 
-  "Bursa":[
-    "Büyükorhan",
-    "Gemlik",
-    "Gürsu",
-    "Harmancık",
-    "İnegöl",
-    "İznik",
-    "Karacabey",
-    "Keles",
-    "Kestel",
-    "Mudanya",
-    "Mustafakemalpaşa",
-    "Nilüfer",
-    "Orhaneli",
-    "Orhangazi",
-    "Osmangazi",
-    "Yenişehir",
-    "Yıldırım"
-  ],
+/* =========================
+CITY LIST
+========================= */
 
-  "Çanakkale":[
-    "Ayvacık",
-    "Bayramiç",
-    "Biga",
-    "Bozcaada",
-    "Çan",
-    "Eceabat",
-    "Ezine",
-    "Gelibolu",
-    "Gökçeada",
-    "Lapseki",
-    "Merkez",
-    "Yenice"
-  ],
+const cities =
 
-  "Çankırı":[
-    "Atkaracalar",
-    "Bayramören",
-    "Çerkeş",
-    "Eldivan",
-    "Ilgaz",
-    "Kızılırmak",
-    "Korgun",
-    "Kurşunlu",
-    "Merkez",
-    "Orta",
-    "Şabanözü",
-    "Yapraklı"
-  ],
+Object.keys(window.CITY_DATA)
 
-  "Çorum":[
-    "Alaca",
-    "Bayat",
-    "Boğazkale",
-    "Dodurga",
-    "İskilip",
-    "Kargı",
-    "Laçin",
-    "Mecitözü",
-    "Merkez",
-    "Oğuzlar",
-    "Ortaköy",
-    "Osmancık",
-    "Sungurlu",
-    "Uğurludağ"
-  ]
+.filter(city=>
+
+typeof city === "string" &&
+city.trim().length
+
+)
+
+/* UNIQUE */
+
+.filter((city,index,array)=>
+
+array.indexOf(city) === index
+
+)
+
+/* SORT */
+
+.sort((a,b)=>
+
+a.localeCompare(
+b,
+"tr"
+)
+
+);
+
+/* =========================
+CITY APPEND
+========================= */
+
+const cityFragment =
+document.createDocumentFragment();
+
+cities.forEach(city=>{
+
+const option =
+document.createElement("option");
+
+option.value = city;
+
+option.textContent = city;
+
+cityFragment.appendChild(option);
+
+});
+
+citySelect.appendChild(
+cityFragment
+);
+
+/* =========================
+REMOVE OLD EVENT
+========================= */
+
+if(citySelect._cityHandler){
+
+citySelect.removeEventListener(
+"change",
+citySelect._cityHandler
+);
+
+}
+
+/* =========================
+CHANGE HANDLER
+========================= */
+
+const handleCityChange = ()=>{
+
+const selectedCity =
+citySelect.value;
+
+/* RESET */
+
+districtSelect.innerHTML = `
+<option value="">
+İlçe Seçiniz
+</option>
+`;
+
+districtSelect.disabled = true;
+
+/* EMPTY */
+
+if(!selectedCity){
+return;
+}
+
+/* INVALID */
+
+if(
+!Object.prototype.hasOwnProperty.call(
+window.CITY_DATA,
+selectedCity
+)
+){
+return;
+}
+
+const rawDistricts =
+window.CITY_DATA[selectedCity];
+
+/* INVALID */
+
+if(
+!Array.isArray(rawDistricts)
+){
+return;
+}
+
+/* =========================
+DISTRICT CLEAN
+========================= */
+
+const districts =
+
+[...new Set(
+
+rawDistricts
+
+.filter(district=>
+
+typeof district === "string" &&
+district.trim().length
+
+)
+
+.map(district=>
+
+district.trim()
+
+)
+
+)]
+
+.sort((a,b)=>
+
+a.localeCompare(
+b,
+"tr"
+)
+
+);
+
+/* EMPTY */
+
+if(!districts.length){
+return;
+}
+
+/* =========================
+DISTRICT APPEND
+========================= */
+
+const districtFragment =
+document.createDocumentFragment();
+
+districts.forEach(district=>{
+
+const option =
+document.createElement("option");
+
+option.value = district;
+
+option.textContent = district;
+
+districtFragment.appendChild(option);
+
+});
+
+districtSelect.appendChild(
+districtFragment
+);
+
+districtSelect.disabled = false;
 
 };
+
+/* =========================
+SAVE EVENT
+========================= */
+
+citySelect._cityHandler =
+handleCityChange;
+
+/* =========================
+BIND EVENT
+========================= */
+
+citySelect.addEventListener(
+"change",
+handleCityChange
+);
+
+}
