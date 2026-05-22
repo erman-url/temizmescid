@@ -7,7 +7,7 @@
 
 <meta
 name="viewport"
-content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover"
 >
 
 <title>
@@ -262,6 +262,38 @@ color:#166534;
 
 }
 
+.big-button{
+
+touch-action:
+manipulation;
+
+pointer-events:auto;
+
+-webkit-user-select:none;
+user-select:none;
+
+-webkit-touch-callout:none;
+
+}
+
+.big-button,
+.reset-btn{
+
+-webkit-tap-highlight-color:
+transparent;
+
+}
+
+.big-button{
+
+will-change:
+transform;
+
+transform:
+translateZ(0);
+
+}
+
 </style>
 
 </head>
@@ -317,6 +349,7 @@ id="counter"
 <button
 class="big-button"
 id="tapButton"
+aria-label="Zikir sayacı"
 >
 TIKLA
 </button>
@@ -443,6 +476,36 @@ render();
 }
 
 render();
+
+
+let lastTouchEnd = 0;
+
+const tapButton =
+document.getElementById(
+"tapButton"
+);
+
+tapButton.addEventListener(
+"touchend",
+function(event){
+
+const now =
+Date.now();
+
+if(
+now - lastTouchEnd <= 300
+){
+
+event.preventDefault();
+
+}
+
+lastTouchEnd = now;
+
+},
+{passive:false}
+);
+
 
 </script>
 
