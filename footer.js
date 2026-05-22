@@ -1,88 +1,121 @@
+/* =========================
+ACTIVE PAGE DETECT
+========================= */
+
+const currentPath =
+location.pathname;
+
+/* PAGE CHECK */
+
+const isHome =
+
+currentPath.endsWith("/") ||
+
+currentPath.endsWith("/index.html");
+
+const isMescidler =
+currentPath.includes("mescidler");
+
+const isSosyal =
+currentPath.includes("sosyal");
+
+const isIletisim =
+currentPath.includes("iletisim");
+
+
+/* =========================
+RENDER FOOTER
+========================= */
+
 document.write(`
 
-<nav class="footer">
+<nav class="bottom-nav">
 
 <!-- ANA -->
 
-<div
-class="nav-item"
+<button
+type="button"
+class="nav-item ${isHome ? "active" : ""}"
 onclick="location.href='index.html'"
 >
 
-<span class="nav-icon">
-⌂
-</span>
+<i class="ri-home-5-line nav-icon"></i>
 
-<p>
+<span>
 Ana
-</p>
-
-</div>
-
-<!-- MESCİDLER -->
-
-<div
-class="nav-item"
-onclick="location.href='mescidler.html'"
->
-
-<span class="nav-icon">
-★
 </span>
 
-<p>
-Mescidler
-</p>
+</button>
 
-</div>
 
-<!-- CENTER ACTION -->
+<!-- MESCIDLER -->
 
 <button
 type="button"
-class="center-btn"
-onclick="handleCenterAction()"
+class="nav-item ${isMescidler ? "active" : ""}"
+onclick="location.href='mescidler.html'"
 >
-+
+
+<i class="ri-star-line nav-icon"></i>
+
+<span>
+Mescidler
+</span>
+
 </button>
+
+
+<!-- CENTER FAB -->
+
+<button
+type="button"
+class="nav-fab"
+onclick="handleCenterAction()"
+aria-label="Mescid Değerlendir"
+>
+
+<i class="ri-add-line"></i>
+
+</button>
+
 
 <!-- SOSYAL -->
 
-<div
-class="nav-item"
+<button
+type="button"
+class="nav-item ${isSosyal ? "active" : ""}"
 onclick="location.href='sosyal.html'"
 >
 
-<span class="nav-icon">
-◎
+<i class="ri-group-line nav-icon"></i>
+
+<span>
+Sosyal
 </span>
 
-<p>
-Sosyal
-</p>
+</button>
 
-</div>
 
-<!-- İLETİŞİM -->
+<!-- ILETISIM -->
 
-<div
-class="nav-item"
+<button
+type="button"
+class="nav-item ${isIletisim ? "active" : ""}"
 onclick="location.href='iletisim.html'"
 >
 
-<span class="nav-icon">
-✉
+<i class="ri-mail-line nav-icon"></i>
+
+<span>
+İletişim
 </span>
 
-<p>
-İletişim
-</p>
-
-</div>
+</button>
 
 </nav>
 
 `);
+
 
 /* =========================
 CENTER BUTTON SYSTEM
@@ -93,7 +126,7 @@ function handleCenterAction(){
 const path =
 location.pathname;
 
-/* INDEX PAGE */
+/* HOME */
 
 const isHome =
 
@@ -103,7 +136,7 @@ path.endsWith("/index.html") ||
 
 path === "";
 
-/* INDEX → OPEN MODAL */
+/* OPEN MODAL */
 
 if(isHome){
 
@@ -117,8 +150,9 @@ return;
 
 }
 
-/* OTHER PAGES → HOME */
+/* OTHER PAGE */
 
-location.href = "index.html";
+location.href =
+"index.html";
 
 }
