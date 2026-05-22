@@ -995,6 +995,12 @@ box-shadow:
 
 }
 
+#countdown:empty{
+
+display:none;
+
+}
+
 
 .rating-text{
   display:flex;
