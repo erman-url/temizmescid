@@ -19,6 +19,8 @@ document.addEventListener(
 
   updateDateTime();
 
+  initCitySystem();
+
   setInterval(
     updateDateTime,
     1000
@@ -688,26 +690,35 @@ if(imagesInput.files.length > 5){
   const formData =
     new FormData();
 
-  formData.append(
-    "name",
-    document.getElementById("mescidName")
-    ?.value
-    ?.trim()
-  );
+ formData.append(
+"name",
+cleanText(
 
-  formData.append(
-    "city",
-    document.getElementById("city")
-    ?.value
-    ?.trim()
-  );
+document.getElementById("mescidName")
+?.value || ""
 
-  formData.append(
-    "district",
-    document.getElementById("district")
-    ?.value
-    ?.trim()
-  );
+)
+);
+
+formData.append(
+"city",
+cleanText(
+
+document.getElementById("city")
+?.value || ""
+
+)
+);
+
+formData.append(
+"district",
+cleanText(
+
+document.getElementById("district")
+?.value || ""
+
+)
+);
 
   formData.append(
     "category",
@@ -715,12 +726,15 @@ if(imagesInput.files.length > 5){
     ?.value
   );
 
-  formData.append(
-    "address",
-    document.getElementById("desc")
-    ?.value
-    ?.trim()
-  );
+formData.append(
+"address",
+cleanText(
+
+document.getElementById("desc")
+?.value || ""
+
+)
+);
 
   formData.append(
     "has_ablution",
@@ -858,9 +872,14 @@ COMMENT
 
 formData.append(
 "comment",
+
+cleanText(
+
 document.getElementById("extraNote")
-?.value
-?.trim() || ""
+?.value || ""
+
+)
+
 );
 
 
@@ -1083,30 +1102,101 @@ function updateDateTime(){
 }
 
 
-
-
-
-
-
-
-
 // =========================
 // STEP VALIDATION
 // =========================
 function validateStep(step){
 
+  // =========================
   // STEP 2
+  // =========================
 
   if(step === 2){
+
+    const name =
+    cleanText(
+      document.getElementById("mescidName")
+      ?.value || ""
+    );
+
+    const city =
+    cleanText(
+      document.getElementById("city")
+      ?.value || ""
+    );
+
+    const district =
+    cleanText(
+      document.getElementById("district")
+      ?.value || ""
+    );
+
+    const desc =
+    cleanText(
+      document.getElementById("desc")
+      ?.value || ""
+    );
 
     const type =
     document.getElementById("type")
     ?.value;
 
+    /* NAME */
+
+    if(
+      !validateMescidName(name)
+    ){
+
+      alert(
+        "Lütfen geçerli bir mescid adı giriniz."
+      );
+
+      return false;
+
+    }
+
+    /* CITY */
+
+    if(!city){
+
+      alert(
+        "Şehir seçiniz"
+      );
+
+      return false;
+
+    }
+
+    /* DISTRICT */
+
+    if(!district){
+
+      alert(
+        "İlçe seçiniz"
+      );
+
+      return false;
+
+    }
+
+    /* CATEGORY */
+
     if(!type){
 
       alert(
-        "Konum seçmek zorunlu"
+        "Kategori seçiniz"
+      );
+
+      return false;
+
+    }
+
+    /* DESCRIPTION LIMIT */
+
+    if(desc.length > 120){
+
+      alert(
+        "Açıklama en fazla 120 karakter olabilir."
       );
 
       return false;
@@ -1114,7 +1204,10 @@ function validateStep(step){
     }
 
   }
+
+  // =========================
   // STEP 3
+  // =========================
 
   if(step === 4){
 
@@ -1169,7 +1262,6 @@ function validateStep(step){
   return true;
 
 }
-
 
 // =========================
 // TOGGLE BINARY
@@ -2128,5 +2220,179 @@ document
 );
 
 },700);
+
+}
+
+/* =========================
+CITY / DISTRICT SYSTEM
+========================= */
+
+function initCitySystem(){
+
+const citySelect =
+document.getElementById("city");
+
+const districtSelect =
+document.getElementById("district");
+
+if(
+!citySelect ||
+!districtSelect ||
+!window.CITY_DATA
+){
+return;
+}
+
+/* CITY FILL */
+
+Object.keys(window.CITY_DATA)
+.forEach(city=>{
+
+const option =
+document.createElement("option");
+
+option.value = city;
+
+option.textContent = city;
+
+citySelect.appendChild(option);
+
+});
+
+/* CHANGE */
+
+citySelect.addEventListener(
+"change",
+()=>{
+
+const selectedCity =
+citySelect.value;
+
+districtSelect.innerHTML = `
+<option value="">
+İlçe Seçiniz
+</option>
+`;
+
+districtSelect.disabled = true;
+
+if(
+!selectedCity ||
+!window.CITY_DATA[selectedCity]
+){
+return;
+}
+
+window.CITY_DATA[selectedCity]
+.forEach(district=>{
+
+const option =
+document.createElement("option");
+
+option.value = district;
+
+option.textContent = district;
+
+districtSelect.appendChild(option);
+
+});
+
+districtSelect.disabled = false;
+
+}
+);
+
+}
+
+/* =========================
+MESCID NAME VALIDATION
+========================= */
+
+function validateMescidName(name){
+
+if(!name){
+return false;
+}
+
+const cleaned =
+name.trim();
+
+/* MIN */
+
+if(cleaned.length < 5){
+return false;
+}
+
+/* MAX */
+
+if(cleaned.length > 80){
+return false;
+}
+
+/* ONLY NUMBER */
+
+if(/^\d+$/.test(cleaned)){
+return false;
+}
+
+/* REPEAT */
+
+if(/(.)\1{4,}/.test(cleaned)){
+return false;
+}
+
+/* INVALID */
+
+const invalidWords = [
+
+"test",
+"deneme",
+"abc",
+"xxx",
+"asd",
+"qwe",
+"ist",
+"mt"
+
+];
+
+if(
+invalidWords.includes(
+cleaned.toLowerCase()
+)
+){
+return false;
+}
+
+/* WORD COUNT */
+
+const words =
+cleaned.split(/\s+/);
+
+if(words.length < 2){
+return false;
+}
+
+return true;
+
+}
+
+/* =========================
+TEXT CLEANER
+========================= */
+
+function cleanText(value){
+
+if(!value){
+return "";
+}
+
+return String(value)
+
+.replace(/\s+/g," ")
+
+.replace(/[^\p{L}\p{N}\s\-]/gu,"")
+
+.trim();
 
 }

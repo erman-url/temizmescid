@@ -1320,7 +1320,6 @@ onclick="event.stopPropagation()"
 
 </div>
 
-
 <!-- STEP 2 -->
 <div class="step" id="s2">
 
@@ -1328,44 +1327,100 @@ onclick="event.stopPropagation()"
     Konum (Mescid Nerede)
   </h4>
 
+  <!-- MESCID NAME -->
+
   <input
     id="mescidName"
     placeholder="Mescid Adı"
     required
+    maxlength="80"
+    autocomplete="off"
+    spellcheck="false"
+    autocapitalize="words"
   >
 
-  <input
+  <!-- CITY -->
+
+  <select
     id="city"
-    placeholder="Şehir"
     required
+    autocomplete="off"
   >
 
-  <input
+    <option value="">
+      Şehir Seçiniz
+    </option>
+
+  </select>
+
+  <!-- DISTRICT -->
+
+  <select
     id="district"
-    placeholder="İlçe"
     required
+    disabled
+    autocomplete="off"
   >
 
-  <select id="type" required>
+    <option value="">
+      Önce Şehir Seçin
+    </option>
+
+  </select>
+
+  <!-- CATEGORY -->
+
+  <select
+    id="type"
+    required
+    autocomplete="off"
+  >
 
     <option value="">
       Kategori Seçiniz
     </option>
 
     <option>AVM</option>
-    <option>Benzinci</option>
+
+    <option>
+      Akaryakıt İstasyonu
+    </option>
+
+    <option>
+      Metro / Tren İstasyonu
+    </option>
+
     <option>Stadyum</option>
-    <option>Metro</option>
+
     <option>Otel</option>
+
     <option>Hastane</option>
+
+    <option>Üniversite</option>
+
+    <option>İş Merkezi</option>
+
+    <option>Dinlenme Tesisi</option>
+
+    <option>Terminal</option>
+
+    <option>Havalimanı</option>
+
     <option>Diğer</option>
 
   </select>
 
-<input
-  id="desc"
-  placeholder="Kısa Açıklama (Opsiyonel)"
->
+  <!-- OPTIONAL DESCRIPTION -->
+
+  <input
+    id="desc"
+    placeholder="Kısa Açıklama (Opsiyonel)"
+    maxlength="120"
+    autocomplete="off"
+    spellcheck="false"
+  >
+
+  <!-- ACTIONS -->
 
   <div class="step-actions">
 
@@ -1986,6 +2041,7 @@ class="upload-loader hidden"
 
 
 <script src="verses.js"></script>
+<script src="city-data.js"></script>
 <script src="app.js"></script>
 <script src="footer.js"></script>
 
