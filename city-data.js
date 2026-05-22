@@ -1,5 +1,7 @@
 /* =========================
-CITY / DISTRICT SYSTEM FINAL
+CITY SYSTEM ONLY FINAL
+81 İL
+DISTRICT = TEXT INPUT
 ========================= */
 
 function normalizeTR(text){
@@ -19,7 +21,7 @@ function initCitySystem(){
 const citySelect =
 document.getElementById("city");
 
-const districtSelect =
+const districtInput =
 document.getElementById("district");
 
 /* =========================
@@ -28,55 +30,100 @@ ELEMENT CHECK
 
 if(
 !citySelect ||
-!districtSelect ||
-typeof window.CITY_DATA !== "object" ||
-window.CITY_DATA === null
+!districtInput
 ){
 return;
 }
 
 /* =========================
-RESET SELECTS
+81 CITY LIST
 ========================= */
 
-citySelect.innerHTML = `
-<option value="">
-Şehir Seçiniz
-</option>
-`;
+const cities = [
 
-districtSelect.innerHTML = `
-<option value="">
-Önce Şehir Seçin
-</option>
-`;
+"Adana",
+"Adıyaman",
+"Afyonkarahisar",
+"Ağrı",
+"Amasya",
+"Ankara",
+"Antalya",
+"Artvin",
+"Aydın",
+"Balıkesir",
+"Bilecik",
+"Bingöl",
+"Bitlis",
+"Bolu",
+"Burdur",
+"Bursa",
+"Çanakkale",
+"Çankırı",
+"Çorum",
+"Denizli",
+"Diyarbakır",
+"Edirne",
+"Elazığ",
+"Erzincan",
+"Erzurum",
+"Eskişehir",
+"Gaziantep",
+"Giresun",
+"Gümüşhane",
+"Hakkari",
+"Hatay",
+"Isparta",
+"Mersin",
+"İstanbul",
+"İzmir",
+"Kars",
+"Kastamonu",
+"Kayseri",
+"Kırklareli",
+"Kırşehir",
+"Kocaeli",
+"Konya",
+"Kütahya",
+"Malatya",
+"Manisa",
+"Kahramanmaraş",
+"Mardin",
+"Muğla",
+"Muş",
+"Nevşehir",
+"Niğde",
+"Ordu",
+"Rize",
+"Sakarya",
+"Samsun",
+"Siirt",
+"Sinop",
+"Sivas",
+"Tekirdağ",
+"Tokat",
+"Trabzon",
+"Tunceli",
+"Şanlıurfa",
+"Uşak",
+"Van",
+"Yozgat",
+"Zonguldak",
+"Aksaray",
+"Bayburt",
+"Karaman",
+"Kırıkkale",
+"Batman",
+"Şırnak",
+"Bartın",
+"Ardahan",
+"Iğdır",
+"Yalova",
+"Karabük",
+"Kilis",
+"Osmaniye",
+"Düzce"
 
-districtSelect.disabled = true;
-
-/* =========================
-CITY LIST
-========================= */
-
-const cities =
-
-Object.keys(window.CITY_DATA)
-
-.filter(city=>
-
-typeof city === "string" &&
-city.trim().length
-
-)
-
-/* UNIQUE */
-
-.filter((city,index,array)=>
-
-array.indexOf(city) === index
-
-)
-
-/* SORT */
+]
 
 .sort((a,b)=>
 
@@ -88,10 +135,20 @@ b,
 );
 
 /* =========================
-CITY APPEND
+RESET
 ========================= */
 
-const cityFragment =
+citySelect.innerHTML = `
+<option value="">
+Şehir Seçiniz
+</option>
+`;
+
+/* =========================
+APPEND
+========================= */
+
+const fragment =
 document.createDocumentFragment();
 
 cities.forEach(city=>{
@@ -103,156 +160,54 @@ option.value = city;
 
 option.textContent = city;
 
-cityFragment.appendChild(option);
+fragment.appendChild(option);
 
 });
 
 citySelect.appendChild(
-cityFragment
+fragment
 );
 
 /* =========================
-REMOVE OLD EVENT
+DISTRICT INPUT SETTINGS
 ========================= */
 
-if(citySelect._cityHandler){
+districtInput.disabled = false;
 
-citySelect.removeEventListener(
-"change",
-citySelect._cityHandler
+districtInput.placeholder =
+"İlçe Giriniz";
+
+districtInput.maxLength = 60;
+
+districtInput.setAttribute(
+"autocomplete",
+"off"
 );
 
-}
-
-/* =========================
-CHANGE HANDLER
-========================= */
-
-const handleCityChange = ()=>{
-
-const selectedCity =
-citySelect.value;
-
-/* RESET */
-
-districtSelect.innerHTML = `
-<option value="">
-İlçe Seçiniz
-</option>
-`;
-
-districtSelect.disabled = true;
-
-/* EMPTY */
-
-if(!selectedCity){
-return;
-}
-
-/* INVALID */
-
-if(
-!Object.prototype.hasOwnProperty.call(
-window.CITY_DATA,
-selectedCity
-)
-){
-return;
-}
-
-const rawDistricts =
-window.CITY_DATA[selectedCity];
-
-/* INVALID */
-
-if(
-!Array.isArray(rawDistricts)
-){
-return;
-}
+districtInput.setAttribute(
+"autocapitalize",
+"words"
+);
 
 /* =========================
 DISTRICT CLEAN
 ========================= */
 
-const districts =
+districtInput.addEventListener(
+"input",
+()=>{
 
-[...new Set(
+districtInput.value =
 
-rawDistricts
+districtInput.value
 
-.filter(district=>
+.replace(/\s{2,}/g," ")
 
-typeof district === "string" &&
-district.trim().length
+.replace(/[0-9]/g,"")
 
-)
+.slice(0,60);
 
-.map(district=>
-
-district.trim()
-
-)
-
-)]
-
-.sort((a,b)=>
-
-a.localeCompare(
-b,
-"tr"
-)
-
-);
-
-/* EMPTY */
-
-if(!districts.length){
-return;
 }
-
-/* =========================
-DISTRICT APPEND
-========================= */
-
-const districtFragment =
-document.createDocumentFragment();
-
-districts.forEach(district=>{
-
-const option =
-document.createElement("option");
-
-option.value = district;
-
-option.textContent = district;
-
-districtFragment.appendChild(option);
-
-});
-
-districtSelect.appendChild(
-districtFragment
-);
-
-districtSelect.disabled = false;
-
-};
-
-/* =========================
-SAVE EVENT
-========================= */
-
-citySelect._cityHandler =
-handleCityChange;
-
-/* =========================
-BIND EVENT
-========================= */
-
-citySelect.addEventListener(
-"change",
-handleCityChange
 );
 
 }

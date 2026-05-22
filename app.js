@@ -1171,9 +1171,9 @@ function validateStep(step){
 
     if(!district){
 
-      alert(
-        "İlçe seçiniz"
-      );
+    alert(
+  "İlçe giriniz"
+);
 
       return false;
 
@@ -2222,6 +2222,7 @@ document
 },700);
 
 }
+
 /* =========================
 CITY / DISTRICT SYSTEM FINAL
 ========================= */
@@ -2243,7 +2244,7 @@ function initCitySystem(){
 const citySelect =
 document.getElementById("city");
 
-const districtSelect =
+const districtInput =
 document.getElementById("district");
 
 /* =========================
@@ -2252,11 +2253,109 @@ ELEMENT CHECK
 
 if(
 !citySelect ||
-!districtSelect ||
-typeof window.CITY_DATA !== "object"
+!districtInput
 ){
 return;
 }
+
+/* =========================
+81 CITY LIST
+========================= */
+
+const cities = [
+
+"Adana",
+"Adıyaman",
+"Afyonkarahisar",
+"Ağrı",
+"Amasya",
+"Ankara",
+"Antalya",
+"Artvin",
+"Aydın",
+"Balıkesir",
+"Bilecik",
+"Bingöl",
+"Bitlis",
+"Bolu",
+"Burdur",
+"Bursa",
+"Çanakkale",
+"Çankırı",
+"Çorum",
+"Denizli",
+"Diyarbakır",
+"Edirne",
+"Elazığ",
+"Erzincan",
+"Erzurum",
+"Eskişehir",
+"Gaziantep",
+"Giresun",
+"Gümüşhane",
+"Hakkari",
+"Hatay",
+"Isparta",
+"Mersin",
+"İstanbul",
+"İzmir",
+"Kars",
+"Kastamonu",
+"Kayseri",
+"Kırklareli",
+"Kırşehir",
+"Kocaeli",
+"Konya",
+"Kütahya",
+"Malatya",
+"Manisa",
+"Kahramanmaraş",
+"Mardin",
+"Muğla",
+"Muş",
+"Nevşehir",
+"Niğde",
+"Ordu",
+"Rize",
+"Sakarya",
+"Samsun",
+"Siirt",
+"Sinop",
+"Sivas",
+"Tekirdağ",
+"Tokat",
+"Trabzon",
+"Tunceli",
+"Şanlıurfa",
+"Uşak",
+"Van",
+"Yozgat",
+"Zonguldak",
+"Aksaray",
+"Bayburt",
+"Karaman",
+"Kırıkkale",
+"Batman",
+"Şırnak",
+"Bartın",
+"Ardahan",
+"Iğdır",
+"Yalova",
+"Karabük",
+"Kilis",
+"Osmaniye",
+"Düzce"
+
+]
+
+.sort((a,b)=>
+
+a.localeCompare(
+b,
+"tr"
+)
+
+);
 
 /* =========================
 RESET
@@ -2267,38 +2366,6 @@ citySelect.innerHTML = `
 Şehir Seçiniz
 </option>
 `;
-
-districtSelect.innerHTML = `
-<option value="">
-Önce Şehir Seçin
-</option>
-`;
-
-districtSelect.disabled = true;
-
-/* =========================
-CITY LIST
-========================= */
-
-const cities =
-
-Object.keys(window.CITY_DATA)
-
-.filter(city=>
-
-city &&
-typeof city === "string"
-
-)
-
-.sort((a,b)=>
-
-a.localeCompare(
-b,
-"tr"
-)
-
-);
 
 /* =========================
 CITY APPEND
@@ -2325,135 +2392,74 @@ cityFragment
 );
 
 /* =========================
-CHANGE EVENT
+DISTRICT INPUT SETTINGS
 ========================= */
 
-citySelect.addEventListener(
-"change",
-handleCityChange
+districtInput.disabled = false;
+
+districtInput.placeholder =
+"İlçe Giriniz";
+
+districtInput.maxLength = 60;
+
+/* =========================
+INPUT CLEAN
+========================= */
+
+districtInput.addEventListener(
+"input",
+()=>{
+
+districtInput.value =
+
+districtInput.value
+
+.replace(/\s{2,}/g," ")
+
+.replace(
+/[^a-zA-ZçğıöşüÇĞİÖŞÜ\s-]/g,
+""
+)
+
+.slice(0,60);
+
+}
 );
 
 /* =========================
-HANDLER
+FORMAT
 ========================= */
 
-function handleCityChange(){
+districtInput.addEventListener(
+"blur",
+()=>{
 
-const selectedCity =
-citySelect.value;
+districtInput.value =
 
-/* RESET DISTRICT */
+districtInput.value
 
-districtSelect.innerHTML = `
-<option value="">
-İlçe Seçiniz
-</option>
-`;
+.trim()
 
-districtSelect.disabled = true;
+.replace(/\s+/g," ")
 
-/* EMPTY */
+.split(" ")
+.map(word=>
 
-if(!selectedCity){
-return;
+word.charAt(0)
+.toLocaleUpperCase("tr-TR")
+
++
+
+word.slice(1)
+.toLocaleLowerCase("tr-TR")
+
+)
+.join(" ")
+
 }
-
-/* INVALID CITY */
-
-if(
-!Object.prototype.hasOwnProperty.call(
-window.CITY_DATA,
-selectedCity
-)
-){
-return;
-}
-
-/* =========================
-DISTRICTS
-========================= */
-
-const rawDistricts =
-window.CITY_DATA[selectedCity];
-
-/* INVALID */
-
-if(
-!Array.isArray(rawDistricts)
-){
-return;
-}
-
-/* =========================
-CLEAN + UNIQUE
-========================= */
-
-const uniqueDistricts =
-
-[...new Set(
-
-rawDistricts
-
-.filter(district=>
-
-district &&
-typeof district === "string"
-
-)
-
-.map(district=>
-
-district.trim()
-
-)
-
-)]
-
-.sort((a,b)=>
-
-a.localeCompare(
-b,
-"tr"
-)
-
 );
 
-/* EMPTY */
-
-if(!uniqueDistricts.length){
-return;
 }
-
-/* =========================
-APPEND
-========================= */
-
-const districtFragment =
-document.createDocumentFragment();
-
-uniqueDistricts.forEach(district=>{
-
-const option =
-document.createElement("option");
-
-option.value = district;
-
-option.textContent = district;
-
-districtFragment.appendChild(option);
-
-});
-
-districtSelect.appendChild(
-districtFragment
-);
-
-districtSelect.disabled = false;
-
-}
-
-}
-
 
 /* =========================
 MESCID NAME VALIDATION
@@ -2547,3 +2553,4 @@ return String(value)
 .trim();
 
 }
+

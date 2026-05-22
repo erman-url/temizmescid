@@ -1359,18 +1359,16 @@ onclick="event.stopPropagation()"
 
   <!-- DISTRICT -->
 
-  <select
-    id="district"
-    required
-    disabled
-    autocomplete="off"
-  >
-
-    <option value="">
-      Önce Şehir Seçin
-    </option>
-
-  </select>
+<input
+type="text"
+id="district"
+placeholder="İlçe Giriniz"
+maxlength="60"
+required
+autocomplete="address-level2"
+autocapitalize="words"
+spellcheck="false"
+>
 
   <!-- CATEGORY -->
 
@@ -2045,7 +2043,6 @@ class="upload-loader hidden"
 
 
 <script src="verses.js"></script>
-<script src="city-data.js"></script>
 <script src="app.js"></script>
 <script src="footer.js"></script>
 
