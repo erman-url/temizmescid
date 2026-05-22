@@ -64,7 +64,8 @@ max-width:520px;
 margin:auto;
 
 padding:
-22px 18px 140px;
+22px 18px
+calc(140px + env(safe-area-inset-bottom));
 
 }
 
@@ -199,31 +200,6 @@ color:#111827;
 
 }
 
-.big-button{
-
-width:220px;
-height:220px;
-
-border:none;
-
-border-radius:999px;
-
-background:
-linear-gradient(
-135deg,
-#2e7d32,
-#1b5e20
-);
-
-color:#fff;
-
-font-size:28px;
-font-weight:900;
-
-box-shadow:
-0 20px 50px rgba(0,0,0,.28);
-
-}
 
 .big-button:active{
 
@@ -262,7 +238,52 @@ color:#166534;
 
 }
 
+.big-button,
+.reset-btn{
+
+-webkit-tap-highlight-color:
+transparent;
+
+}
+
 .big-button{
+
+position:relative;
+
+width:230px;
+height:230px;
+
+margin:
+0 auto;
+
+border:none;
+outline:none;
+
+border-radius:999px;
+
+display:flex;
+align-items:center;
+justify-content:center;
+
+background:
+radial-gradient(
+circle at 30% 28%,
+#4ade80 0%,
+#2e7d32 38%,
+#14532d 72%,
+#0b3b1f 100%
+);
+
+color:#fff;
+
+font-size:30px;
+font-weight:900;
+
+letter-spacing:.5px;
+
+cursor:pointer;
+
+overflow:hidden;
 
 touch-action:
 manipulation;
@@ -274,23 +295,134 @@ user-select:none;
 
 -webkit-touch-callout:none;
 
-}
-
-.big-button,
-.reset-btn{
-
 -webkit-tap-highlight-color:
 transparent;
 
-}
+appearance:none;
+-webkit-appearance:none;
 
-.big-button{
+transform:
+translateZ(0);
 
 will-change:
 transform;
 
+box-shadow:
+0 30px 60px rgba(0,0,0,.34),
+0 12px 22px rgba(0,0,0,.24),
+inset 0 4px 10px rgba(255,255,255,.28),
+inset 0 -16px 30px rgba(0,0,0,.28);
+
+transition:
+transform .12s ease,
+box-shadow .18s ease,
+filter .18s ease;
+
+}
+
+
+/* TOP SHINE */
+
+.big-button::before{
+
+content:"";
+
+position:absolute;
+
+top:18px;
+left:32px;
+right:32px;
+
+height:72px;
+
+border-radius:999px;
+
+background:
+linear-gradient(
+180deg,
+rgba(255,255,255,.34),
+rgba(255,255,255,0)
+);
+
+filter:blur(4px);
+
+opacity:.9;
+
+}
+
+
+/* OUTER GLOW */
+
+.big-button::after{
+
+content:"";
+
+position:absolute;
+
+inset:-10px;
+
+border-radius:999px;
+
+background:
+radial-gradient(
+circle,
+rgba(74,222,128,.24),
+transparent 70%
+);
+
+z-index:-1;
+
+filter:blur(12px);
+
+}
+
+
+/* ACTIVE */
+
+.big-button:active{
+
 transform:
-translateZ(0);
+translateY(4px)
+scale(.97);
+
+box-shadow:
+0 14px 24px rgba(0,0,0,.24),
+inset 0 3px 8px rgba(255,255,255,.12),
+inset 0 -10px 20px rgba(0,0,0,.24);
+
+}
+
+
+/* DESKTOP HOVER */
+
+.big-button:hover{
+
+filter:
+brightness(1.04);
+
+}
+
+
+/* ACTIVE */
+
+.big-button:active{
+
+transform:
+translateZ(0)
+scale(.965);
+
+box-shadow:
+0 12px 28px rgba(0,0,0,.22);
+
+}
+
+
+/* HOVER DESKTOP */
+
+.big-button:hover{
+
+filter:
+brightness(1.03);
 
 }
 
@@ -351,7 +483,7 @@ class="big-button"
 id="tapButton"
 aria-label="Zikir sayacı"
 >
-TIKLA
+ZİKİR
 </button>
 
 <div
