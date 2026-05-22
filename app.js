@@ -833,7 +833,16 @@ womenArea:
 "women_area_exists",
 
 paper:
-"paper_towel_exists"
+"paper_towel_exists",
+
+hanger:
+"hanger_exists",
+
+socket:
+"socket_exists",
+
+soap:
+"soap_exists"
 
 };
 
@@ -897,7 +906,7 @@ for(const file of imagesInput.files){
 
 const res = await fetch(
 
-`https://spring-violet-7aa7.temizmescid.workers.dev/api/mescid/create?t=${Date.now()}`,
+`${API_URL}/api/mescid/create?t=${Date.now()}`,
 
 {
   method:"POST",
