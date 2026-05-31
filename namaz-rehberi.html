@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+name="viewport"
+content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+>
+
+<title>
+Namaz Rehberi | TemizMescid
+</title>
+
+<meta
+name="description"
+content="Namaz vakitleri, namaz kılınışı, dualar ve namazın önemi rehberi."
+>
+
+<meta
+name="theme-color"
+content="#0f172a"
+>
+
+<link rel="stylesheet" href="style.css">
+
+<link
+href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css"
+rel="stylesheet"
+/>
+
+<style>
+
+/* =========================
+PAGE
+========================= */
+
+.page{
+
+max-width:420px;
+
+margin:0 auto;
+
+padding:
+20px 16px 130px;
+
+}
+
+/* =========================
+HERO
+========================= */
+
+.namaz-hero{
+
+position:relative;
+
+overflow:hidden;
+
+padding:
+32px 24px;
+
+border-radius:34px;
+
+background:
+linear-gradient(
+135deg,
+rgba(255,255,255,.10),
+rgba(255,255,255,.04)
+);
+
+backdrop-filter:blur(20px);
+
+border:
+1px solid rgba(255,255,255,.08);
+
+box-shadow:
+0 18px 40px rgba(0,0,0,.24);
+
+margin-bottom:22px;
+
+}
+
+.namaz-hero::before{
+
+content:"";
+
+position:absolute;
+
+top:-70px;
+right:-70px;
+
+width:180px;
+height:180px;
+
+border-radius:999px;
+
+background:
+rgba(255,255,255,.06);
+
+filter:blur(40px);
+
+}
+
+.hero-badge{
+
+display:inline-flex;
+align-items:center;
+gap:8px;
+
+height:34px;
+
+padding:0 14px;
+
+border-radius:999px;
+
+background:
+rgba(255,255,255,.08);
+
+border:
+1px solid rgba(255,255,255,.08);
+
+font-size:11px;
+font-weight:800;
+
+letter-spacing:.6px;
+
+text-transform:uppercase;
+
+color:#6dffb2;
+
+margin-bottom:18px;
+
+}
+
+.namaz-hero h1{
+
+font-size:40px;
+font-weight:900;
+
+line-height:1.02;
+
+letter-spacing:-1.5px;
+
+margin-bottom:14px;
+
+color:#fff;
+
+}
+
+.namaz-hero p{
+
+font-size:14px;
+line-height:1.8;
+
+color:
+rgba(255,255,255,.72);
+
+max-width:290px;
+
+}
+
+/* =========================
+GRID
+========================= */
+
+.namaz-grid{
+
+display:grid;
+
+grid-template-columns:
+1fr 1fr;
+
+gap:16px;
+
+}
+
+/* =========================
+CARD
+========================= */
+
+.namaz-card{
+
+position:relative;
+
+overflow:hidden;
+
+min-height:210px;
+
+padding:22px;
+
+border-radius:30px;
+
+background:
+linear-gradient(
+180deg,
+rgba(255,255,255,.98),
+rgba(248,250,252,.96)
+);
+
+border:
+1px solid rgba(255,255,255,.55);
+
+box-shadow:
+0 12px 30px rgba(0,0,0,.10);
+
+transition:
+transform .18s ease,
+box-shadow .18s ease;
+
+cursor:pointer;
+
+}
+
+.namaz-card:active{
+
+transform:scale(.985);
+
+}
+
+.namaz-card::before{
+
+content:"";
+
+position:absolute;
+
+top:-40px;
+right:-40px;
+
+width:120px;
+height:120px;
+
+border-radius:999px;
+
+background:
+rgba(34,197,94,.08);
+
+}
+
+/* ICON */
+
+.namaz-icon{
+
+position:relative;
+z-index:2;
+
+width:68px;
+height:68px;
+
+border-radius:22px;
+
+display:flex;
+align-items:center;
+justify-content:center;
+
+font-size:32px;
+
+margin-bottom:20px;
+
+background:
+linear-gradient(
+135deg,
+#2e7d32,
+#14532d
+);
+
+color:#fff;
+
+box-shadow:
+0 10px 24px rgba(0,0,0,.18);
+
+}
+
+/* TITLE */
+
+.namaz-title{
+
+position:relative;
+z-index:2;
+
+font-size:22px;
+font-weight:900;
+
+line-height:1.15;
+
+letter-spacing:-.5px;
+
+color:#111827;
+
+margin-bottom:10px;
+
+}
+
+/* TEXT */
+
+.namaz-text{
+
+position:relative;
+z-index:2;
+
+font-size:13px;
+line-height:1.8;
+
+color:#6b7280;
+
+}
+
+/* =========================
+INFO BOX
+========================= */
+
+.info-box{
+
+margin-top:22px;
+
+padding:
+24px 22px;
+
+border-radius:30px;
+
+background:
+linear-gradient(
+135deg,
+rgba(255,255,255,.08),
+rgba(255,255,255,.03)
+);
+
+backdrop-filter:blur(18px);
+
+border:
+1px solid rgba(255,255,255,.08);
+
+box-shadow:
+0 10px 30px rgba(0,0,0,.18);
+
+}
+
+.info-box h3{
+
+font-size:18px;
+font-weight:900;
+
+margin-bottom:12px;
+
+color:#fff;
+
+}
+
+.info-box p{
+
+font-size:13px;
+line-height:1.9;
+
+color:
+rgba(255,255,255,.72);
+
+}
+
+/* =========================
+MOBILE
+========================= */
+
+@media(max-width:380px){
+
+.namaz-grid{
+
+grid-template-columns:
+1fr;
+
+}
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<main class="page">
+
+<!-- HERO -->
+
+<section class="namaz-hero">
+
+<div class="hero-badge">
+
+<i class="ri-moon-clear-fill"></i>
+
+TemizMescid Rehber
+
+</div>
+
+<h1>
+Namaz
+Rehberi
+</h1>
+
+<p>
+Namaz vakitleri, dualar ve ibadet rehberine modern mobil deneyim ile erişin.
+</p>
+
+</section>
+
+<!-- GRID -->
+
+<section class="namaz-grid">
+
+<!-- CARD -->
+
+<div
+class="namaz-card"
+onclick="location.href='namazvakit.html'"
+>
+
+<div class="namaz-icon">
+🕰️
+</div>
+
+<div class="namaz-title">
+Namaz
+Vakti
+</div>
+
+<div class="namaz-text">
+Bulunduğunuz konuma göre günlük namaz vakitlerini görüntüleyin.
+</div>
+
+</div>
+
+<!-- CARD -->
+
+<div
+class="namaz-card"
+onclick="location.href='namaz-kilinisi.html'"
+>
+
+<div class="namaz-icon">
+🕌
+</div>
+
+<div class="namaz-title">
+Namaz
+Kılınışı
+</div>
+
+<div class="namaz-text">
+5 vakit namazın doğru kılınış rehberine erişin.
+</div>
+
+</div>
+
+<!-- CARD -->
+
+<div
+class="namaz-card"
+onclick="location.href='namaz-dualari.html'"
+>
+
+<div class="namaz-icon">
+🤲
+</div>
+
+<div class="namaz-title">
+Namaz
+Duaları
+</div>
+
+<div class="namaz-text">
+Namazda okunan sureler, dualar ve anlamlarını öğrenin.
+</div>
+
+</div>
+
+<!-- CARD -->
+
+<div
+class="namaz-card"
+onclick="location.href='namazin-onemi.html'"
+>
+
+<div class="namaz-icon">
+✨
+</div>
+
+<div class="namaz-title">
+Namazın
+Önemi
+</div>
+
+<div class="namaz-text">
+Namaz ibadetinin önemi ve günlük yaşama etkileri hakkında bilgiler.
+</div>
+
+</div>
+
+</section>
+
+<!-- INFO -->
+
+<section class="info-box">
+
+<h3>
+Namaz Bilinci
+</h3>
+
+<p>
+Namaz, İslam’ın temel ibadetlerinden biridir. Düzenli ibadet bilinci, temiz ve huzurlu ibadet alanlarıyla daha güçlü hale gelir.
+</p>
+
+</section>
+
+</main>
+
+<script src="footer.js"></script>
+
+</body>
+</html>
