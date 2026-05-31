@@ -2563,3 +2563,172 @@ return String(value)
 
 }
 
+
+/* =========================
+HICRI EVENTS
+========================= */
+
+const HIJRI_EVENTS = [
+
+{
+title:"Hicri Yılbaşı",
+date:"2026-06-16",
+desc:"Hicri 1448 yılı başlıyor."
+},
+
+{
+title:"Aşure Günü",
+date:"2026-07-25",
+desc:"Muharrem ayının 10. günü."
+},
+
+{
+title:"Mevlid Kandili",
+date:"2026-09-03",
+desc:"Peygamber Efendimizin doğumu."
+},
+
+{
+title:"Regaib Kandili",
+date:"2026-12-17",
+desc:"Üç ayların başlangıcı."
+},
+
+{
+title:"Miraç Kandili",
+date:"2027-01-06",
+desc:"Miraç gecesi."
+},
+
+{
+title:"Berat Kandili",
+date:"2027-01-25",
+desc:"Berat gecesi."
+},
+
+{
+title:"Ramazan Başlangıcı",
+date:"2027-02-08",
+desc:"Ramazan ayının ilk günü."
+},
+
+{
+title:"Kadir Gecesi",
+date:"2027-03-15",
+desc:"Bin aydan hayırlı gece."
+},
+
+{
+title:"Ramazan Bayramı",
+date:"2027-03-18",
+desc:"Ramazan Bayramı."
+},
+
+{
+title:"Arefe Günü",
+date:"2027-05-25",
+desc:"Kurban Bayramı arifesi."
+},
+
+{
+title:"Kurban Bayramı",
+date:"2027-05-26",
+desc:"Kurban Bayramı başladı."
+}
+
+];
+
+function updateHijriCard(){
+
+const titleEl =
+document.getElementById("hijriTitle");
+
+const dateEl =
+document.getElementById("hijriDate");
+
+const countdownEl =
+document.getElementById("hijriCountdown");
+
+if(
+!titleEl ||
+!dateEl ||
+!countdownEl
+){
+return;
+}
+
+const now = new Date();
+
+const nextEvent =
+HIJRI_EVENTS.find(event=>{
+
+const eventDate =
+new Date(event.date+"T00:00:00");
+
+return eventDate >= now;
+
+});
+
+if(!nextEvent){
+
+titleEl.textContent =
+"Hicri Takvim";
+
+dateEl.textContent =
+"Yeni tarihler bekleniyor";
+
+countdownEl.textContent =
+"—";
+
+return;
+
+}
+
+const targetDate =
+new Date(nextEvent.date+"T00:00:00");
+
+const diff =
+targetDate - now;
+
+const days =
+Math.ceil(
+diff / 86400000
+);
+
+const formattedDate =
+targetDate.toLocaleDateString(
+"tr-TR",
+{
+day:"numeric",
+month:"long",
+year:"numeric",
+weekday:"long"
+}
+);
+
+titleEl.textContent =
+nextEvent.title;
+
+dateEl.textContent =
+formattedDate;
+
+if(days <= 0){
+
+countdownEl.textContent =
+nextEvent.desc;
+
+}else if(days === 1){
+
+countdownEl.textContent =
+"1 gün kaldı";
+
+}else{
+
+countdownEl.textContent =
+`${days} gün kaldı`;
+
+}
+
+}
+
+updateHijriCard();
